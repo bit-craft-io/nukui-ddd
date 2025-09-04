@@ -7,6 +7,7 @@ namespace App\Libraries\Shared;
 class SharedGlobals
 {
     private array $_globals = [];
+
     public function set(string $key, $value): void
     {
         $this->_globals[$key] = $value;
