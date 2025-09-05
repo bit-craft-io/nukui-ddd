@@ -1,0 +1,16 @@
+[2024-11-05 16:23:20] local.ERROR: Trait "App\Libraries\Depends\Singleton" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"App\\Libraries\\Depends\\Singleton\" not found at J:\\projects\\BIT_CRAFT\\craft-1\\backend\\source\\app\\Libraries\\Depends\\AppModel.php:13)
+[stacktrace]
+#0 {main}
+"} 
+[2024-11-05 16:23:32] local.ERROR: Trait "App\Libraries\Depends\Singleton" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"App\\Libraries\\Depends\\Singleton\" not found at J:\\projects\\BIT_CRAFT\\craft-1\\backend\\source\\app\\Libraries\\Depends\\AppModel.php:13)
+[stacktrace]
+#0 {main}
+"} 
+[2024-11-05 17:08:24] local.ERROR: Trait "App\Libraries\Depends\Singleton" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"App\\Libraries\\Depends\\Singleton\" not found at J:\\projects\\BIT_CRAFT\\craft-1\\backend\\source\\app\\Libraries\\Depends\\AppModel.php:13)
+[stacktrace]
+#0 {main}
+"} 
+[2024-11-05 17:09:05] local.ERROR: Trait "App\Libraries\Depends\Singleton" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"App\\Libraries\\Depends\\Singleton\" not found at J:\\projects\\BIT_CRAFT\\craft-1\\backend\\source\\app\\Libraries\\Depends\\AppModel.php:13)
+[stacktrace]
+#0 {main}
+"} 
