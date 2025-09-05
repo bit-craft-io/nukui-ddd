@@ -1,0 +1,28 @@
+[2024-11-14 14:15:46] local.ERROR: Cannot declare class App\Libraries\Depends\ValueObjectType because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Libraries\\Depends\\ValueObjectType because the name is already in use at J:\\projects\\BIT_CRAFT\\craft-1\\backend\\source\\app\\Libraries\\Depends\\ValueObjectType.php:15)
+[stacktrace]
+#0 {main}
+"} 
+[2024-11-14 14:15:50] local.ERROR: Cannot declare class App\Libraries\Depends\ValueObjectType because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Libraries\\Depends\\ValueObjectType because the name is already in use at J:\\projects\\BIT_CRAFT\\craft-1\\backend\\source\\app\\Libraries\\Depends\\ValueObjectType.php:15)
+[stacktrace]
+#0 {main}
+"} 
+[2024-11-14 14:31:18] local.ERROR: Cannot declare class App\Libraries\Depends\ValueObjectType because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Libraries\\Depends\\ValueObjectType because the name is already in use at J:\\projects\\BIT_CRAFT\\craft-1\\backend\\source\\app\\Libraries\\Depends\\ValueObjectType.php:15)
+[stacktrace]
+#0 {main}
+"} 
+[2024-11-14 14:31:33] local.ERROR: Cannot declare class App\Libraries\Depends\ValueObjectType because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Libraries\\Depends\\ValueObjectType because the name is already in use at J:\\projects\\BIT_CRAFT\\craft-1\\backend\\source\\app\\Libraries\\Depends\\ValueObjectType.php:15)
+[stacktrace]
+#0 {main}
+"} 
+[2024-11-14 14:33:19] local.ERROR: Cannot declare class App\Libraries\Depends\ValueObjectType because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Libraries\\Depends\\ValueObjectType because the name is already in use at J:\\projects\\BIT_CRAFT\\craft-1\\backend\\source\\app\\Libraries\\Depends\\ValueObjectType.php:15)
+[stacktrace]
+#0 {main}
+"} 
+[2024-11-14 14:35:05] local.ERROR: Cannot declare class App\Libraries\Depends\ValueObjectType because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Libraries\\Depends\\ValueObjectType because the name is already in use at J:\\projects\\BIT_CRAFT\\craft-1\\backend\\source\\app\\Libraries\\Depends\\ValueObjectType.php:15)
+[stacktrace]
+#0 {main}
+"} 
+[2024-11-14 14:59:10] local.ERROR: Cannot declare class App\Libraries\Depends\ValueObjectType because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Libraries\\Depends\\ValueObjectType because the name is already in use at J:\\projects\\BIT_CRAFT\\craft-1\\backend\\source\\app\\Libraries\\Depends\\ValueObjectType.php:15)
+[stacktrace]
+#0 {main}
+"} 

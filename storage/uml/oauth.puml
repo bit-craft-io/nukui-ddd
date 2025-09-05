@@ -1,0 +1,33 @@
+@startuml
+title OAuth
+hide footbox
+Participant frontend as front
+Participant backend as back
+Participant DB as db
+Participant 認証画面 as oauth
+
+'== 初期表示 ==
+
+autonumber
+activate front
+front -> back : 処理開始
+
+activate back
+back -> oauth : 問い合わせ
+deactivate back
+
+activate oauth
+oauth -> front: 画面情報
+front -> oauth: 認証ボタン押下
+oauth -> oauth: 認証処理
+oauth --> back: コールバック処理
+activate back
+back -> db: 登録
+activate db
+db -> db: 登録処理
+
+back --> front: リダイレクト
+deactivate db
+deactivate back
+deactivate oauth
+@enduml
