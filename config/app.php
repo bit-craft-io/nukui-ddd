@@ -40,7 +40,6 @@ return [
     */
 
     'debug' => (bool) env('APP_DEBUG', false),
-    'xhprof' => (bool) env('APP_XHPROF', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,8 +54,6 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'web_url' => env('APP_WEB_URL', 'http://localhost'),
-
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -68,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => env('APP_TIMEZONE', 'UTC'),
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -104,7 +101,7 @@ return [
 
     'previous_keys' => [
         ...array_filter(
-            explode(',', env('APP_PREVIOUS_KEYS', ''))
+            explode(',', (string) env('APP_PREVIOUS_KEYS', ''))
         ),
     ],
 
@@ -126,8 +123,4 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'aliases' => [
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'Redis' => Illuminate\Support\Facades\Redis::class,
-    ],
 ];
