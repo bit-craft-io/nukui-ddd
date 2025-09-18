@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    use SoftDeletes;
+
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('u_items', function (Blueprint $table) {
+            $table->unsignedBigInteger('id')->autoIncrement()->comment('識別子');
+            $table->string('name', 64)->nullable()->comment('名前');
+            $table->unsignedSmallInteger('max_display')->default(1)->comment('表示最大値');
+            $table->unsignedSmallInteger('max_stock')->default(1)->comment('所持最大値');
+            $table->timestamp('enabled_from_at')->nullable()->comment('有効期間（開始日時）');
+            $table->timestamp('enabled_end_at')->nullable()->comment('有効期間（終了日時）');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('u_items');
+    }
+};
