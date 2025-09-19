@@ -14,8 +14,8 @@ use Illuminate\Database\Eloquent\Model;
 trait TraitDataSource
 {
     // @note ここにデータソースを追記していく
-    const DS_ACCOUNT = DsAccount::class;
-    const DS_U_USER = DsUUser::class;
+    const string DS_ACCOUNT = DsAccount::class;
+    const string DS_U_USER = DsUUser::class;
 
     /**
      * @template T
