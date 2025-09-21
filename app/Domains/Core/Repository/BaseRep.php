@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domains;
+namespace App\Domains\Core\Repository;
 
 use App\Libraries\Traits\TraitDataSource;
 use App\Libraries\Traits\TraitEntity;

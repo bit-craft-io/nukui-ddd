@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UseCase;
+namespace App\UseCase\Account;
 
 use App\Libraries\Traits\TraitDataSource;
 use Illuminate\Support\Facades\Hash;

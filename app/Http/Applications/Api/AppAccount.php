@@ -26,13 +26,9 @@ class AppAccount extends BaseApp
         $repAccount->persist($entAccount);
 
         // @note 意識高い系の実装です
-        //$primary_data = "$email:$password";
-        //$primary_code = HelpCompress::comp($primary_data);
-        //UtilGlobals::set('primary_code', $primary_code);
-        //dd(__LINE__);
-        $vo_primary_code = $this->_vo(self::VO_PRIMARY_CODE)->init([$email, $password]);
-
-        UtilGlobals::set('primary_code', $vo_primary_code->primary_code);
+        $primary_data = "$email:$password";
+        $primary_code = HelpCompress::comp($primary_data);
+        UtilGlobals::set('primary_code', $primary_code);
 
         $ucMakePublicId = $this->_useCase(self::UC_MAKE_PUBLIC_ID);
         $public_id = $ucMakePublicId->execute();
@@ -50,9 +46,10 @@ class AppAccount extends BaseApp
 
     public function login(array $params): void
     {
-        $vo_primary_code = $this->_vo(self::VO_PRIMARY_CODE)->init($params);
+        [$email, $password] = explode(':', HelpCompress::unComp($params['primary_code']));
+
         $ucCreateApiToken = $this->_useCase(self::UC_CREATE_API_TOKEN);
-        $bearer_token = $ucCreateApiToken->execute($vo_primary_code->email, $vo_primary_code->password);
+        $bearer_token = $ucCreateApiToken->execute($email, $password);
         UtilGlobals::set('bearer_token', $bearer_token);
     }
 

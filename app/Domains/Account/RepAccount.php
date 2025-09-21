@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domains\Account;
 
-use App\Domains\BaseEnt;
-use App\Domains\BaseRep;
+use App\Domains\Core\Entity\BaseEnt;
+use App\Domains\Core\Repository\BaseRep;
 
 class RepAccount extends BaseRep
 {

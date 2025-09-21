@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Libraries\Traits;
 
-use App\Domains\VOs\VoPrimaryCode;
 use App\Libraries\Utils\UtilInstance;
 
 trait TraitValueObject
 {
-    const string VO_PRIMARY_CODE = VoPrimaryCode::class;
+    //const string VO_PRIMARY_CODE = VoPrimaryCode::class;
 
     /**
      * @template T

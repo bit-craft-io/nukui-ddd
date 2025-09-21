@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Libraries\Traits;
 
-use App\Domains\BaseEnt;
+use App\Domains\Core\Entity\BaseEnt;
 use App\Libraries\Utils\UtilInstance;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
