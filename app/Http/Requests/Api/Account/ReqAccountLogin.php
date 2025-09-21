@@ -9,8 +9,14 @@ class ReqAccountLogin extends BaseReq
     public function rules(): array
     {
         return [
-            'email' => 'required|string',
-            'password' => 'required|string',
+            'primary_code' => 'required|string',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'primary_code' => $this->header('Primary-Code'),
+        ]);
     }
 }

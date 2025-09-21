@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Middlewares;
 
+use App\Libraries\Utils\UtilGlobals;
+use App\Libraries\Utils\UtilInstance;
 use Closure;
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
@@ -14,6 +17,15 @@ class MdlAfterExecute
     public function handle($request, Closure $next)
     {
         $response = $next($request);
+
+        // TODO response に特化したクラスを作成するか？
+        $modify_response = UtilGlobals::find('response');
+        if ($modify_response) {
+            /** @var Responsable $class */
+            $class = UtilInstance::singleton($modify_response);
+            return $class->toResponse($request);
+        }
+
         $is_success = self::STATUS_SUCCESS === (int) $response->getStatusCode();
         if ($is_success) {
             $uri_segments = explode('/', $request->route()->uri());

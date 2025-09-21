@@ -7,6 +7,7 @@ namespace App\Libraries\Utils;
 final class UtilInstance
 {
     protected static ?object $_prototype = null;
+    protected static ?object $_shingleton = null;
 
     /**
      * @template T
@@ -17,13 +18,14 @@ final class UtilInstance
     {
         if (!app()->has($class)) {
             app()->singleton($class);
-            self::$_prototype = app($class);
-            if (method_exists(self::$_prototype, 'setDefaults')) {
-                self::$_prototype->setDefaults();
+            self::$_shingleton = app($class);
+            if (method_exists(self::$_shingleton, 'setDefaults')) {
+                self::$_shingleton->setDefaults();
             }
+            self::$_prototype = clone self::$_shingleton;
         }
         if ($is_singleton) {
-            return self::$_prototype;
+            return self::$_shingleton;
         }
         return clone self::$_prototype;
     }

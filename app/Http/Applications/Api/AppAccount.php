@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Applications\Api;
 
 use App\Http\Applications\BaseApp;
+use App\Http\Responses\ResNone;
+use App\Libraries\Helpers\HelpCompress;
 use App\Libraries\Helpers\HelpRandom;
 use App\Libraries\Utils\UtilGlobals;
 
@@ -14,7 +16,7 @@ class AppAccount extends BaseApp
     {
         $ucMakeEmail = $this->_useCase(self::UC_MAKE_EMAIL);
         $email = $ucMakeEmail->execute();
-        $password = HelpRandom::key(4,4);
+        $password = HelpRandom::key32(4,4);
 
         $repAccount = $this->_rep(self::REP_ACCOUNT);
         $entAccount = $repAccount->draft();
@@ -23,8 +25,10 @@ class AppAccount extends BaseApp
         $entAccount->_password($password);
         $repAccount->persist($entAccount);
 
-        UtilGlobals::set('email', $email);
-        UtilGlobals::set('password', $password);
+        // @note 意識高い系の実装です
+        $primary_data = "$email:$password";
+        $primary_code = HelpCompress::comp($primary_data);
+        UtilGlobals::set('primary_code', $primary_code);
 
         $ucMakePublicId = $this->_useCase(self::UC_MAKE_PUBLIC_ID);
         $public_id = $ucMakePublicId->execute();
@@ -42,8 +46,16 @@ class AppAccount extends BaseApp
 
     public function login(array $params): void
     {
+        [$email, $password] = explode(':', HelpCompress::unComp($params['primary_code']));
+
         $ucCreateApiToken = $this->_useCase(self::UC_CREATE_API_TOKEN);
-        $token = $ucCreateApiToken->execute($params['email'], $params['password']);
-        dd($token);
+        $bearer_token = $ucCreateApiToken->execute($email, $password);
+        UtilGlobals::set('bearer_token', $bearer_token);
+    }
+
+    public function dummy(array $params): void
+    {
+        // TODO response に特化したクラスを作成するか？
+        UtilGlobals::set('response', ResNone::class);
     }
 }

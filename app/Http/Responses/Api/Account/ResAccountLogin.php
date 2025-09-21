@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Http\Responses\Api\Account;
 
 use App\Libraries\Utils\UtilGlobals;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ResAccountRegister extends JsonResponse
+class ResAccountLogin extends JsonResponse
 {
     public function toResponse(Request $request): JsonResponse
     {
@@ -17,6 +15,6 @@ class ResAccountRegister extends JsonResponse
         ];
         return response()->json($result)
             ->header('Content-Type', 'application/json')
-            ->header('Primary-Code', UtilGlobals::find('primary_code'));
+            ->header('WWW-Authenticate', 'Bearer ' . UtilGlobals::find('bearer_token'));
     }
 }

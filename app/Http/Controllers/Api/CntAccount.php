@@ -16,14 +16,13 @@ class CntAccount extends BaseCnt
         $app->register($req->params());
     }
 
-//    public function login(AppAccount $app, ReqAccountLogin $req): void
-    public function login(AppAccount $app, ReqNone $req): void
+    public function login(AppAccount $app, ReqAccountLogin $req): void
     {
         $app->login($req->params());
     }
 
     public function dummy(AppAccount $app, ReqNone $req): void
     {
-        dd(__LINE__);
+        $app->dummy($req->params());
     }
 }
