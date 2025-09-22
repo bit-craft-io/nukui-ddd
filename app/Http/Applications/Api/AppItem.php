@@ -17,6 +17,8 @@ class AppItem extends BaseApp
         $entItem = $this->_rep(self::REP_ITEM)->findByUserId($req->user_id);
         dd($entItem->item_id);
 
+        // TODO イテレータパターン
+        $entItem = $this->_rep(self::REP_ITEM)->getByUserId($req->user_id);
         dd(__LINE__);
     }
 

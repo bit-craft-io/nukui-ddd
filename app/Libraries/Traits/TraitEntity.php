@@ -6,6 +6,7 @@ namespace App\Libraries\Traits;
 
 use App\Domains\Core\Entity\BaseEnt;
 use App\Libraries\Utils\UtilInstance;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -30,5 +31,19 @@ trait TraitEntity
             $ent->_model($model);
         }
         return $ent;
+    }
+
+    /**
+     * @param Collection<Model> $model
+     * @return Collection<BaseEnt>
+     */
+    protected function _ents(Collection $model): Collection
+    {
+        // TODO イテレータパターン
+//        $ent = UtilInstance::prototype($this->_entFQCN());
+//        if ($model && method_exists($ent, '_model')) {
+//            $ent->_model($model);
+//        }
+//        return $ent;
     }
 }

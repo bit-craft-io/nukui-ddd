@@ -10,12 +10,12 @@ use App\Http\Requests\ReqNone;
 
 class CntItem extends BaseCnt
 {
-    public function get(AppItem $app, ReqNone $req)
+    public function get(AppItem $app, ReqNone $req): void
     {
         $app->get($req);
     }
 
-    public function dummy(AppItem $app, ReqNone $req)
+    public function dummy(AppItem $app, ReqNone $req): void
     {
         dd(__LINE__);
     }

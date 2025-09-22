@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataSources;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class DsUItem extends BaseDs
@@ -14,5 +15,13 @@ class DsUItem extends BaseDs
             ->newQuery()
             ->where('user_id', $user_id)
             ->first();
+    }
+
+    public function getByUserId(int $user_id): Collection
+    {
+        return $this->_model
+            ->newQuery()
+            ->where('user_id', $user_id)
+            ->get();
     }
 }
