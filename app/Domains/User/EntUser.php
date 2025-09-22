@@ -15,13 +15,13 @@ use App\Domains\Core\Entity\BaseEnt;
  * @method _energy_max_regen(int $value)
  * @method _energy_max_stock(int $value)
  * @method _meta_data(object $value)
- * @property-read int $id
+ * @property-read integer $id
  * @property-read string $public_id
  * @property-read string $nick_name
- * @property-read int $icon_no
- * @property-read int $energy
- * @property-read int $energy_max_regen
- * @property-read int $energy_max_stock
+ * @property-read integer $icon_no
+ * @property-read integer $energy
+ * @property-read integer $energy_max_regen
+ * @property-read integer $energy_max_stock
  * @property-read object $meta_data
  */
 class EntUser extends BaseEnt

@@ -24,6 +24,9 @@ class DsUUser extends BaseDs
             ->upsert($values, $uniqueBy);
     }
 
+    /**
+     * @return Model|null
+     */
     public function getDraft(): ?Model
     {
         return $this->_model;
@@ -34,5 +37,10 @@ class DsUUser extends BaseDs
         $this->_model
             ->newQuery()
             ->insert($values);
+    }
+
+    public function dummy(): ?Model
+    {
+        throw $this->_modelException(self::ERR_MDL_DATA_NOT_FOUND);
     }
 }

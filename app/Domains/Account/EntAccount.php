@@ -11,7 +11,7 @@ use App\Domains\Core\Entity\BaseEnt;
  * @method _name(string $value)
  * @method _email(string $value)
  * @method _password(string $value)
- * @property-read int $id
+ * @property-read integer $id
  * @property-read string $name
  * @property-read string $email
  * @property-read string $password

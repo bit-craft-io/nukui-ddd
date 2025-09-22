@@ -14,6 +14,16 @@ final class UtilInstance
      * @param T $class
      * @return T
      */
+    public static function new($class)
+    {
+        return app($class);
+    }
+
+    /**
+     * @template T
+     * @param T $class
+     * @return T
+     */
     public static function prototype($class, bool $is_singleton = false)
     {
         if (!app()->has($class)) {
@@ -23,6 +33,7 @@ final class UtilInstance
                 self::$_shingleton->setDefaults();
             }
             self::$_prototype = clone self::$_shingleton;
+
         }
         if ($is_singleton) {
             return self::$_shingleton;

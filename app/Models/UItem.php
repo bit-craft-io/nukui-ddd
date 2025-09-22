@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Enums\TypeItem;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-class UUser extends Model
+class UItem extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -13,13 +15,10 @@ class UUser extends Model
      */
     protected $fillable = [
         'id',
-        'public_id',
-        'nick_name',
-        'icon_no',
-        'energy',
-        'energy_max_regen',
-        'energy_max_stock',
-        'meta_data',
+        'user_id',
+        'item_id',
+        'amount',
+        'enabled_end_at',
     ];
 
     /**
@@ -34,10 +33,10 @@ class UUser extends Model
     ];
 
     protected $casts = [
-        'icon_no' => 'integer',
-        'energy' => 'integer',
-        'energy_max_regen' => 'integer',
-        'energy_max_stock' => 'integer',
-        'meta_data' => 'json',
+        'id' => 'integer',
+        'user_id' => 'integer',
+        'item_id' => 'integer',
+        'amount' => 'integer',
+        'enabled_end_at' => 'datetime',
     ];
 }

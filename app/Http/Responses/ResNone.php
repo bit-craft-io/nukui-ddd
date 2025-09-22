@@ -5,7 +5,7 @@ namespace App\Http\Responses;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ResNone extends JsonResponse
+class ResNone extends BaseRes
 {
     public function toResponse(Request $request): JsonResponse
     {

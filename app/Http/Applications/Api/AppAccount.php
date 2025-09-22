@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace App\Http\Applications\Api;
 
+use App\Exceptions\AppException;
 use App\Http\Applications\BaseApp;
-use App\Http\Responses\ResNone;
+use App\Http\Requests\Api\Account\ReqAccountLogin;
+use App\Http\Requests\ReqNone;
 use App\Libraries\Helpers\HelpCompress;
 use App\Libraries\Helpers\HelpRandom;
 use App\Libraries\Utils\UtilGlobals;
 
 class AppAccount extends BaseApp
 {
-    public function register(array $params): void
+    public function register(ReqNone $req): void
     {
         $ucMakeEmail = $this->_useCase(self::UC_MAKE_EMAIL);
         $email = $ucMakeEmail->execute();
@@ -44,18 +46,24 @@ class AppAccount extends BaseApp
         $repUser->persist($entUser);
     }
 
-    public function login(array $params): void
+    public function login(ReqAccountLogin $req): void
     {
-        [$email, $password] = explode(':', HelpCompress::unComp($params['primary_code']));
+        [$email, $password] = explode(':', HelpCompress::unComp($req->primary_code));
 
         $ucCreateApiToken = $this->_useCase(self::UC_CREATE_API_TOKEN);
         $bearer_token = $ucCreateApiToken->execute($email, $password);
         UtilGlobals::set('bearer_token', $bearer_token);
     }
 
-    public function dummy(array $params): void
+    /**
+     * @throws AppException
+     */
+    public function dummy(ReqNone $req): void
     {
-        // TODO response に特化したクラスを作成するか？
-        UtilGlobals::set('response', ResNone::class);
+        $repUser = $this->_rep(self::REP_USER);
+        $entUser = $repUser->draft();
+
+        // TODO
+        throw $this->_appException(self::ERR_APP_USER_NOT_FOUND);
     }
 }

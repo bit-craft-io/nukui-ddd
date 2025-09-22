@@ -11,7 +11,6 @@ abstract class BaseEnt
 {
     // @note HlpInstanceからクラス生成時に不変の値を設定
     abstract public function setDefaults(): void;
-
     protected ?Model $_model = null;
     protected array $_draft = [];
     protected array $_draft_keys = [];

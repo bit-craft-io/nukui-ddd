@@ -1,18 +1,17 @@
 <?php
 
-declare(strict_types=1);
+namespace App\Http\Responses;
 
-namespace App\Domains\Core\ValueObject;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
 
-class BaseVo
+abstract class BaseRes extends JsonResponse
 {
     protected ?array $_props = null;
-
-    public function init(array $props)
+    public function init(array $props = []): void
     {
         $this->_props = $props;
     }
-
     public function __get(string $name)
     {
         return $this?->_props[$name] ?? null;

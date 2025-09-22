@@ -15,8 +15,14 @@ class RepUser extends BaseRep
         return $this->_ent($model);
     }
 
+    /**
+     * @return EntUser|BaseEnt
+     */
     public function draft(): EntUser|BaseEnt
     {
+//        // TODO
+//        $this->_ds(self::DS_U_USER)->dummy();
+
         $model = $this->_ds(self::DS_U_USER)->getDraft();
         return $this->_ent($model);
     }

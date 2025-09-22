@@ -6,6 +6,7 @@ namespace App\Libraries\Traits;
 
 use App\DataSources\BaseDs;
 use App\DataSources\DsAccount;
+use App\DataSources\DsUItem;
 use App\DataSources\DsUUser;
 use App\Libraries\Utils\UtilGlobals;
 use App\Libraries\Utils\UtilInstance;
@@ -16,6 +17,7 @@ trait TraitDataSource
     // @note ここにデータソースを追記していく
     const string DS_ACCOUNT = DsAccount::class;
     const string DS_U_USER = DsUUser::class;
+    const string DS_U_ITEM = DsUItem::class;
 
     /**
      * @template T
