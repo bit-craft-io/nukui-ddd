@@ -12,7 +12,7 @@ trait TraitAppException
 
     public function _appException(array $error_info)
     {
-        $class = UtilInstance::new(AppException::class);
-        return $class->exception($error_info);
+//        $class = UtilInstance::new(AppException::class);
+//        return $class->exception($error_info);
     }
 }

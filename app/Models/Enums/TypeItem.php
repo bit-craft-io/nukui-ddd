@@ -4,37 +4,37 @@ namespace App\Models\Enums;
 
 enum TypeItem: int
 {
-    case Consumable = 1;
-    case Permanent  = 2;
-    case Equipment  = 3;
-    case Material   = 4;
+    case consumable = 1;
+    case permanent  = 2;
+    case equipment  = 3;
+    case material   = 4;
     public function label(): string
     {
         return match($this) {
-            self::Consumable => '消耗アイテム',
-            self::Permanent  => '永続アイテム',
-            self::Equipment  => '装備アイテム',
-            self::Material   => '素材アイテム',
+            self::consumable => '消耗アイテム',
+            self::permanent  => '永続アイテム',
+            self::equipment  => '装備アイテム',
+            self::material   => '素材アイテム',
         };
     }
 
     public function isConsumable(): bool
     {
-        return $this === self::Consumable;
+        return $this === self::consumable;
     }
 
     public function isPermanent(): bool
     {
-        return $this === self::Permanent;
+        return $this === self::permanent;
     }
 
     public function isEquipment(): bool
     {
-        return $this === self::Equipment;
+        return $this === self::equipment;
     }
 
     public function isMaterial(): bool
     {
-        return $this === self::Material;
+        return $this === self::material;
     }
 }

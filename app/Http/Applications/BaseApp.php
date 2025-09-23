@@ -7,12 +7,12 @@ namespace App\Http\Applications;
 use App\Libraries\Traits\TraitRepository;
 use App\Libraries\Traits\TraitValueObject;
 use App\Libraries\Traits\TraitUseCase;
-use App\Libraries\Traits\TraitAppException;
+use App\Libraries\Traits\TraitException;
 
 abstract class BaseApp
 {
     use TraitRepository;
     use TraitValueObject;
     use TraitUseCase;
-    use TraitAppException;
+    use TraitException;
 }

@@ -6,16 +6,27 @@ use Exception;
 
 class AppException extends Exception
 {
+//    /**
+//     * @template T of array{code:int, message:string, temp:string}
+//     *
+//     * @param T $message
+//     * @return self
+//     */
+//    public function make(array $message): self
+//    {
+//        $this->code = $message['code'];
+//        $this->message = $message['message'];
+//        return $this;
+//    }
+
     /**
-     * @template T of array{code:int, message:string, temp:string}
-     *
-     * @param T $error_info
+     * @param TypeErrorCode $type_error_code
      * @return self
      */
-    public function exception(array $error_info): AppException
+    public function make(TypeErrorCode $type_error_code): self
     {
-        $this->code = $error_info['code'];
-        $this->message = $error_info['message'];
+        $this->code = $type_error_code->value;
+        $this->message = $type_error_code->message();
         return $this;
     }
 }

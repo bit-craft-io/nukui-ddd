@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Applications\Api;
 
 use App\Exceptions\AppException;
+use App\Exceptions\TypeErrorCode;
 use App\Http\Applications\BaseApp;
 use App\Http\Requests\Api\Account\ReqAccountLogin;
 use App\Http\Requests\ReqNone;
@@ -64,6 +65,12 @@ class AppAccount extends BaseApp
         $entUser = $repUser->draft();
 
         // TODO
-        throw $this->_appException(self::ERR_APP_USER_NOT_FOUND);
+        $except = $this->_except(self::EXCEPT_TYPE_APP);//->make(self::CODE_APP_USER_NOT_FOUND);
+
+        /** @var class-string<TypeErrorCode> $aaa */
+        $aaa = self::$error_code;
+
+        //make(self::CODE_APP_USER_NOT_FOUND);
+        //$except->make($except->type());
     }
 }
