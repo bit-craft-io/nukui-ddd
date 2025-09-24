@@ -12,13 +12,8 @@ class AppItem extends BaseApp
 {
     public function get(ReqNone $req): void
     {
-        // TODO テスト用にfind（１件）
-        //  本来はｎ件
-        //$entItem = $this->_rep(Reps::REP_ITEM)->findByUserId($req->user_id);
-        //dd($req->user_id, $entItem->item_id);
-
-        // TODO イテレータパターン
-        $entItems = $this->_rep(Reps::REP_ITEM)->getByUserId($req->user_id);
+        $repItem = $this->_rep(Reps::REP_ITEM);
+        $entItems = $repItem->getByUserId($req->user_id);
         $entItem = $entItems->find(1);
         dd($entItems->find(1));
     }

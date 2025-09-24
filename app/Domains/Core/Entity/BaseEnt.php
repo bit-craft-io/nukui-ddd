@@ -13,7 +13,7 @@ abstract class BaseEnt
     use TraitDataSource;
 
     // @note HlpInstanceからクラス生成時に不変の値を設定
-    abstract public function setDefaults(): void;
+    abstract public function initOnce(): void;
     protected ?Model $_model = null;
     protected array $_draft = [];
     protected array $_draft_keys = [];

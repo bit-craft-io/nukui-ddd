@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Domains\User;
 
 use App\Domains\Core\Entity\BaseEnt;
+use App\Domains\Core\ValueObject\VoEnergy;
+use App\Libraries\Utils\UtilInstance;
+use App\Libraries\Utils\UtilIterator;
 
 /**
  * @method _id(int $value)
@@ -26,10 +29,18 @@ use App\Domains\Core\Entity\BaseEnt;
  */
 class EntUser extends BaseEnt
 {
-
-    public function setDefaults(): void
+    public function initOnce(): void
     {
-        // TODO: Implement setDefaults() method.
+        // TODO: Implement initOnce() method.
+    }
+
+    public function getEnergy(): int
+    {
+        // TODO VO ファクトリ作成中（Trait?）初期化処理になるはず
+        $voEnergy = UtilInstance::prototype(VoEnergy::class);
+        $voEnergy->_props(['energy' => $this->energy]);
+        dd($voEnergy);
+        return $this->energy;
     }
 
     public function isEmpty(): bool

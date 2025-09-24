@@ -25,8 +25,8 @@ final class UtilIterator implements Iterator
 //        if (!app()->has($class)) {
 //            app()->singleton($class);
 //            self::$_prototype[$class] = app()->make($class);
-//            // @note $_callable 作成時の prototype で setDefaults を実行済
-//            //$this->_prototype->setDefaults();
+//            // @note $_callable 作成時の prototype で initOnce を実行済
+//            //$this->_prototype->initOnce();
 //        }
 //        return clone self::$_prototype[$class];
 //    }

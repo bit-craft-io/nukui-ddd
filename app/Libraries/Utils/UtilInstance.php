@@ -30,8 +30,8 @@ final class UtilInstance
         if (!app()->has($class)) {
             app()->singleton($class);
             self::$_singleton[$class] = app($class);
-            if (method_exists(self::$_singleton[$class], 'setDefaults')) {
-                self::$_singleton[$class]->setDefaults();
+            if (method_exists(self::$_singleton[$class], 'initOnce')) {
+                self::$_singleton[$class]->initOnce();
             }
             self::$_prototype[$class] = clone self::$_singleton[$class];
         }

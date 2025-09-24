@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class DsUUser extends BaseDs
 {
+    public function findByUserId(int $user_id): ?Model
+    {
+        return $this->_model
+            ->newQuery()
+            ->where('id', $user_id)
+            ->first();
+    }
+
     public function findByPublicId(string $public_id): ?Model
     {
         return $this->_model

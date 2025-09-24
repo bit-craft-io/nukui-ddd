@@ -18,7 +18,7 @@ use App\Domains\Core\Entity\BaseEnt;
  */
 class EntAccount extends BaseEnt
 {
-    public function setDefaults(): void
+    public function initOnce(): void
     {
         // TODO: Implement setUp() method.
     }
