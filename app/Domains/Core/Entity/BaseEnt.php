@@ -16,13 +16,16 @@ abstract class BaseEnt
 
     // @note HlpInstanceからクラス生成時に不変の値を設定
     abstract public function initOnce(): void;
+    abstract public function initAfter(): void;
     protected ?Model $_model = null;
     protected array $_draft = [];
     protected array $_draft_keys = [];
 
-    public function init(?Model $model): void
+    public function init(?Model $model): self
     {
         $this->_model = $model;
+        $this->initAfter();
+        return $this;
     }
 
     public function __get(string $name)
@@ -32,14 +35,6 @@ abstract class BaseEnt
 
     public function __call(string $name, array $arguments = [])
     {
-        //$snake_case = Str::snake($name);
-        //if ('_' === $snake_case[0]) {
-        //    $key = substr($snake_case, 1);
-        //    $this->_draft[$key] = $arguments[0];
-        //    $this->_draft_keys[] = $key;
-        //}
-        //dd($this->_model->getAttributes());
-
         $this->_draft[$name] = $arguments[0];
         $this->_draft_keys[] = $name;
         return $this;

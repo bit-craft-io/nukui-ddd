@@ -10,10 +10,10 @@ use App\Domains\Core\ValueObject\VoMItem;
 use App\Libraries\Utils\UtilIterator;
 
 /**
- * @method user_id(integer $value)
- * @method item_id(integer $value)
- * @method amount(integer $value)
- * @method enabled_end_at(string $value)
+ * @method void user_id(integer $value)
+ * @method void item_id(integer $value)
+ * @method void amount(integer $value)
+ * @method void enabled_end_at(string $value)
  * @property-read integer $user_id
  * @property-read integer $item_id
  * @property-read integer $amount
@@ -27,6 +27,11 @@ class EntItem extends BaseEnt
     {
         $models = $this->_ds(DSs::DS_M_ITEM)->getEnable();
         $this->_vo_m_items = $this->_vo(VoMItem::class)->iterator($models);
+    }
+
+    public function initAfter(): void
+    {
+        // TODO: Implement initAfter() method.
     }
 
     public function addAmount(int $amount): void
