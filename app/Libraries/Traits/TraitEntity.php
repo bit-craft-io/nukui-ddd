@@ -6,8 +6,11 @@ namespace App\Libraries\Traits;
 
 use App\Domains\Core\Entity\BaseEnt;
 use App\Libraries\Utils\UtilInstance;
+use App\Libraries\Utils\UtilIterator;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Iterator;
 
 trait TraitEntity
 {
@@ -30,5 +33,24 @@ trait TraitEntity
             $ent->_model($model);
         }
         return $ent;
+    }
+
+    /**
+     * @param Collection<Model> $models
+     * @return Collection<BaseEnt>
+     */
+    protected function _ents(string $class, Collection $models): UtilIterator
+    {
+        // @note 20250924 イテレータ
+        $ent = UtilInstance::prototype($class);
+        $callable = function ($model) use ($ent) {
+            if ($model && method_exists($ent, '_model')) {
+                $ent->_model($model);
+            }
+            return $ent;
+        };
+        $iterator = UtilInstance::prototype(UtilIterator::class);
+        $iterator->init($callable, $models);
+        return $iterator;
     }
 }

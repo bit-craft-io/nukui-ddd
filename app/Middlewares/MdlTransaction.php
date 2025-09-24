@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class MdlTransaction
+final class MdlTransaction
 {
     public function handle($request, Closure $next)
     {

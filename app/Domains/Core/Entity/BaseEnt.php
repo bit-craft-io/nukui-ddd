@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Domains\Core\Entity;
 
+use App\Libraries\Traits\TraitDataSource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 abstract class BaseEnt
 {
+    use TraitDataSource;
+
     // @note HlpInstanceからクラス生成時に不変の値を設定
     abstract public function setDefaults(): void;
-
     protected ?Model $_model = null;
     protected array $_draft = [];
     protected array $_draft_keys = [];
@@ -42,11 +44,6 @@ abstract class BaseEnt
         $this->_model->fill($this->_draft);
         $this->_draft = [];
     }
-
-    //public function current()
-    //{
-    //    return $this->_model;
-    //}
 
     public function getProperties(): array
     {

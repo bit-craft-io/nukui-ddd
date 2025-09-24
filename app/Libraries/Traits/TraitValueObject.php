@@ -8,15 +8,13 @@ use App\Libraries\Utils\UtilInstance;
 
 trait TraitValueObject
 {
-    //const string VO_PRIMARY_CODE = VoPrimaryCode::class;
-
     /**
      * @template T
-     * @param T $vo
+     * @param T $vo_class
      * @return T
      */
-    public function _vo(string $vo)
+    public function _vo(string $vo_class)
     {
-        return UtilInstance::prototype($vo);
+        return UtilInstance::prototype($vo_class);
     }
 }

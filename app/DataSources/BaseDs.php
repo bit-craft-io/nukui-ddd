@@ -6,7 +6,7 @@ namespace App\DataSources;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BaseDs
+abstract class BaseDs
 {
     protected ?Model $_model = null;
 

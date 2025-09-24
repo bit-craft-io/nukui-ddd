@@ -8,21 +8,26 @@ use App\Http\Applications\Api\AppAccount;
 use App\Http\Controllers\BaseCnt;
 use App\Http\Requests\Api\Account\ReqAccountLogin;
 use App\Http\Requests\ReqNone;
+use App\Http\Responses\Core\ResponseConfig;
+use App\Http\Responses\ResNone;
+use App\Libraries\Utils\UtilGlobals;
 
 class CntAccount extends BaseCnt
 {
     public function register(AppAccount $app, ReqNone $req): void
     {
-        $app->register($req->params());
+        $app->register($req);
     }
 
     public function login(AppAccount $app, ReqAccountLogin $req): void
     {
-        $app->login($req->params());
+        $app->login($req);
     }
 
     public function dummy(AppAccount $app, ReqNone $req): void
     {
-        $app->dummy($req->params());
+        // @note Responseのクラスを変更
+        ResponseConfig::modifyResponse(ResNone::class);
+        $app->dummy($req);
     }
 }

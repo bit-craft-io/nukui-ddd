@@ -1,10 +1,16 @@
 <?php
 
+use App\Exceptions\ExceptApp;
+use App\Exceptions\ExceptModel;
+use App\Http\Responses\Core\ResponseConfig;
+use App\Http\Responses\ResError;
 use App\Middlewares\MdlAfterExecute;
 use App\Middlewares\MdlTransaction;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -19,5 +25,18 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->render(function (Throwable $e, Request $request): JsonResponse {
+            if ($e instanceof ExceptApp) {
+                return response()->json([
+                    'code' => $e->getCode(),
+                    'message' => $e->getMessage(),
+                ], 400);
+            }
+            if ($e instanceof ExceptModel) {
+                return response()->json([
+                    'code' => $e->getCode(),
+                    'message' => $e->getMessage(),
+                ], 400);
+            }
+        });
     })->create();
