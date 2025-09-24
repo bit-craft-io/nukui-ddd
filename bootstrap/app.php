@@ -1,7 +1,7 @@
 <?php
 
-use App\Exceptions\AppException;
-use App\Exceptions\ModelException;
+use App\Exceptions\ExceptApp;
+use App\Exceptions\ExceptModel;
 use App\Http\Responses\Core\ResponseConfig;
 use App\Http\Responses\ResError;
 use App\Middlewares\MdlAfterExecute;
@@ -26,13 +26,13 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (Throwable $e, Request $request): JsonResponse {
-            if ($e instanceof AppException) {
+            if ($e instanceof ExceptApp) {
                 return response()->json([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage(),
                 ], 400);
             }
-            if ($e instanceof ModelException) {
+            if ($e instanceof ExceptModel) {
                 return response()->json([
                     'code' => $e->getCode(),
                     'message' => $e->getMessage(),

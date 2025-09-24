@@ -4,24 +4,26 @@ declare(strict_types=1);
 
 namespace App\Http\Applications\Api;
 
-use App\Exceptions\AppException;
-use App\Exceptions\TypeErrorCode;
+use App\Domains\Reps;
+use App\Exceptions\Excepts;
+use App\Exceptions\TypeExcept;
 use App\Http\Applications\BaseApp;
 use App\Http\Requests\Api\Account\ReqAccountLogin;
 use App\Http\Requests\ReqNone;
 use App\Libraries\Helpers\HelpCompress;
 use App\Libraries\Helpers\HelpRandom;
 use App\Libraries\Utils\UtilGlobals;
+use App\UseCase\UCs;
 
 class AppAccount extends BaseApp
 {
     public function register(ReqNone $req): void
     {
-        $ucMakeEmail = $this->_useCase(self::UC_MAKE_EMAIL);
+        $ucMakeEmail = $this->_useCase(UCs::UC_MAKE_EMAIL);
         $email = $ucMakeEmail->execute();
         $password = HelpRandom::key32(4,4);
 
-        $repAccount = $this->_rep(self::REP_ACCOUNT);
+        $repAccount = $this->_rep(Reps::REP_ACCOUNT);
         $entAccount = $repAccount->draft();
         $entAccount->_name('none');
         $entAccount->_email($email);
@@ -33,10 +35,10 @@ class AppAccount extends BaseApp
         $primary_code = HelpCompress::comp($primary_data);
         UtilGlobals::set('primary_code', $primary_code);
 
-        $ucMakePublicId = $this->_useCase(self::UC_MAKE_PUBLIC_ID);
+        $ucMakePublicId = $this->_useCase(UCs::UC_MAKE_PUBLIC_ID);
         $public_id = $ucMakePublicId->execute();
 
-        $repUser = $this->_rep(self::REP_USER);
+        $repUser = $this->_rep(Reps::REP_USER);
         $entUser = $repUser->draft();
         $entUser->_id($entAccount->id);
         $entUser->_public_id($public_id);
@@ -51,23 +53,24 @@ class AppAccount extends BaseApp
     {
         [$email, $password] = explode(':', HelpCompress::unComp($req->primary_code));
 
-        $ucCreateApiToken = $this->_useCase(self::UC_CREATE_API_TOKEN);
+        $ucCreateApiToken = $this->_useCase(UCs::UC_CREATE_API_TOKEN);
         $bearer_token = $ucCreateApiToken->execute($email, $password);
         UtilGlobals::set('bearer_token', $bearer_token);
     }
 
     /**
-     * @throws AppException
+     * @param ReqNone $req
+     * @return void
      */
     public function dummy(ReqNone $req): void
     {
-        $repUser = $this->_rep(self::REP_USER);
+        $repUser = $this->_rep(Reps::REP_USER);
         $entUser = $repUser->draft();
 
         // TODO
-        $except = $this->_except(self::EXCEPT_TYPE_APP);//->make(self::CODE_APP_USER_NOT_FOUND);
+        $except = $this->_except(Excepts::EXCEPT_APP)->make(TypeExcept::app_user_not_found);
 
-        /** @var class-string<TypeErrorCode> $aaa */
+        /** @var class-string<TypeExcept> $aaa */
         $aaa = self::$error_code;
 
         //make(self::CODE_APP_USER_NOT_FOUND);

@@ -37,6 +37,6 @@ class UItem extends Model
         'user_id' => 'integer',
         'item_id' => 'integer',
         'amount' => 'integer',
-        'enabled_end_at' => 'datetime',
+        'enabled_end_at' => 'datetime:Y-m-d H:i:s',
     ];
 }

@@ -38,8 +38,8 @@ class MItem extends Model
         'type_item' => TypeItem::class,
         'max_display' => 'integer',
         'max_stock' => 'integer',
-        'enabled_from_at' => 'datetime',
-        'enabled_end_at' => 'datetime',
+        'enabled_from_at' => 'datetime:Y-m-d H:i:s',
+        'enabled_end_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     public function scopeEnable(Builder $query): Builder

@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace App\DataSources;
 
+use App\Domains\Item\EntItem;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class DsUItem extends BaseDs
 {
+    public function draft(): ?Model
+    {
+        return $this->_model;
+    }
+    // TODO 動的確認用のメソッド
     public function findByUserId(int $user_id): ?Model
     {
         return $this->_model
@@ -23,5 +29,13 @@ class DsUItem extends BaseDs
             ->newQuery()
             ->where('user_id', $user_id)
             ->get();
+    }
+
+    public function upsert(array $values): void
+    {
+        $uniqueBy = ['user_id', 'item_id'];
+        $this->_model
+            ->newQuery()
+            ->upsert($values, $uniqueBy);
     }
 }

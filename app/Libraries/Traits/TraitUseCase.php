@@ -11,17 +11,13 @@ use App\UseCase\Account\UcMakePublicId;
 
 trait TraitUseCase
 {
-    const string UC_MAKE_EMAIL = UcMakeEmail::class;
-    const string UC_MAKE_PUBLIC_ID = UcMakePublicId::class;
-    const string UC_CREATE_API_TOKEN = UcCreateApiToken::class;
-
     /**
      * @template T
-     * @param T $use_case
+     * @param T $use_case_class
      * @return T
      */
-    public function _useCase(string $use_case)
+    public function _useCase(string $use_case_class)
     {
-        return UtilInstance::singleton($use_case);
+        return UtilInstance::singleton($use_case_class);
     }
 }

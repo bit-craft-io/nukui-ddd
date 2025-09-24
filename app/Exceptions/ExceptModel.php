@@ -5,7 +5,7 @@ namespace App\Exceptions;
 use App\Http\Applications\Api\AppAccount;
 use Exception;
 
-final class ModelException extends Exception
+final class ExceptModel extends Exception
 {
     /**
      * @template T of array{code:int, message:string, temp:string}
@@ -13,7 +13,7 @@ final class ModelException extends Exception
      * @param T $error_info
      * @return self
      */
-    public function exception(array $error_info): ModelException
+    public function exception(array $error_info): ExceptModel
     {
         // TODO ログ出力
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);

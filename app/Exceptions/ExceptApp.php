@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-class AppException extends Exception
+class ExceptApp extends Exception
 {
 //    /**
 //     * @template T of array{code:int, message:string, temp:string}
@@ -20,13 +20,13 @@ class AppException extends Exception
 //    }
 
     /**
-     * @param TypeErrorCode $type_error_code
+     * @param TypeExcept $type_except
      * @return self
      */
-    public function make(TypeErrorCode $type_error_code): self
+    public function make(TypeExcept $type_except): self
     {
-        $this->code = $type_error_code->value;
-        $this->message = $type_error_code->message();
+        $this->code = $type_except->value;
+        $this->message = $type_except->message();
         return $this;
     }
 }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('enabled_end_at')->nullable()->comment('有効期間（終了日時）');
             $table->timestamps();
 
-            $table->index(['user_id', 'item_id'], 'user_id_item_id');
+            $table->unique(['user_id', 'item_id'], 'user_id_item_id');
         });
     }
 

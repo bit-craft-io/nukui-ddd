@@ -7,7 +7,7 @@ namespace App\Domains\Account;
 use App\Domains\Core\Entity\BaseEnt;
 
 /**
- * @method _id(string $value)
+ * @method _id(integer $value)
  * @method _name(string $value)
  * @method _email(string $value)
  * @method _password(string $value)

@@ -14,37 +14,30 @@ use Illuminate\Database\Eloquent\Model;
 
 trait TraitDataSource
 {
-    // @note ここにデータソースを追記していく
-    const string DS_ACCOUNT = DsAccount::class;
-    const string DS_U_USER = DsUUser::class;
-    const string DS_U_ITEM = DsUItem::class;
-
     /**
      * @template T
-     * @param T $ds_type
+     * @param T $data_source_class
      * @return T
      */
-    protected function _ds(string $ds_type)
+    protected function _ds(string $data_source_class)
     {
-        $instance = UtilGlobals::find($ds_type);
+        $instance = UtilGlobals::find($data_source_class);
         if ($instance) {
             return $instance;
         }
 
-        //$model_class_name = preg_replace('/^Ds/', '', class_basename($this->_ds_type));
-        $model_class_name = preg_replace('/^Ds/', '', class_basename($ds_type));
+        $model_class_name = preg_replace('/^Ds/', '', class_basename($data_source_class));
         $model_name = "App\\Models\\$model_class_name";
 
         /** @var BaseDs $instance */
-        //$instance = HlpInstance::singleton($this->_ds_type);
-        $instance = UtilInstance::singleton($ds_type);
+        $instance = UtilInstance::singleton($data_source_class);
 
         /** @var Model $model */
         $model = UtilInstance::singleton($model_name);
 
         $instance->_model($model);
 
-        UtilGlobals::set($ds_type, $instance);
+        UtilGlobals::set($data_source_class, $instance);
 
         return $instance;
     }

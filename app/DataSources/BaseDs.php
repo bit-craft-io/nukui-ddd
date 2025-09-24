@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace App\DataSources;
 
-use App\Libraries\Traits\TraitModelException;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseDs
 {
-    use TraitModelException;
-
     protected ?Model $_model = null;
 
     /**
