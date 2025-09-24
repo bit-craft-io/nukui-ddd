@@ -22,7 +22,7 @@ class RepAccount extends BaseRep
         $ent->commit();
         $id = $this->_ds(DSs::DS_ACCOUNT)->insertGetId($ent->getProperties());
 
-        $ent->_id($id);
+        $ent->id($id);
         $ent->commit();
     }
 }

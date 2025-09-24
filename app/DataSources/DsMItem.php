@@ -6,7 +6,6 @@ namespace App\DataSources;
 
 use App\Models\MItem;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 class DsMItem extends BaseDs
 {

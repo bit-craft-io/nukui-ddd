@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Responses\Core;
 
 use App\Http\Responses\ResError;
 use App\Libraries\Utils\UtilInstance;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

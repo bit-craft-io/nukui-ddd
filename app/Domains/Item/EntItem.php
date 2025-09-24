@@ -7,14 +7,13 @@ namespace App\Domains\Item;
 use App\DataSources\DSs;
 use App\Domains\Core\Entity\BaseEnt;
 use App\Domains\Core\ValueObject\VoMItem;
-use App\Libraries\Utils\UtilInstance;
 use App\Libraries\Utils\UtilIterator;
 
 /**
- * @method _user_id(integer $value)
- * @method _item_id(integer $value)
- * @method _amount(integer $value)
- * @method _enabled_end_at(string $value)
+ * @method user_id(integer $value)
+ * @method item_id(integer $value)
+ * @method amount(integer $value)
+ * @method enabled_end_at(string $value)
  * @property-read integer $user_id
  * @property-read integer $item_id
  * @property-read integer $amount
@@ -27,7 +26,7 @@ class EntItem extends BaseEnt
     public function initOnce(): void
     {
         $models = $this->_ds(DSs::DS_M_ITEM)->getEnable();
-        $this->_vo_m_items = UtilInstance::singleton(VoMItem::class)->iterator($models);
+        $this->_vo_m_items = $this->_vo(VoMItem::class)->iterator($models);
     }
 
     public function addAmount(int $amount): void

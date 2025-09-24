@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Libraries\Traits;
 
-use App\Domains\Reps;
 use App\Libraries\Utils\UtilInstance;
 
 trait TraitRepository

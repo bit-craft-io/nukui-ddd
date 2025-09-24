@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Api\Develop;
 
 use App\Http\Requests\BaseReq;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Libraries\Utils;
 
 use Illuminate\Database\Eloquent\Collection;
@@ -16,20 +18,6 @@ final class UtilIterator implements Iterator
     protected ?Collection $_models = null;
     protected array $_keys = [];
     protected int $_position = 0;
-//    /** @var array<self> */
-//    protected static array $_prototype = [];
-//
-//    public static function prototype()
-//    {
-//        $class = static::class;
-//        if (!app()->has($class)) {
-//            app()->singleton($class);
-//            self::$_prototype[$class] = app()->make($class);
-//            // @note $_callable 作成時の prototype で initOnce を実行済
-//            //$this->_prototype->initOnce();
-//        }
-//        return clone self::$_prototype[$class];
-//    }
 
     /**
      * @return mixed

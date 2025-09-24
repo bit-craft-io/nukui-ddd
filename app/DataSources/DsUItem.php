@@ -4,23 +4,14 @@ declare(strict_types=1);
 
 namespace App\DataSources;
 
-use App\Domains\Item\EntItem;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class DsUItem extends BaseDs
 {
-    public function draft(): ?Model
+    public function getDraft(): ?Model
     {
         return $this->_model;
-    }
-    // TODO 動的確認用のメソッド
-    public function findByUserId(int $user_id): ?Model
-    {
-        return $this->_model
-            ->newQuery()
-            ->where('user_id', $user_id)
-            ->first();
     }
 
     public function getByUserId(int $user_id): Collection

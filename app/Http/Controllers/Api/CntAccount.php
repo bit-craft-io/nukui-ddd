@@ -10,7 +10,6 @@ use App\Http\Requests\Api\Account\ReqAccountLogin;
 use App\Http\Requests\ReqNone;
 use App\Http\Responses\Core\ResponseConfig;
 use App\Http\Responses\ResNone;
-use App\Libraries\Utils\UtilGlobals;
 
 class CntAccount extends BaseCnt
 {

@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace App\Libraries\Traits;
 
 use App\Libraries\Utils\UtilInstance;
-use App\UseCase\Account\UcCreateApiToken;
-use App\UseCase\Account\UcMakeEmail;
-use App\UseCase\Account\UcMakePublicId;
 
 trait TraitUseCase
 {

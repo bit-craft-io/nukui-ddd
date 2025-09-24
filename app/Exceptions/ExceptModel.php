@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Exceptions;
 
 use App\Http\Applications\Api\AppAccount;
@@ -25,8 +27,6 @@ final class ExceptModel extends Exception
             'function' => $caller['function'] ?? 'global',
             'type' => $caller['type'] ?? '',
         ];
-
-        \Log::emergency($log);
 
         $this->code = $error_info['code'];
         $this->message = $error_info['message'];

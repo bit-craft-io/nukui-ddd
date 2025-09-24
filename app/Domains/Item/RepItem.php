@@ -13,7 +13,7 @@ class RepItem extends BaseRep
 {
     public function draft(int $user_id, int $item_id): EntItem|BaseEnt
     {
-        $model = $this->_ds(DSs::DS_U_ITEM)->draft();
+        $model = $this->_ds(DSs::DS_U_ITEM)->getDraft();
         $model->fill(['user_id' => $user_id, 'item_id' => $item_id]);
         return $this->_ent($model);
     }
@@ -25,7 +25,7 @@ class RepItem extends BaseRep
     public function getByUserId(int $user_id): UtilIterator
     {
         $models = $this->_ds(DSs::DS_U_ITEM)->getByUserId($user_id);
-        return $this->_ents(EntItem::class, $models);
+        return $this->_ent()->iterator($models);
     }
 
     public function persist(EntItem|BaseEnt $ent): void

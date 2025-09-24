@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Responses\Api\Account;
 
 use App\Libraries\Utils\UtilGlobals;

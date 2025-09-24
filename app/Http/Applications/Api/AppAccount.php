@@ -25,9 +25,9 @@ class AppAccount extends BaseApp
 
         $repAccount = $this->_rep(Reps::REP_ACCOUNT);
         $entAccount = $repAccount->draft();
-        $entAccount->_name('none');
-        $entAccount->_email($email);
-        $entAccount->_password($password);
+        $entAccount->name('none');
+        $entAccount->email($email);
+        $entAccount->password($password);
         $repAccount->persist($entAccount);
 
         // @note 意識高い系の実装です
@@ -40,12 +40,12 @@ class AppAccount extends BaseApp
 
         $repUser = $this->_rep(Reps::REP_USER);
         $entUser = $repUser->draft();
-        $entUser->_id($entAccount->id);
-        $entUser->_public_id($public_id);
-        $entUser->_nick_name('none');
-        $entUser->_energy(100);
-        $entUser->_energy_max_regen(100);
-        $entUser->_energy_max_stock(100);
+        $entUser->id($entAccount->id);
+        $entUser->public_id($public_id);
+        $entUser->nick_name('none');
+        $entUser->energy(100);
+        $entUser->energy_max_regen(100);
+        $entUser->energy_max_stock(100);
         $repUser->persist($entUser);
     }
 
