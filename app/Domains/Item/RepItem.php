@@ -11,7 +11,7 @@ use App\Libraries\Utils\UtilIterator;
 
 class RepItem extends BaseRep
 {
-    public function draft(int $user_id, int $item_id): EntItem|BaseEnt
+    public function makeDraft(int $user_id, int $item_id): EntItem|BaseEnt
     {
         $model = $this->_ds(DSs::DS_U_ITEM)->getDraft();
         $model->fill(['user_id' => $user_id, 'item_id' => $item_id]);

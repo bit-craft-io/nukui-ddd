@@ -19,12 +19,14 @@ class AppAccount extends BaseApp
 {
     public function register(ReqNone $req): void
     {
+        $this->_useTransaction();
+
         $ucMakeEmail = $this->_useCase(UCs::UC_MAKE_EMAIL);
         $email = $ucMakeEmail->execute();
         $password = HelpRandom::key32(4,4);
 
         $repAccount = $this->_rep(Reps::REP_ACCOUNT);
-        $entAccount = $repAccount->draft();
+        $entAccount = $repAccount->mekDraft();
         $entAccount->name('none');
         $entAccount->email($email);
         $entAccount->password($password);
@@ -39,7 +41,7 @@ class AppAccount extends BaseApp
         $public_id = $ucMakePublicId->execute();
 
         $repUser = $this->_rep(Reps::REP_USER);
-        $entUser = $repUser->draft();
+        $entUser = $repUser->makeDraft();
         $entUser->id($entAccount->id);
         $entUser->public_id($public_id);
         $entUser->nick_name('none');
@@ -65,7 +67,7 @@ class AppAccount extends BaseApp
     public function dummy(ReqNone $req): void
     {
         $repUser = $this->_rep(Reps::REP_USER);
-        $entUser = $repUser->draft();
+        $entUser = $repUser->makeDraft();
 
         // TODO
         $except = $this->_except(Excepts::EXCEPT_APP)->make(TypeExcept::app_user_not_found);

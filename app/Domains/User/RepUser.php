@@ -13,7 +13,7 @@ class RepUser extends BaseRep
     /**
      * @return EntUser|BaseEnt
      */
-    public function draft(): EntUser|BaseEnt
+    public function makeDraft(): EntUser|BaseEnt
     {
         $model = $this->_ds(DSs::DS_U_USER)->getDraft();
         return $this->_ent($model);

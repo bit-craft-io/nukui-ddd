@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domains\Core\ValueObject;
 
-use App\Libraries\Utils\UtilIterator;
-
 abstract class BaseEntVo
 {
     protected ?object $_this_ent = null;
@@ -24,4 +22,9 @@ abstract class BaseEntVo
     {
         $this->_this_ent->$name($arguments[0]);
     }
+
+    // @note BaseEntVo のイテレータは存在しない Entity のイテレータは存在する
+    //public function iterator($collect): UtilIterator
+    //{
+    //}
 }

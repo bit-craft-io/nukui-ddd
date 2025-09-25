@@ -12,14 +12,14 @@ class AppDevelop extends BaseApp
 {
     public function itemAdd(ReqDevelopItemAdd $req): void
     {
-        $rep = $this->_rep(Reps::REP_ITEM);
-        $ents = $rep->getByUserId($req->user_id);
-        $ent = $ents->find($req->item_id);
-        if (!$ent) {
-            $ent = $rep->draft($req->user_id, $req->item_id);
-            $ent->enabled_end_at($ent->getEnabledEndAt());
+        $repItem = $this->_rep(Reps::REP_ITEM);
+        $entItemIte = $repItem->getByUserId($req->user_id);
+        $entItem = $entItemIte->find($req->item_id);
+        if (!$entItem) {
+            $entItem = $repItem->makeDraft($req->user_id, $req->item_id);
+            $entItem->enabled_end_at($entItem->getEnabledEndAt());
         }
-        $ent->addAmount($req->amount);
-        $rep->persist($ent);
+        $entItem->addAmount($req->amount);
+        $repItem->persist($entItem);
     }
 }

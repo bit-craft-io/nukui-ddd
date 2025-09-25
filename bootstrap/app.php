@@ -4,6 +4,7 @@ use App\Exceptions\ExceptApp;
 use App\Exceptions\ExceptModel;
 use App\Http\Responses\Core\ResponseConfig;
 use App\Http\Responses\ResError;
+use App\Libraries\Utils\UtilGlobals;
 use App\Middlewares\MdlAfterExecute;
 use App\Middlewares\MdlTransaction;
 use Illuminate\Foundation\Application;
@@ -25,6 +26,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+
+        UtilGlobals::set('is_exception', true);
+
         $exceptions->render(function (Throwable $e, Request $request): JsonResponse {
             if ($e instanceof ExceptApp) {
                 return response()->json([
