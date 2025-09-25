@@ -36,12 +36,20 @@ class EntItem extends BaseEnt
 
     public function addAmount(int $amount): void
     {
-        $this->_amount($this->amount + $amount);
+        $sum = $this->amount + $amount;
+        $vo_m_item = $this->_vo_m_items->find($this->item_id);
+
+        // TODO
+        dd($vo_m_item->type_item);
+
+        $sum = min($vo_m_item->max_stock, $sum);
+        $this->amount($sum);
     }
 
     public function getEnabledEndAt(): ?string
     {
-        $date = $this->enabled_end_at ?? $this->_vo_m_items->find($this->item_id)?->enabled_end_at;
+        $date = $this->enabled_end_at
+            ?? $this->_vo_m_items->find($this->item_id)?->enabled_end_at;
         return $date?->format('Y-m-d H:i:s');
     }
 }
