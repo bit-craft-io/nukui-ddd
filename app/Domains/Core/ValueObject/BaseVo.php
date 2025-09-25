@@ -6,7 +6,7 @@ namespace App\Domains\Core\ValueObject;
 
 use App\Libraries\Utils\UtilIterator;
 
-class BaseVo
+abstract class BaseVo
 {
     protected ?array $_props = null;
 

@@ -36,25 +36,23 @@ class EntUser extends BaseEnt
 
     public function initAfter(): void
     {
-        // TODO VOの処理を作成中
-        //dd($this->energy);
-        $this->_vo_energy = $this->_vo(VoEnergy::class)->init(['energy' => $this->energy]);
-
-        $temp = $this->_vo_energy->energy;
-        //dd($temp + 10);
-        //$this->_vo_energy->energy($temp + 10);
-
-        $this->_vo_energy->energy($temp + 10);
-        //dd($this->_vo_energy->energy);
-        dd($this->energy);
-        //->init(['energy' => $this->energy]);
+        // @note $this（entity）を渡す、voの値を変更すると entity の値も変わる（draft）
+        $this->_vo_energy = $this->_vo(VOs::VO_ENERGY)->init($this);
     }
 
-    public function getEnergy(): int
+    //public function getEnergy(): int
+    //{
+    //    return $this->energy;
+    //}
+
+    public function addEnergy(int $value): void
     {
-        $this->_vo_energy->energy($this->_vo_energy->energy + 10);
-        dd(__LINE__);
-        return $this->_vo_energy->energy;
+        $this->_vo_energy->recover($value);
+    }
+
+    public function subEnergy(int $value): void
+    {
+        $this->_vo_energy->consume($value);
     }
 
     public function isEmpty(): bool
