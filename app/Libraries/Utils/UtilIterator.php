@@ -14,10 +14,10 @@ use Iterator;
 final class UtilIterator implements Iterator
 {
     /** @var callable|null  */
-    protected $_callable = null;
-    protected ?Collection $_models = null;
-    protected array $_keys = [];
-    protected int $_position = 0;
+    private $_callable = null;
+    private ?Collection $_models = null;
+    private array $_keys = [];
+    private int $_position = 0;
 
     /**
      * @return mixed

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Applications\Api;
 
 use App\Domains\Reps;
-use App\Http\Applications\BaseApp;
-use App\Http\Requests\ReqNone;
+use App\Http\Applications\Core\BaseApp;
+use App\Http\Requests\Core\ReqNone;
 
 class AppUser extends BaseApp
 {
@@ -14,7 +14,6 @@ class AppUser extends BaseApp
     {
         $repUser = $this->_rep(Reps::REP_USER);
         $entUser = $repUser->findByUserId($req->user_id);
-        dd($entUser->getEnergy());
-        dd(__LINE__);
+        $entUser->addEnergy(1);
     }
 }

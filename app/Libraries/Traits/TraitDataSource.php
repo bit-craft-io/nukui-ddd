@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Libraries\Traits;
 
-use App\DataSources\BaseDs;
+use App\DataSources\Core\BaseDs;
 use App\Libraries\Utils\UtilGlobals;
 use App\Libraries\Utils\UtilInstance;
 use Illuminate\Database\Eloquent\Model;

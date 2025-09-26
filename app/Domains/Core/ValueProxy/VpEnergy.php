@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Core\ValueObject;
+namespace App\Domains\Core\ValueProxy;
 
 /**
  * @method void energy(integer $value)
@@ -10,7 +10,7 @@ namespace App\Domains\Core\ValueObject;
  * @property-read $energy_max_regen
  * @property-read $energy_max_stock
  */
-class VoEnergy extends BaseEntVo
+class VpEnergy extends BaseVp
 {
     public function recover(int $value): void
     {

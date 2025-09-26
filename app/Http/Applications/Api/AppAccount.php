@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Applications\Api;
 
 use App\Domains\Reps;
+use App\Exceptions\Enums\TypeExcept;
 use App\Exceptions\Excepts;
-use App\Exceptions\TypeExcept;
-use App\Http\Applications\BaseApp;
+use App\Http\Applications\Core\BaseApp;
 use App\Http\Requests\Api\Account\ReqAccountLogin;
-use App\Http\Requests\ReqNone;
+use App\Http\Requests\Core\ReqNone;
 use App\Libraries\Helpers\HelpCompress;
 use App\Libraries\Helpers\HelpRandom;
 use App\Libraries\Utils\UtilGlobals;
@@ -32,7 +32,6 @@ class AppAccount extends BaseApp
         $entAccount->password($password);
         $repAccount->persist($entAccount);
 
-        // @note 意識高い系の実装です
         $primary_data = "$email:$password";
         $primary_code = HelpCompress::comp($primary_data);
         UtilGlobals::set('primary_code', $primary_code);

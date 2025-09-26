@@ -21,10 +21,11 @@ abstract class BaseVo
         return $this?->_props[$name] ?? null;
     }
 
-    public function __call(string $name, array $arguments = [])
-    {
-        $this->_props[$name] = $arguments[0];
-    }
+    // @note ValueObject は mutable の為、setter は存在しない
+    //public function __call(string $name, array $arguments = [])
+    //{
+    //    $this->_props[$name] = $arguments[0];
+    //}
 
     public function iterator($collect): UtilIterator
     {

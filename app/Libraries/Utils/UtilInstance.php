@@ -6,9 +6,9 @@ namespace App\Libraries\Utils;
 
 final class UtilInstance
 {
-    protected static ?array $_prototype = null;
+    private static ?array $_prototype = null;
     /** @var array<object>|null  */
-    protected static ?array $_singleton = null;
+    private static ?array $_singleton = null;
 
     /**
      * @template T

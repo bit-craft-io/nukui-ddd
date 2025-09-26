@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace App\Http\Responses\Core;
 
-use App\Http\Responses\ResError;
 use App\Libraries\Utils\UtilInstance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 final class ResponseConfig
 {
-    protected static ?object $response = null;
+    private static BaseRes $response;
 
-    public static function modifyResponse(string $response): void
+    public static function modifyResponse(string $response_class): void
     {
-        self::$response = UtilInstance::singleton($response);
+        /** @var BaseRes $response */
+        $response = UtilInstance::singleton($response_class);
+        self::$response = $response;
     }
 
     public static function modifyResponseError(array $contents): void
@@ -30,7 +31,6 @@ final class ResponseConfig
     public static function find(Request $request): ?object
     {
         if (self::$response) {
-
             return self::$response;
         }
 
@@ -38,8 +38,11 @@ final class ResponseConfig
         $route = Str::studly(array_shift($uri_segments));
         $file = 'Res' . Str::studly(implode('_', $uri_segments));
         $domain = isset($uri_segments[0]) ? Str::studly($uri_segments[0]) : null;
-        $class_name = "App\\Http\\Responses\\{$route}\\{$domain}\\{$file}";
-        self::$response = UtilInstance::singleton($class_name);
+        $response_class = "App\\Http\\Responses\\{$route}\\{$domain}\\{$file}";
+
+        /** @var BaseRes $response */
+        $response = UtilInstance::singleton($response_class);
+        self::$response = $response;
 
         return self::$response;
     }

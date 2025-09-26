@@ -9,7 +9,8 @@ use Closure;
 
 final class MdlAfterExecute
 {
-    public const int STATUS_SUCCESS = 200;
+    // TODO private const
+    private const int STATUS_SUCCESS = 200;
     public function handle($request, Closure $next)
     {
         $response = $next($request);

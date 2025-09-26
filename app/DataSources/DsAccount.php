@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataSources;
 
+use App\DataSources\Core\BaseDs;
 use App\Models\Account;
 use Illuminate\Database\Eloquent\Model;
 

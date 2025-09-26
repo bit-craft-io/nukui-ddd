@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Applications\Api\AppItem;
-use App\Http\Controllers\BaseCnt;
-use App\Http\Requests\ReqNone;
+use App\Http\Controllers\Core\BaseCnt;
+use App\Http\Requests\Core\ReqNone;
 
 class CntItem extends BaseCnt
 {

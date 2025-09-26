@@ -2,8 +2,6 @@
 
 use App\Exceptions\ExceptApp;
 use App\Exceptions\ExceptModel;
-use App\Http\Responses\Core\ResponseConfig;
-use App\Http\Responses\ResError;
 use App\Libraries\Utils\UtilGlobals;
 use App\Middlewares\MdlAfterExecute;
 use App\Middlewares\MdlTransaction;

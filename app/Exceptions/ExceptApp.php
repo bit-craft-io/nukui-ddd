@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
+use App\Exceptions\Enums\TypeExcept;
 use Exception;
 
 class ExceptApp extends Exception

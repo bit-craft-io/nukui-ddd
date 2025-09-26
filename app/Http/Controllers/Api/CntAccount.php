@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Applications\Api\AppAccount;
-use App\Http\Controllers\BaseCnt;
+use App\Http\Controllers\Core\BaseCnt;
 use App\Http\Requests\Api\Account\ReqAccountLogin;
-use App\Http\Requests\ReqNone;
+use App\Http\Requests\Core\ReqNone;
+use App\Http\Responses\Core\ResNone;
 use App\Http\Responses\Core\ResponseConfig;
-use App\Http\Responses\ResNone;
 
 class CntAccount extends BaseCnt
 {

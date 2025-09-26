@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Applications\Api;
 
 use App\Domains\Reps;
-use App\Http\Applications\BaseApp;
+use App\Http\Applications\Core\BaseApp;
 use App\Http\Requests\Api\Develop\ReqDevelopItemAdd;
 
 class AppDevelop extends BaseApp
