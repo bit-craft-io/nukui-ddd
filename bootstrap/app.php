@@ -28,17 +28,16 @@ return Application::configure(basePath: dirname(__DIR__))
         UtilGlobals::set('is_exception', true);
 
         $exceptions->render(function (Throwable $e, Request $request): JsonResponse {
+            $error = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+            ];
             if ($e instanceof ExceptApp) {
-                return response()->json([
-                    'code' => $e->getCode(),
-                    'message' => $e->getMessage(),
-                ], 400);
+                return response()->json($error, 422);
             }
             if ($e instanceof ExceptModel) {
-                return response()->json([
-                    'code' => $e->getCode(),
-                    'message' => $e->getMessage(),
-                ], 400);
+                return response()->json($error, 500);
             }
+            return response()->json($error, 401);
         });
     })->create();

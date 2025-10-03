@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
  * @property-read integer $code
  * @property-read string $message
  */
-class ResError extends BaseRes
+final class ResError extends BaseRes
 {
     public function toResponse(Request $request): JsonResponse
     {

@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 final class ResponseConfig
 {
-    private static BaseRes $response;
+    private static ?BaseRes $response = null;
 
     public static function modifyResponse(string $response_class): void
     {
@@ -30,7 +30,7 @@ final class ResponseConfig
 
     public static function find(Request $request): ?object
     {
-        if (self::$response) {
+        if (self::$response ?? null) {
             return self::$response;
         }
 
