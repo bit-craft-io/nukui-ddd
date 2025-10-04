@@ -7,7 +7,7 @@ namespace App\Exceptions;
 use App\Exceptions\Enums\TypeExcept;
 use Exception;
 
-class ExceptApp extends Exception
+final class ExceptApp extends Exception
 {
     /**
      * @param TypeExcept $type_except

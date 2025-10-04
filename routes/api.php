@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\CntUser;
 use Illuminate\Support\Facades\Route;
 
 Route::domain(env('APP_URL'))
-    ->middleware(['mdl.after.execute', 'mdl.transaction'])
+    ->middleware(['mdl.response', 'mdl.transaction'])
     ->prefix('account')
     ->controller(CntAccount::class)
     ->group(function () {
@@ -16,7 +16,7 @@ Route::domain(env('APP_URL'))
     });
 
 Route::domain(env('APP_URL'))
-    ->middleware(['auth:sanctum', 'mdl.after.execute', 'mdl.transaction'])
+    ->middleware(['auth:sanctum', 'mdl.response', 'mdl.transaction'])
     ->prefix('account')
     ->controller(CntAccount::class)
     ->group(function () {
@@ -24,7 +24,7 @@ Route::domain(env('APP_URL'))
     });
 
 Route::domain(env('APP_URL'))
-    ->middleware(['auth:sanctum', 'mdl.after.execute', 'mdl.transaction'])
+    ->middleware(['auth:sanctum', 'mdl.response', 'mdl.transaction'])
     ->prefix('user')
     ->controller(CntUser::class)
     ->group(function () {
@@ -32,7 +32,7 @@ Route::domain(env('APP_URL'))
     });
 
 Route::domain(env('APP_URL'))
-    ->middleware(['auth:sanctum', 'mdl.after.execute', 'mdl.transaction'])
+    ->middleware(['auth:sanctum', 'mdl.response', 'mdl.transaction'])
     ->prefix('item')
     ->controller(CntItem::class)
     ->group(function () {
@@ -41,7 +41,7 @@ Route::domain(env('APP_URL'))
     });
 
 Route::domain(env('APP_URL'))
-    ->middleware(['auth:sanctum', 'mdl.after.execute', 'mdl.transaction'])
+    ->middleware(['auth:sanctum', 'mdl.response', 'mdl.transaction'])
     ->prefix('develop')
     ->controller(CntDevelop::class)
     ->group(function () {

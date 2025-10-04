@@ -8,13 +8,13 @@ use App\Http\Applications\Api\AppUser;
 use App\Http\Controllers\Core\BaseCnt;
 use App\Http\Requests\Core\ReqNone;
 use App\Http\Responses\Core\ResNone;
-use App\Http\Responses\Core\ResponseConfig;
+use App\Http\Responses\Core\ModifyRes;
 
 class CntUser extends BaseCnt
 {
     public function info(AppUser $app, ReqNone $req): void
     {
-        ResponseConfig::modifyResponse(ResNone::class);
+        ModifyRes::set(ResNone::class);
         $app->info($req);
     }
 }

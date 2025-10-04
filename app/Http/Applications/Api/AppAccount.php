@@ -10,9 +10,9 @@ use App\Exceptions\Excepts;
 use App\Http\Applications\Core\BaseApp;
 use App\Http\Requests\Api\Account\ReqAccountLogin;
 use App\Http\Requests\Core\ReqNone;
+use App\Http\Responses\Core\ParamRes;
 use App\Libraries\Helpers\HelpCompress;
 use App\Libraries\Helpers\HelpRandom;
-use App\Libraries\Utils\UtilGlobals;
 use App\UseCase\UCs;
 
 class AppAccount extends BaseApp
@@ -34,7 +34,7 @@ class AppAccount extends BaseApp
 
         $primary_data = "$email:$password";
         $primary_code = HelpCompress::comp($primary_data);
-        UtilGlobals::set('primary_code', $primary_code);
+        ParamRes::set('primary_code', $primary_code);
 
         $ucMakePublicId = $this->_useCase(UCs::UC_MAKE_PUBLIC_ID);
         $public_id = $ucMakePublicId->execute();
@@ -56,7 +56,8 @@ class AppAccount extends BaseApp
 
         $ucCreateApiToken = $this->_useCase(UCs::UC_CREATE_API_TOKEN);
         $bearer_token = $ucCreateApiToken->execute($email, $password);
-        UtilGlobals::set('bearer_token', $bearer_token);
+
+        ParamRes::set('bearer_token', $bearer_token);
     }
 
     /**

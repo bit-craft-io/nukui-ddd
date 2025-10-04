@@ -9,7 +9,7 @@ use App\Http\Controllers\Core\BaseCnt;
 use App\Http\Requests\Api\Account\ReqAccountLogin;
 use App\Http\Requests\Core\ReqNone;
 use App\Http\Responses\Core\ResNone;
-use App\Http\Responses\Core\ResponseConfig;
+use App\Http\Responses\Core\ModifyRes;
 
 class CntAccount extends BaseCnt
 {
@@ -26,7 +26,7 @@ class CntAccount extends BaseCnt
     public function dummy(AppAccount $app, ReqNone $req): void
     {
         // @note Responseのクラスを変更
-        ResponseConfig::modifyResponse(ResNone::class);
+        ModifyRes::set(ResNone::class);
         $app->dummy($req);
     }
 }

@@ -3,7 +3,7 @@
 use App\Exceptions\ExceptApp;
 use App\Exceptions\ExceptModel;
 use App\Libraries\Utils\UtilGlobals;
-use App\Middlewares\MdlAfterExecute;
+use App\Middlewares\MdlResponse;
 use App\Middlewares\MdlTransaction;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -20,7 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'mdl.transaction' => MdlTransaction::class,
-            'mdl.after.execute' => MdlAfterExecute::class,
+            'mdl.response' => MdlResponse::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
