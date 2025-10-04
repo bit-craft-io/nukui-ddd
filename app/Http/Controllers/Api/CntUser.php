@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Applications\Api\AppDevelop;
+use App\Http\Applications\Api\AppUser;
 use App\Http\Controllers\Core\BaseCnt;
-use App\Http\Requests\Api\Develop\ReqDevelopItemAdd;
+use App\Http\Requests\Core\ReqNone;
 use App\Http\Responses\Core\ResNone;
 use App\Http\Responses\Core\ModifyRes;
 
-class CntDevelop extends BaseCnt
+class CntUser extends BaseCnt
 {
-    public function itemAdd(AppDevelop $app, ReqDevelopItemAdd $req): void
+    public function info(AppUser $app, ReqNone $req): void
     {
         ModifyRes::set(ResNone::class);
-        $app->itemAdd($req);
+        $app->info($req);
     }
 }

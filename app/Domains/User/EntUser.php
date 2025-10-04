@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace App\Domains\User;
 
 use App\Domains\Core\Entity\BaseEnt;
+use App\Domains\Core\ValueProxy\VpEnergy;
 
 /**
- * @method _id(int $value)
- * @method _public_id(string $value)
- * @method _nick_name(string $value)
- * @method _icon_no(string $value)
- * @method _energy(int $value)
- * @method _energy_max_regen(int $value)
- * @method _energy_max_stock(int $value)
- * @method _meta_data(object $value)
+ * @method void id(int $value)
+ * @method void public_id(string $value)
+ * @method void nick_name(string $value)
+ * @method void icon_no(string $value)
+ * @method void energy(int $value)
+ * @method void energy_max_regen(int $value)
+ * @method void energy_max_stock(int $value)
+ * @method void meta_data(object $value)
  * @property-read integer $id
  * @property-read string $public_id
  * @property-read string $nick_name
@@ -26,10 +27,32 @@ use App\Domains\Core\Entity\BaseEnt;
  */
 class EntUser extends BaseEnt
 {
+    protected VpEnergy $_vp_energy;
 
-    public function setDefaults(): void
+    public function initOnce(): void
     {
-        // TODO: Implement setDefaults() method.
+        // TODO: Implement initOnce() method.
+    }
+
+    public function initAfter(): void
+    {
+        // @note $this（entity）を渡す、voの値を変更すると entity の値も変わる（draft）
+        $this->_vp_energy = $this->_vo(VPs::VP_ENERGY)->init($this);
+    }
+
+    //public function getEnergy(): int
+    //{
+    //    return $this->energy;
+    //}
+
+    public function addEnergy(int $value): void
+    {
+        $this->_vp_energy->recover($value);
+    }
+
+    public function subEnergy(int $value): void
+    {
+        $this->_vp_energy->consume($value);
     }
 
     public function isEmpty(): bool

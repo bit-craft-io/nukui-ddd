@@ -6,7 +6,7 @@ namespace App\Libraries\Utils;
 
 final class UtilGlobals
 {
-    protected static array $_globals = [];
+    private static array $_globals = [];
 
     public static function set(string $key, $value): void
     {

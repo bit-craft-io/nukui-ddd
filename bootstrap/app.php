@@ -2,9 +2,8 @@
 
 use App\Exceptions\ExceptApp;
 use App\Exceptions\ExceptModel;
-use App\Http\Responses\Core\ResponseConfig;
-use App\Http\Responses\ResError;
-use App\Middlewares\MdlAfterExecute;
+use App\Libraries\Utils\UtilGlobals;
+use App\Middlewares\MdlResponse;
 use App\Middlewares\MdlTransaction;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -21,22 +20,24 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'mdl.transaction' => MdlTransaction::class,
-            'mdl.after.execute' => MdlAfterExecute::class,
+            'mdl.response' => MdlResponse::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+
+        UtilGlobals::set('is_exception', true);
+
         $exceptions->render(function (Throwable $e, Request $request): JsonResponse {
+            $error = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+            ];
             if ($e instanceof ExceptApp) {
-                return response()->json([
-                    'code' => $e->getCode(),
-                    'message' => $e->getMessage(),
-                ], 400);
+                return response()->json($error, 422);
             }
             if ($e instanceof ExceptModel) {
-                return response()->json([
-                    'code' => $e->getCode(),
-                    'message' => $e->getMessage(),
-                ], 400);
+                return response()->json($error, 500);
             }
+            return response()->json($error, 401);
         });
     })->create();

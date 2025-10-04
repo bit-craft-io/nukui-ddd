@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace App\Libraries\Traits;
 
-use App\DataSources\BaseDs;
-use App\DataSources\DsAccount;
-use App\DataSources\DsUItem;
-use App\DataSources\DsUUser;
+use App\DataSources\Core\BaseDs;
 use App\Libraries\Utils\UtilGlobals;
 use App\Libraries\Utils\UtilInstance;
 use Illuminate\Database\Eloquent\Model;
 
 trait TraitDataSource
 {
+    private static ?array $_instances = null;
+
     /**
      * @template T
      * @param T $data_source_class
@@ -21,7 +20,8 @@ trait TraitDataSource
      */
     protected function _ds(string $data_source_class)
     {
-        $instance = UtilGlobals::find($data_source_class);
+        $instance = self::$_instances[$data_source_class] ?? null;
+\Log::emergency(json_encode($instance));
         if ($instance) {
             return $instance;
         }
@@ -37,7 +37,7 @@ trait TraitDataSource
 
         $instance->_model($model);
 
-        UtilGlobals::set($data_source_class, $instance);
+        self::$_instances[$data_source_class] = $instance;
 
         return $instance;
     }

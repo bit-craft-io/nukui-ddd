@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Http\Responses\Api\Account;
 
-use App\Libraries\Utils\UtilGlobals;
+use App\Http\Responses\Core\BaseRes;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ResAccountRegister extends JsonResponse
+/**
+ * @property-read string $primary_code
+ */
+final class ResAccountRegister extends BaseRes
 {
     public function toResponse(Request $request): JsonResponse
     {
@@ -17,6 +20,6 @@ class ResAccountRegister extends JsonResponse
         ];
         return response()->json($result)
             ->header('Content-Type', 'application/json')
-            ->header('Primary-Code', UtilGlobals::find('primary_code'));
+            ->header('Primary-Code', $this->primary_code);
     }
 }

@@ -4,60 +4,39 @@ declare(strict_types=1);
 
 namespace App\Domains\Core\ValueObject;
 
-use App\Libraries\Utils\UtilInstance;
 use App\Libraries\Utils\UtilIterator;
-use Illuminate\Database\Eloquent\Model;
 
-class BaseVo
+abstract class BaseVo
 {
-//    protected ?array $_props = null;
-//
-//    public function _props(array $props)
-//    {
-//        $this->_props = $props;
-//    }
-//
-//    public function __get(string $name)
-//    {
-//        return $this?->_props[$name] ?? null;
-//    }
-//
-//    public function iterator($models): UtilIterator
-//    {
-//        $callable = function ($props) {
-//            if ($props && method_exists($this, '_props')) {
-//                $this->_props($props->toArray());
-//            }
-//            return $this;
-//        };
-//        // TODO prototype の処理が重複
-//        $iterator = UtilInstance::prototype(UtilIterator::class);
-//        $iterator->init($callable, $models);
-//        return $iterator;
-//    }
-    protected ?Model $_model = null;
+    protected ?array $_props = null;
 
-    public function _model(?Model $model): void
+    public function init(array $props): self
     {
-        $this->_model = $model;
+        $this->_props = $props;
+        return $this;
     }
 
     public function __get(string $name)
     {
-        return $this?->_model?->{$name};
+        return $this?->_props[$name] ?? null;
     }
 
-    public function iterator($models): UtilIterator
+    // @note ValueObject は mutable の為、setter は存在しない
+    //public function __call(string $name, array $arguments = [])
+    //{
+    //    $this->_props[$name] = $arguments[0];
+    //}
+
+    public function iterator($collect): UtilIterator
     {
-        $callable = function ($model) {
-            if ($model && method_exists($this, '_model')) {
-                $this->_model($model);
+        $callable = function ($props) {
+            if ($props && method_exists($this, 'init')) {
+                $this->init($props->toArray());
             }
             return $this;
         };
-        // TODO prototype の処理が重複
-        $iterator = UtilInstance::prototype(UtilIterator::class);
-        $iterator->init($callable, $models);
+        $iterator = app(UtilIterator::class);
+        $iterator->init($callable, $collect);
         return $iterator;
     }
 }

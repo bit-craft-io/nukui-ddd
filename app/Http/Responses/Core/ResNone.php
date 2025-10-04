@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Responses;
+declare(strict_types=1);
+
+namespace App\Http\Responses\Core;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ResNone extends BaseRes
+final class ResNone extends BaseRes
 {
     public function toResponse(Request $request): JsonResponse
     {

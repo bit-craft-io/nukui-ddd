@@ -1,19 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Exceptions;
 
-use App\Http\Applications\Api\AppAccount;
+use App\Exceptions\Enums\TypeExcept;
 use Exception;
 
 final class ExceptModel extends Exception
 {
     /**
-     * @template T of array{code:int, message:string, temp:string}
-     *
-     * @param T $error_info
+     * @param TypeExcept $type_except
      * @return self
      */
-    public function exception(array $error_info): ExceptModel
+    public function exception(TypeExcept $type_except): ExceptModel
     {
         // TODO ログ出力
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
@@ -26,10 +26,8 @@ final class ExceptModel extends Exception
             'type' => $caller['type'] ?? '',
         ];
 
-        \Log::emergency($log);
-
-        $this->code = $error_info['code'];
-        $this->message = $error_info['message'];
+        $this->code = $type_except->value;
+        $this->message = $type_except->message();
         return $this;
     }
 }

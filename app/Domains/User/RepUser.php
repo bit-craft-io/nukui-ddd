@@ -10,21 +10,22 @@ use App\Domains\Core\Repository\BaseRep;
 
 class RepUser extends BaseRep
 {
+    /**
+     * @return EntUser|BaseEnt
+     */
+    public function makeDraft(): EntUser|BaseEnt
+    {
+        $model = $this->_ds(DSs::DS_U_USER)->getDraft();
+        return $this->_ent($model);
+    }
     public function findByPublicId(string $public_id): EntUser|BaseEnt
     {
         $model = $this->_ds(DSs::DS_U_USER)->findByPublicId($public_id);
         return $this->_ent($model);
     }
-
-    /**
-     * @return EntUser|BaseEnt
-     */
-    public function draft(): EntUser|BaseEnt
+    public function findByUserId(int $user_id): EntUser|BaseEnt
     {
-//        // TODO
-//        $this->_ds(self::DS_U_USER)->dummy();
-
-        $model = $this->_ds(DSs::DS_U_USER)->getDraft();
+        $model = $this->_ds(DSs::DS_U_USER)->findByUserId($user_id);
         return $this->_ent($model);
     }
 

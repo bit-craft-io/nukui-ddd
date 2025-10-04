@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Libraries\Traits;
 
+use App\Exceptions\Enums\TypeExcept;
 use App\Exceptions\ExceptApp;
 use App\Exceptions\ExceptModel;
-use App\Exceptions\TypeExcept;
 use App\Libraries\Utils\UtilInstance;
 
 trait TraitException

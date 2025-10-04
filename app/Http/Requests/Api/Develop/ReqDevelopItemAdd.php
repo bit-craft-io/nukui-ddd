@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Api\Develop;
 
-use App\Http\Requests\BaseReq;
+use App\Http\Requests\Core\BaseReq;
 
 /**
  * @property-read integer $item_id

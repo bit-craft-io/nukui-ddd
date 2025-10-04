@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Responses;
+declare(strict_types=1);
+
+namespace App\Http\Responses\Core;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -9,7 +11,7 @@ use Illuminate\Http\Request;
  * @property-read integer $code
  * @property-read string $message
  */
-class ResError extends BaseRes
+final class ResError extends BaseRes
 {
     public function toResponse(Request $request): JsonResponse
     {

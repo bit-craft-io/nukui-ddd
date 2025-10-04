@@ -1,12 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Responses\Api\Account;
 
-use App\Libraries\Utils\UtilGlobals;
+use App\Http\Responses\Core\BaseRes;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ResAccountLogin extends JsonResponse
+/**
+ * @property-read string $bearer_token
+ */
+final class ResAccountLogin extends BaseRes
 {
     public function toResponse(Request $request): JsonResponse
     {
@@ -15,6 +20,6 @@ class ResAccountLogin extends JsonResponse
         ];
         return response()->json($result)
             ->header('Content-Type', 'application/json')
-            ->header('WWW-Authenticate', 'Bearer ' . UtilGlobals::find('bearer_token'));
+            ->header('WWW-Authenticate', 'Bearer ' . $this->bearer_token);
     }
 }

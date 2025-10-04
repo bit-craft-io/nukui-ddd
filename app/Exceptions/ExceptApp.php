@@ -1,24 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Exceptions;
 
+use App\Exceptions\Enums\TypeExcept;
 use Exception;
 
-class ExceptApp extends Exception
+final class ExceptApp extends Exception
 {
-//    /**
-//     * @template T of array{code:int, message:string, temp:string}
-//     *
-//     * @param T $message
-//     * @return self
-//     */
-//    public function make(array $message): self
-//    {
-//        $this->code = $message['code'];
-//        $this->message = $message['message'];
-//        return $this;
-//    }
-
     /**
      * @param TypeExcept $type_except
      * @return self
