@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Api\Account;
 
-use App\Http\Requests\Core\BaseReq;
+use App\Core\Http\Requests\BaseReq;
 
 /**
  * @property-read string $primary_code
  */
-class ReqAccountLogin extends BaseReq
+final class ReqAccountLogin extends BaseReq
 {
     public function rules(): array
     {

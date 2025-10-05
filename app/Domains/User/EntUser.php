@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domains\User;
 
-use App\Domains\Core\Entity\BaseEnt;
-use App\Domains\Core\ValueProxy\VpEnergy;
+use App\Core\Domains\Entity\BaseEnt;
+use App\Core\Domains\ValueProxy\VpEnergy;
 
 /**
  * @method void id(int $value)
@@ -37,7 +37,7 @@ class EntUser extends BaseEnt
     public function initAfter(): void
     {
         // @note $this（entity）を渡す、voの値を変更すると entity の値も変わる（draft）
-        $this->_vp_energy = $this->_vo(VPs::VP_ENERGY)->init($this);
+        $this->_vp_energy = $this->_vo(VpUser::VP_ENERGY)->init($this);
     }
 
     //public function getEnergy(): int

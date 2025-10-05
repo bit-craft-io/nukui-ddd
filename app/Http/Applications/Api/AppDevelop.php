@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Applications\Api;
 
-use App\Domains\Reps;
-use App\Http\Applications\Core\BaseApp;
+use App\Core\Http\Applications\BaseApp;
+use App\Domains\Rep;
 use App\Http\Requests\Api\Develop\ReqDevelopItemAdd;
 
 class AppDevelop extends BaseApp
 {
     public function itemAdd(ReqDevelopItemAdd $req): void
     {
-        $repItem = $this->_rep(Reps::REP_ITEM);
+        $repItem = $this->_rep(Rep::REP_ITEM);
         $entItemIte = $repItem->getByUserId($req->user_id);
         $entItem = $entItemIte->find($req->item_id);
         if (!$entItem) {

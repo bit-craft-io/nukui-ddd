@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Api\Develop;
 
-use App\Http\Requests\Core\BaseReq;
+use App\Core\Http\Requests\BaseReq;
 
 /**
  * @property-read integer $item_id
  * @property-read integer $amount
  */
-class ReqDevelopItemAdd extends BaseReq
+final class ReqDevelopItemAdd extends BaseReq
 {
     public function rules(): array
     {

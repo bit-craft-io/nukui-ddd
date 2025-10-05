@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Http\Applications\Api;
 
-use App\Domains\Reps;
-use App\Exceptions\Enums\TypeExcept;
-use App\Exceptions\Excepts;
-use App\Http\Applications\Core\BaseApp;
+use App\Core\Exceptions\Enums\TypeExcept;
+use App\Core\Exceptions\Except;
+use App\Core\Http\Applications\BaseApp;
+use App\Core\Http\Applications\ParamResponse;
+use App\Core\Http\Requests\ReqNone;
+use App\Core\Libraries\Helpers\HelperCompress;
+use App\Core\Libraries\Helpers\HelperRandom;
+use App\Domains\Rep;
+use App\Http\Applications\UseCase\UC;
 use App\Http\Requests\Api\Account\ReqAccountLogin;
-use App\Http\Requests\Core\ReqNone;
-use App\Http\Responses\Core\ParamRes;
-use App\Libraries\Helpers\HelpCompress;
-use App\Libraries\Helpers\HelpRandom;
-use App\UseCase\UCs;
 
 class AppAccount extends BaseApp
 {
@@ -21,11 +21,11 @@ class AppAccount extends BaseApp
     {
         $this->_useTransaction();
 
-        $ucMakeEmail = $this->_useCase(UCs::UC_MAKE_EMAIL);
+        $ucMakeEmail = $this->_useCase(UC::UC_ACCOUNT_MAKE_EMAIL);
         $email = $ucMakeEmail->execute();
-        $password = HelpRandom::key32(4,4);
+        $password = HelperRandom::key32(4,4);
 
-        $repAccount = $this->_rep(Reps::REP_ACCOUNT);
+        $repAccount = $this->_rep(Rep::REP_ACCOUNT);
         $entAccount = $repAccount->mekDraft();
         $entAccount->name('none');
         $entAccount->email($email);
@@ -33,13 +33,13 @@ class AppAccount extends BaseApp
         $repAccount->persist($entAccount);
 
         $primary_data = "$email:$password";
-        $primary_code = HelpCompress::comp($primary_data);
-        ParamRes::set('primary_code', $primary_code);
+        $primary_code = HelperCompress::comp($primary_data);
+        ParamResponse::set('primary_code', $primary_code);
 
-        $ucMakePublicId = $this->_useCase(UCs::UC_MAKE_PUBLIC_ID);
+        $ucMakePublicId = $this->_useCase(UC::UC_ACCOUNT_MAKE_PUBLIC_ID);
         $public_id = $ucMakePublicId->execute();
 
-        $repUser = $this->_rep(Reps::REP_USER);
+        $repUser = $this->_rep(Rep::REP_USER);
         $entUser = $repUser->makeDraft();
         $entUser->id($entAccount->id);
         $entUser->public_id($public_id);
@@ -52,12 +52,12 @@ class AppAccount extends BaseApp
 
     public function login(ReqAccountLogin $req): void
     {
-        [$email, $password] = explode(':', HelpCompress::unComp($req->primary_code));
+        [$email, $password] = explode(':', HelperCompress::unComp($req->primary_code));
 
-        $ucCreateApiToken = $this->_useCase(UCs::UC_CREATE_API_TOKEN);
+        $ucCreateApiToken = $this->_useCase(UC::UC_ACCOUNT_CREATE_API_TOKEN);
         $bearer_token = $ucCreateApiToken->execute($email, $password);
 
-        ParamRes::set('bearer_token', $bearer_token);
+        ParamResponse::set('bearer_token', $bearer_token);
     }
 
     /**
@@ -66,11 +66,11 @@ class AppAccount extends BaseApp
      */
     public function dummy(ReqNone $req): void
     {
-        $repUser = $this->_rep(Reps::REP_USER);
+        $repUser = $this->_rep(Rep::REP_USER);
         $entUser = $repUser->makeDraft();
 
         // TODO
-        $except = $this->_except(Excepts::EXCEPT_APP)->make(TypeExcept::app_user_not_found);
+        $except = $this->_except(Except::EXCEPT_APP)->make(TypeExcept::app_user_not_found);
 
         /** @var class-string<TypeExcept> $aaa */
         $aaa = self::$error_code;

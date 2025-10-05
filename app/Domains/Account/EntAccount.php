@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Account;
 
-use App\Domains\Core\Entity\BaseEnt;
+use App\Core\Domains\Entity\BaseEnt;
 
 /**
  * @method void id(integer $value)

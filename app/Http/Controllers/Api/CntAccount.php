@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Core\Http\Controllers\BaseCnt;
+use App\Core\Http\Controllers\ModifyResponse;
+use App\Core\Http\Requests\ReqNone;
+use App\Core\Http\Responses\ResNone;
 use App\Http\Applications\Api\AppAccount;
-use App\Http\Controllers\Core\BaseCnt;
 use App\Http\Requests\Api\Account\ReqAccountLogin;
-use App\Http\Requests\Core\ReqNone;
-use App\Http\Responses\Core\ResNone;
-use App\Http\Responses\Core\ModifyRes;
 
 class CntAccount extends BaseCnt
 {
@@ -26,7 +26,7 @@ class CntAccount extends BaseCnt
     public function dummy(AppAccount $app, ReqNone $req): void
     {
         // @note Responseのクラスを変更
-        ModifyRes::set(ResNone::class);
+        ModifyResponse::set(ResNone::class);
         $app->dummy($req);
     }
 }

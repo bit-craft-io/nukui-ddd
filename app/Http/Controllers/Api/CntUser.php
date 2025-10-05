@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Core\Http\Controllers\BaseCnt;
+use App\Core\Http\Controllers\ModifyResponse;
+use App\Core\Http\Requests\ReqNone;
+use App\Core\Http\Responses\ResNone;
 use App\Http\Applications\Api\AppUser;
-use App\Http\Controllers\Core\BaseCnt;
-use App\Http\Requests\Core\ReqNone;
-use App\Http\Responses\Core\ResNone;
-use App\Http\Responses\Core\ModifyRes;
 
 class CntUser extends BaseCnt
 {
     public function info(AppUser $app, ReqNone $req): void
     {
-        ModifyRes::set(ResNone::class);
+        ModifyResponse::set(ResNone::class);
         $app->info($req);
     }
 }

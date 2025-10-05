@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domains\Item;
 
-use App\DataSources\DSs;
-use App\Domains\Core\Entity\BaseEnt;
-use App\Domains\Core\ValueObject\VoMItem;
-use App\Libraries\Utils\UtilIterator;
+use App\Core\Domains\Entity\BaseEnt;
+use App\Core\Domains\ValueObject\VoMItem;
+use App\Core\Libraries\Utils\UtilIterator;
+use App\DataSources\DS;
 
 /**
  * @method void user_id(integer $value)
@@ -25,7 +25,7 @@ class EntItem extends BaseEnt
     protected ?UtilIterator $_vo_m_items = null;
     public function initOnce(): void
     {
-        $models = $this->_ds(DSs::DS_M_ITEM)->getEnable();
+        $models = $this->_ds(DS::DS_M_ITEM)->getEnable();
         $this->_vo_m_items = $this->_vo(VoMItem::class)->iterator($models);
     }
 

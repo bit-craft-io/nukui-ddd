@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Responses\Api\Account;
 
-use App\Http\Responses\Core\BaseRes;
+use App\Core\Http\Responses\BaseRes;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
