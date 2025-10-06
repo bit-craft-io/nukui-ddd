@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\CntAccount;
-use App\Http\Controllers\Api\CntDevelop;
-use App\Http\Controllers\Api\CntItem;
-use App\Http\Controllers\Api\CntUser;
+use App\Http\Controllers\CntAccount;
+use App\Http\Controllers\CntDevelop;
+use App\Http\Controllers\CntItem;
+use App\Http\Controllers\CntUser;
 use Illuminate\Support\Facades\Route;
 
 Route::domain(env('APP_URL'))

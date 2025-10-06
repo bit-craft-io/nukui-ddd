@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Core\Http\Controllers\BaseCnt;
 use App\Core\Http\Requests\ReqNone;
-use App\Http\Applications\Api\AppItem;
+use App\Http\Applications\AppItem;
 
 class CntItem extends BaseCnt
 {

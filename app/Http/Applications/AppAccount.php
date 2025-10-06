@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Applications\Api;
+namespace App\Http\Applications;
 
 use App\Core\Exceptions\Enums\TypeExcept;
 use App\Core\Exceptions\Except;
@@ -13,7 +13,7 @@ use App\Core\Libraries\Helpers\HelperCompress;
 use App\Core\Libraries\Helpers\HelperRandom;
 use App\Domains\Rep;
 use App\Http\Applications\UseCase\UC;
-use App\Http\Requests\Api\Account\ReqAccountLogin;
+use App\Http\Requests\Account\ReqAccountLogin;
 
 class AppAccount extends BaseApp
 {
@@ -70,7 +70,7 @@ class AppAccount extends BaseApp
         $entUser = $repUser->makeDraft();
 
         // TODO
-        $except = $this->_except(Except::EXCEPT_APP)->make(TypeExcept::app_user_not_found);
+        $except = $this->_except(Except::EXCEPT_APP)->make(TypeExcept::AppUserNotFound);
 
         /** @var class-string<TypeExcept> $aaa */
         $aaa = self::$error_code;

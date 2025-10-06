@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Responses\Api\Account;
+namespace App\Http\Responses\Account;
 
 use App\Core\Http\Responses\BaseRes;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
- * @property-read string $primary_code
+ * @property-read string $bearer_token
  */
-final class ResAccountRegister extends BaseRes
+final class ResAccountLogin extends BaseRes
 {
     public function toResponse(Request $request): JsonResponse
     {
@@ -20,6 +20,6 @@ final class ResAccountRegister extends BaseRes
         ];
         return response()->json($result)
             ->header('Content-Type', 'application/json')
-            ->header('Primary-Code', $this->primary_code);
+            ->header('WWW-Authenticate', 'Bearer ' . $this->bearer_token);
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\Api\Develop;
+namespace App\Http\Requests\Develop;
 
 use App\Core\Http\Requests\BaseReq;
 

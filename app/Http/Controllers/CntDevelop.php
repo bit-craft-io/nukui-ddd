@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Core\Http\Controllers\BaseCnt;
 use App\Core\Http\Controllers\ModifyResponse;
 use App\Core\Http\Responses\ResNone;
-use App\Http\Applications\Api\AppDevelop;
-use App\Http\Requests\Api\Develop\ReqDevelopItemAdd;
+use App\Http\Applications\AppDevelop;
+use App\Http\Requests\Develop\ReqDevelopItemAdd;
 
 class CntDevelop extends BaseCnt
 {

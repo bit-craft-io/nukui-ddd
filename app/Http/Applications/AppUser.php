@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Applications\Api;
+namespace App\Http\Applications;
 
 use App\Core\Http\Applications\BaseApp;
 use App\Core\Http\Requests\ReqNone;

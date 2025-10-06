@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Applications\Api;
+namespace App\Http\Applications;
 
 use App\Core\Http\Applications\BaseApp;
 use App\Domains\Rep;
-use App\Http\Requests\Api\Develop\ReqDevelopItemAdd;
+use App\Http\Requests\Develop\ReqDevelopItemAdd;
 
 class AppDevelop extends BaseApp
 {
