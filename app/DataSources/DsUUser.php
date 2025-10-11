@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataSources;
 
-use App\DataSources\Core\BaseDs;
+use App\Core\DataSources\BaseDs;
 use Illuminate\Database\Eloquent\Model;
 
 class DsUUser extends BaseDs

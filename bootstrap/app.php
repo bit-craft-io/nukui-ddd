@@ -1,10 +1,9 @@
 <?php
 
-use App\Exceptions\ExceptApp;
-use App\Exceptions\ExceptModel;
-use App\Libraries\Utils\UtilGlobals;
-use App\Middlewares\MdlResponse;
-use App\Middlewares\MdlTransaction;
+use App\Core\Exceptions\ExceptApp;
+use App\Core\Exceptions\ExceptModel;
+use App\Core\Http\Middlewares\MdlResponse;
+use App\Core\Http\Middlewares\MdlTransaction;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -25,7 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
 
-        UtilGlobals::set('is_exception', true);
+        MdlTransaction::$is_exception = true;
 
         $exceptions->render(function (Throwable $e, Request $request): JsonResponse {
             $error = [
