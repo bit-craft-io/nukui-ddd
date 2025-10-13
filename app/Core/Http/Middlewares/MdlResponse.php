@@ -16,10 +16,11 @@ final class MdlResponse
 {
     private function _responseClass($request): BaseRes|string
     {
-        $segments = explode('/', $request->route()->uri());
-        $file = Str::studly("res_$segments[1]_$segments[2]");
-        $domain = Str::studly($segments[1] ?? null);
-        $response_class = "App\\Http\\Responses\\{$domain}\\{$file}";
+        $uri_segments = explode('/', $request->route()->uri());
+        $route = Str::studly(array_shift($uri_segments));
+        $file = 'Res' . Str::studly(implode('_', $uri_segments));
+        $domain = isset($uri_segments[0]) ? Str::studly($uri_segments[0]) : null;
+        $response_class = "App\\Http\\Responses\\{$route}\\{$domain}\\{$file}";
         return UtilInstance::singleton($response_class);
     }
 
