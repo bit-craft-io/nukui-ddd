@@ -8,7 +8,7 @@ use App\Core\Http\Applications\ParamResponse;
 use App\Core\Http\Controllers\ModifyResponse;
 use App\Core\Http\Responses\BaseRes;
 use App\Core\Http\Responses\ResError;
-use App\Core\Libraries\Utils\UtilInstance;
+use App\Core\Libraries\Stateful\Static\StfStaInstance;
 use Closure;
 use Illuminate\Support\Str;
 
@@ -21,7 +21,7 @@ final class MdlResponse
         $file = 'Res' . Str::studly(implode('_', $uri_segments));
         $domain = isset($uri_segments[0]) ? Str::studly($uri_segments[0]) : null;
         $response_class = "App\\Http\\Responses\\{$route}\\{$domain}\\{$file}";
-        return UtilInstance::singleton($response_class);
+        return StfStaInstance::singleton($response_class);
     }
 
     public function handle($request, Closure $next)
@@ -30,7 +30,7 @@ final class MdlResponse
 
         if (200 !== (int) $response->getStatusCode()) {
             $contents = json_decode($response->getContent(), true);
-            $class = UtilInstance::singleton(ResError::class);
+            $class = StfStaInstance::singleton(ResError::class);
             $class->init([
                 'code' => $contents['code'] ?? 0,
                 'message' => $contents['message'] ?? ''

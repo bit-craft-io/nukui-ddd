@@ -9,8 +9,8 @@ use App\Core\Exceptions\Except;
 use App\Core\Http\Applications\BaseApp;
 use App\Core\Http\Applications\ParamResponse;
 use App\Core\Http\Requests\ReqNone;
-use App\Core\Libraries\Helpers\HelperCompress;
-use App\Core\Libraries\Helpers\HelperRandom;
+use App\Core\Libraries\Stateless\Static\StlStaCompress;
+use App\Core\Libraries\Stateless\Static\StlStaRandom;
 use App\Domains\Rep;
 use App\Http\Applications\UseCase\UC;
 use App\Http\Requests\Account\ReqAccountLogin;
@@ -23,7 +23,7 @@ class AppAccount extends BaseApp
 
         $ucMakeEmail = $this->_useCase(UC::UC_ACCOUNT_MAKE_EMAIL);
         $email = $ucMakeEmail->execute();
-        $password = HelperRandom::key32(4,4);
+        $password = StlStaRandom::key32(4,4);
 
         $repAccount = $this->_rep(Rep::REP_ACCOUNT);
         $entAccount = $repAccount->mekDraft();
@@ -33,7 +33,7 @@ class AppAccount extends BaseApp
         $repAccount->persist($entAccount);
 
         $primary_data = "$email:$password";
-        $primary_code = HelperCompress::comp($primary_data);
+        $primary_code = StlStaCompress::comp($primary_data);
         ParamResponse::set('primary_code', $primary_code);
 
         $ucMakePublicId = $this->_useCase(UC::UC_ACCOUNT_MAKE_PUBLIC_ID);
@@ -52,7 +52,7 @@ class AppAccount extends BaseApp
 
     public function login(ReqAccountLogin $req): void
     {
-        [$email, $password] = explode(':', HelperCompress::unComp($req->primary_code));
+        [$email, $password] = explode(':', StlStaCompress::unComp($req->primary_code));
 
         $ucCreateApiToken = $this->_useCase(UC::UC_ACCOUNT_CREATE_API_TOKEN);
         $bearer_token = $ucCreateApiToken->execute($email, $password);

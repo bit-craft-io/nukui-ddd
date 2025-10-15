@@ -6,7 +6,7 @@ namespace App\Domains\Item;
 
 use App\Core\Domains\Entity\BaseEnt;
 use App\Core\Domains\ValueObject\VoMItem;
-use App\Core\Libraries\Utils\UtilIterator;
+use App\Core\Libraries\Stateful\Static\StfStaIterator;
 use App\DataSources\DS;
 
 /**
@@ -21,8 +21,8 @@ use App\DataSources\DS;
  */
 class EntItem extends BaseEnt
 {
-    /** @var UtilIterator<VoMItem>|null  */
-    protected ?UtilIterator $_vo_m_items = null;
+    /** @var StfStaIterator<VoMItem>|null  */
+    protected ?StfStaIterator $_vo_m_items = null;
     public function initOnce(): void
     {
         $models = $this->_ds(DS::DS_M_ITEM)->getEnable();

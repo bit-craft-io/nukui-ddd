@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Libraries\Utils;
+namespace App\Core\Libraries\Stateful\Static;
 
 use Illuminate\Support\Facades\Log;
 
-class UtilDev
+final class StfStaDev
 {
     public static function emergency(string $message = '', int $mode = 0): void
     {

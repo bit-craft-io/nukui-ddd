@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Core\Domains\Entity;
 
+use App\Core\Libraries\Stateful\Static\StfStaIterator;
 use App\Core\Libraries\Traits\TraitDataSource;
 use App\Core\Libraries\Traits\TraitValueObject;
-use App\Core\Libraries\Utils\UtilIterator;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property-read integer $id
+ */
 abstract class BaseEnt
 {
     // @note Entity の initOnce で使用
@@ -87,9 +90,9 @@ abstract class BaseEnt
      * イテレータを取得
      *
      * @param $collect
-     * @return UtilIterator
+     * @return StfStaIterator
      */
-    public function iterator($collect): UtilIterator
+    public function iterator($collect): StfStaIterator
     {
         $callable = function ($model) {
             if ($model && method_exists($this, 'init')) {
@@ -97,8 +100,13 @@ abstract class BaseEnt
             }
             return $this;
         };
-        $iterator = app(UtilIterator::class);
+        $iterator = app(StfStaIterator::class);
         $iterator->init($callable, $collect);
         return $iterator;
+    }
+
+    public function isNew(): bool
+    {
+        return empty($this->id);
     }
 }

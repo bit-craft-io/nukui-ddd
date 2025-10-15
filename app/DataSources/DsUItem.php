@@ -30,4 +30,18 @@ class DsUItem extends BaseDs
             ->newQuery()
             ->upsert($values, $uniqueBy);
     }
+
+//    public function insert(array $values): void
+//    {
+//        $this->_model
+//            ->newQuery()
+//            ->insert($values);
+//    }
+//
+//    public function update(array $values): void
+//    {
+//        $this->_model
+//            ->newQuery()
+//            ->update($values);
+//    }
 }

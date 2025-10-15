@@ -6,7 +6,7 @@ namespace App\Domains\Item;
 
 use App\Core\Domains\Entity\BaseEnt;
 use App\Core\Domains\Repository\BaseRep;
-use App\Core\Libraries\Utils\UtilIterator;
+use App\Core\Libraries\Stateful\Static\StfStaIterator;
 use App\DataSources\DS;
 
 class RepItem extends BaseRep
@@ -20,9 +20,9 @@ class RepItem extends BaseRep
 
     /**
      * @param int $user_id
-     * @return UtilIterator<EntItem|BaseEnt>
+     * @return StfStaIterator<EntItem|BaseEnt>
      */
-    public function getByUserId(int $user_id): UtilIterator
+    public function getByUserId(int $user_id): StfStaIterator
     {
         $models = $this->_ds(DS::DS_U_ITEM)->getByUserId($user_id);
         return $this->_ent()->iterator($models);
@@ -30,7 +30,14 @@ class RepItem extends BaseRep
 
     public function persist(EntItem|BaseEnt $ent): void
     {
+        // @note 型のキャスト（$casts）の設定は upsert は有効にならない
+        //       この為、他のやり方で永続化
+        // TODO 他のやり方
         $ent->commit();
-        $this->_ds(DS::DS_U_ITEM)->upsert($ent->getProperties());
+        if ($ent->isNew()) {
+            $this->_ds(DS::DS_U_ITEM)->insert($ent->getProperties());
+        } else {
+            $this->_ds(DS::DS_U_ITEM)->update($ent->getProperties());
+        }
     }
 }

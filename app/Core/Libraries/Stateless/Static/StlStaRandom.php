@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Libraries\Helpers;
+namespace App\Core\Libraries\Stateless\Static;
 
-final class HelperRandom
+final class StlStaRandom
 {
     private static function _random(array $numbers, array $chars, int $number_digits = 5, int $char_digits = 5): string
     {

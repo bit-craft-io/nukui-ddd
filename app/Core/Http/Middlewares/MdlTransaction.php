@@ -17,16 +17,16 @@ final class MdlTransaction
 
         $response = $next($request);
 
-        \App\Core\Libraries\Utils\UtilDev::emergency();
+        \App\Core\Libraries\Stateful\Static\StfStaDev::emergency();
 
         if (DB::transactionLevel() >= 1) {
             // @note エラーの場合は is_exception が存在
             //$is_exception = UtilGlobals::find('is_exception') ?? false;
             if (self::$is_exception) {
-                \App\Core\Libraries\Utils\UtilDev::emergency('rollback::');
+                \App\Core\Libraries\Stateful\Static\StfStaDev::emergency('rollback::');
                 DB::rollback();
             } else {
-                \App\Core\Libraries\Utils\UtilDev::emergency('commit::');
+                \App\Core\Libraries\Stateful\Static\StfStaDev::emergency('commit::');
                 DB::commit();
             }
         }

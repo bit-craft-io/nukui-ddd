@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Core\Libraries\Traits;
 
 use App\Core\DataSources\BaseDs;
-use App\Core\Libraries\Utils\UtilInstance;
+use App\Core\Libraries\Stateful\Static\StfStaInstance;
 use Illuminate\Database\Eloquent\Model;
 
 trait TraitDataSource
@@ -29,10 +29,10 @@ trait TraitDataSource
         $model_name = "App\\Models\\$model_class_name";
 
         /** @var BaseDs $instance */
-        $instance = UtilInstance::singleton($data_source_class);
+        $instance = StfStaInstance::singleton($data_source_class);
 
         /** @var Model $model */
-        $model = UtilInstance::singleton($model_name);
+        $model = StfStaInstance::singleton($model_name);
 
         $instance->_model($model);
 
