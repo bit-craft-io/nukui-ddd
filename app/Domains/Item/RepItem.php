@@ -35,8 +35,10 @@ class RepItem extends BaseRep
         // TODO 他のやり方
         $ent->commit();
         if ($ent->isNew()) {
+            // TODO 動作確認
             $this->_ds(DS::DS_U_ITEM)->insert($ent->getProperties());
         } else {
+            // TODO 動作確認
             $this->_ds(DS::DS_U_ITEM)->update($ent->getProperties());
         }
     }
