@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Libraries\Helpers;
+namespace App\Core\Libraries\Stateless\Static;
 
-final class HelperCompress
+final class StlStaCompress
 {
     public static function comp(string $value): string
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Domains\ValueObject;
 
-use App\Core\Libraries\Utils\UtilIterator;
+use App\Core\Libraries\Stateful\Static\StfStaIterator;
 
 abstract class BaseVo
 {
@@ -27,7 +27,7 @@ abstract class BaseVo
     //    $this->_props[$name] = $arguments[0];
     //}
 
-    public function iterator($collect): UtilIterator
+    public function iterator($collect): StfStaIterator
     {
         $callable = function ($props) {
             if ($props && method_exists($this, 'init')) {
@@ -35,7 +35,7 @@ abstract class BaseVo
             }
             return $this;
         };
-        $iterator = app(UtilIterator::class);
+        $iterator = app(StfStaIterator::class);
         $iterator->init($callable, $collect);
         return $iterator;
     }

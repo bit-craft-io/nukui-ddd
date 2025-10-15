@@ -1,10 +1,19 @@
 <?php
 
 use App\Http\Controllers\CntAccount;
+use App\Http\Controllers\CntDemo;
 use App\Http\Controllers\CntDevelop;
 use App\Http\Controllers\CntItem;
 use App\Http\Controllers\CntUser;
 use Illuminate\Support\Facades\Route;
+
+Route::domain(env('APP_URL'))
+    ->middleware(['mdl.response', 'mdl.transaction'])
+    ->prefix('demo')
+    ->controller(CntDemo::class)
+    ->group(function () {
+        Route::any('case01', 'case01');
+    });
 
 Route::domain(env('APP_URL'))
     ->middleware(['mdl.response', 'mdl.transaction'])

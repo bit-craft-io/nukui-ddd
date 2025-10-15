@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Libraries\Utils;
+namespace App\Core\Libraries\Stateful\Static;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +11,7 @@ use Iterator;
 /**
  * @template T
  */
-final class UtilIterator implements Iterator
+final class StfStaIterator implements Iterator
 {
     /** @var callable|null  */
     private $_callable = null;

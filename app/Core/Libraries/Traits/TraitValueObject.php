@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Traits;
 
-use App\Core\Libraries\Utils\UtilInstance;
+use App\Core\Libraries\Stateful\Static\StfStaInstance;
 
 trait TraitValueObject
 {
@@ -15,6 +15,6 @@ trait TraitValueObject
      */
     public function _vo(string $vo_class)
     {
-        return UtilInstance::prototype($vo_class);
+        return StfStaInstance::prototype($vo_class);
     }
 }

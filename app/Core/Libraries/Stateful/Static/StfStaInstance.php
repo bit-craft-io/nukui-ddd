@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Libraries\Utils;
+namespace App\Core\Libraries\Stateful\Static;
 
-final class UtilInstance
+final class StfStaInstance
 {
     private static ?array $_prototype = null;
     /** @var array<object>|null  */
