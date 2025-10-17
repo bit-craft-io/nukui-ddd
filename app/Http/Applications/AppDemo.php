@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace App\Http\Applications;
 
 use App\Core\Http\Applications\BaseApp;
-use App\Core\Http\Responses\ResNone;
 
 class AppDemo extends BaseApp
 {
     public function case01(array $req): void
     {
-        $this->_modify()->set(ResNone::class);
+        // @note レスポンスクラスを変更
+        //       MdlResponse
+        //$this->_responseModifySet(ResNone::class);
     }
 }

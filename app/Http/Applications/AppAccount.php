@@ -7,7 +7,6 @@ namespace App\Http\Applications;
 use App\Core\Exceptions\Enums\TypeExcept;
 use App\Core\Exceptions\Except;
 use App\Core\Http\Applications\BaseApp;
-use App\Core\Http\Applications\ParamResponse;
 use App\Core\Http\Requests\ReqNone;
 use App\Core\Libraries\Stateless\Static\StlStaCompress;
 use App\Core\Libraries\Stateless\Static\StlStaRandom;
@@ -34,7 +33,8 @@ class AppAccount extends BaseApp
 
         $primary_data = "$email:$password";
         $primary_code = StlStaCompress::comp($primary_data);
-        ParamResponse::set('primary_code', $primary_code);
+        $this->_responseParamSet('primary_code', $primary_code);
+        //$this->_param()->set('primary_code', $primary_code);
 
         $ucMakePublicId = $this->_useCase(UC::UC_ACCOUNT_MAKE_PUBLIC_ID);
         $public_id = $ucMakePublicId->execute();
@@ -57,7 +57,7 @@ class AppAccount extends BaseApp
         $ucCreateApiToken = $this->_useCase(UC::UC_ACCOUNT_CREATE_API_TOKEN);
         $bearer_token = $ucCreateApiToken->execute($email, $password);
 
-        ParamResponse::set('bearer_token', $bearer_token);
+        $this->_responseParamSet('bearer_token', $bearer_token);
     }
 
     /**

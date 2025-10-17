@@ -4,23 +4,26 @@ declare(strict_types=1);
 
 namespace App\Core\Http\Middlewares;
 
-use App\Core\Http\Applications\ParamResponse;
-use App\Core\Http\Controllers\ModifyResponse;
 use App\Core\Http\Responses\BaseRes;
 use App\Core\Http\Responses\ResError;
 use App\Core\Libraries\Stateful\Static\StfStaInstance;
+use App\Core\Libraries\Traits\TraitResponse;
 use Closure;
 use Illuminate\Support\Str;
 
 final class MdlResponse
 {
+    use TraitResponse;
+
     private function _responseClass($request): BaseRes|string
     {
         $uri_segments = explode('/', $request->route()->uri());
-        $route = Str::studly(array_shift($uri_segments));
-        $file = 'Res' . Str::studly(implode('_', $uri_segments));
+        //$route = Str::studly(array_shift($uri_segments));
+        array_shift($uri_segments);
         $domain = isset($uri_segments[0]) ? Str::studly($uri_segments[0]) : null;
-        $response_class = "App\\Http\\Responses\\{$route}\\{$domain}\\{$file}";
+        $file = 'Res' . Str::studly(implode('_', $uri_segments));
+        //$response_class = "App\\Http\\Responses\\{$route}\\{$domain}\\{$file}";
+        $response_class = "App\\Http\\Responses\\{$domain}\\{$file}";
         return StfStaInstance::singleton($response_class);
     }
 
@@ -38,13 +41,12 @@ final class MdlResponse
             return $class->toResponse($request);
         }
 
-        /** @var BaseRes $class */
-        $class = ModifyResponse::find();
+        $class = $this->_responseModifyFind();
         if (!$class) {
             $class = $this->_responseClass($request);
         }
 
-        $class->setParams(ParamResponse::all());
+        $class->setParams($this->_responseParamAll());
         return $class->toResponse($request);
     }
 }

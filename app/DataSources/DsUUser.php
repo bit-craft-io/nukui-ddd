@@ -41,13 +41,6 @@ class DsUUser extends BaseDs
         return $this->_model;
     }
 
-    //public function insert(array $values): void
-    //{
-    //    $this->_model
-    //        ->newQuery()
-    //        ->insert($values);
-    //}
-
     public function dummy(): ?Model
     {
         //throw $this->_modelException();

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Http\Applications;
+namespace App\Core\Libraries\Stateful\Static;
 
-final class ParamResponse
+final class StlStaResponseParam
 {
-    private static array $_param = [];
+    protected static array $_param = [];
 
     public static function set(string $key, $value): void
     {

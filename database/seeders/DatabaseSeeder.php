@@ -29,10 +29,14 @@ QUERY;
         $queries[] = /** @lang text */
             <<<'QUERY'
 insert into m_items (id, name, type_item, max_display, max_stock, enabled_from_at, enabled_end_at, created_at, updated_at) values
-(1, '消費アイテム', 1, 999, 9999, null, null, null, null),
-(2, '永続アイテム', 2, 99, 99, null, '2038-01-01 00:00:00', null, null),
-(3, '装備アイテム', 3, 9, 9, null, '2038-01-01 00:00:00', null, null),
-(4, '素材アイテム', 4, 9999, 9999, null, '2038-01-01 00:00:00', null, null);
+(1, 'elixir', 1, 999, 9999, '2025-01-01 00:00:00', '2038-01-01 00:00:00', null, null),
+(2, 'potion', 1, 999, 9999, '2025-01-01 00:00:00', '2038-01-01 00:00:00', null, null),
+(3, 'seal', 2, 1, 1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', null, null),
+(4, 'badge', 2, 1, 1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', null, null),
+(5, 'sword', 3, 99, 99, '2025-01-01 00:00:00', '2038-01-01 00:00:00', null, null),
+(6, 'shield', 3, 99, 99, '2025-01-01 00:00:00', '2038-01-01 00:00:00', null, null),
+(7, 'material_a', 4, 9999, 9999, '2025-01-01 00:00:00', '2038-01-01 00:00:00', null, null),
+(8, 'material_b', 4, 9999, 9999, '2025-01-01 00:00:00', '2038-01-01 00:00:00', null, null);
 QUERY;
         Schema::enableForeignKeyConstraints();
 
