@@ -13,7 +13,7 @@ final class StfInsResponseParam
         $this->_param[$key] = $value;
     }
 
-    public function get(): array
+    public function all(): array
     {
         return $this->_param;
     }

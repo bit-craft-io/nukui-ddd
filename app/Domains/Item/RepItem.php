@@ -30,16 +30,15 @@ class RepItem extends BaseRep
 
     public function persist(EntItem|BaseEnt $ent): void
     {
+        //$ent->commit();
+        //$ent->upsert();
         // @note 型のキャスト（$casts）の設定は upsert は有効にならない
-        //       この為、他のやり方で永続化
-        // TODO 他のやり方
+        //       この為、upsert 以外のやり方で永続化
         $ent->commit();
         if ($ent->isNew()) {
-            // TODO 動作確認
             $this->_ds(DS::DS_U_ITEM)->insert($ent->getProperties());
         } else {
-            // TODO 動作確認
-            $this->_ds(DS::DS_U_ITEM)->update($ent->getProperties());
+            $this->_ds(DS::DS_U_ITEM)->update($ent->getProperties(), ['user_id' => $ent->user_id, 'item_id' => $ent->item_id]);
         }
     }
 }

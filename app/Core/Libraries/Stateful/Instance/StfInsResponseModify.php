@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Stateful\Instance;
 
+use App\Core\Http\Responses\BaseRes;
+use App\Core\Libraries\Stateful\Static\StfStaInstance;
+
 final class StfInsResponseModify
 {
-    protected ?string $_modify = null;
+    protected ?BaseRes $_response = null;
 
-    public function set(string $value = null): void
+    public function set(string $response_class): void
     {
-        $this->_modify = $value;
+        /** @var BaseRes $response */
+        $response = StfStaInstance::singleton($response_class);
+        $this->_response = $response;
     }
 
-    public function find(): ?string
+    public function find(): ?BaseRes
     {
-        return $this->_modify;
+        return $this->_response;
     }
 }

@@ -107,6 +107,6 @@ abstract class BaseEnt
 
     public function isNew(): bool
     {
-        return empty($this->id);
+        return empty($this->id ?? null);
     }
 }
