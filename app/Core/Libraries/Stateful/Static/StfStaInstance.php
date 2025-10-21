@@ -50,12 +50,4 @@ final class StfStaInstance
     {
         return self::prototype($class, true);
     }
-
-    ///**
-    // * @return UtilIterator
-    // */
-    //public static function iterator(): UtilIterator
-    //{
-    //    return self::prototype(UtilIterator::class);
-    //}
 }

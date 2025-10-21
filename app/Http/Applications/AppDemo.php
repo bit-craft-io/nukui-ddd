@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Applications;
 
 use App\Core\Http\Applications\BaseApp;
+use App\Core\Http\Responses\ResNone;
 
 class AppDemo extends BaseApp
 {
@@ -12,6 +13,6 @@ class AppDemo extends BaseApp
     {
         // @note レスポンスクラスを変更
         //       MdlResponse
-        //$this->_responseModifySet(ResNone::class);
+        $this->_response()->modify::set(ResNone::class);
     }
 }

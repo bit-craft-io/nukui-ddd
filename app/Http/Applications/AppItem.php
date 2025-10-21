@@ -15,7 +15,7 @@ class AppItem extends BaseApp
         $repItem = $this->_rep(Rep::REP_ITEM);
         $entItems = $repItem->getByUserId($req->user_id);
         $entItem = $entItems->find(1);
-        $this->_responseParamSet('item', $entItem->getProperties());
+        $this->_response()->param::set('item', $entItem->getProperties());
     }
 
     public function dummy(array $params): void

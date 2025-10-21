@@ -33,8 +33,8 @@ class AppAccount extends BaseApp
 
         $primary_data = "$email:$password";
         $primary_code = StlStaCompress::comp($primary_data);
-        $this->_responseParamSet('primary_code', $primary_code);
-        //$this->_param()->set('primary_code', $primary_code);
+        $this->_response()->param::set('primary_code', $primary_code);
+        dd(__LINE__);
 
         $ucMakePublicId = $this->_useCase(UC::UC_ACCOUNT_MAKE_PUBLIC_ID);
         $public_id = $ucMakePublicId->execute();
@@ -56,8 +56,7 @@ class AppAccount extends BaseApp
 
         $ucCreateApiToken = $this->_useCase(UC::UC_ACCOUNT_CREATE_API_TOKEN);
         $bearer_token = $ucCreateApiToken->execute($email, $password);
-
-        $this->_responseParamSet('bearer_token', $bearer_token);
+        $this->_response()->param::set('bearer_token', $bearer_token);
     }
 
     /**

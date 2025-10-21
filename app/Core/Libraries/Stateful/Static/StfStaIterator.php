@@ -51,7 +51,6 @@ final class StfStaIterator implements Iterator
         /** @var T|null $model */
         $model = $this->_models->get($key) ?? null;
         if ($model) {
-//            dd($this->_callable, $model);
             return call_user_func($this->_callable, $model);
         }
         return null;

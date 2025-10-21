@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Stateful\Static;
 
-final class StlStaResponseParam
+final class StfStaResponseParam
 {
     protected static array $_param = [];
 
@@ -13,7 +13,7 @@ final class StlStaResponseParam
         self::$_param[$key] = $value;
     }
 
-    public static function all(): array
+    public static function get(): array
     {
         return self::$_param;
     }
