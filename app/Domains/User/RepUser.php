@@ -7,6 +7,7 @@ namespace App\Domains\User;
 use App\Core\Domains\Entity\BaseEnt;
 use App\Core\Domains\Repository\BaseRep;
 use App\DataSources\DS;
+use App\Domains\Ent;
 
 class RepUser extends BaseRep
 {
@@ -15,23 +16,37 @@ class RepUser extends BaseRep
      */
     public function makeDraft(): EntUser|BaseEnt
     {
-        $model = $this->_ds(DS::DS_U_USER)->getDraft();
-        return $this->_ent($model);
-    }
-    public function findByPublicId(string $public_id): EntUser|BaseEnt
-    {
-        $model = $this->_ds(DS::DS_U_USER)->findByPublicId($public_id);
-        return $this->_ent($model);
-    }
-    public function findByUserId(int $user_id): EntUser|BaseEnt
-    {
-        $model = $this->_ds(DS::DS_U_USER)->findByUserId($user_id);
-        return $this->_ent($model);
+        $model = $this->_infra::ds(DS::DS_U_USER)->getDraft();
+        return $this->_domain::ent(Ent::ENT_USER)->init($model);
     }
 
+    /**
+     * @param string $public_id
+     * @return EntUser|BaseEnt
+     */
+    public function findByPublicId(string $public_id): EntUser|BaseEnt
+    {
+        $model = $this->_infra::ds(DS::DS_U_USER)->findByPublicId($public_id);
+        return $this->_domain::ent(Ent::ENT_USER)->init($model);
+    }
+
+    /**
+     * @param int $user_id
+     * @return EntUser|BaseEnt
+     */
+    public function findByUserId(int $user_id): EntUser|BaseEnt
+    {
+        $model = $this->_infra::ds(DS::DS_U_USER)->findByUserId($user_id);
+        return $this->_domain::ent(Ent::ENT_USER)->init($model);
+    }
+
+    /**
+     * @param EntUser|BaseEnt $ent
+     * @return void
+     */
     public function persist(EntUser|BaseEnt $ent): void
     {
         $ent->commit();
-        $this->_ds(DS::DS_U_USER)->insert($ent->getProperties());
+        $this->_infra::ds(DS::DS_U_USER)->insert($ent->getProperties());
     }
 }

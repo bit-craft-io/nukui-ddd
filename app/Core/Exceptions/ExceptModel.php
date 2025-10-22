@@ -13,7 +13,7 @@ final class ExceptModel extends Exception
      * @param TypeExcept $type_except
      * @return self
      */
-    public function exception(TypeExcept $type_except): ExceptModel
+    public function init(TypeExcept $type_except): ExceptModel
     {
         // TODO ログ出力
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);

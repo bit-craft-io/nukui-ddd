@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Libraries\Traits;
+namespace App\Core\Libraries\Stateful;
 
 use App\Core\DataSources\BaseDs;
-use App\Core\Libraries\Stateful\Static\StfStaFactory;
 use Illuminate\Database\Eloquent\Model;
 
-trait TraitDataSource
+final class StfInfra
 {
     private static ?array $_instances = null;
 
@@ -17,7 +16,7 @@ trait TraitDataSource
      * @param T $data_source_class
      * @return T
      */
-    protected function _ds(string $data_source_class)
+    public static function ds(string $data_source_class)
     {
         $instance = self::$_instances[$data_source_class] ?? null;
         if ($instance) {
@@ -28,10 +27,10 @@ trait TraitDataSource
         $model_name = "App\\Models\\$model_class_name";
 
         /** @var BaseDs $instance */
-        $instance = StfStaFactory::singleton($data_source_class);
+        $instance = Static\StfStaFactory::singleton($data_source_class);
 
         /** @var Model $model */
-        $model = StfStaFactory::singleton($model_name);
+        $model = Static\StfStaFactory::singleton($model_name);
 
         $instance->_model($model);
 

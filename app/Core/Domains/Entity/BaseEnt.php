@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Core\Domains\Entity;
 
 use App\Core\Libraries\Stateful\Static\StfStaIterator;
-use App\Core\Libraries\Traits\TraitDataSource;
-use App\Core\Libraries\Traits\TraitValueObject;
+use App\Core\Libraries\Traits\TraitDomain;
+use App\Core\Libraries\Traits\TraitInfra;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,10 +15,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 abstract class BaseEnt
 {
+    use TraitDomain;
     // @note Entity の initOnce で使用
-    use TraitDataSource;
-    // @note ValueObject の作成に使用
-    use TraitValueObject;
+    use TraitInfra;
 
     // @note クラス生成時に１回だけ実行される
     abstract public function initOnce(): void;
@@ -89,10 +89,11 @@ abstract class BaseEnt
     /**
      * イテレータを取得
      *
-     * @param $collect
+     * @param Collection $collect
+     * @param string $key_name
      * @return StfStaIterator
      */
-    public function iterator($collect): StfStaIterator
+    public function iterator(Collection $collect, string $key_name = 'id'): StfStaIterator
     {
         $callable = function ($model) {
             if ($model && method_exists($this, 'init')) {
@@ -101,7 +102,7 @@ abstract class BaseEnt
             return $this;
         };
         $iterator = app(StfStaIterator::class);
-        $iterator->init($callable, $collect);
+        $iterator->init($callable, $collect, $key_name);
         return $iterator;
     }
 

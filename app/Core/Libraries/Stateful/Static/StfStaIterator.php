@@ -31,13 +31,13 @@ final class StfStaIterator implements Iterator
      * @template K of Model
      * @param callable $callable
      * @param Collection<K> $models
-     * @param string $keyName
+     * @param string $key_name
      * @return void
      */
-    public function init(callable $callable, Collection $models, string $keyName = 'id'): void
+    public function init(callable $callable, Collection $models, string $key_name = 'id'): void
     {
         $this->_callable = $callable;
-        $this->_models = $models->keyBy($keyName);
+        $this->_models = $models->keyBy($key_name);
         $this->_keys = $this->_models->keys()->all();
         $this->rewind();
     }
@@ -50,6 +50,7 @@ final class StfStaIterator implements Iterator
     {
         /** @var T|null $model */
         $model = $this->_models->get($key) ?? null;
+        //dd($this->_models->toArray());
         if ($model) {
             return call_user_func($this->_callable, $model);
         }

@@ -1,19 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
-namespace App\Core\Libraries\Traits;
+namespace App\Core\Libraries\Stateful;
 
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
 
-trait TraitUseCase
+final class StfService
 {
     /**
      * @template T
      * @param T $use_case_class
      * @return T
      */
-    public function _useCase(string $use_case_class)
+    public static function uc(string $use_case_class)
     {
         return StfStaFactory::singleton($use_case_class);
     }

@@ -17,10 +17,11 @@ final class ResError extends BaseRes
     {
         $result = [
             'success' => 0,
-            'error_info' => [
-                'code' =>  $this->code,
-                'message' => $this->message
-            ],
+            'result' => (object)$this->_props,
+            //'error_info' => [
+            //    'code' =>  $this->code,
+            //    'message' => $this->message
+            //],
         ];
         return response()->json($result);
     }

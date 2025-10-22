@@ -7,20 +7,21 @@ namespace App\Domains\Account;
 use App\Core\Domains\Entity\BaseEnt;
 use App\Core\Domains\Repository\BaseRep;
 use App\DataSources\DS;
+use App\Domains\Ent;
 
 class RepAccount extends BaseRep
 {
     public function mekDraft(): EntAccount|BaseEnt
     {
-        $model = $this->_ds(DS::DS_ACCOUNT)->getDraft();
-        return $this->_ent($model);
+        $model = $this->_infra::ds(DS::DS_ACCOUNT)->getDraft();
+        return $this->_domain::ent(Ent::ENT_ACCOUNT)->init($model);
     }
 
     public function persist(EntAccount|BaseEnt $ent): void
     {
         /** @var  */
         $ent->commit();
-        $id = $this->_ds(DS::DS_ACCOUNT)->insertGetId($ent->getProperties());
+        $id = $this->_infra::ds(DS::DS_ACCOUNT)->insertGetId($ent->getProperties());
 
         $ent->id($id);
         $ent->commit();
