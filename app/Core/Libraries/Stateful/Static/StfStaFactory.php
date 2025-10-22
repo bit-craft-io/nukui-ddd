@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Stateful\Static;
 
-final class StfStaInstance
+final class StfStaFactory
 {
     private static ?array $_prototype = null;
     /** @var array<object>|null  */
@@ -50,12 +50,4 @@ final class StfStaInstance
     {
         return self::prototype($class, true);
     }
-
-    ///**
-    // * @return UtilIterator
-    // */
-    //public static function iterator(): UtilIterator
-    //{
-    //    return self::prototype(UtilIterator::class);
-    //}
 }

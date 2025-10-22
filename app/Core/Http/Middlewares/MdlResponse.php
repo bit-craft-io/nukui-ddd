@@ -6,7 +6,7 @@ namespace App\Core\Http\Middlewares;
 
 use App\Core\Http\Responses\BaseRes;
 use App\Core\Http\Responses\ResError;
-use App\Core\Libraries\Stateful\Static\StfStaInstance;
+use App\Core\Libraries\Stateful\Static\StfStaFactory;
 use App\Core\Libraries\Traits\TraitResponse;
 use Closure;
 use Illuminate\Support\Str;
@@ -24,7 +24,7 @@ final class MdlResponse
         $file = 'Res' . Str::studly(implode('_', $uri_segments));
         //$response_class = "App\\Http\\Responses\\{$route}\\{$domain}\\{$file}";
         $response_class = "App\\Http\\Responses\\{$domain}\\{$file}";
-        return StfStaInstance::singleton($response_class);
+        return StfStaFactory::singleton($response_class);
     }
 
     public function handle($request, Closure $next)
@@ -33,7 +33,7 @@ final class MdlResponse
 
         if (200 !== (int) $response->getStatusCode()) {
             $contents = json_decode($response->getContent(), true);
-            $class = StfStaInstance::singleton(ResError::class);
+            $class = StfStaFactory::singleton(ResError::class);
             $class->init([
                 'code' => $contents['code'] ?? 0,
                 'message' => $contents['message'] ?? ''
@@ -41,12 +41,12 @@ final class MdlResponse
             return $class->toResponse($request);
         }
 
-        $class = $this->_responseModifyFind();
+        $class = $this->_response()->modify::find();
         if (!$class) {
             $class = $this->_responseClass($request);
         }
 
-        $class->setParams($this->_responseParamAll());
+        $class->setParams($this->_response()->param::get());
         return $class->toResponse($request);
     }
 }

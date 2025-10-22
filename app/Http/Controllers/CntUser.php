@@ -13,7 +13,7 @@ class CntUser extends BaseCnt
 {
     public function info(AppUser $app, ReqNone $req): void
     {
-        $this->_responseModifySet(ResNone::class);
+        $this->_response()->modify::set(ResNone::class);
         $app->info($req);
     }
 }

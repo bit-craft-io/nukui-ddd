@@ -22,6 +22,7 @@ Route::domain(env('APP_URL'))
     ->group(function () {
         Route::any('register', 'register');
         Route::any('login', 'login');
+        Route::any('dummy', 'dummy');
     });
 
 Route::domain(env('APP_URL'))

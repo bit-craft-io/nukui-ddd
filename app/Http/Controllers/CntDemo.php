@@ -15,7 +15,7 @@ class CntDemo extends BaseCnt
 
     public function case01(AppDemo $app, ReqNone $req): void
     {
-        $this->_responseModifySet(ResNone::class);
+        $this->_response()->modify::set(ResNone::class);
         $app->case01([]);
     }
 }

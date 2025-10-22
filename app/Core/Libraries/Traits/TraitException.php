@@ -7,7 +7,7 @@ namespace App\Core\Libraries\Traits;
 use App\Core\Exceptions\Enums\TypeExcept;
 use App\Core\Exceptions\ExceptApp;
 use App\Core\Exceptions\ExceptModel;
-use App\Core\Libraries\Stateful\Static\StfStaInstance;
+use App\Core\Libraries\Stateful\Static\StfStaFactory;
 
 trait TraitException
 {
@@ -22,6 +22,6 @@ trait TraitException
      */
     protected function _except(string $except_type)
     {
-        return StfStaInstance::new($except_type);
+        return StfStaFactory::new($except_type);
     }
 }
