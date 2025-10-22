@@ -13,7 +13,7 @@ final class ResNone extends BaseRes
     {
         $result = [
             'success' => 1,
-            //'props' => $this->_props
+            'result' => (object)$this->_props
         ];
         return response()->json($result);
     }

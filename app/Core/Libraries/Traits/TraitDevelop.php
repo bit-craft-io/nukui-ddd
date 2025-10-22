@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Core\Libraries\Traits;
 
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
-use App\Core\Libraries\Stateless\StlDevelop;
+use App\Core\Libraries\Stateful\StfDevelop;
 
 trait TraitDevelop
 {
     /**
-     * @return StlDevelop
+     * @return StfDevelop
      */
-    protected function _dev(): StlDevelop
+    protected function _dev(): StfDevelop
     {
-        return StfStaFactory::singleton(StlDevelop::class);
+        return StfStaFactory::singleton(StfDevelop::class);
     }
 }

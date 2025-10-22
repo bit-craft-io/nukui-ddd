@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Core\Libraries\Traits;
 
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
-use App\Core\Libraries\Stateless\StlResponse;
+use App\Core\Libraries\Stateful\StfResponse;
 
 trait TraitResponse
 {
     /**
-     * @return StlResponse
+     * @return StfResponse
      */
-    protected function _response(): StlResponse
+    protected function _response(): StfResponse
     {
-        return StfStaFactory::singleton(StlResponse::class);
+        return StfStaFactory::singleton(StfResponse::class);
     }
 }

@@ -37,7 +37,8 @@ class EntUser extends BaseEnt
     public function initAfter(): void
     {
         // @note $this（entity）を渡す、voの値を変更すると entity の値も変わる（draft）
-        $this->_vp_energy = $this->_vo(VpUser::VP_ENERGY)->init($this);
+        //$this->_vp_energy = $this->_vo(VpUser::VP_ENERGY)->init($this);
+        $this->_vp_energy = $this->_domain::vo(VpUser::VP_ENERGY)->init($this);
     }
 
     //public function getEnergy(): int

@@ -20,16 +20,15 @@ class AppAccount extends BaseApp
     {
         $this->_useTransaction();
 
-        $ucMakeEmail = $this->_useCase(UC::UC_ACCOUNT_MAKE_EMAIL);
-        $email = $ucMakeEmail->execute();
+        $email = $this->_service::uc(UC::UC_ACCOUNT_MAKE_EMAIL)->execute();
         $password = StlStaRandom::key32(4,4);
 
-        $repAccount = $this->_rep(Rep::REP_ACCOUNT);
-        $entAccount = $repAccount->mekDraft();
-        $entAccount->name('none');
-        $entAccount->email($email);
-        $entAccount->password($password);
-        $repAccount->persist($entAccount);
+        $rep_account = $this->_domain::rep(Rep::REP_ACCOUNT);
+        $ent_account = $rep_account->mekDraft();
+        $ent_account->name('none');
+        $ent_account->email($email);
+        $ent_account->password($password);
+        $rep_account->persist($ent_account);
 
         $primary_data = "$email:$password";
         $primary_code = StlStaCompress::comp($primary_data);
@@ -38,12 +37,10 @@ class AppAccount extends BaseApp
         $this->_dev()->log::emergency(__LINE__);
         //$this->_dev()->tool::getValueSize($this);
 
-        $ucMakePublicId = $this->_useCase(UC::UC_ACCOUNT_MAKE_PUBLIC_ID);
-        $public_id = $ucMakePublicId->execute();
-
-        $repUser = $this->_rep(Rep::REP_USER);
+        $public_id = $this->_service::uc(UC::UC_ACCOUNT_MAKE_PUBLIC_ID)->execute();
+        $repUser = $this->_domain::rep(Rep::REP_USER);
         $entUser = $repUser->makeDraft();
-        $entUser->id($entAccount->id);
+        $entUser->id($ent_account->id);
         $entUser->public_id($public_id);
         $entUser->nick_name('none');
         $entUser->energy(100);
@@ -56,8 +53,7 @@ class AppAccount extends BaseApp
     {
         [$email, $password] = explode(':', StlStaCompress::unComp($req->primary_code));
 
-        $ucCreateApiToken = $this->_useCase(UC::UC_ACCOUNT_CREATE_API_TOKEN);
-        $bearer_token = $ucCreateApiToken->execute($email, $password);
+        $bearer_token = $this->_service::uc(UC::UC_ACCOUNT_CREATE_API_TOKEN)->execute($email, $password);
         $this->_response()->param::set('bearer_token', $bearer_token);
     }
 
@@ -67,14 +63,12 @@ class AppAccount extends BaseApp
      */
     public function dummy(ReqNone $req): void
     {
-        $repUser = $this->_rep(Rep::REP_USER);
+        $repUser = $this->_domain::rep(Rep::REP_USER);
         $entUser = $repUser->makeDraft();
 
         // TODO
-        $except = $this->_except(Except::EXCEPT_APP)->make(TypeExcept::AppUserNotFound);
-
-        /** @var class-string<TypeExcept> $aaa */
-        $aaa = self::$error_code;
+        //$except = $this->_except(Except::EXCEPT_APP)->make(TypeExcept::AppUserNotFound);
+        $except = $this->_except::app(TypeExcept::AppUserNotFound);
 
         //make(self::CODE_APP_USER_NOT_FOUND);
         //$except->make($except->type());

@@ -2,6 +2,7 @@
 
 namespace App\Core\Libraries\Stateful\Static;
 
+use App\Core\Libraries\Stateful\Static\Enums\TypeSizeUnit;
 use Closure;
 
 final class StfStaDevelopTool
@@ -10,11 +11,11 @@ final class StfStaDevelopTool
      * 変数のサイズを計算
      *
      * @param mixed $value
-     * @param Enums\TypeSizeUnit $type_size_unit
+     * @param TypeSizeUnit $type_size_unit
      * @param int $depth
      * @return float|null
      */
-    public static function getValueSize(mixed $value, Enums\TypeSizeUnit $type_size_unit = Enums\TypeSizeUnit::Kb, int $depth = 3): float|null
+    public static function getValueSize(mixed $value, TypeSizeUnit $type_size_unit = TypeSizeUnit::Kb, int $depth = 3): float|null
     {
         $closures = function ($data) use (&$closures) {
             if (is_array($data)) {
