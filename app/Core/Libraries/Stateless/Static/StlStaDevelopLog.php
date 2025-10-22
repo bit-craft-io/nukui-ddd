@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Core\Libraries\Stateful\Static;
+namespace App\Core\Libraries\Stateless\Static;
 
-use App\Core\Libraries\Stateful\Static\Enums\TypeLogText;
+use App\Core\Libraries\Stateless\Static\Enums\TypeLogText;
 use Illuminate\Support\Facades\Log;
 
-final class StfStaDevelopLog
+final class StlStaDevelopLog
 {
     /**
      * @param string|int $message

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Traits;
 
-use App\Core\Libraries\Stateful\StfInfra;
+use App\Core\Libraries\Stateful\Static\StfStaInfra;
 
 trait TraitInfra
 {
-    public string|StfInfra $_infra = StfInfra::class;
+    public string|StfStaInfra $_infra = StfStaInfra::class;
 }

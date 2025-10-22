@@ -8,7 +8,7 @@ use App\Core\Libraries\Traits\TraitInfra;
 use App\DataSources\DS;
 use Illuminate\Support\Facades\Hash;
 
-class UcCreateApiToken
+final class UcCreateApiToken
 {
     use TraitInfra;
 

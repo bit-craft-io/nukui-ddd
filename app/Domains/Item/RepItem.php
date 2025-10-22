@@ -6,7 +6,7 @@ namespace App\Domains\Item;
 
 use App\Core\Domains\Entity\BaseEnt;
 use App\Core\Domains\Repository\BaseRep;
-use App\Core\Libraries\Stateful\Static\StfStaIterator;
+use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\DataSources\DS;
 use App\Domains\Ent;
 
@@ -21,9 +21,9 @@ class RepItem extends BaseRep
 
     /**
      * @param int $user_id
-     * @return StfStaIterator<EntItem|BaseEnt>
+     * @return StfInsIterator<EntItem|BaseEnt>
      */
-    public function getByUserId(int $user_id): StfStaIterator
+    public function getByUserId(int $user_id): StfInsIterator
     {
         $models = $this->_infra::ds(DS::DS_U_ITEM)->getByUserId($user_id);
         return $this->_domain::ent(Ent::ENT_ITEM)->iterator($models, 'item_id');

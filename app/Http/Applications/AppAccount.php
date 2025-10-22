@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Applications;
 
 use App\Core\Exceptions\Enums\TypeExcept;
-use App\Core\Exceptions\Except;
 use App\Core\Http\Applications\BaseApp;
 use App\Core\Http\Requests\ReqNone;
-use App\Core\Libraries\Stateless\Static\StlStaCompress;
-use App\Core\Libraries\Stateless\Static\StlStaRandom;
 use App\Domains\Rep;
 use App\Http\Applications\UseCase\UC;
 use App\Http\Requests\Account\ReqAccountLogin;
@@ -18,10 +15,11 @@ class AppAccount extends BaseApp
 {
     public function register(ReqNone $req): void
     {
-        $this->_useTransaction();
+        $this->_transaction::begin();
 
         $email = $this->_service::uc(UC::UC_ACCOUNT_MAKE_EMAIL)->execute();
-        $password = StlStaRandom::key32(4,4);
+        //$password = StlStaRandom::key32(4,4);
+        $password = $this->_util()->random::key32(4, 4);
 
         $rep_account = $this->_domain::rep(Rep::REP_ACCOUNT);
         $ent_account = $rep_account->mekDraft();
@@ -31,27 +29,26 @@ class AppAccount extends BaseApp
         $rep_account->persist($ent_account);
 
         $primary_data = "$email:$password";
-        $primary_code = StlStaCompress::comp($primary_data);
+        //$primary_code = StlStaCompress::comp($primary_data);
+        $primary_code = $this->_util()->compress::comp($primary_data);
         $this->_response()->param::set('primary_code', $primary_code);
 
-        $this->_dev()->log::emergency(__LINE__);
-        //$this->_dev()->tool::getValueSize($this);
-
         $public_id = $this->_service::uc(UC::UC_ACCOUNT_MAKE_PUBLIC_ID)->execute();
-        $repUser = $this->_domain::rep(Rep::REP_USER);
-        $entUser = $repUser->makeDraft();
-        $entUser->id($ent_account->id);
-        $entUser->public_id($public_id);
-        $entUser->nick_name('none');
-        $entUser->energy(100);
-        $entUser->energy_max_regen(100);
-        $entUser->energy_max_stock(100);
-        $repUser->persist($entUser);
+        $rep_user = $this->_domain::rep(Rep::REP_USER);
+        $ent_user = $rep_user->makeDraft();
+        $ent_user->id($ent_account->id);
+        $ent_user->public_id($public_id);
+        $ent_user->nick_name('none');
+        $ent_user->energy(100);
+        $ent_user->energy_max_regen(100);
+        $ent_user->energy_max_stock(100);
+        $rep_user->persist($ent_user);
     }
 
     public function login(ReqAccountLogin $req): void
     {
-        [$email, $password] = explode(':', StlStaCompress::unComp($req->primary_code));
+        //[$email, $password] = explode(':', StlStaCompress::unComp($req->primary_code));
+        [$email, $password] = explode(':', $this->_util()->compress::unComp($req->primary_code));
 
         $bearer_token = $this->_service::uc(UC::UC_ACCOUNT_CREATE_API_TOKEN)->execute($email, $password);
         $this->_response()->param::set('bearer_token', $bearer_token);

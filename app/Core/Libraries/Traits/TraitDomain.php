@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Traits;
 
-use App\Core\Libraries\Stateful\StfDomain;
+use App\Core\Libraries\Stateless\Static\StlStaDomain;
 
 trait TraitDomain
 {
-    public string|StfDomain $_domain = StfDomain::class;
+    public string|StlStaDomain $_domain = StlStaDomain::class;
 }

@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Traits;
 
-use App\Core\Libraries\Stateful\Static\StfStaFactory;
-use App\Core\Libraries\Stateful\StfDevelop;
+use App\Core\Libraries\Stateless\StlDevelop;
 
 trait TraitDevelop
 {
     /**
-     * @return StfDevelop
+     * @return string|StlDevelop
      */
-    protected function _dev(): StfDevelop
+    protected function _dev(): string|StlDevelop
     {
-        return StfStaFactory::singleton(StfDevelop::class);
+        return StlDevelop::class;
     }
 }

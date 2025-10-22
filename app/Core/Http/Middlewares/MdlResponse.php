@@ -7,6 +7,7 @@ namespace App\Core\Http\Middlewares;
 use App\Core\Http\Responses\BaseRes;
 use App\Core\Http\Responses\ResError;
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
+use App\Core\Libraries\Traits\TraitFactory;
 use App\Core\Libraries\Traits\TraitResponse;
 use Closure;
 use Illuminate\Support\Str;
@@ -14,6 +15,7 @@ use Illuminate\Support\Str;
 final class MdlResponse
 {
     use TraitResponse;
+    //use TraitFactory;
 
     private function _responseClass($request): BaseRes|string
     {

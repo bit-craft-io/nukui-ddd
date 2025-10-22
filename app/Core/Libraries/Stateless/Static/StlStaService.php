@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Libraries\Stateful;
+namespace App\Core\Libraries\Stateless\Static;
 
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
 
-final class StfService
+final class StlStaService
 {
     /**
      * @template T

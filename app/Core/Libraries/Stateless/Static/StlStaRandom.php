@@ -6,6 +6,13 @@ namespace App\Core\Libraries\Stateless\Static;
 
 final class StlStaRandom
 {
+    /**
+     * @param array $numbers
+     * @param array $chars
+     * @param int $number_digits
+     * @param int $char_digits
+     * @return string
+     */
     private static function _random(array $numbers, array $chars, int $number_digits = 5, int $char_digits = 5): string
     {
         shuffle($numbers);
@@ -19,6 +26,11 @@ final class StlStaRandom
         return implode('', $lot_merged);
     }
 
+    /**
+     * @param int $number_digits
+     * @param int $char_digits
+     * @return string
+     */
     public static function key(int $number_digits = 5, int $char_digits = 5): string
     {
         $numbers = range(0, 9);
@@ -26,6 +38,11 @@ final class StlStaRandom
         return self::_random($numbers, $chars, $number_digits, $char_digits);
     }
 
+    /**
+     * @param int $number_digits
+     * @param int $char_digits
+     * @return string
+     */
     public static function key32(int $number_digits = 5, int $char_digits = 5): string
     {
         $numbers = str_split('23456789');

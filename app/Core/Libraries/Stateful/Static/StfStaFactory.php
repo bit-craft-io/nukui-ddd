@@ -6,7 +6,9 @@ namespace App\Core\Libraries\Stateful\Static;
 
 final class StfStaFactory
 {
+    /** @var array<object>|null  */
     private static ?array $_prototype = null;
+
     /** @var array<object>|null  */
     private static ?array $_singleton = null;
 

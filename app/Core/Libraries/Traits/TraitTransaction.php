@@ -4,22 +4,9 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Traits;
 
-use Illuminate\Support\Facades\DB;
+use App\Core\Libraries\Stateful\Static\StfStaTransaction;
 
 trait TraitTransaction
 {
-    protected function _useTransaction(): void
-    {
-        DB::beginTransaction();
-    }
-
-    protected function _commit(): void
-    {
-        DB::commit();
-    }
-
-    protected function _rollback(): void
-    {
-        DB::rollBack();
-    }
+    public string|StfStaTransaction $_transaction = StfStaTransaction::class;
 }
