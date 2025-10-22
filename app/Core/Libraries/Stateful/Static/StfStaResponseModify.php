@@ -13,7 +13,7 @@ final class StfStaResponseModify
     public static function set(string $response_class): void
     {
         /** @var BaseRes $response */
-        $response = StfStaInstance::singleton($response_class);
+        $response = StfStaFactory::singleton($response_class);
         self::$_response = $response;
     }
 

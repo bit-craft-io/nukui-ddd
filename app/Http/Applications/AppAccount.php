@@ -34,7 +34,9 @@ class AppAccount extends BaseApp
         $primary_data = "$email:$password";
         $primary_code = StlStaCompress::comp($primary_data);
         $this->_response()->param::set('primary_code', $primary_code);
-        dd(__LINE__);
+
+        $this->_dev()->log::emergency(__LINE__);
+        //$this->_dev()->tool::getValueSize($this);
 
         $ucMakePublicId = $this->_useCase(UC::UC_ACCOUNT_MAKE_PUBLIC_ID);
         $public_id = $ucMakePublicId->execute();

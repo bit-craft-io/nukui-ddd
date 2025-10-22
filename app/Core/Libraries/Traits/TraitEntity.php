@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Core\Libraries\Traits;
 
 use App\Core\Domains\Entity\BaseEnt;
-use App\Core\Libraries\Stateful\Static\StfStaInstance;
+use App\Core\Libraries\Stateful\Static\StfStaFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -25,7 +25,7 @@ trait TraitEntity
     protected function _ent(?Model $model = null): BaseEnt
     {
         /** @var BaseEnt $ent */
-        $ent = StfStaInstance::prototype($this->_entityClass());
+        $ent = StfStaFactory::prototype($this->_entityClass());
         if ($model && method_exists($ent, 'init')) {
             $ent->init($model);
         }

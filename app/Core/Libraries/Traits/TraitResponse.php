@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Traits;
 
-use App\Core\Libraries\Stateful\Static\StfStaInstance;
-use App\Core\Libraries\Stateless\StlResponseBuilder;
+use App\Core\Libraries\Stateful\Static\StfStaFactory;
+use App\Core\Libraries\Stateless\StlResponse;
 
 trait TraitResponse
 {
     /**
-     * @return StlResponseBuilder
+     * @return StlResponse
      */
-    protected function _response(): StlResponseBuilder
+    protected function _response(): StlResponse
     {
-        return StfStaInstance::singleton(StlResponseBuilder::class);
+        return StfStaFactory::singleton(StlResponse::class);
     }
 }

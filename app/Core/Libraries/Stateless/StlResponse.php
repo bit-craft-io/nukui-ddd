@@ -11,14 +11,15 @@ use App\Core\Libraries\Stateful\Static\StfStaResponseParam;
  * @property-read StfStaResponseParam $param
  * @property-read StfStaResponseModify $modify
  */
-final class StlResponseBuilder
+final class StlResponse
 {
+    private array $_classes = [
+        'param' => StfStaResponseParam::class,
+        'modify' => StfStaResponseModify::class,
+    ];
+
     public function __get(string $name)
     {
-        return match ($name) {
-            'param' => StfStaResponseParam::class,
-            'modify' => StfStaResponseModify::class,
-            default => null,
-        };
+        return $this->_classes[$name];
     }
 }
