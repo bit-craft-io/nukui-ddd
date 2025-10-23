@@ -13,7 +13,6 @@ class AppItem extends BaseApp
 {
     public function get(ReqNone $req): void
     {
-//        //$enum = $this->_Except::code;
 //        ///** @var class-string<TypeExcept> $enum */
 //        $enum = $this->_Except::appUserNotFound();
 

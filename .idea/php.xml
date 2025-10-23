@@ -26,7 +26,7 @@
   <component name="PhpCSFixer">
     <phpcsfixer_settings>
       <PhpCSFixerConfiguration tool_path="$PROJECT_DIR$/vendor/bin/php-cs-fixer" />
-      <phpcs_fixer_by_interpreter asDefaultInterpreter="true" interpreter_id="ab3f01f8-ff1a-42bb-8318-9f38cd78e7b7" standards="PSR1;PSR2;Symfony;DoctrineAnnotation;PHP70Migration;PHP71Migration" tool_path="//wsl.localhost/Ubuntu/var/www/draft/vendor/bin/php-cs-fixer" timeout="30000" />
+      <phpcs_fixer_by_interpreter asDefaultInterpreter="true" interpreter_id="ab3f01f8-ff1a-42bb-8318-9f38cd78e7b7" tool_path="\\wsl.localhost\Ubuntu\var\www\draft\vendor\bin\php-cs-fixer" timeout="30000" />
     </phpcsfixer_settings>
   </component>
   <component name="PhpCodeSniffer">
@@ -192,8 +192,8 @@
   <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />
   <component name="PhpStan">
     <PhpStan_settings>
-      <phpstan_by_interpreter asDefaultInterpreter="true" interpreter_id="15677f41-2f14-4ea6-84ac-09106f1af99f" timeout="60000" />
       <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />
+      <phpstan_by_interpreter asDefaultInterpreter="true" interpreter_id="ab3f01f8-ff1a-42bb-8318-9f38cd78e7b7" tool_path="\\wsl.localhost\Ubuntu\var\www\draft\vendor\bin\phpstan" timeout="60000" />
     </PhpStan_settings>
   </component>
   <component name="PhpStanOptionsConfiguration">
@@ -206,7 +206,7 @@
   </component>
   <component name="Psalm">
     <Psalm_settings>
-      <psalm_fixer_by_interpreter asDefaultInterpreter="true" interpreter_id="15677f41-2f14-4ea6-84ac-09106f1af99f" timeout="60000" />
+      <psalm_fixer_by_interpreter asDefaultInterpreter="true" interpreter_id="ab3f01f8-ff1a-42bb-8318-9f38cd78e7b7" timeout="60000" />
     </Psalm_settings>
   </component>
   <component name="PsalmOptionsConfiguration">

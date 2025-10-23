@@ -26,8 +26,7 @@ class EntItem extends BaseEnt
     public function initOnce(): void
     {
         $models = $this->_Infra::ds(DS::DS_M_ITEM)->getEnable();
-        //$this->_vo_m_items = $this->_vo(VoMItem::class)->iterator($models);
-        $this->_vo_m_items = $this->_Domain::vo(VoMItem::class)->iterator($models);
+        $this->_vo_m_items = $this->_Domain::vo(VoItem::VP_M_ITEM)->iterator($models);
     }
 
     public function initAfter(): void
