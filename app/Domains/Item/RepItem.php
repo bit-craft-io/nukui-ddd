@@ -14,9 +14,9 @@ class RepItem extends BaseRep
 {
     public function makeDraft(int $user_id, int $item_id): EntItem|BaseEnt
     {
-        $model = $this->_infra::ds(DS::DS_U_ITEM)->getDraft();
+        $model = $this->_Infra::ds(DS::DS_U_ITEM)->getDraft();
         $model->fill(['user_id' => $user_id, 'item_id' => $item_id]);
-        return $this->_domain::ent(Ent::ENT_ITEM)->init($model);
+        return $this->_Domain::ent(Ent::ENT_ITEM)->init($model);
     }
 
     /**
@@ -25,8 +25,8 @@ class RepItem extends BaseRep
      */
     public function getByUserId(int $user_id): StfInsIterator
     {
-        $models = $this->_infra::ds(DS::DS_U_ITEM)->getByUserId($user_id);
-        return $this->_domain::ent(Ent::ENT_ITEM)->iterator($models, 'item_id');
+        $models = $this->_Infra::ds(DS::DS_U_ITEM)->getByUserId($user_id);
+        return $this->_Domain::ent(Ent::ENT_ITEM)->iterator($models, 'item_id');
     }
 
     public function persist(EntItem|BaseEnt $ent): void
@@ -37,9 +37,9 @@ class RepItem extends BaseRep
         //       この為、upsert 以外のやり方で永続化
         $ent->commit();
         if ($ent->isNew()) {
-            $this->_infra::ds(DS::DS_U_ITEM)->insert($ent->getProperties());
+            $this->_Infra::ds(DS::DS_U_ITEM)->insert($ent->getProperties());
         } else {
-            $this->_infra::ds(DS::DS_U_ITEM)->update($ent->getProperties(), ['user_id' => $ent->user_id, 'item_id' => $ent->item_id]);
+            $this->_Infra::ds(DS::DS_U_ITEM)->update($ent->getProperties(), ['user_id' => $ent->user_id, 'item_id' => $ent->item_id]);
         }
     }
 }

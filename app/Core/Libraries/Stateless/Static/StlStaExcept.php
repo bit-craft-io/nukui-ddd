@@ -11,6 +11,20 @@ use App\Core\Libraries\Stateful\Static\StfStaFactory;
 
 final class StlStaExcept
 {
+//    public const Code = TypeExcept::class;
+//
+//    /**
+//     * @return class-string<TypeExcept>
+//     */
+//    public static function code()
+//    {
+//        return TypeExcept::class;
+//    }
+//    public static function appUserNotFound(): TypeExcept
+//    {
+//        return TypeExcept::AppUserNotFound;
+//    }
+
     /**
      * @param TypeExcept $type_except
      * @return ExceptApp

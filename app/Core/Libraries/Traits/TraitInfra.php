@@ -8,5 +8,5 @@ use App\Core\Libraries\Stateful\Static\StfStaInfra;
 
 trait TraitInfra
 {
-    public string|StfStaInfra $_infra = StfStaInfra::class;
+    public string|StfStaInfra $_Infra = StfStaInfra::class;
 }

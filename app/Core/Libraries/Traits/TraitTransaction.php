@@ -8,5 +8,5 @@ use App\Core\Libraries\Stateful\Static\StfStaTransaction;
 
 trait TraitTransaction
 {
-    public string|StfStaTransaction $_transaction = StfStaTransaction::class;
+    public string|StfStaTransaction $_Transaction = StfStaTransaction::class;
 }

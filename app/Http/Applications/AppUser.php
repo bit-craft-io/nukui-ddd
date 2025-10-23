@@ -12,7 +12,7 @@ class AppUser extends BaseApp
 {
     public function info(ReqNone $req): void
     {
-        $repUser = $this->_domain::rep(Rep::REP_USER);
+        $repUser = $this->_Domain::rep(Rep::REP_USER);
         $entUser = $repUser->findByUserId($req->user_id);
         $entUser->addEnergy(1);
     }

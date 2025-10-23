@@ -15,13 +15,12 @@ final class UcMakePublicId
 
     public function execute(): string
     {
-        $random = $this->_util()->random;
-        $ds_u_user = $this->_infra::ds(DS::DS_U_USER);
+        $ds_u_user = $this->_Infra::ds(DS::DS_U_USER);
         do {
             // TODO 処理コストを確認 $this->_util()->random
             //$random_key = $this->_util()->random::key(4, 5);
             //$model = $this->_infra::ds(DS::DS_U_USER)->findByPublicId($random_key);
-            $random_key = $random::key(4, 5);
+            $random_key = $this->_UtilRandom::key(4, 5);
             $model = $ds_u_user->findByPublicId($random_key);
         } while ($model);
         return $random_key;

@@ -13,7 +13,7 @@ class AppDevelop extends BaseApp
     public function itemAdd(ReqDevelopItemAdd $req): void
     {
         //$repItem = $this->_rep(Rep::REP_ITEM);
-        $repItem = $this->_domain::rep(Rep::REP_ITEM);
+        $repItem = $this->_Domain::rep(Rep::REP_ITEM);
         $entItemIte = $repItem->getByUserId($req->user_id);
         $entItem = $entItemIte->find($req->item_id);
         if (!$entItem) {

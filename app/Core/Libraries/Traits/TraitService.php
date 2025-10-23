@@ -8,5 +8,5 @@ use App\Core\Libraries\Stateless\Static\StlStaService;
 
 trait TraitService
 {
-    public string|StlStaService $_service = StlStaService::class;
+    public string|StlStaService $_Service = StlStaService::class;
 }

@@ -8,5 +8,5 @@ use App\Core\Libraries\Stateless\Static\StlStaExcept;
 
 trait TraitException
 {
-    public string|StlStaExcept $_except = StlStaExcept::class;
+    public string|StlStaExcept $_Except = StlStaExcept::class;
 }

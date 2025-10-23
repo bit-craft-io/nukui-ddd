@@ -14,7 +14,7 @@ final class UcCreateApiToken
 
     public function execute(string $email, string $password): string
     {
-        $account = $this->_infra::ds(DS::DS_ACCOUNT)->findByEmail($email);
+        $account = $this->_Infra::ds(DS::DS_ACCOUNT)->findByEmail($email);
         if (!$account || !Hash::check($password, $account->password)) {
             return '';
         }

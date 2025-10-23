@@ -21,16 +21,16 @@ final class MdlTransaction
         // TODO try - catch するか判断
         $response = $next($request);
 
-        $this->_dev()->log::emergency();
+        $this->_DevLog::emergency();
 
-        if ($this->_transaction::getLevel()) {
+        if ($this->_Transaction::getLevel()) {
             // @note エラーの場合は is_exception が存在
-            if ($this->_transaction::isRollback()) {
-                $this->_dev()->log::emergency('rollback');
-                $this->_transaction::rollback();
+            if ($this->_Transaction::isRollback()) {
+                $this->_DevLog::emergency('rollback');
+                $this->_Transaction::rollback();
             } else {
-                $this->_dev()->log::emergency('commit');
-                $this->_transaction::commit();
+                $this->_DevLog::emergency('commit');
+                $this->_Transaction::commit();
             }
         }
         return $response;

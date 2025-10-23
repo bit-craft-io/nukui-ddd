@@ -16,8 +16,8 @@ class RepUser extends BaseRep
      */
     public function makeDraft(): EntUser|BaseEnt
     {
-        $model = $this->_infra::ds(DS::DS_U_USER)->getDraft();
-        return $this->_domain::ent(Ent::ENT_USER)->init($model);
+        $model = $this->_Infra::ds(DS::DS_U_USER)->getDraft();
+        return $this->_Domain::ent(Ent::ENT_USER)->init($model);
     }
 
     /**
@@ -26,8 +26,8 @@ class RepUser extends BaseRep
      */
     public function findByPublicId(string $public_id): EntUser|BaseEnt
     {
-        $model = $this->_infra::ds(DS::DS_U_USER)->findByPublicId($public_id);
-        return $this->_domain::ent(Ent::ENT_USER)->init($model);
+        $model = $this->_Infra::ds(DS::DS_U_USER)->findByPublicId($public_id);
+        return $this->_Domain::ent(Ent::ENT_USER)->init($model);
     }
 
     /**
@@ -36,8 +36,8 @@ class RepUser extends BaseRep
      */
     public function findByUserId(int $user_id): EntUser|BaseEnt
     {
-        $model = $this->_infra::ds(DS::DS_U_USER)->findByUserId($user_id);
-        return $this->_domain::ent(Ent::ENT_USER)->init($model);
+        $model = $this->_Infra::ds(DS::DS_U_USER)->findByUserId($user_id);
+        return $this->_Domain::ent(Ent::ENT_USER)->init($model);
     }
 
     /**
@@ -47,6 +47,6 @@ class RepUser extends BaseRep
     public function persist(EntUser|BaseEnt $ent): void
     {
         $ent->commit();
-        $this->_infra::ds(DS::DS_U_USER)->insert($ent->getProperties());
+        $this->_Infra::ds(DS::DS_U_USER)->insert($ent->getProperties());
     }
 }

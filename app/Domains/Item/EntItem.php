@@ -25,9 +25,9 @@ class EntItem extends BaseEnt
     protected ?StfInsIterator $_vo_m_items = null;
     public function initOnce(): void
     {
-        $models = $this->_infra::ds(DS::DS_M_ITEM)->getEnable();
+        $models = $this->_Infra::ds(DS::DS_M_ITEM)->getEnable();
         //$this->_vo_m_items = $this->_vo(VoMItem::class)->iterator($models);
-        $this->_vo_m_items = $this->_domain::vo(VoMItem::class)->iterator($models);
+        $this->_vo_m_items = $this->_Domain::vo(VoMItem::class)->iterator($models);
     }
 
     public function initAfter(): void

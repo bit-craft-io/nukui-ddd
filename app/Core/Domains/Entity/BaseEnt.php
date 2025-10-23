@@ -104,7 +104,7 @@ abstract class BaseEnt
         //$iterator = app(StfInsIterator::class);
         //$iterator->init($callable, $collect, $key_name);
         //return $iterator;
-        return $this->_domain::iterator($callable, $collect, $key_name);
+        return $this->_Domain::iterator($callable, $collect, $key_name);
     }
 
     public function isNew(): bool

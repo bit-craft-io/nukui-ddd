@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Traits;
 
-use App\Core\Libraries\Stateful\StfResponse;
+use App\Core\Libraries\Stateful\Static\StfStaResponseModify;
+use App\Core\Libraries\Stateful\Static\StfStaResponseParam;
 
 trait TraitResponse
 {
-    /**
-     * @return string|StfResponse
-     */
-    protected function _response(): string|StfResponse
-    {
-        return StfResponse::class;
-    }
+    public string|StfStaResponseParam $_ResParam = StfStaResponseParam::class;
+    public string|StfStaResponseModify $_res_modify = StfStaResponseModify::class;
 }

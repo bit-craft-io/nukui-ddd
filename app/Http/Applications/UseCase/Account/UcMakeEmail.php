@@ -17,10 +17,9 @@ final class UcMakeEmail
 
     public function execute(): string
     {
-        $random = $this->_util()->random;
-        $ds_u_user = $this->_infra::ds(DS::DS_U_USER);
+        $ds_u_user = $this->_Infra::ds(DS::DS_U_USER);
         do {
-            $random_key = $random::key(10, 10);
+            $random_key = $this->_UtilRandom::key(10, 10);
             $model = $ds_u_user->findByPublicId($random_key);
         } while ($model);
         return $random_key . '@' . self::MAIL_DOMAIN;

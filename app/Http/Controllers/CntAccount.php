@@ -25,7 +25,7 @@ class CntAccount extends BaseCnt
     public function dummy(AppAccount $app, ReqNone $req): void
     {
         // @note Responseのクラスを変更
-        $this->_response()->modify::set(ResNone::class);
+        $this->_res_modify::set(ResNone::class);
         $app->dummy($req);
     }
 }

@@ -8,5 +8,5 @@ use App\Core\Libraries\Stateless\Static\StlStaDomain;
 
 trait TraitDomain
 {
-    public string|StlStaDomain $_domain = StlStaDomain::class;
+    public string|StlStaDomain $_Domain = StlStaDomain::class;
 }
