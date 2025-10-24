@@ -7,7 +7,7 @@ namespace App\Domains\Item;
 use App\Core\Domains\Entity\BaseEnt;
 use App\Core\Domains\ValueObject\VoMItem;
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
-use App\DataSources\DS;
+use App\DataSources\DsHub;
 
 /**
  * @method void user_id(integer $value)
@@ -25,8 +25,8 @@ class EntItem extends BaseEnt
     protected ?StfInsIterator $_vo_m_items = null;
     public function initOnce(): void
     {
-        $models = $this->_Infra::ds(DS::DS_M_ITEM)->getEnable();
-        $this->_vo_m_items = $this->_Domain::vo(VoItem::VP_M_ITEM)->iterator($models);
+        $models = $this->_Infra::ds(DsHub::DS_M_ITEM)->getEnable();
+        $this->_vo_m_items = $this->_Domain::vo(VoHub::VP_M_ITEM)->iterator($models, 'item_id');
     }
 
     public function initAfter(): void

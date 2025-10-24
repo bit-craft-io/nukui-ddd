@@ -6,7 +6,7 @@ namespace App\Http\Applications\UseCase\Account;
 
 use App\Core\Libraries\Traits\TraitInfra;
 use App\Core\Libraries\Traits\TraitUtil;
-use App\DataSources\DS;
+use App\DataSources\DsHub;
 
 final class UcMakeEmail
 {
@@ -17,7 +17,7 @@ final class UcMakeEmail
 
     public function execute(): string
     {
-        $ds_u_user = $this->_Infra::ds(DS::DS_U_USER);
+        $ds_u_user = $this->_Infra::ds(DsHub::DS_U_USER);
         do {
             $random_key = $this->_UtilRandom::key(10, 10);
             $model = $ds_u_user->findByPublicId($random_key);

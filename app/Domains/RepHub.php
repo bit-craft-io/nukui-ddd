@@ -8,7 +8,7 @@ use App\Domains\Account\RepAccount;
 use App\Domains\Item\RepItem;
 use App\Domains\User\RepUser;
 
-final class Rep
+final class RepHub
 {
     const string REP_ACCOUNT = RepAccount::class;
     const string REP_USER = RepUser::class;

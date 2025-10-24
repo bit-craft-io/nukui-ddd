@@ -13,6 +13,6 @@ class AppDemo extends BaseApp
     {
         // @note レスポンスクラスを変更
         //       MdlResponse
-        $this->_res_modify::set(ResNone::class);
+        $this->_ResponseModify::set(ResNone::class);
     }
 }

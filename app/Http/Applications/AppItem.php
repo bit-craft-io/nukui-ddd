@@ -7,7 +7,7 @@ namespace App\Http\Applications;
 use App\Core\Exceptions\Enums\TypeExcept;
 use App\Core\Http\Applications\BaseApp;
 use App\Core\Http\Requests\ReqNone;
-use App\Domains\Rep;
+use App\Domains\RepHub;
 
 class AppItem extends BaseApp
 {
@@ -21,11 +21,11 @@ class AppItem extends BaseApp
         // @note getのみなので Response クラスもしくは
         //       Appクラスで処理をして param に渡す？
         //       param に渡す方がResクラスが共通で使えてエレガントっぽい
-        $repItem = $this->_Domain::rep(Rep::REP_ITEM);
+        $repItem = $this->_Domain::rep(RepHub::REP_ITEM);
         $entItems = $repItem->getByUserId($req->user_id);
         // TODO item_id = 1
         $entItem = $entItems->find(1);
-        $this->_ResParam::set('item', $entItem->getProperties());
+        $this->_ResponseParam::set('item', $entItem->getProperties());
     }
 
     public function dummy(array $params): void

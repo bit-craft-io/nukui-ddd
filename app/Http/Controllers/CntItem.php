@@ -13,7 +13,7 @@ class CntItem extends BaseCnt
 {
     public function get(AppItem $app, ReqNone $req): void
     {
-        $this->_res_modify::set(ResNone::class);
+        $this->_ResponseModify::set(ResNone::class);
         $app->get($req);
     }
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Applications;
 
 use App\Core\Http\Applications\BaseApp;
-use App\Domains\Rep;
+use App\Domains\RepHub;
 use App\Http\Requests\Develop\ReqDevelopItemAdd;
 
 class AppDevelop extends BaseApp
@@ -13,7 +13,7 @@ class AppDevelop extends BaseApp
     public function itemAdd(ReqDevelopItemAdd $req): void
     {
         //$repItem = $this->_rep(Rep::REP_ITEM);
-        $repItem = $this->_Domain::rep(Rep::REP_ITEM);
+        $repItem = $this->_Domain::rep(RepHub::REP_ITEM);
         $entItemIte = $repItem->getByUserId($req->user_id);
         $entItem = $entItemIte->find($req->item_id);
         if (!$entItem) {

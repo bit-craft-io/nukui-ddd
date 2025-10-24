@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataSources;
 
-final class DS
+final class DsHub
 {
     const string DS_M_ITEM = DsMItem::class;
     const string DS_ACCOUNT = DsAccount::class;

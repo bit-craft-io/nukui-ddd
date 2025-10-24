@@ -101,9 +101,6 @@ abstract class BaseEnt
             }
             return $this;
         };
-        //$iterator = app(StfInsIterator::class);
-        //$iterator->init($callable, $collect, $key_name);
-        //return $iterator;
         return $this->_Domain::iterator($callable, $collect, $key_name);
     }
 

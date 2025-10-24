@@ -43,12 +43,12 @@ final class MdlResponse
             return $class->toResponse($request);
         }
 
-        $class = $this->_res_modify::find();
+        $class = $this->_ResponseModify::find();
         if (!$class) {
             $class = $this->_responseClass($request);
         }
 
-        $class->setParams($this->_ResParam::get());
+        $class->setParams($this->_ResponseParam::get());
         return $class->toResponse($request);
     }
 }

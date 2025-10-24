@@ -9,6 +9,6 @@ use App\Core\Libraries\Stateful\Static\StfStaResponseParam;
 
 trait TraitResponse
 {
-    public string|StfStaResponseParam $_ResParam = StfStaResponseParam::class;
-    public string|StfStaResponseModify $_res_modify = StfStaResponseModify::class;
+    public string|StfStaResponseParam $_ResponseParam = StfStaResponseParam::class;
+    public string|StfStaResponseModify $_ResponseModify = StfStaResponseModify::class;
 }

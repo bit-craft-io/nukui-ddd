@@ -7,8 +7,8 @@ namespace App\Http\Applications;
 use App\Core\Exceptions\Enums\TypeExcept;
 use App\Core\Http\Applications\BaseApp;
 use App\Core\Http\Requests\ReqNone;
-use App\Domains\Rep;
-use App\Http\Applications\UseCase\UC;
+use App\Domains\RepHub;
+use App\Http\Applications\UseCase\UcHub;
 use App\Http\Requests\Account\ReqAccountLogin;
 
 class AppAccount extends BaseApp
@@ -17,11 +17,10 @@ class AppAccount extends BaseApp
     {
         $this->_Transaction::begin();
 
-        $email = $this->_Service::uc(UC::UC_ACCOUNT_MAKE_EMAIL)->execute();
-        //$password = StlStaRandom::key32(4,4);
+        $email = $this->_Service::uc(UcHub::UC_ACCOUNT_MAKE_EMAIL)->execute();
         $password = $this->_UtilRandom::key32(4, 4);
 
-        $rep_account = $this->_Domain::rep(Rep::REP_ACCOUNT);
+        $rep_account = $this->_Domain::rep(RepHub::REP_ACCOUNT);
         $ent_account = $rep_account->mekDraft();
         $ent_account->name('none');
         $ent_account->email($email);
@@ -29,15 +28,14 @@ class AppAccount extends BaseApp
         $rep_account->persist($ent_account);
 
         $primary_data = "$email:$password";
-        //$primary_code = StlStaCompress::comp($primary_data);
         $primary_code = $this->_UtilCompress::comp($primary_data);
-        $this->_ResParam::set('primary_code', $primary_code);
+        $this->_ResponseParam::set('primary_code', $primary_code);
 
         //$val = $this->_DevTool::getValueSize('hoge-fuga');
         //$this->_DevLog::emergency((string)$val);
 
-        $public_id = $this->_Service::uc(UC::UC_ACCOUNT_MAKE_PUBLIC_ID)->execute();
-        $rep_user = $this->_Domain::rep(Rep::REP_USER);
+        $public_id = $this->_Service::uc(UcHub::UC_ACCOUNT_MAKE_PUBLIC_ID)->execute();
+        $rep_user = $this->_Domain::rep(RepHub::REP_USER);
         $ent_user = $rep_user->makeDraft();
         $ent_user->id($ent_account->id);
         $ent_user->public_id($public_id);
@@ -54,8 +52,8 @@ class AppAccount extends BaseApp
         [$email, $password] = explode(':', $this->_UtilCompress::unComp($req->primary_code));
         //dd($email, $password);
 
-        $bearer_token = $this->_Service::uc(UC::UC_ACCOUNT_CREATE_API_TOKEN)->execute($email, $password);
-        $this->_ResParam::set('bearer_token', $bearer_token);
+        $bearer_token = $this->_Service::uc(UcHub::UC_ACCOUNT_CREATE_API_TOKEN)->execute($email, $password);
+        $this->_ResponseParam::set('bearer_token', $bearer_token);
     }
 
     /**
@@ -64,7 +62,7 @@ class AppAccount extends BaseApp
      */
     public function dummy(ReqNone $req): void
     {
-        $repUser = $this->_Domain::rep(Rep::REP_USER);
+        $repUser = $this->_Domain::rep(RepHub::REP_USER);
         $entUser = $repUser->makeDraft();
 
         // TODO

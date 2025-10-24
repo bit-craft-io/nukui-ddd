@@ -6,7 +6,7 @@ namespace App\Http\Applications\UseCase\Account;
 
 use App\Core\Libraries\Traits\TraitInfra;
 use App\Core\Libraries\Traits\TraitUtil;
-use App\DataSources\DS;
+use App\DataSources\DsHub;
 
 final class UcMakePublicId
 {
@@ -15,7 +15,7 @@ final class UcMakePublicId
 
     public function execute(): string
     {
-        $ds_u_user = $this->_Infra::ds(DS::DS_U_USER);
+        $ds_u_user = $this->_Infra::ds(DsHub::DS_U_USER);
         do {
             // TODO 処理コストを確認 $this->_util()->random
             //$random_key = $this->_util()->random::key(4, 5);

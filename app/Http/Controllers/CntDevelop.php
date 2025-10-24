@@ -13,7 +13,7 @@ class CntDevelop extends BaseCnt
 {
     public function itemAdd(AppDevelop $app, ReqDevelopItemAdd $req): void
     {
-        $this->_res_modify::set(ResNone::class);
+        $this->_ResponseModify::set(ResNone::class);
         $app->itemAdd($req);
     }
 }

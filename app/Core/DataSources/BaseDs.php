@@ -43,4 +43,15 @@ abstract class BaseDs
             ->where($conditions)
             ->update($values);
     }
+
+    /**
+     * @param array $values
+     * @return int
+     */
+    public function insertGetId(array $values): int
+    {
+        return $this->_model
+            ->newQuery()
+            ->insertGetId($values);
+    }
 }
