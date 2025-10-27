@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\_Demo\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-class UItem extends Model
+class UDemoItem extends Model
 {
     /**
      * The attributes that are mass assignable.

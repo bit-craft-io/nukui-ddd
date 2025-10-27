@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\_Demo\Models;
 
+use App\Models\Enums\TypeItem;
 use Illuminate\Database\Eloquent\Model;
 
-class UItem extends Model
+class MDemoItem extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -14,10 +15,11 @@ class UItem extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'id',
-        'user_id',
-        'item_id',
-        'amount',
+        'name',
+        'type_item',
+        'max_display',
+        'max_stock',
+        'begin_at',
         'end_at',
     ];
 
@@ -33,10 +35,11 @@ class UItem extends Model
     ];
 
     protected $casts = [
-        'id' => 'integer',
-        'user_id' => 'integer',
-        'item_id' => 'integer',
-        'amount' => 'integer',
+        'name' => 'string',
+        'type_item' => TypeItem::class,
+        'max_display' => 'integer',
+        'max_stock' => 'integer',
+        'begin_at' => 'datetime:Y-m-d H:i:s',
         'end_at' => 'datetime:Y-m-d H:i:s',
     ];
 }

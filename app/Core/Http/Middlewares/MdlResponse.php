@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Core\Http\Middlewares;
 
 use App\Core\Http\Responses\BaseRes;
-use App\Core\Http\Responses\ResError;
+use App\Core\Http\Responses\ResFailed;
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
 use App\Core\Libraries\Traits\TraitResponse;
 use Closure;
@@ -33,7 +33,7 @@ final class MdlResponse
 
         if (200 !== (int) $response->getStatusCode()) {
             $contents = json_decode($response->getContent(), true);
-            $class = StfStaFactory::singleton(ResError::class);
+            $class = StfStaFactory::singleton(ResFailed::class);
             $class->init([
                 'code' => $contents['code'] ?? 0,
                 'message' => $contents['message'] ?? ''

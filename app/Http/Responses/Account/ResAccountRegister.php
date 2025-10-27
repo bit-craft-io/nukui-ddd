@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
  */
 final class ResAccountRegister extends BaseRes
 {
-    public function toResponse(Request $request): JsonResponse
+    public function toResponse(Request $req): JsonResponse
     {
         $result = [
             'success' => 1,

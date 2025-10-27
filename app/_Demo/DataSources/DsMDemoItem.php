@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\DataSources;
+namespace App\_Demo\DataSources;
 
+use App\_Demo\Models\MDemoItem;
 use App\Core\DataSources\BaseDs;
-use App\Models\MItem;
 use Illuminate\Database\Eloquent\Collection;
 
-class DsMItem extends BaseDs
+class DsMDemoItem extends BaseDs
 {
     /**
-     * @return Collection<MItem>
+     * @return Collection<MDemoItem>
      */
     public function getEnable(): Collection
     {

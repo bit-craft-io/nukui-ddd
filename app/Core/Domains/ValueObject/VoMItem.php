@@ -12,8 +12,8 @@ use App\Models\Enums\TypeItem;
  * @property-read TypeItem $type_item
  * @property-read integer $max_display
  * @property-read integer $max_stock
- * @property-read string $enabled_from_at
- * @property-read string $enabled_end_at
+ * @property-read string $begin_at
+ * @property-read string $end_at
  */
 class VoMItem extends BaseVo
 {

@@ -13,11 +13,11 @@ use App\DataSources\DsHub;
  * @method void user_id(integer $value)
  * @method void item_id(integer $value)
  * @method void amount(integer $value)
- * @method void enabled_end_at(string $value)
+ * @method void end_at(string $value)
  * @property-read integer $user_id
  * @property-read integer $item_id
  * @property-read integer $amount
- * @property-read object $enabled_end_at
+ * @property-read object $end_at
  */
 class EntItem extends BaseEnt
 {
@@ -26,7 +26,7 @@ class EntItem extends BaseEnt
     public function initOnce(): void
     {
         $models = $this->_Infra::ds(DsHub::DS_M_ITEM)->getEnable();
-        $this->_vo_m_items = $this->_Domain::vo(VoHub::VP_M_ITEM)->iterator($models, 'item_id');
+        $this->_vo_m_items = $this->_Domain::vo(VoHub::VP_M_ITEM)->iterator($models, 'id');
     }
 
     public function initAfter(): void
@@ -45,9 +45,9 @@ class EntItem extends BaseEnt
 
     public function getEnabledEndAt(): ?string
     {
-        if ($this->enabled_end_at) {
-            return $this->enabled_end_at->format('Y-m-d H:i:s');
+        if ($this->end_at) {
+            return $this->end_at->format('Y-m-d H:i:s');
         }
-        return $this->_vo_m_items->find($this->item_id)?->enabled_end_at;
+        return $this->_vo_m_items->find($this->item_id)?->end_at;
     }
 }

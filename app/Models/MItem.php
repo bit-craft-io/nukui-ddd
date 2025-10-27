@@ -20,8 +20,8 @@ class MItem extends Model
         'type_item',
         'max_display',
         'max_stock',
-        'enabled_from_at',
-        'enabled_end_at',
+        'begin_at',
+        'end_at',
     ];
 
     /**
@@ -40,22 +40,23 @@ class MItem extends Model
         'type_item' => TypeItem::class,
         'max_display' => 'integer',
         'max_stock' => 'integer',
-        'enabled_from_at' => 'datetime:Y-m-d H:i:s',
-        'enabled_end_at' => 'datetime:Y-m-d H:i:s',
+        'begin_at' => 'datetime:Y-m-d H:i:s',
+        'end_at' => 'datetime:Y-m-d H:i:s',
     ];
 
-    public function scopeEnable(Builder $query): Builder
-    {
-        // TODO baseModel
-        $now = now();
-        return $query
-            ->where(function ($query) use ($now) {
-                $query->whereNull('enabled_from_at')
-                    ->orWhere('enabled_from_at', '<=', $now);
-            })
-            ->where(function ($query) use ($now) {
-                $query->whereNull('enabled_end_at')
-                    ->orWhere('enabled_end_at', '>=', $now);
-            });
-    }
+    // @note Builder の責任を DataSource に持たせる
+    //public function scopeEnable(Builder $query): Builder
+    //{
+    //    // TODO baseModel
+    //    $now = now();
+    //    return $query
+    //        ->where(function ($query) use ($now) {
+    //            $query->whereNull('begin_at')
+    //                ->orWhere('begin_at', '<=', $now);
+    //        })
+    //        ->where(function ($query) use ($now) {
+    //            $query->whereNull('end_at')
+    //                ->orWhere('end_at', '>=', $now);
+    //        });
+    //}
 }

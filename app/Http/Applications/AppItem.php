@@ -16,13 +16,14 @@ class AppItem extends BaseApp
 //        ///** @var class-string<TypeExcept> $enum */
 //        $enum = $this->_Except::appUserNotFound();
 
-        throw $this->_Except::app(TypeExcept::AppUserNotFound);
+        //throw $this->_Except::app(TypeExcept::AppUserNotFound);
 
         // @note getのみなので Response クラスもしくは
         //       Appクラスで処理をして param に渡す？
         //       param に渡す方がResクラスが共通で使えてエレガントっぽい
         $repItem = $this->_Domain::rep(RepHub::REP_ITEM);
         $entItems = $repItem->getByUserId($req->user_id);
+
         // TODO item_id = 1
         $entItem = $entItems->find(1);
         $this->_ResponseParam::set('item', $entItem->getProperties());

@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('m_items', function (Blueprint $table) {
+        Schema::create('m_demo_items', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement()->comment('識別子');
             $table->string('name', 64)->nullable()->comment('名前');
             $table->unsignedTinyInteger('type_item')->default(1)->comment('アイテムタイプ（1: 消耗アイテム | 2: 永続アイテム | 3:装備アイテム | 4:素材アイテム）');
@@ -26,6 +26,17 @@ return new class extends Migration
 
             $table->index(['type_item'], 'type_item');
         });
+        Schema::create('u_demo_items', function (Blueprint $table) {
+            $table->unsignedBigInteger('id')->autoIncrement()->comment('識別子');
+            $table->unsignedBigInteger('user_id')->default(1)->comment('ユーザID');
+            $table->unsignedBigInteger('item_id')->default(1)->comment('アイテムID');
+            $table->unsignedInteger('amount')->default(1)->comment('所持数');
+            // @note 検索時に使用
+            $table->timestamp('end_at')->nullable()->comment('有効期間（終了日時）');
+            $table->timestamps();
+
+            $table->unique(['user_id', 'item_id'], 'user_id_item_id');
+        });
     }
 
     /**
@@ -33,6 +44,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('m_items');
+        Schema::dropIfExists('m_demo_items');
+        Schema::dropIfExists('u_demo_items');
     }
 };

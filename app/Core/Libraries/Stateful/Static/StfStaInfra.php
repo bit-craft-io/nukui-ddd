@@ -23,8 +23,8 @@ final class StfStaInfra
             return $instance;
         }
 
-        $model_class_name = preg_replace('/^Ds/', '', class_basename($data_source_class));
-        $model_name = "App\\Models\\$model_class_name";
+        [$app_dir, $model_class_name] = explode('\\DataSources\\Ds', $data_source_class);
+        $model_name = "$app_dir\\Models\\$model_class_name";
 
         /** @var BaseDs $instance */
         $instance = StfStaFactory::singleton($data_source_class);

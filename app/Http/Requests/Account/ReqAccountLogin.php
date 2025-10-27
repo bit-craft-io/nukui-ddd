@@ -18,7 +18,7 @@ final class ReqAccountLogin extends BaseReq
         ];
     }
 
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $this->merge([
             'primary_code' => $this->header('Primary-Code'),
