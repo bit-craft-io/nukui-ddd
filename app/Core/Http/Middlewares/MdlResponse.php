@@ -7,7 +7,6 @@ namespace App\Core\Http\Middlewares;
 use App\Core\Http\Responses\BaseRes;
 use App\Core\Http\Responses\ResError;
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
-use App\Core\Libraries\Traits\TraitFactory;
 use App\Core\Libraries\Traits\TraitResponse;
 use Closure;
 use Illuminate\Support\Str;
@@ -15,18 +14,17 @@ use Illuminate\Support\Str;
 final class MdlResponse
 {
     use TraitResponse;
-    //use TraitFactory;
 
     private function _responseClass($request): BaseRes|string
     {
-        $uri_segments = explode('/', $request->route()->uri());
-        //$route = Str::studly(array_shift($uri_segments));
-        array_shift($uri_segments);
-        $domain = isset($uri_segments[0]) ? Str::studly($uri_segments[0]) : null;
-        $file = 'Res' . Str::studly(implode('_', $uri_segments));
-        //$response_class = "App\\Http\\Responses\\{$route}\\{$domain}\\{$file}";
-        $response_class = "App\\Http\\Responses\\{$domain}\\{$file}";
-        return StfStaFactory::singleton($response_class);
+        $uri = $request->route()->uri();
+        $api = str_starts_with($uri, 'api/') ? substr($uri, 4) : $uri;
+        $api_segments = explode('/', $api);
+        $domain = Str::studly($api_segments[0] ?? '');
+        $action = Str::studly($api_segments[1] ?? '');
+        $controller = $request->route()->getAction()['controller'] ?? null;
+        $namespace = preg_replace('/^(.*?\\\Http)\\\.*/', '$1', $controller);
+        return StfStaFactory::singleton("$namespace\\Responses\\$domain\\Res{$domain}{$action}");
     }
 
     public function handle($request, Closure $next)
