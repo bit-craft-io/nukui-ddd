@@ -6,8 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Core\Http\Controllers\BaseCnt;
 use App\Core\Http\Requests\ReqNone;
-use App\Core\Http\Responses\ResNone;
-use App\Core\Libraries\Stateful\Static\StfStaFactory;
+use App\Core\Http\Responses\ResSuccess;
 use App\Http\Applications\AppAccount;
 use App\Http\Requests\Account\ReqAccountLogin;
 
@@ -26,7 +25,7 @@ class CntAccount extends BaseCnt
     public function dummy(AppAccount $app, ReqNone $req): void
     {
         // @note Responseのクラスを変更
-        $this->_response()->modify::set(ResNone::class);
+        $this->_ResponseModify::set(ResSuccess::class);
         $app->dummy($req);
     }
 }

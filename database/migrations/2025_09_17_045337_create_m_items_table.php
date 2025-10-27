@@ -20,8 +20,8 @@ return new class extends Migration
             $table->unsignedTinyInteger('type_item')->default(1)->comment('アイテムタイプ（1: 消耗アイテム | 2: 永続アイテム | 3:装備アイテム | 4:素材アイテム）');
             $table->unsignedInteger('max_display')->default(1)->comment('表示最大値');
             $table->unsignedInteger('max_stock')->default(1)->comment('所持最大値');
-            $table->timestamp('enabled_from_at')->nullable()->comment('有効期間（開始日時）');
-            $table->timestamp('enabled_end_at')->nullable()->comment('有効期間（終了日時）');
+            $table->timestamp('begin_at')->nullable()->comment('有効期間（開始日時）');
+            $table->timestamp('end_at')->nullable()->comment('有効期間（終了日時）');
             $table->timestamps();
 
             $table->index(['type_item'], 'type_item');

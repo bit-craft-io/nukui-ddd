@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Libraries\Stateful;
+namespace App\Core\Libraries\Stateless\Static;
 
 use App\Core\Exceptions\Enums\TypeExcept;
 use App\Core\Exceptions\ExceptApp;
 use App\Core\Exceptions\ExceptModel;
+use App\Core\Libraries\Stateful\Static\StfStaFactory;
 
-final class StfExcept
+final class StlStaExcept
 {
     /**
      * @param TypeExcept $type_except
@@ -16,7 +17,7 @@ final class StfExcept
      */
     public static function app(TypeExcept $type_except): ExceptApp
     {
-        $class = Static\StfStaFactory::new(ExceptApp::class);
+        $class = StfStaFactory::new(ExceptApp::class);
         $class->init($type_except);
         return $class;
     }
@@ -27,7 +28,7 @@ final class StfExcept
      */
     public static function model(TypeExcept $type_except): ExceptModel
     {
-        $class = Static\StfStaFactory::new(ExceptModel::class);
+        $class = StfStaFactory::new(ExceptModel::class);
         $class->init($type_except);
         return $class;
     }

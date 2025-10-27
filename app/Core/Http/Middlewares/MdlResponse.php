@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Core\Http\Middlewares;
 
 use App\Core\Http\Responses\BaseRes;
-use App\Core\Http\Responses\ResError;
+use App\Core\Http\Responses\ResFailed;
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
 use App\Core\Libraries\Traits\TraitResponse;
 use Closure;
@@ -17,14 +17,14 @@ final class MdlResponse
 
     private function _responseClass($request): BaseRes|string
     {
-        $uri_segments = explode('/', $request->route()->uri());
-        //$route = Str::studly(array_shift($uri_segments));
-        array_shift($uri_segments);
-        $domain = isset($uri_segments[0]) ? Str::studly($uri_segments[0]) : null;
-        $file = 'Res' . Str::studly(implode('_', $uri_segments));
-        //$response_class = "App\\Http\\Responses\\{$route}\\{$domain}\\{$file}";
-        $response_class = "App\\Http\\Responses\\{$domain}\\{$file}";
-        return StfStaFactory::singleton($response_class);
+        $uri = $request->route()->uri();
+        $api = str_starts_with($uri, 'api/') ? substr($uri, 4) : $uri;
+        $api_segments = explode('/', $api);
+        $domain = Str::studly($api_segments[0] ?? '');
+        $action = Str::studly($api_segments[1] ?? '');
+        $controller = $request->route()->getAction()['controller'] ?? null;
+        $namespace = preg_replace('/^(.*?\\\Http)\\\.*/', '$1', $controller);
+        return StfStaFactory::singleton("$namespace\\Responses\\$domain\\Res{$domain}{$action}");
     }
 
     public function handle($request, Closure $next)
@@ -33,7 +33,7 @@ final class MdlResponse
 
         if (200 !== (int) $response->getStatusCode()) {
             $contents = json_decode($response->getContent(), true);
-            $class = StfStaFactory::singleton(ResError::class);
+            $class = StfStaFactory::singleton(ResFailed::class);
             $class->init([
                 'code' => $contents['code'] ?? 0,
                 'message' => $contents['message'] ?? ''
@@ -41,12 +41,12 @@ final class MdlResponse
             return $class->toResponse($request);
         }
 
-        $class = $this->_response()->modify::find();
+        $class = $this->_ResponseModify::find();
         if (!$class) {
             $class = $this->_responseClass($request);
         }
 
-        $class->setParams($this->_response()->param::get());
+        $class->setParams($this->_ResponseParam::get());
         return $class->toResponse($request);
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('item_id')->default(1)->comment('アイテムID');
             $table->unsignedInteger('amount')->default(1)->comment('所持数');
             // @note 検索時に使用
-            $table->timestamp('enabled_end_at')->nullable()->comment('有効期間（終了日時）');
+            $table->timestamp('end_at')->nullable()->comment('有効期間（終了日時）');
             $table->timestamps();
 
             $table->unique(['user_id', 'item_id'], 'user_id_item_id');

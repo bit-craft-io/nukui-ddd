@@ -8,7 +8,7 @@ use App\Http\Applications\UseCase\Account\UcCreateApiToken;
 use App\Http\Applications\UseCase\Account\UcMakeEmail;
 use App\Http\Applications\UseCase\Account\UcMakePublicId;
 
-class UC
+final class UcHub
 {
     const string UC_ACCOUNT_MAKE_EMAIL = UcMakeEmail::class;
     const string UC_ACCOUNT_MAKE_PUBLIC_ID = UcMakePublicId::class;

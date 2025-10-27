@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
  * @property-read integer $code
  * @property-read string $message
  */
-final class ResError extends BaseRes
+final class ResFailed extends BaseRes
 {
-    public function toResponse(Request $request): JsonResponse
+    public function toResponse(Request $req): JsonResponse
     {
         $result = [
             'success' => 0,

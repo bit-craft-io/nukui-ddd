@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Traits;
 
-use App\Core\Libraries\Stateful\StfService;
+use App\Core\Libraries\Stateless\Static\StlStaService;
 
 trait TraitService
 {
-    public string|StfService $_service = StfService::class;
+    public string|StlStaService $_Service = StlStaService::class;
 }

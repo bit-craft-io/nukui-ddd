@@ -17,7 +17,7 @@ class DsMItem extends BaseDs
     {
         return $this->_model
             ->newQuery()
-            ->enable()
+            ->where($this->enable('begin_at', 'end_at'))
             ->get();
     }
 }

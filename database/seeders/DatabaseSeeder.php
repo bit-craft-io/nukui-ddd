@@ -28,7 +28,7 @@ QUERY;
         DB::table('m_items')->truncate();
         $queries[] = /** @lang text */
             <<<'QUERY'
-insert into m_items (id, name, type_item, max_display, max_stock, enabled_from_at, enabled_end_at, created_at, updated_at) values
+insert into m_items (id, name, type_item, max_display, max_stock, begin_at, end_at, created_at, updated_at) values
 (1, 'elixir', 1, 999, 9999, '2025-01-01 00:00:00', '2038-01-01 00:00:00', null, null),
 (2, 'potion', 1, 999, 9999, '2025-01-01 00:00:00', '2038-01-01 00:00:00', null, null),
 (3, 'seal', 2, 1, 1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', null, null),

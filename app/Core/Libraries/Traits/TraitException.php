@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Traits;
 
-use App\Core\Libraries\Stateful\StfExcept;
+use App\Core\Libraries\Stateless\Static\StlStaExcept;
 
 trait TraitException
 {
-    public string|StfExcept $_except = StfExcept::class;
+    public string|StlStaExcept $_Except = StlStaExcept::class;
 }

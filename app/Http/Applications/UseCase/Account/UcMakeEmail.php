@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace App\Http\Applications\UseCase\Account;
 
-use App\Core\Libraries\Stateless\Static\StlStaRandom;
 use App\Core\Libraries\Traits\TraitInfra;
-use App\DataSources\DS;
+use App\Core\Libraries\Traits\TraitUtil;
+use App\DataSources\DsHub;
 
-class UcMakeEmail
+final class UcMakeEmail
 {
     use TraitInfra;
+    use TraitUtil;
 
     const string MAIL_DOMAIN = 'example.com';
 
     public function execute(): string
     {
-        $ds_u_user = $this->_infra::ds(DS::DS_U_USER);
+        $ds_u_user = $this->_Infra::ds(DsHub::DS_U_USER);
         do {
-            $random_key = StlStaRandom::key(10, 10);;
+            $random_key = $this->_UtilRandom::key(10, 10);
             $model = $ds_u_user->findByPublicId($random_key);
         } while ($model);
         return $random_key . '@' . self::MAIL_DOMAIN;

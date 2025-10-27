@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Core\Libraries\Stateful\Static;
+namespace App\Core\Libraries\Stateless\Static;
 
-use App\Core\Libraries\Stateful\Static\Enums\TypeSizeUnit;
+use App\Core\Libraries\Stateless\Static\Enums\TypeSizeUnit;
 use Closure;
 
-final class StfStaDevelopTool
+final class StlStaDevelopTool
 {
     /**
      * 変数のサイズを計算

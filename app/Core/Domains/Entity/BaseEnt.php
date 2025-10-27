@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Domains\Entity;
 
-use App\Core\Libraries\Stateful\Static\StfStaIterator;
+use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\Core\Libraries\Traits\TraitDomain;
 use App\Core\Libraries\Traits\TraitInfra;
 use Illuminate\Database\Eloquent\Collection;
@@ -91,9 +91,9 @@ abstract class BaseEnt
      *
      * @param Collection $collect
      * @param string $key_name
-     * @return StfStaIterator
+     * @return StfInsIterator
      */
-    public function iterator(Collection $collect, string $key_name = 'id'): StfStaIterator
+    public function iterator(Collection $collect, string $key_name = 'id'): StfInsIterator
     {
         $callable = function ($model) {
             if ($model && method_exists($this, 'init')) {
@@ -101,9 +101,7 @@ abstract class BaseEnt
             }
             return $this;
         };
-        $iterator = app(StfStaIterator::class);
-        $iterator->init($callable, $collect, $key_name);
-        return $iterator;
+        return $this->_Domain::iterator($callable, $collect, $key_name);
     }
 
     public function isNew(): bool

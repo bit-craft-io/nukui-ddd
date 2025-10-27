@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Core\Domains\ValueObject;
 
-use App\Core\Libraries\Stateful\Static\StfStaIterator;
+use App\Core\Libraries\Stateful\Instance\StfInsIterator;
+use App\Core\Libraries\Traits\TraitDomain;
 
 abstract class BaseVo
 {
+    use TraitDomain;
+
     protected ?array $_props = null;
 
     public function init(array $props): self
@@ -27,7 +30,7 @@ abstract class BaseVo
     //    $this->_props[$name] = $arguments[0];
     //}
 
-    public function iterator($collect): StfStaIterator
+    public function iterator($collect, string $key_name = 'id'): StfInsIterator
     {
         $callable = function ($props) {
             if ($props && method_exists($this, 'init')) {
@@ -35,8 +38,9 @@ abstract class BaseVo
             }
             return $this;
         };
-        $iterator = app(StfStaIterator::class);
-        $iterator->init($callable, $collect);
-        return $iterator;
+        //$iterator = app(StfInsIterator::class);
+        //$iterator->init($callable, $collect);
+        //return $iterator;
+        return $this->_Domain::iterator($callable, $collect, $key_name);
     }
 }

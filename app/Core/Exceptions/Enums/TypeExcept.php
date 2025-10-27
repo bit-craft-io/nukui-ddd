@@ -8,6 +8,7 @@ enum TypeExcept: int
 {
     case ModelDataNotFound = 100;
     case AppUserNotFound = 1001;
+
     public function message(): string
     {
         return match($this) {

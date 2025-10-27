@@ -7,9 +7,9 @@ namespace App\Core\Http\Responses;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-final class ResNone extends BaseRes
+final class ResSuccess extends BaseRes
 {
-    public function toResponse(Request $request): JsonResponse
+    public function toResponse(Request $req): JsonResponse
     {
         $result = [
             'success' => 1,

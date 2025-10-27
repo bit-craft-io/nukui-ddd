@@ -4,19 +4,24 @@ declare(strict_types=1);
 
 namespace App\Http\Applications\UseCase\Account;
 
-use App\Core\Libraries\Stateless\Static\StlStaRandom;
 use App\Core\Libraries\Traits\TraitInfra;
-use App\DataSources\DS;
+use App\Core\Libraries\Traits\TraitUtil;
+use App\DataSources\DsHub;
 
-class UcMakePublicId
+final class UcMakePublicId
 {
     use TraitInfra;
+    use TraitUtil;
 
     public function execute(): string
     {
+        $ds_u_user = $this->_Infra::ds(DsHub::DS_U_USER);
         do {
-            $random_key = StlStaRandom::key(4, 5);
-            $model = $this->_infra::ds(DS::DS_U_USER)->findByPublicId($random_key);
+            // TODO 処理コストを確認 $this->_util()->random
+            //$random_key = $this->_util()->random::key(4, 5);
+            //$model = $this->_infra::ds(DS::DS_U_USER)->findByPublicId($random_key);
+            $random_key = $this->_UtilRandom::key(4, 5);
+            $model = $ds_u_user->findByPublicId($random_key);
         } while ($model);
         return $random_key;
     }

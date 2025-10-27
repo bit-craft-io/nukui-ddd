@@ -4,6 +4,7 @@ use App\Core\Exceptions\ExceptApp;
 use App\Core\Exceptions\ExceptModel;
 use App\Core\Http\Middlewares\MdlResponse;
 use App\Core\Http\Middlewares\MdlTransaction;
+use App\Core\Libraries\Stateful\Static\StfStaTransaction;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -24,7 +25,8 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
 
-        MdlTransaction::$is_exception = true;
+        // @note transaction rollback enable
+        StfStaTransaction::enableRollback();
 
         $exceptions->render(function (Throwable $e, Request $request): JsonResponse {
             $error = [

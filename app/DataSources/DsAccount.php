@@ -30,11 +30,4 @@ class DsAccount extends BaseDs
             ->newQuery()
             ->upsert($values, $uniqueBy);
     }
-
-    public function insertGetId(array $values): int
-    {
-        return $this->_model
-            ->newQuery()
-            ->insertGetId($values);
-    }
 }
