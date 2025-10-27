@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Item;
+namespace App\_Demo\Domains\DemoItem;
 
 use App\Core\Domains\Entity\BaseEnt;
 use App\Core\Domains\ValueObject\VoMItem;
 use App\Core\Domains\ValueProxy\VpItem;
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\DataSources\DsHub;
+use App\Domains\Item\VoHub;
+use App\Domains\Item\VpHub;
 
 /**
  * @method void user_id(integer $value)
@@ -20,7 +22,7 @@ use App\DataSources\DsHub;
  * @property-read integer $amount
  * @property-read object $end_at
  */
-class EntItem extends BaseEnt
+class EntDemoItem extends BaseEnt
 {
     /** @var StfInsIterator<VoMItem>|null  */
     protected ?StfInsIterator $_vo_m_items = null;

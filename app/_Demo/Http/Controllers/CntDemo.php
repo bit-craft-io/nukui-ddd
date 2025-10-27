@@ -54,5 +54,9 @@ class CntDemo extends BaseCnt
      */
     public function case03(AppDemo $app, ReqNone $req): void
     {
+        // @note レスポンスのクラスは MdlResponse で自動生成
     }
+
+    //        //$val = $this->_DevTool::getValueSize('hoge-fuga');
+    //        //$this->_DevLog::emergency((string)$val);
 }

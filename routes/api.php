@@ -32,15 +32,6 @@ Route::domain(env('APP_URL'))
     ->group(function () {
         Route::any('register', 'register');
         Route::any('login', 'login');
-        Route::any('dummy', 'dummy');
-    });
-
-Route::domain(env('APP_URL'))
-    ->middleware(['auth:sanctum', 'mdl.response', 'mdl.transaction'])
-    ->prefix('account')
-    ->controller(CntAccount::class)
-    ->group(function () {
-        Route::any('dummy', 'dummy');
     });
 
 Route::domain(env('APP_URL'))
@@ -57,7 +48,6 @@ Route::domain(env('APP_URL'))
     ->controller(CntItem::class)
     ->group(function () {
         Route::any('get', 'get');
-        Route::any('dummy', 'dummy');
     });
 
 Route::domain(env('APP_URL'))
@@ -66,4 +56,5 @@ Route::domain(env('APP_URL'))
     ->controller(CntDevelop::class)
     ->group(function () {
         Route::any('item-add', 'itemAdd');
+        Route::any('item-sub', 'itemSub');
     });

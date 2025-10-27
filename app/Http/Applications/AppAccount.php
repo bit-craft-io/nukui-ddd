@@ -13,7 +13,7 @@ use App\Http\Requests\Account\ReqAccountLogin;
 
 class AppAccount extends BaseApp
 {
-    public function register(ReqNone $req): void
+    public function register(): void
     {
         $this->_Transaction::begin();
 
@@ -31,9 +31,6 @@ class AppAccount extends BaseApp
         $primary_code = $this->_UtilCompress::comp($primary_data);
         $this->_ResponseParam::set('primary_code', $primary_code);
 
-        //$val = $this->_DevTool::getValueSize('hoge-fuga');
-        //$this->_DevLog::emergency((string)$val);
-
         $public_id = $this->_Service::uc(UcHub::UC_ACCOUNT_MAKE_PUBLIC_ID)->execute();
         $rep_user = $this->_Domain::rep(RepHub::REP_USER);
         $ent_user = $rep_user->makeDraft();
@@ -48,28 +45,8 @@ class AppAccount extends BaseApp
 
     public function login(ReqAccountLogin $req): void
     {
-        //[$email, $password] = explode(':', StlStaCompress::unComp($req->primary_code));
         [$email, $password] = explode(':', $this->_UtilCompress::unComp($req->primary_code));
-        //dd($email, $password);
-
         $bearer_token = $this->_Service::uc(UcHub::UC_ACCOUNT_CREATE_API_TOKEN)->execute($email, $password);
         $this->_ResponseParam::set('bearer_token', $bearer_token);
-    }
-
-    /**
-     * @param ReqNone $req
-     * @return void
-     */
-    public function dummy(ReqNone $req): void
-    {
-        $repUser = $this->_Domain::rep(RepHub::REP_USER);
-        $entUser = $repUser->makeDraft();
-
-        // TODO
-        //$except = $this->_except(Except::EXCEPT_APP)->make(TypeExcept::AppUserNotFound);
-        $except = $this->_Except::app(TypeExcept::AppUserNotFound);
-
-        //make(self::CODE_APP_USER_NOT_FOUND);
-        //$except->make($except->type());
     }
 }

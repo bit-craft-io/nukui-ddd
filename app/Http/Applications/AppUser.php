@@ -14,6 +14,6 @@ class AppUser extends BaseApp
     {
         $repUser = $this->_Domain::rep(RepHub::REP_USER);
         $entUser = $repUser->findByUserId($req->user_id);
-        $this->_ResponseParam::set('user_info', $entUser->getProperties());
+        $this->_ResponseParam::set('user_info', $entUser->toArray());
     }
 }

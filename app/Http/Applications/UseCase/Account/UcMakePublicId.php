@@ -18,9 +18,7 @@ final class UcMakePublicId
         $ds_u_user = $this->_Infra::ds(DsHub::DS_U_USER);
         do {
             // TODO 処理コストを確認 $this->_util()->random
-            //$random_key = $this->_util()->random::key(4, 5);
-            //$model = $this->_infra::ds(DS::DS_U_USER)->findByPublicId($random_key);
-            $random_key = $this->_UtilRandom::key(4, 5);
+            $random_key = $this->_UtilRandom::key32(4, 5);
             $model = $ds_u_user->findByPublicId($random_key);
         } while ($model);
         return $random_key;
