@@ -2,11 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Item;
+namespace App\_Demo\Domains\DemoItem;
 
 use App\Core\Domains\Entity\BaseEnt;
+use App\Core\Domains\ValueObject\VoMItem;
 use App\Core\Domains\ValueProxy\VpItem;
+use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\DataSources\DsHub;
+use App\Domains\Item\VoHub;
+use App\Domains\Item\VpHub;
 
 /**
  * @method void user_id(integer $value)
@@ -18,22 +22,17 @@ use App\DataSources\DsHub;
  * @property-read integer $amount
  * @property-read object $end_at
  */
-class EntItem extends BaseEnt
+class EntDemoItem extends BaseEnt
 {
-    ///** @var StfInsIterator<VoMItem>|null  */
-    //protected ?StfInsIterator $_vo_m_items = null;
-    protected array $_m_item_map = [];
+    /** @var StfInsIterator<VoMItem>|null  */
+    protected ?StfInsIterator $_vo_m_items = null;
 
     protected VpItem $_vp_item;
 
     public function initOnce(): void
     {
         $models = $this->_Infra::ds(DsHub::DS_M_ITEM)->getEnable();
-
-        // @note vo の iterator より map の方が扱いやすそう
-        //$this->_vo_m_items = $this->_Domain::vo(VoHub::VO_M_ITEM)->iterator($models, 'id');
-
-        $this->_m_item_map = $models->keyBy('id')->toArray();
+        $this->_vo_m_items = $this->_Domain::vo(VoHub::VO_M_ITEM)->iterator($models, 'id');
     }
 
     public function initAfter(): void
@@ -43,15 +42,8 @@ class EntItem extends BaseEnt
 
     public function addAmount(int $amount): void
     {
-        // @note 責任を分離した場合の処理
-        //       max_stock は m_items の値の為 $vo_m_items に問い合わせ
-        // $vo_m_items = $this->_vo_m_items?->find($this->item_id);
-        // $sum_amount = $vo_m_items->minAmount($this->amount + $amount);
-        // $this->_vp_item->add($sum_amount);
-
-        $m_item = $this->_m_item_map[$this->item_id];
-        $sum_amount = min($m_item['max_stock'], $this->amount + $amount);
-        $this->_vp_item->add($sum_amount);
+        $max_stock = $this->_vo_m_items?->find($this->item_id)->max_stock;
+        $this->_vp_item->add($amount, $max_stock);
     }
 
     public function subAmount(int $amount): void
@@ -59,19 +51,12 @@ class EntItem extends BaseEnt
         $this->_vp_item->sub($amount);
     }
 
-    public function hasAmount(int $amount): bool
-    {
-        return $this->_vp_item->has($amount);
-    }
-
     public function getMItemEndAt(): ?string
     {
         if ($this->end_at) {
             return $this->end_at->toDateTimeString();
         }
-        //return $this->_vo_m_items->find($this->item_id)?->end_at;
-        return $this->_m_item_map[$this->item_id]['end_at'] ?? null;
-        //return  data_get($this->_m_item_map, $this->item_id . '.end_at');
+        return $this->_vo_m_items->find($this->item_id)?->end_at;
     }
 
     public function toArray(): array

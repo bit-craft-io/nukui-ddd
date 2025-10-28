@@ -6,9 +6,9 @@ namespace App\Core\Domains\ValueProxy;
 
 /**
  * @method void energy(integer $value)
- * @property-read $energy
- * @property-read $energy_max_regen
- * @property-read $energy_max_stock
+ * @property-read integer $energy
+ * @property-read integer $energy_max_regen
+ * @property-read integer $energy_max_stock
  */
 class VpEnergy extends BaseVp
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\DataSources;
+namespace App\_Demo\DataSources;
 
 use App\Core\DataSources\BaseDs;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class DsUItem extends BaseDs
+class DsUDemoItem extends BaseDs
 {
     public function getDraft(): ?Model
     {
@@ -30,4 +30,18 @@ class DsUItem extends BaseDs
             ->newQuery()
             ->upsert($values, $uniqueBy);
     }
+
+//    public function insert(array $values): void
+//    {
+//        $this->_model
+//            ->newQuery()
+//            ->insert($values);
+//    }
+//
+//    public function update(array $values): void
+//    {
+//        $this->_model
+//            ->newQuery()
+//            ->update($values);
+//    }
 }

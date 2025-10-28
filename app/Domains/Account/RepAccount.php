@@ -20,7 +20,7 @@ class RepAccount extends BaseRep
     public function persist(EntAccount|BaseEnt $ent): void
     {
         $ent->commit();
-        $id = $this->_Infra::ds(DsHub::DS_ACCOUNT)->insertGetId($ent->getProperties());
+        $id = $this->_Infra::ds(DsHub::DS_ACCOUNT)->createGetId($ent->getProperties());
 
         $ent->id($id);
         $ent->commit();

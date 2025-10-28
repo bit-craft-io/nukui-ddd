@@ -16,9 +16,4 @@ class CntItem extends BaseCnt
         $this->_ResponseModify::set(ResSuccess::class);
         $app->get($req);
     }
-
-    public function dummy(AppItem $app, ReqNone $req): void
-    {
-        dd(__LINE__);
-    }
 }

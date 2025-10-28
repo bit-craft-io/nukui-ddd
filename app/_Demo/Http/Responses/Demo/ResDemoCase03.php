@@ -22,6 +22,7 @@ final class ResDemoCase03 extends BaseRes
      */
     public function toResponse(Request|ReqNone $req): JsonResponse
     {
+        // @note MDemoItem を取得して返す
         $req->user_id;
         $mDemoItems = $this->_Infra::ds(DsHub::DS_M_DEMO_ITEM)->getEnable();
 
