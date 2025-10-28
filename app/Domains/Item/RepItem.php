@@ -31,7 +31,7 @@ class RepItem extends BaseRep
      * @return EntItem|BaseEnt
      * @throws Exception
      */
-    public function findOrFailed(int $user_id, int $item_id): EntItem|BaseEnt
+    public function findOrFail(int $user_id, int $item_id): EntItem|BaseEnt
     {
         $conditions = ['user_id' => $user_id, 'item_id' => $item_id];
         $model = $this->_Infra::ds(DsHub::DS_U_ITEM)->findOrFail($conditions);

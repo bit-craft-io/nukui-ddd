@@ -50,7 +50,7 @@ class AppDemo extends BaseApp
     {
         // @note ビジネスロジックを記述します
         $rep_item = $this->_Domain::rep(RepHub::REP_ITEM);
-        $ent_item = $rep_item->findOrFailed($req->user_id, $req->dummy_item_id ?? 1);
+        $ent_item = $rep_item->findOrFail($req->user_id, $req->dummy_item_id ?? 1);
 
         $amount = $req->dummy_amount ?? 1;
         if ($ent_item->hasAmount($amount)) {

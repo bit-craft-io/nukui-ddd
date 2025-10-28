@@ -65,6 +65,7 @@ abstract class BaseDs
         if (empty($model)) {
             throw $this->_Except::model(TypeExcept::ModelDataNotFound);
         }
+
         return $model;
     }
 
