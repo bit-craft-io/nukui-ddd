@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('m_gacha_draw_rarities', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('id')->autoIncrement()->comment('識別子');
             $table->unsignedInteger('group_no')->default(0)->comment('グループ番号');
             $table->unsignedTinyInteger('type_rarity')->default(1)->comment('レアリティ（1: N | 2: R | 3:SR | 4:SSR）');
             $table->unsignedSmallInteger('rate')->default(0)->comment('抽選率（10000分率）');
