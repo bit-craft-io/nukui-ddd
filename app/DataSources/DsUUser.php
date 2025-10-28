@@ -52,9 +52,4 @@ class DsUUser extends BaseDs
     {
         return $this->_model;
     }
-
-    public function dummy(): ?Model
-    {
-        //throw $this->_modelException();
-    }
 }

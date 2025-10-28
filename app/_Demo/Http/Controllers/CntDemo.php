@@ -11,6 +11,7 @@ use App\Core\Http\Controllers\BaseCnt;
 use App\Core\Http\Requests\ReqNone;
 use App\Core\Http\Responses\ResSuccess;
 use App\Core\Libraries\Traits\TraitDevelop;
+use Exception;
 
 class CntDemo extends BaseCnt
 {
@@ -59,4 +60,13 @@ class CntDemo extends BaseCnt
 
     //        //$val = $this->_DevTool::getValueSize('hoge-fuga');
     //        //$this->_DevLog::emergency((string)$val);
+
+    /**
+     * @throws Exception
+     */
+    public function app01(AppDemo $app, ReqNone $req): void
+    {
+        $this->_ResponseModify::set(ResSuccess::class);
+        $app->app01($req);
+    }
 }

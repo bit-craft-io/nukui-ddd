@@ -54,7 +54,7 @@ class EntDemoItem extends BaseEnt
     public function getMItemEndAt(): ?string
     {
         if ($this->end_at) {
-            return $this->end_at->format('Y-m-d H:i:s');
+            return $this->end_at->toDateTimeString();
         }
         return $this->_vo_m_items->find($this->item_id)?->end_at;
     }
@@ -64,7 +64,7 @@ class EntDemoItem extends BaseEnt
         return [
             'item_id' => $this->item_id,
             'amount' => $this->amount,
-            'end_at' => $this->end_at->format('Y-m-d H:i:s'),
+            'end_at' => $this->end_at->toDateTimeString(),
         ];
     }
 }

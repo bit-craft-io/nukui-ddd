@@ -47,6 +47,6 @@ class RepUser extends BaseRep
     public function persist(EntUser|BaseEnt $ent): void
     {
         $ent->commit();
-        $this->_Infra::ds(DsHub::DS_U_USER)->insert($ent->getProperties());
+        $this->_Infra::ds(DsHub::DS_U_USER)->create($ent->getProperties());
     }
 }

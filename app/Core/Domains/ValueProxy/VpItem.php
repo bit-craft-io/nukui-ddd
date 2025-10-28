@@ -18,13 +18,12 @@ class VpItem extends BaseVp
 
     public function sub(int $amount): void
     {
-        $subAmount = $this->amount - $amount;
-        $this->amount(max($subAmount, 0));
+        $sub_amount = $this->amount - $amount;
+        $this->amount(max($sub_amount, 0));
     }
 
-    public function add(int $amount, int $max_stock): void
+    public function add(int $amount): void
     {
-        $sum = min($max_stock, $this->amount + $amount);
-        $this->amount($sum);
+        $this->amount($amount);
     }
 }

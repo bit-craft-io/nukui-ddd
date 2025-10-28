@@ -19,8 +19,7 @@ abstract class BaseReq extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $user_id = $this->user()->id ?? null;
-        $this->merge(['user_id' => $user_id]);
+        $this->merge(['user_id' => ($this->user()->id ?? null)]);
     }
 
     // @note バリデーション後に初期化

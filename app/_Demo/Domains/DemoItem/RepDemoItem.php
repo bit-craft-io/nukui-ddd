@@ -34,7 +34,7 @@ class RepDemoItem extends BaseRep
     {
         $ent->commit();
         if ($ent->isNew()) {
-            $this->_Infra::ds(DsHub::DS_U_DEMO_ITEM)->insert($ent->getProperties());
+            $this->_Infra::ds(DsHub::DS_U_DEMO_ITEM)->create($ent->getProperties());
         } else {
             $this->_Infra::ds(DsHub::DS_U_DEMO_ITEM)->update($ent->getProperties(), ['user_id' => $ent->user_id, 'item_id' => $ent->item_id]);
         }
