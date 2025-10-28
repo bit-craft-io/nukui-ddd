@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domains;
 
-use App\Domains\Account\EntAccount;
 use App\Domains\Item\EntItem;
+use App\Domains\Account\EntAccount;
 use App\Domains\User\EntUser;
 
 final class EntHub

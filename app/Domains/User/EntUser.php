@@ -60,4 +60,14 @@ class EntUser extends BaseEnt
     {
         return ($this->id ?? 0) != 0;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'public_id' => $this->public_id,
+            'nick_name' => $this->nick_name,
+            'icon_no' => $this->icon_no,
+            'energy' => $this->energy,
+        ];
+    }
 }

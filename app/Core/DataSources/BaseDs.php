@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 namespace App\Core\DataSources;
 
+use App\Core\Exceptions\Enums\TypeExcept;
+use App\Core\Libraries\Traits\TraitException;
 use Carbon\CarbonImmutable;
 use Closure;
+use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseDs
 {
+    use TraitException;
+
     protected ?CarbonImmutable $_now = null;
     protected ?Model $_model = null;
 
@@ -20,7 +26,6 @@ abstract class BaseDs
             $this->_now = CarbonImmutable::now();
         }
         return $this->_now;
-
     }
 
     /**
@@ -34,14 +39,57 @@ abstract class BaseDs
     }
 
     /**
+     * @param array $conditions
+     * @return Model
+     */
+    final public function find(array $conditions): Model
+    {
+        return $this->_model
+            ->newQuery()
+            ->where($conditions)
+            ->first();
+    }
+
+    /**
+     * @param array $conditions
+     * @return Model
+     * @throws Exception
+     */
+    final public function findOrFail(array $conditions): Model
+    {
+        $model = $this->_model
+            ->newQuery()
+            ->where($conditions)
+            ->first();
+
+        if (empty($model)) {
+            throw $this->_Except::model(TypeExcept::ModelDataNotFound);
+        }
+
+        return $model;
+    }
+
+    /**
+     * @param array $conditions
+     * @return Collection<Model>
+     */
+    final public function get(array $conditions): Collection
+    {
+        return $this->_model
+            ->newQuery()
+            ->where($conditions)
+            ->get();
+    }
+
+    /**
      * @param array $values
      * @return void
      */
-    final public function insert(array $values): void
+    final public function create(array $values): void
     {
         $this->_model
             ->newQuery()
-            ->insert($values);
+            ->create($values);
     }
 
     /**
@@ -61,11 +109,13 @@ abstract class BaseDs
      * @param array $values
      * @return int
      */
-    final public function insertGetId(array $values): int
+    final public function createGetId(array $values): int
     {
-        return $this->_model
+        return (
+            $this->_model
             ->newQuery()
-            ->insertGetId($values);
+            ->create($values)
+        )->id ?? 0;
     }
 
     final public function enable(?string $column_begin = null, ?string $column_end = null): Closure

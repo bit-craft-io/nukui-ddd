@@ -12,20 +12,13 @@ use App\Http\Requests\Account\ReqAccountLogin;
 
 class CntAccount extends BaseCnt
 {
-    public function register(AppAccount $app, ReqNone $req): void
+    public function register(AppAccount $app): void
     {
-        $app->register($req);
+        $app->register();
     }
 
     public function login(AppAccount $app, ReqAccountLogin $req): void
     {
         $app->login($req);
-    }
-
-    public function dummy(AppAccount $app, ReqNone $req): void
-    {
-        // @note Responseのクラスを変更
-        $this->_ResponseModify::set(ResSuccess::class);
-        $app->dummy($req);
     }
 }

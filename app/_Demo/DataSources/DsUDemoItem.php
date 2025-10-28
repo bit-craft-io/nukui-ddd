@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\DataSources;
+namespace App\_Demo\DataSources;
 
 use App\Core\DataSources\BaseDs;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class DsUItem extends BaseDs
+class DsUDemoItem extends BaseDs
 {
     public function getDraft(): ?Model
     {

@@ -7,6 +7,8 @@ namespace App\_Demo\Http\Applications;
 use App\_Demo\Http\Requests\Demo\ReqDemoCase01;
 use App\Core\Http\Applications\BaseApp;
 use App\Core\Http\Requests\ReqNone;
+use App\Domains\RepHub;
+use Exception;
 
 class AppDemo extends BaseApp
 {
@@ -37,5 +39,24 @@ class AppDemo extends BaseApp
             'message2' => 'user_id は処理内でのみ使用',
             'message3' => 'public_id は他ユーザに知られても良い',
         ]);
+    }
+
+    /**
+     * @param ReqNone $req
+     * @return void
+     * @throws Exception
+     */
+    public function app01(ReqNone $req): void
+    {
+        // @note ビジネスロジックを記述します
+        $rep_item = $this->_Domain::rep(RepHub::REP_ITEM);
+        $ent_item = $rep_item->findOrFail($req->user_id, $req->dummy_item_id ?? 1);
+
+        $amount = $req->dummy_amount ?? 1;
+        if ($ent_item->hasAmount($amount)) {
+            $ent_item->subAmount($amount);
+        }
+        $rep_item->persist($ent_item);
+        $this->_ResponseParam::set('items', $ent_item->toArray());
     }
 }

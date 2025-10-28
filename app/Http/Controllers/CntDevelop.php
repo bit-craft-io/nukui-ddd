@@ -8,6 +8,7 @@ use App\Core\Http\Controllers\BaseCnt;
 use App\Core\Http\Responses\ResSuccess;
 use App\Http\Applications\AppDevelop;
 use App\Http\Requests\Develop\ReqDevelopItemAdd;
+use App\Http\Requests\Develop\ReqDevelopItemSub;
 
 class CntDevelop extends BaseCnt
 {
@@ -15,5 +16,11 @@ class CntDevelop extends BaseCnt
     {
         $this->_ResponseModify::set(ResSuccess::class);
         $app->itemAdd($req);
+    }
+
+    public function itemSub(AppDevelop $app, ReqDevelopItemSub $req): void
+    {
+        $this->_ResponseModify::set(ResSuccess::class);
+        $app->itemSub($req);
     }
 }
