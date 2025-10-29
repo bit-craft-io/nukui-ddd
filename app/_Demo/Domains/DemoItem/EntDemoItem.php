@@ -32,7 +32,7 @@ class EntDemoItem extends BaseEnt
     public function initOnce(): void
     {
         $models = $this->_Infra::ds(DsHub::DS_M_ITEM)->getEnable();
-        $this->_vo_m_items = $this->_Domain::vo(VoHub::VO_M_ITEM)->iterator($models, 'id');
+        $this->_vo_m_items = $this->_Domain::voIterator(VoHub::VO_M_ITEM, $models, 'id');
     }
 
     public function initAfter(): void

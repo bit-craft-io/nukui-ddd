@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Core\Domains\Entity;
 
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
+use App\Core\Libraries\Stateful\Static\StfStaFactory;
 use App\Core\Libraries\Traits\TraitDomain;
 use App\Core\Libraries\Traits\TraitInfra;
 use Illuminate\Database\Eloquent\Collection;
@@ -101,7 +102,9 @@ abstract class BaseEnt
             }
             return $this;
         };
-        return $this->_Domain::iterator($callable, $collect, $key_name);
+        $class = StfStaFactory::prototype(StfInsIterator::class);
+        $class->init($callable, $collect, $key_name);
+        return $class;
     }
 
     public function isNew(): bool

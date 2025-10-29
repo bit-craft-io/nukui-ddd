@@ -3,6 +3,7 @@
 use App\_Demo\Http\Controllers\CntDemo;
 use App\Http\Controllers\CntAccount;
 use App\Http\Controllers\CntDevelop;
+use App\Http\Controllers\CntGacha;
 use App\Http\Controllers\CntItem;
 use App\Http\Controllers\CntUser;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,7 @@ if (env('APP_ENV') === 'local') {
             Route::any('anti01', 'anti01');
             Route::any('trial01', 'trial01');
             Route::any('bugfix01', 'bugfix01');
+            Route::any('bench01', 'bench01');
         });
 }
 
@@ -51,6 +53,15 @@ Route::domain(env('APP_URL'))
     ->controller(CntItem::class)
     ->group(function () {
         Route::any('get', 'get');
+    });
+
+Route::domain(env('APP_URL'))
+    ->middleware(['auth:sanctum', 'mdl.response', 'mdl.transaction'])
+    ->prefix('gacha')
+    ->controller(CntGacha::class)
+    ->group(function () {
+        Route::any('get', 'get');
+        Route::any('play', 'play');
     });
 
 Route::domain(env('APP_URL'))

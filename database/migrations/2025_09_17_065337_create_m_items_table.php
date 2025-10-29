@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedInteger('max_stock')->default(1)->comment('所持最大値');
             $table->timestamp('begin_at')->nullable()->comment('有効期間（開始日時）');
             $table->timestamp('end_at')->nullable()->comment('有効期間（終了日時）');
+            $table->string('ops_memo', 128)->nullable()->comment('運用メモ');
             $table->timestamps();
 
             $table->index(['type_item'], 'type_item');
