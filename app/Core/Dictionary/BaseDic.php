@@ -2,38 +2,38 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Domains\ValueObject;
+namespace App\Core\Dictionary;
 
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
+use App\Core\Libraries\Traits\TraitInfra;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
-abstract class BaseVo
+abstract class BaseDic
 {
-    protected ?array $_props = null;
+    use TraitInfra;
 
-    public function init(array $props): self
+    abstract public function getEnable();
+
+    protected ?Model $_model = null;
+
+    public function init(?Model $model): self
     {
-        $this->_props = $props;
+        $this->_model = $model;
         return $this;
     }
 
     public function __get(string $name)
     {
-        return $this?->_props[$name] ?? null;
+        return $this?->_model?->{$name};
     }
-
-    // @note ValueObject は mutable の為、setter は存在しない
-    //public function __call(string $name, array $arguments = [])
-    //{
-    //    $this->_props[$name] = $arguments[0];
-    //}
 
     public function iterator(Collection $collect, string $key_name = 'id'): StfInsIterator
     {
-        $callable = function ($props) {
-            if ($props && method_exists($this, 'init')) {
-                $this->init($props->toArray());
+        $callable = function ($model) {
+            if ($model && method_exists($this, 'init')) {
+                $this->init($model);
             }
             return $this;
         };

@@ -13,10 +13,10 @@ class AppItem extends BaseApp
 {
     public function get(ReqNone $req): void
     {
-        $repItem = $this->_Domain::rep(RepHub::REP_ITEM);
-        $entItems = $repItem->getByUserId($req->user_id);
+        $rep_item = $this->_Domain::rep(RepHub::REP_ITEM);
+        $ent_items = $rep_item->getByUserId($req->user_id);
         $items = [];
-        foreach ($entItems as $entItem) {
+        foreach ($ent_items as $entItem) {
             $items[] = $entItem->toArray();
         }
         $this->_ResponseParam::set('items', $items);

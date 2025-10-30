@@ -37,6 +37,7 @@ abstract class BaseVp
         }
         if ($this->_proxy_array) {
             $this->_proxy_array[$name] = $arguments[0];
+            return;
         }
         $this->_proxy_object->$name($arguments[0]);
     }

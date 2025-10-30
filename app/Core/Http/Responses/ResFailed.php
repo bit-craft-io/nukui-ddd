@@ -17,7 +17,7 @@ final class ResFailed extends BaseRes
     {
         $result = [
             'success' => 0,
-            'result' => (object)$this->_props,
+            'result' => (object)$this->_result,
             //'error_info' => [
             //    'code' =>  $this->code,
             //    'message' => $this->message

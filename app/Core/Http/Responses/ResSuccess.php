@@ -13,7 +13,7 @@ final class ResSuccess extends BaseRes
     {
         $result = [
             'success' => 1,
-            'result' => (object)$this->_props
+            'result' => (object)$this->_result
         ];
         return response()->json($result);
     }

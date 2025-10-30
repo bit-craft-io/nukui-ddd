@@ -6,6 +6,7 @@ namespace App\Domains\Item;
 
 use App\Core\Domains\Entity\BaseEnt;
 use App\Core\Domains\Repository\BaseRep;
+use App\Core\Domains\ValueObject\VoMItem;
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\DataSources\DsHub;
 use App\Domains\EntHub;
@@ -45,7 +46,7 @@ class RepItem extends BaseRep
     public function getByUserId(int $user_id): StfInsIterator
     {
         $models = $this->_Infra::ds(DsHub::DS_U_ITEM)->getByUserId($user_id);
-        return $this->_Domain::ent(EntHub::ENT_ITEM)->iterator($models, 'item_id');
+        return $this->_Domain::entIterator(EntHub::ENT_ITEM, $models, 'item_id');
     }
 
     /**

@@ -13,27 +13,33 @@ class AppDevelop extends BaseApp
 {
     public function itemAdd(ReqDevelopItemAdd $req): void
     {
-        $repItem = $this->_Domain::rep(RepHub::REP_ITEM);
-        $entItemIte = $repItem->getByUserId($req->user_id);
-        $entItem = $entItemIte->find($req->item_id);
-        if (!$entItem) {
-            $entItem = $repItem->makeDraft($req->user_id, $req->item_id);
-            $entItem->end_at($entItem->getMItemEndAt());
+        $rep_item = $this->_Domain::rep(RepHub::REP_ITEM);
+
+        $ent_items = $rep_item->getByUserId($req->user_id);
+        $ent_item = $ent_items->find($req->item_id);
+        if (!$ent_item) {
+            $ent_item = $rep_item->makeDraft($req->user_id, $req->item_id);
+            $ent_item->end_at($ent_item->getMItemEndAt());
         }
-        $entItem->addAmount($req->amount);
-        $repItem->persist($entItem);
+
+        // TODO WIP この処理はDicクラスで処理
+        //$sum_amount = $rep_item->getVoMItem()->find($req->item_id)->getSumAmount($ent_item->amount + $req->amount);
+        //$ent_item->addAmount($sum_amount);
+        //$rep_item->persist($ent_item);
     }
 
     public function itemSub(ReqDevelopItemSub $req): void
     {
-        $repItem = $this->_Domain::rep(RepHub::REP_ITEM);
-        $entItemIte = $repItem->getByUserId($req->user_id);
-        $entItem = $entItemIte->find($req->item_id);
-        if (!$entItem) {
-            $entItem = $repItem->makeDraft($req->user_id, $req->item_id);
-            $entItem->end_at($entItem->getMItemEndAt());
+        $rep_item = $this->_Domain::rep(RepHub::REP_ITEM);
+
+        $ent_items = $rep_item->getByUserId($req->user_id);
+        $ent_item = $ent_items->find($req->item_id);
+        if (!$ent_item) {
+            $ent_item = $rep_item->makeDraft($req->user_id, $req->item_id);
+            $ent_item->end_at($ent_item->getMItemEndAt());
         }
-        $entItem->subAmount($req->amount);
-        $repItem->persist($entItem);
+
+        $ent_item->subAmount($req->amount);
+        $rep_item->persist($ent_item);
     }
 }

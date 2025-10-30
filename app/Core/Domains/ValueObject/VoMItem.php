@@ -17,5 +17,8 @@ use App\Models\Enums\TypeItem;
  */
 class VoMItem extends BaseVo
 {
-
+    public function getSumAmount(int $amount): int
+    {
+        return min($this->max_stock, $amount);
+    }
 }
