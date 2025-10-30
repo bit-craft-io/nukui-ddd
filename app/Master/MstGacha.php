@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Dictionary;
+namespace App\Master;
 
-use App\Core\Dictionary\BaseDic;
+use App\Core\Dictionary\BaseMst;
+use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\DataSources\DsHub;
 use App\Models\Enums\TypeDraw;
 use Illuminate\Database\Eloquent\Collection;
@@ -26,11 +27,16 @@ use Illuminate\Database\Eloquent\Collection;
  * @property-read integer $display_order
  * @property-read string $banner_image_name
  */
-class DicMGacha extends BaseDic
+final class MstGacha extends BaseMst
 {
-    public function getEnable(): Collection
+    protected function _getCollect(): Collection
     {
         return $this->_Infra::ds(DsHub::DS_M_GACHA)->getEnable();
+    }
+
+    public function getIterator(string $key_name = 'id'): StfInsIterator
+    {
+        parent::iterator($this->_getCollect(), $key_name);
     }
 
     public function toArray(): array

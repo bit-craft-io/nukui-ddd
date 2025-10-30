@@ -6,13 +6,9 @@ namespace App\Http\Responses\Gacha;
 
 use App\Core\Http\Requests\ReqNone;
 use App\Core\Http\Responses\BaseRes;
-use App\Core\Libraries\Stateful\Instance\StfInsIterator;
-use App\Core\Libraries\Traits\TraitDictionary;
+use App\Core\Libraries\Traits\TraitApplication;
 use App\Core\Libraries\Traits\TraitDomain;
-use App\Core\Libraries\Traits\TraitInfra;
-use App\DataSources\DsHub;
-use App\Dictionary\DicHub;
-use App\Dictionary\DicMGacha;
+use App\Master\MstHub;
 use App\Domains\RepHub;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,18 +18,16 @@ use Illuminate\Http\Request;
  */
 final class ResGachaGet extends BaseRes
 {
-    // TODO ここで Infra を使用して良いかを再考
-    use TraitInfra;
+    // TODO use Traitの精査
     use TraitDomain;
-    use TraitDictionary;
+    use TraitApplication;
 
     public function toResponse(Request|ReqNone $req): JsonResponse
     {
-        // @note ディクショナリクラスはマスタのイテレータ
-        //       マスタのイテレータにはビジネスロジックを入れる事ができる
-        //       Collection<Model>はビジネスロジックを入れる事ができない
-        $dic_gachas = $this->_Dict::iterator(DicHub::DIC_M_GACHA);
-        foreach($dic_gachas as $dic_gacha) {
+        // @note Collection<Model>はビジネスロジックをModelに入れる事ができるが
+        //       責任を分離の為、イテレータ用のクラスを作成
+        $m_gachas = $this->_App::mst(MstHub::MST_GACHA)->getIterator();
+        foreach($m_gachas as $dic_gacha) {
             $this->_result['gachas'][] = $dic_gacha->toArray();
         }
 

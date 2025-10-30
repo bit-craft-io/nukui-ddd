@@ -10,11 +10,13 @@ use App\Core\Libraries\Traits\TraitInfra;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-abstract class BaseDic
+abstract class BaseMst
 {
     use TraitInfra;
 
-    abstract public function getEnable();
+    abstract protected function _getCollect(): Collection;
+    abstract public function getIterator(string $key_name = 'id'): StfInsIterator;
+    abstract public function toArray(): array;
 
     protected ?Model $_model = null;
 
