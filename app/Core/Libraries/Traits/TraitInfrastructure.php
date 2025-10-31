@@ -6,7 +6,7 @@ namespace App\Core\Libraries\Traits;
 
 use App\Core\Libraries\Stateful\Static\StfStaInfra;
 
-trait TraitInfra
+trait TraitInfrastructure
 {
     public string|StfStaInfra $_Infra = StfStaInfra::class;
 }

@@ -43,16 +43,16 @@ insert into m_items (name, type_item, max_display, max_stock, begin_at, end_at, 
 QUERY;
 
         // TODO WIP
-//        DB::table('m_gachas')->truncate();
-//        $queries[] = /** @lang text */
-//            <<<'QUERY'
-//insert into m_gachas (name, is_active, type_draw, group_no, exec_count, item_id, total_cost, draw_count, gacha_lot_rarity_group_no, gacha_lot_group_no, begin_at, end_at, display_order, banner_image_name, ops_memo) values
-//('Normal', 1, 1, 1, 0, 1, 100, 1, 0, 1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 1, null, null),
-//('Step', 1, 2, 2, 0, 1, 100, 10, 0, 1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 1, null, null),
-//('Step', 1, 2, 2, 1, 1, 100, 10, 0, 2, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 1, null, null),
-//('Fixed', 1, 3, 3, 0, 1, 1000, 10, 0, 1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 1, null, null),
-//('Rarity', 1, 4, 4, 0, 1, 100, 1, 0, 1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 1, null, null);
-//QUERY;
+        DB::table('m_gachas')->truncate();
+        $queries[] = /** @lang text */
+            <<<'QUERY'
+insert into m_gachas (name, is_active, type_draw, group_no, exec_count, type_cost, cost_id, total_cost_amount, draw_count, gacha_lot_rarity_group_no, gacha_lot_group_no, begin_at, end_at, display_order, banner_image_name, ops_memo) values
+('Normal', 1, 1, 1, 0, 1, 1, 100, 1, 0, 1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 1, null, null),
+('Step', 1, 2, 2, 0, 1, 1, 100, 10, 0, 1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 1, null, null),
+('Step', 1, 2, 2, 1, 1, 1, 100, 10, 0, 2, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 1, null, null),
+('Fixed', 1, 3, 3, 0, 1, 1, 1000, 10, 0, 1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 1, null, null),
+('Rarity', 1, 4, 4, 0, 1, 1, 100, 1, 0, 1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 1, null, null);
+QUERY;
 
         Schema::enableForeignKeyConstraints();
 

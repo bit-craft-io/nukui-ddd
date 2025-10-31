@@ -17,4 +17,14 @@ final class StlStaApplication
     {
         return StfStaFactory::singleton($master_class);
     }
+
+    /**
+     * @template T of object
+     * @param class-string<T> $use_case_class
+     * @return T
+     */
+    public static function uc(string $use_case_class): object
+    {
+        return StfStaFactory::singleton($use_case_class);
+    }
 }

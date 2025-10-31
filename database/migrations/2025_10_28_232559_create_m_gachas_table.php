@@ -19,8 +19,9 @@ return new class extends Migration
             // @note 「グループ番号」と「実行回数」より「ｎステップを表現」
             $table->unsignedInteger('group_no')->default(0)->comment('グループ番号');
             $table->unsignedInteger('exec_count')->default(0)->comment('実行回数');
-            $table->unsignedBigInteger('item_id')->comment('アイテムID');
-            $table->unsignedInteger('total_cost')->comment('合計コスト');
+            $table->unsignedBigInteger('type_cost')->default(1)->comment('コストタイプ（1: アイテム | 2: その他）');
+            $table->unsignedBigInteger('cost_id')->default(0)->comment('コストID');
+            $table->unsignedInteger('total_cost_amount')->default(0)->comment('合計コスト個数');
             $table->unsignedInteger('draw_count')->default(1)->comment('抽選回数');
             // @note レアリティ抽選の場合は先に使用
             $table->unsignedInteger('gacha_lot_rarity_group_no')->default(0)->comment('レアリティ抽選のグループ番号');

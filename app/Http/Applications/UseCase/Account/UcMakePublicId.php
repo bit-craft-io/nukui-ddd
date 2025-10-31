@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Applications\UseCase\Account;
 
-use App\Core\Libraries\Traits\TraitInfra;
+use App\Core\Libraries\Traits\TraitInfrastructure;
 use App\Core\Libraries\Traits\TraitUtil;
 use App\DataSources\DsHub;
 
 final class UcMakePublicId
 {
-    use TraitInfra;
+    use TraitInfrastructure;
     use TraitUtil;
 
     public function execute(): string

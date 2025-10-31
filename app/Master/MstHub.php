@@ -7,4 +7,5 @@ namespace App\Master;
 class MstHub
 {
     const string MST_GACHA = MstGacha::class;
+    const string MST_GACHA_LOT_ENTITY = MstGachaLotEntity::class;
 }

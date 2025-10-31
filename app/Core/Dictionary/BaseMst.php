@@ -6,17 +6,18 @@ namespace App\Core\Dictionary;
 
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
-use App\Core\Libraries\Traits\TraitInfra;
+use App\Core\Libraries\Traits\TraitInfrastructure;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseMst
 {
-    use TraitInfra;
+    use TraitInfrastructure;
 
-    abstract protected function _getCollect(): Collection;
+    abstract protected function _get(): Collection;
     abstract public function getIterator(string $key_name = 'id'): StfInsIterator;
     abstract public function toArray(): array;
+    abstract public function find(int $id): self;
 
     protected ?Model $_model = null;
 

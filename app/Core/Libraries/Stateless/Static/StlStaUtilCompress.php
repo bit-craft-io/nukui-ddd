@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Stateless\Static;
 
-final class StlStaCompress
+final class StlStaUtilCompress
 {
     /**
      * @param string $value

@@ -9,6 +9,7 @@ use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\DataSources\DsHub;
 use App\Models\Enums\TypeDraw;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property-read integer $id
@@ -29,14 +30,55 @@ use Illuminate\Database\Eloquent\Collection;
  */
 final class MstGacha extends BaseMst
 {
-    protected function _getCollect(): Collection
+    protected function _get(): Collection
     {
         return $this->_Infra::ds(DsHub::DS_M_GACHA)->getEnable();
     }
 
+    /**
+     * @param string $key_name
+     * @return StfInsIterator<MstGacha>
+     */
     public function getIterator(string $key_name = 'id'): StfInsIterator
     {
-        parent::iterator($this->_getCollect(), $key_name);
+        return parent::iterator($this->_get(), $key_name);
+    }
+
+    /**
+     * @param int $id
+     * @return self
+     */
+    public function find(int $id): self
+    {
+        return $this->init($this->_Infra::ds(DsHub::DS_M_GACHA)->findEnable($id));
+    }
+
+    public function validate(): bool
+    {
+        if ($this->gacha_lot_group_no <= 0) {
+            return false;
+        }
+
+        if ($this->type_draw->isRarity()) {
+            if ($this->gacha_lot_rarity_group_no <= 0) {
+                return false;
+            }
+            return true;
+        }
+
+        //if ($this->type_draw->isNormal()) {
+        //    return true;
+        //}
+        //
+        //if ($this->type_draw->isStep()) {
+        //    return true;
+        //}
+        //
+        //if ($this->type_draw->isFixed()) {
+        //    return true;
+        //}
+
+        return true;
     }
 
     public function toArray(): array

@@ -7,7 +7,7 @@ namespace App\Core\Domains\Entity;
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
 use App\Core\Libraries\Traits\TraitDomain;
-use App\Core\Libraries\Traits\TraitInfra;
+use App\Core\Libraries\Traits\TraitInfrastructure;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,7 +18,7 @@ abstract class BaseEnt
 {
     use TraitDomain;
     // @note Entity の initOnce で使用
-    use TraitInfra;
+    use TraitInfrastructure;
 
     // @note クラス生成時に１回だけ実行される
     abstract public function initOnce(): void;

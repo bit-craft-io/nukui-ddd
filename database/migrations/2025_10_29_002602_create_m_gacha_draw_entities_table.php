@@ -15,7 +15,9 @@ return new class extends Migration
             $table->unsignedBigInteger('id')->autoIncrement()->comment('識別子');
             $table->unsignedInteger('group_no')->default(0)->comment('グループ番号');
             $table->unsignedTinyInteger('type_rarity')->default(1)->comment('レアリティ（1: N | 2: R | 3:SR | 4:SSR）');
-            $table->unsignedBigInteger('item_id')->comment('アイテムID');
+            $table->unsignedBigInteger('type_entity')->comment('エンティティタイプ（1: アイテム | 2: プレイアブル）');
+            $table->unsignedBigInteger('entity_id')->comment('エンティティID');
+            $table->unsignedBigInteger('entity_amount')->comment('エンティティ個数');
             $table->unsignedSmallInteger('rate')->default(0)->comment('抽選率（10000分率）');
             $table->string('ops_memo', 128)->nullable()->comment('運用メモ');
             $table->timestamps();
