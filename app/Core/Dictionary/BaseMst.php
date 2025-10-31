@@ -14,8 +14,7 @@ abstract class BaseMst
 {
     use TraitInfrastructure;
 
-    abstract protected function _get(): Collection;
-    abstract public function getIterator(string $key_name = 'id'): StfInsIterator;
+    abstract public function get(array $conditions = [] , string $key_name = 'id'): StfInsIterator;
     abstract public function toArray(): array;
     abstract public function find(int $id): self;
 

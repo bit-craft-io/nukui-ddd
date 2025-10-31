@@ -7,7 +7,6 @@ namespace App\Master;
 use App\Core\Dictionary\BaseMst;
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\DataSources\DsHub;
-use App\Models\Enums\TypeDraw;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -20,23 +19,17 @@ use Illuminate\Database\Eloquent\Collection;
  * @property-read integer $rate
  * @property-read string $ops_memo
  */
-final class MstGachaLotEntity extends BaseMst
+final class MstGachaDrawEntity extends BaseMst
 {
     /**
-     * @return Collection
-     */
-    protected function _get(): Collection
-    {
-        return $this->_Infra::ds(DsHub::DS_M_GACHA)->getEnable();
-    }
-
-    /**
+     * @param array $conditions
      * @param string $key_name
-     * @return StfInsIterator<MstGacha>
+     * @return StfInsIterator<self>
      */
-    public function getIterator(string $key_name = 'id'): StfInsIterator
+    public function get(array $conditions = [] , string $key_name = 'id'): StfInsIterator
     {
-        return parent::iterator($this->_get(), $key_name);
+        $models = $this->_Infra::ds(DsHub::DS_M_GACHA_LOT_ENTITY)->getEnable($conditions);
+        return parent::iterator($models, $key_name);
     }
 
     /**

@@ -8,8 +8,6 @@ use App\Core\Dictionary\BaseMst;
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\DataSources\DsHub;
 use App\Models\Enums\TypeDraw;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property-read integer $id
@@ -30,18 +28,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 final class MstGacha extends BaseMst
 {
-    protected function _get(): Collection
-    {
-        return $this->_Infra::ds(DsHub::DS_M_GACHA)->getEnable();
-    }
-
     /**
+     * @param array $conditions
      * @param string $key_name
-     * @return StfInsIterator<MstGacha>
-     */
-    public function getIterator(string $key_name = 'id'): StfInsIterator
+     * @return StfInsIterator<self>
+ */
+    public function get(array $conditions = [] , string $key_name = 'id'): StfInsIterator
     {
-        return parent::iterator($this->_get(), $key_name);
+        $models = $this->_Infra::ds(DsHub::DS_M_GACHA)->getEnable($conditions);
+        return parent::iterator($models, $key_name);
     }
 
     /**

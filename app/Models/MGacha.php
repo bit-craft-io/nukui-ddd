@@ -59,6 +59,6 @@ class MGacha extends Model
         'begin_at' => 'datetime:Y-m-d H:i:s',
         'end_at' => 'datetime:Y-m-d H:i:s',
         'display_order' => 'integer',
-        'banner_image_name',
+        'banner_image_name' => 'string',
     ];
 }

@@ -21,7 +21,8 @@ class AppGacha extends BaseApp
 
     public function play(ReqGachaPlay $req): void
     {
-        $m_gachas = $this->_App::mst(MstHub::MST_GACHA)->getIterator();
+        // TODO APP は イテレータを取得しても良い
+        $m_gachas = $this->_App::mst(MstHub::MST_GACHA)->get();
         $m_gacha = $m_gachas->find($req->gacha_id);
         if (!$m_gacha->validate()) {
             throw $this->_Except::app(TypeExcept::ModelDataNotFound);
@@ -30,7 +31,7 @@ class AppGacha extends BaseApp
         $rep_gacha = $this->_Domain::rep(RepHub::REP_GACHA);
         $ent_gacha = $rep_gacha->find($req->user_id);
 
-        $result_lots = $this->_Domain::svc(SvcHub::SVC_GACHA_LOT)->draw($m_gacha);
+        $result_lots = $this->_Domain::svc(SvcHub::SVC_GACHA)->draw($m_gacha);
         //dd($m_gacha->type_draw, __LINE__);
 //        $result_lots = match(true) {
 //            $m_gacha->type_draw->isNormal() => $svc_gacha_lot->normal($req->gacha_id),

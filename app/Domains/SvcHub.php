@@ -8,5 +8,5 @@ use App\Domains\Gacha\Service\SvcGacha;
 
 final class SvcHub
 {
-    const string SVC_GACHA_LOT = SvcGacha::class;
+    const string SVC_GACHA = SvcGacha::class;
 }

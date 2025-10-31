@@ -26,7 +26,7 @@ final class ResGachaGet extends BaseRes
     {
         // @note Collection<Model>はビジネスロジックをModelに入れる事ができるが
         //       責任を分離の為、イテレータ用のクラスを作成
-        $m_gachas = $this->_App::mst(MstHub::MST_GACHA)->getIterator();
+        $m_gachas = $this->_App::mst(MstHub::MST_GACHA)->get();
         foreach($m_gachas as $m_gacha) {
             if (!$m_gacha->validate()) {
                 // TODO エラーもしくはログ出力
