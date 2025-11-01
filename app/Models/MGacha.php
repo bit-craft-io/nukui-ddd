@@ -24,8 +24,8 @@ class MGacha extends Model
         'item_id',
         'total_cost',
         'draw_count',
-        'gacha_lot_rarity_group_no',
-        'gacha_lot_group_no',
+        'gacha_draw_rarity_group_no',
+        'gacha_draw_entity_group_no',
         'begin_at',
         'end_at',
         'display_order',
@@ -38,6 +38,9 @@ class MGacha extends Model
      * @var list<string>
      */
     protected $hidden = [
+        'is_active',
+        'begin_at',
+        'end_at',
         'ops_memo',
         'created_at',
         'updated_at',
@@ -54,8 +57,8 @@ class MGacha extends Model
         'item_id' => 'integer',
         'total_cost' => 'integer',
         'draw_count' => 'integer',
-        'gacha_lot_rarity_group_no',
-        'gacha_lot_group_no',
+        'gacha_draw_rarity_group_no' => 'integer',
+        'gacha_draw_entity_group_no' => 'integer',
         'begin_at' => 'datetime:Y-m-d H:i:s',
         'end_at' => 'datetime:Y-m-d H:i:s',
         'display_order' => 'integer',

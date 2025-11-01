@@ -111,9 +111,4 @@ final class StfInsIterator implements Iterator
     {
         $this->_position = 0;
     }
-
-    public function models(): Collection
-    {
-        return $this->_models;
-    }
 }

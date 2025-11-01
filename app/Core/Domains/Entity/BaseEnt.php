@@ -37,7 +37,9 @@ abstract class BaseEnt
     public function init(?Model $model): self
     {
         $this->_model = $model;
-        $this->initAfter();
+        if ($this->_model) {
+            $this->initAfter();
+        }
         return $this;
     }
 
@@ -110,5 +112,10 @@ abstract class BaseEnt
     public function isNew(): bool
     {
         return empty($this->id ?? null);
+    }
+
+    public function isEmpty(): bool
+    {
+        return empty($this->_model ?? null);
     }
 }

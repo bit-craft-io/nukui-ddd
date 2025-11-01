@@ -8,7 +8,7 @@ use App\Models\Enums\TypeEntity;
 use App\Models\Enums\TypeRarity;
 use Illuminate\Database\Eloquent\Model;
 
-class MGachaDrawEntity extends Model
+class MGachaDrawRarity extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -19,9 +19,6 @@ class MGachaDrawEntity extends Model
         'id',
         'group_no',
         'type_rarity',
-        'type_entity',
-        'entity_id',
-        'entity_amount',
         'rate',
     ];
 
@@ -44,9 +41,6 @@ class MGachaDrawEntity extends Model
         'id' => 'integer',
         'group_no' => 'integer',
         'type_rarity' => TypeRarity::class,
-        'type_entity' => TypeEntity::class,
-        'entity_id' => 'integer',
-        'entity_amount' => 'integer',
         'rate' => 'integer',
         'ops_memo' => 'string',
     ];

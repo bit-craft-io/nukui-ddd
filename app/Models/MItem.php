@@ -29,6 +29,10 @@ class MItem extends Model
      * @var list<string>
      */
     protected $hidden = [
+        'is_active',
+        'begin_at',
+        'end_at',
+        'ops_memo',
         'created_at',
         'updated_at',
         'deleted_at',

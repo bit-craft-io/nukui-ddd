@@ -6,5 +6,5 @@ namespace App\Domains\Gacha;
 
 class VpHub
 {
-    const string VP_U_GACHA_INFO = VpUGachaInfo::class;
+    const string VP_GACHA_INFO = VpGachaInfo::class;
 }

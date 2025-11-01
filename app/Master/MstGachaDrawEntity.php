@@ -28,7 +28,7 @@ final class MstGachaDrawEntity extends BaseMst
      */
     public function get(array $conditions = [] , string $key_name = 'id'): StfInsIterator
     {
-        $models = $this->_Infra::ds(DsHub::DS_M_GACHA_LOT_ENTITY)->getEnable($conditions);
+        $models = $this->_Infra::ds(DsHub::DS_M_GACHA_DRAW_ENTITY)->getEnable($conditions);
         return parent::iterator($models, $key_name);
     }
 

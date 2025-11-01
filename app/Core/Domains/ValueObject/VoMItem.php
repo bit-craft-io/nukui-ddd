@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core\Domains\ValueObject;
 
+use App\Core\Libraries\Traits\TraitInfrastructure;
+use App\DataSources\DsHub;
 use App\Models\Enums\TypeItem;
 
 /**
@@ -17,6 +19,14 @@ use App\Models\Enums\TypeItem;
  */
 class VoMItem extends BaseVo
 {
+    use TraitInfrastructure;
+
+    public function find(int $id): self
+    {
+        $model = $this->_Infra::ds(DsHub::DS_M_ITEM)->findEnable($id);
+        return $this->init($model);
+    }
+
     public function getSumAmount(int $amount): int
     {
         return min($this->max_stock, $amount);

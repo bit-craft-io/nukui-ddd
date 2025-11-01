@@ -19,8 +19,8 @@ use App\Models\Enums\TypeDraw;
  * @property-read integer $item_id
  * @property-read integer $total_cost
  * @property-read integer $draw_count
- * @property-read integer $gacha_lot_rarity_group_no
- * @property-read integer $gacha_lot_group_no
+ * @property-read integer $gacha_draw_rarity_group_no
+ * @property-read integer $gacha_draw_entity_group_no
  * @property-read string $begin_at
  * @property-read string $end_at
  * @property-read integer $display_order
@@ -32,7 +32,7 @@ final class MstGacha extends BaseMst
      * @param array $conditions
      * @param string $key_name
      * @return StfInsIterator<self>
- */
+     */
     public function get(array $conditions = [] , string $key_name = 'id'): StfInsIterator
     {
         $models = $this->_Infra::ds(DsHub::DS_M_GACHA)->getEnable($conditions);
@@ -50,12 +50,12 @@ final class MstGacha extends BaseMst
 
     public function validate(): bool
     {
-        if ($this->gacha_lot_group_no <= 0) {
+        if ($this->gacha_draw_entity_group_no <= 0) {
             return false;
         }
 
         if ($this->type_draw->isRarity()) {
-            if ($this->gacha_lot_rarity_group_no <= 0) {
+            if ($this->gacha_draw_rarity_group_no <= 0) {
                 return false;
             }
             return true;

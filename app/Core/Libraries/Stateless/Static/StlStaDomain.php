@@ -56,6 +56,20 @@ final class StlStaDomain
         return StfStaFactory::prototype($vo_class);
     }
 
+//    /**
+//     * @template T
+//     * @param string $vo_class
+//     * @param Collection $collection
+//     * @param string $key
+//     * @return StfInsIterator<T>
+//     */
+//    public static function voIterator(string $vo_class, Collection $collection, string $key = 'id'): StfInsIterator
+//    {
+//        /** @var BaseVo $vo */
+//        $vo = StfStaFactory::prototype($vo_class);
+//        return $vo->iterator($collection, $key);
+//    }
+
     /**
      * @template T of object
      * @param class-string<T> $vp_class

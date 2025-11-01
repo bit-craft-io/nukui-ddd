@@ -22,8 +22,8 @@ class VpItem extends BaseVp
         $this->amount(max($sub_amount, 0));
     }
 
-    public function add(int $amount): void
-    {
-        $this->amount($amount);
-    }
+    //public function add(int $amount): void
+    //{
+    //    $this->amount($amount);
+    //}
 }

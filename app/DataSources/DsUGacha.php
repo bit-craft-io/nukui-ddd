@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class DsUGacha extends BaseDs
 {
-    public function getDraft(): ?Model
+    public function getDraft(int $user_id): ?Model
     {
-        return $this->_model;
+        return $this->_model->newInstance(['user_id' => $user_id]);
     }
 
     public function getByUserId(int $user_id): Collection

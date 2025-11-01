@@ -14,11 +14,13 @@ class DsMGachaDrawEntity extends BaseDs
     /**
      * @return Collection<MGachaDrawEntity>
      */
-    public function getEnable(array $conditions): Collection
+    public function getEnable(array $conditions = []): Collection
     {
         return $this->_model
             ->newQuery()
             ->where($conditions)
+            ->where('is_active', 1)
+            ->where($this->enable('begin_at', 'end_at'))
             ->get();
     }
 
@@ -27,6 +29,8 @@ class DsMGachaDrawEntity extends BaseDs
         return $this->_model
             ->newQuery()
             ->where('id', $id)
+            ->where('is_active', 1)
+            ->where($this->enable('begin_at', 'end_at'))
             ->first();
     }
 }

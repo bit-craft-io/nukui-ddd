@@ -16,7 +16,7 @@ class UGacha extends Model
     protected $fillable = [
         'id',
         'user_id',
-        'vp_u_gacha_info',
+        'gacha_info',
     ];
 
     /**
@@ -33,6 +33,7 @@ class UGacha extends Model
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
-        'vp_u_gacha_info' => 'object',
+        //'gacha_info' => 'object',
+        'gacha_info' => 'array',
     ];
 }

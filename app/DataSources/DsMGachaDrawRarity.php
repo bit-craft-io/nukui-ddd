@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace App\DataSources;
 
 use App\Core\DataSources\BaseDs;
-use App\Models\MGacha;
+use App\Models\MGachaDrawEntity;
+use App\Models\MGachaDrawRarity;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class DsMGacha extends BaseDs
+class DsMGachaDrawRarity extends BaseDs
 {
     /**
-     * @return Collection<MGacha>
+     * @return Collection<MGachaDrawRarity>
      */
     public function getEnable(array $conditions = []): Collection
     {

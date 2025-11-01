@@ -7,12 +7,13 @@ namespace App\Core\Domains\ValueObject;
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseVo
 {
-    protected ?array $_props = null;
+    protected Model|array|null $_props = null;
 
-    public function init(array $props): self
+    public function init(Model|array $props): self
     {
         $this->_props = $props;
         return $this;

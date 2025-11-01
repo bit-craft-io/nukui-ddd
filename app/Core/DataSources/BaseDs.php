@@ -40,9 +40,9 @@ abstract class BaseDs
 
     /**
      * @param array $conditions
-     * @return Model
+     * @return Model|null
      */
-    final public function find(array $conditions): Model
+    final public function find(array $conditions = []): ?Model
     {
         return $this->_model
             ->newQuery()
@@ -52,10 +52,10 @@ abstract class BaseDs
 
     /**
      * @param array $conditions
-     * @return Model
+     * @return Model|null
      * @throws Exception
      */
-    final public function findOrFail(array $conditions): Model
+    final public function findOrFail(array $conditions = []): ?Model
     {
         $model = $this->_model
             ->newQuery()
@@ -73,7 +73,7 @@ abstract class BaseDs
      * @param array $conditions
      * @return Collection<Model>
      */
-    final public function get(array $conditions): Collection
+    final public function get(array $conditions = []): Collection
     {
         return $this->_model
             ->newQuery()
