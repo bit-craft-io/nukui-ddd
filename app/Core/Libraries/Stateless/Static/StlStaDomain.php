@@ -82,6 +82,16 @@ final class StlStaDomain
 
     /**
      * @template T of object
+     * @param class-string<T> $vp_class
+     * @return T
+     */
+    public static function mstVo(string $vp_class)
+    {
+        return StfStaFactory::singleton($vp_class);
+    }
+
+    /**
+     * @template T of object
      * @param class-string<T> $svc_class
      * @return T
      */

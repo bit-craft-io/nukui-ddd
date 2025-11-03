@@ -6,7 +6,7 @@ namespace App\Domains\Gacha;
 
 use App\Core\Domains\ValueObject\BaseVo;
 
-class VoGachaDrawRarity extends BaseVo
+class VoMGachaDrawEntity extends BaseVo
 {
 
 }

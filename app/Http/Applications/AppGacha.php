@@ -42,7 +42,9 @@ class AppGacha extends BaseApp
         //$result_lots = $this->_Domain::svc(SvcHub::SVC_GACHA)->draw($m_gacha);
 
         // TODO vo
-        $vo_gacha = $this->_Domain::vo(VoHub::VO_M_GACHA)->find($req->gacha_id);
+        //$vo_gacha = $this->_Domain::vo(VoHub::VO_M_GACHA)->find($req->gacha_id);
+        // @note 基底処理にする
+        $vo_gacha = $this->_Domain::mstVo(VoHub::VO_M_GACHA)->find($req->gacha_id);
         $rep_item = $this->_Domain::rep(RepHub::REP_ITEM);
         $ent_item = $rep_item->find($req->user_id, $vo_gacha->cost_id);
         if ($ent_item->isEmpty()) {

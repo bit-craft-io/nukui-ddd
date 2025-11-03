@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Gacha;
 
+use App\Core\Domains\ValueObject\BaseMstVo;
 use App\Core\Domains\ValueObject\BaseVo;
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\Core\Libraries\Traits\TraitInfrastructure;
@@ -29,24 +30,22 @@ use App\Models\Enums\TypeDraw;
  * @property-read integer $display_order
  * @property-read string $banner_image_name
  */
-class VoGacha extends BaseVo
+class VoMGacha extends BaseMstVo
 {
-    use TraitInfrastructure;
-
-    public function find(int $id): self
-    {
-        $model = $this->_Infra::ds(DsHub::DS_M_GACHA)->findEnable($id);
-        return $this->init($model);
-    }
-
-    /**
-     * @return StfInsIterator<self>
-     */
-    public function get(): StfInsIterator
-    {
-        $models = $this->_Infra::ds(DsHub::DS_M_GACHA)->getEnable();
-        return $this->iterator($models);
-    }
+    //public function find(int $id): self
+    //{
+    //    $model = $this->_Infra::ds(DsHub::DS_M_GACHA)->findEnable($id);
+    //    return $this->init($model);
+    //}
+    //
+    ///**
+    // * @return StfInsIterator<self>
+    // */
+    //public function get(): StfInsIterator
+    //{
+    //    $models = $this->_Infra::ds(DsHub::DS_M_GACHA)->getEnable();
+    //    return $this->iterator($models);
+    //}
 
     public function validate(): bool
     {

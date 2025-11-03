@@ -9,7 +9,7 @@ use App\Core\Libraries\Traits\TraitDomain;
 use App\Core\Libraries\Traits\TraitInfrastructure;
 use App\DataSources\DsHub;
 use App\Domains\Gacha\EntGacha;
-use App\Domains\Gacha\VoGacha;
+use App\Domains\Gacha\VoMGacha;
 use App\Domains\Gacha\VoHub;
 use App\Domains\RepHub;
 use App\Master\MstGacha;
@@ -53,7 +53,7 @@ class SvcGacha
         return $draw_lots;
     }
 
-    private function _normal(VoGacha $vo_gacha, EntGacha $ent_gacha): array
+    private function _normal(VoMGacha $vo_gacha, EntGacha $ent_gacha): array
     {
         $conditions = ['group_no' => $vo_gacha->gacha_draw_entity_group_no];
         $m_gacha_draw_entities = $this->_Infra::ds(DsHub::DS_M_GACHA_DRAW_ENTITY)->getEnable($conditions);
@@ -69,7 +69,7 @@ class SvcGacha
         return $draw_lots;
     }
 
-    private function _rarity(VoGacha $vo_gacha, EntGacha $ent_gacha): array
+    private function _rarity(VoMGacha $vo_gacha, EntGacha $ent_gacha): array
     {
         // @note レアリティ抽選用のデータ取得
         $conditions = ['group_no' => $vo_gacha->gacha_draw_rarity_group_no];
@@ -107,7 +107,7 @@ class SvcGacha
         return $draw_lots;
     }
 
-    private function _step(VoGacha $vo_gacha, EntGacha $ent_gacha): array
+    private function _step(VoMGacha $vo_gacha, EntGacha $ent_gacha): array
     {
         // @note 実行回数 $vo_gacha->exec_count でユーザのステップの状態を管理
         if ($vo_gacha->exec_count !== $ent_gacha->getExecCount($vo_gacha->group_no)) {
