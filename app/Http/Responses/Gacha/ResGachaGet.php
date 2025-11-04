@@ -6,9 +6,8 @@ namespace App\Http\Responses\Gacha;
 
 use App\Core\Http\Requests\ReqNone;
 use App\Core\Http\Responses\BaseRes;
-use App\Core\Libraries\Traits\TraitApplication;
 use App\Core\Libraries\Traits\TraitDomain;
-use App\Master\MstHub;
+use App\Domains\Gacha\VoMGacha;
 use App\Domains\RepHub;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,24 +19,22 @@ final class ResGachaGet extends BaseRes
 {
     // TODO use Traitの精査
     use TraitDomain;
-    use TraitApplication;
 
     public function toResponse(Request|ReqNone $req): JsonResponse
     {
-        // @note Collection<Model>はビジネスロジックをModelに入れる事ができるが
-        //       責任を分離の為、イテレータ用のクラスを作成
-        $m_gachas = $this->_App::mst(MstHub::MST_GACHA)->get();
-        foreach($m_gachas as $m_gacha) {
-            if (!$m_gacha->validate()) {
-                // TODO エラーもしくはログ出力
+        // @note Collection<Model> にビジネスロジックを入れたく無い為、Voのイテレータを取得
+        $vo_gachas = $this->_Domain::mstVo(VoMGacha::class)->get();
+        foreach ($vo_gachas as $vo_gacha) {
+            $vo_gacha->find($vo_gacha->id);
+            if (!$vo_gacha->validate()) {
                 continue;
             }
-            $this->_result['gachas'][] = $m_gacha->toArray();
+            $this->_result['gachas'][] = $vo_gacha->toArray();
         }
 
         $rep_gacha = $this->_Domain::rep(RepHub::REP_GACHA);
         $ent_gacha = $rep_gacha->find($req->user_id);
-        $this->_result['u_gacha_info'] = $ent_gacha->toArray();
+        $this->_result['u_gacha'] = $ent_gacha->toArray();
 
         $result = [
             'success' => 1,

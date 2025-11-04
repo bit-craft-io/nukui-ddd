@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace App\Domains\Gacha;
 
 use App\Core\Domains\ValueObject\BaseMstVo;
-use App\Core\Domains\ValueObject\BaseVo;
-use App\Core\Libraries\Stateful\Instance\StfInsIterator;
-use App\Core\Libraries\Traits\TraitInfrastructure;
-use App\DataSources\DsHub;
 use App\Models\Enums\TypeCost;
 use App\Models\Enums\TypeDraw;
 
@@ -32,21 +28,6 @@ use App\Models\Enums\TypeDraw;
  */
 class VoMGacha extends BaseMstVo
 {
-    //public function find(int $id): self
-    //{
-    //    $model = $this->_Infra::ds(DsHub::DS_M_GACHA)->findEnable($id);
-    //    return $this->init($model);
-    //}
-    //
-    ///**
-    // * @return StfInsIterator<self>
-    // */
-    //public function get(): StfInsIterator
-    //{
-    //    $models = $this->_Infra::ds(DsHub::DS_M_GACHA)->getEnable();
-    //    return $this->iterator($models);
-    //}
-
     public function validate(): bool
     {
         if ($this->gacha_draw_entity_group_no <= 0) {
@@ -63,9 +44,24 @@ class VoMGacha extends BaseMstVo
         return true;
     }
 
-    public function validateCost(int $u_entity_amount): bool
+    public function notEnoughCost(int $u_entity_amount): bool
     {
         return $this->total_cost_amount <= $u_entity_amount;
     }
 
+    public function toArray()
+    {
+        return [
+            'if' => $this->id,
+            'name' => $this->name,
+            'type_draw' => $this->type_draw,
+            'group_no' => $this->group_no,
+            'exec_count' => $this->exec_count,
+            'type_cost' => $this->type_cost,
+            'cost_id' => $this->cost_id,
+            'total_cost_amount' => $this->total_cost_amount,
+            'draw_count' => $this->draw_count,
+            'banner_image_name' => $this->banner_image_name,
+        ];
+    }
 }

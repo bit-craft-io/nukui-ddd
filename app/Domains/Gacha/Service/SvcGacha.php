@@ -12,10 +12,11 @@ use App\Domains\Gacha\EntGacha;
 use App\Domains\Gacha\VoMGacha;
 use App\Domains\Gacha\VoHub;
 use App\Domains\RepHub;
-use App\Master\MstGacha;
-use App\Master\MstGachaDrawEntity;
-use App\Master\MstHub;
-use Illuminate\Support\Arr;
+// TODO 削除
+//use App\Master\MstGacha;
+//use App\Master\MstGachaDrawEntity;
+//use App\Master\MstHub;
+//use Illuminate\Support\Arr;
 
 class SvcGacha
 {
@@ -25,6 +26,7 @@ class SvcGacha
 
     public function draw(int $user_id, int $gacha_id): array
     {
+        // TODO 削除
         //$this->_Domain::vo(VoHub::VO_M_GACHA)->find($id);
         //$this->_Domain::vo(VoHub::VO_M_GACHA)->get();
 

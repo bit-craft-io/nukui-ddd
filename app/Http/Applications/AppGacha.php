@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Applications;
 
-use App\Core\Exceptions\Enums\TypeExcept;
 use App\Core\Http\Applications\BaseApp;
 use App\Core\Http\Requests\ReqNone;
-use App\Domains\EntHub;
-use App\Domains\Gacha\Service\SvcGacha;
 use App\Domains\Gacha\VoHub;
 use App\Domains\RepHub;
 use App\Domains\SvcHub;
 use App\Http\Requests\Gacha\ReqGachaPlay;
-use App\Master\MstHub;
 use Exception;
 
 class AppGacha extends BaseApp
@@ -52,7 +48,7 @@ class AppGacha extends BaseApp
         }
 
         // @note コストが足りるか確認
-        if (!$vo_gacha->validateCost($ent_item->amount)) {
+        if ($vo_gacha->notEnoughCost($ent_item->amount)) {
             // TODO エラー出力
             dd('!validateCost');
         }

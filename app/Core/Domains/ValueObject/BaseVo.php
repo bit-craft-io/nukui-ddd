@@ -26,15 +26,13 @@ abstract class BaseVo
 
     // @note ValueObject は mutable の為、setter は存在しない
     //public function __call(string $name, array $arguments = [])
-    //{
-    //    $this->_props[$name] = $arguments[0];
-    //}
 
     public function iterator(Collection $collect, string $key_name = 'id'): StfInsIterator
     {
-        $callable = function ($props) {
-            if ($props && method_exists($this, 'init')) {
-                $this->init($props->toArray());
+        $callable = function ($model) {
+            if ($model && method_exists($this, 'init')) {
+                // @note Collection<Model>
+                $this->init($model);
             }
             return $this;
         };

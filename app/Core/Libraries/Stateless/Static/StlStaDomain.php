@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Core\Libraries\Stateless\Static;
 
 use App\Core\Domains\Entity\BaseEnt;
-use App\Core\Domains\ValueObject\BaseVo;
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
 use Illuminate\Database\Eloquent\Collection;
