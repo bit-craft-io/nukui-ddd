@@ -18,8 +18,8 @@ class EntGacha extends BaseEnt
 {
     protected VpGachaInfo $_vp_gacha_info;
 
-    protected int $_exec_count = 0;
-    protected string $_exec_at = '';
+    //protected int $_exec_count = 0;
+    //protected string $_exec_at = '';
 
     public function initOnce(): void
     {
@@ -28,31 +28,32 @@ class EntGacha extends BaseEnt
 
     public function initAfter(): void
     {
-        $this->_vp_gacha_info = $this->_Domain::vp(VpHub::VP_GACHA_INFO)->init([
-            '_exec_count' => &$this->_exec_count,
-            '_exec_at' => &$this->_exec_at
-        ]);
+        //$this->_vp_gacha_info = $this->_Domain::vp(VpHub::VP_GACHA_INFO)->init([
+        //    '_exec_count' => &$this->_exec_count,
+        //    '_exec_at' => &$this->_exec_at
+        //]);
+        $this->_vp_gacha_info = $this->_Domain::vp(VpHub::VP_GACHA_INFO)->init($this);
     }
 
     public function addExecCount(int $group_no): void
     {
-        $info = $this->gacha_info ?? [];
-        if ($info[$group_no] ?? false) {
-            $this->_exec_count = $info[$group_no]['_exec_count'];
-            $this->_exec_at = $info[$group_no]['_exec_at'];
-        }
+        //$info = $this->gacha_info ?? [];
+        //if ($info[$group_no] ?? false) {
+        //    $this->_exec_count = $info[$group_no]['_exec_count'];
+        //    $this->_exec_at = $info[$group_no]['_exec_at'];
+        //}
 
-        $this->_vp_gacha_info->addExecCount();
+        //$info[$group_no] = $this->_vp_gacha_info->toArray();
+        //$this->gacha_info($info);
 
-        $info[$group_no] = $this->_vp_gacha_info->toArray();
-        $this->gacha_info($info);
+        $this->_vp_gacha_info->addExecCount($group_no);
     }
 
     public function getExecCount(int $group_no): int
     {
         $info = $this->gacha_info ?? [];
         if ($info[$group_no] ?? false) {
-            return $info[$group_no]['_exec_count'];
+            return $info[$group_no]['exec_count'];
         }
         return 0;
     }

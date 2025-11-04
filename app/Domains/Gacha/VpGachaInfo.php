@@ -8,26 +8,32 @@ use App\Core\Domains\ValueProxy\BaseVp;
 use Carbon\CarbonImmutable;
 
 /**
- * @method void _gacha_id(int $value)
- * @method void _exec_count(int $value)
- * @method void _exec_at(string $value)
- * @property-read integer $_gacha_id
- * @property-read integer $_exec_count
- * @property-read string $_exec_at
+ * @method void gacha_info(array $values)
+ * @property array $gacha_info
  */
 class VpGachaInfo extends BaseVp
 {
-    public function addExecCount(): void
+    protected array $_gacha_info = [
+        'exec_count' => 0,
+        'exec_at' => '',
+    ];
+
+    public function addExecCount(int $group_no): void
     {
-        $this->_exec_count($this->_exec_count + 1);
-        $this->_exec_at(CarbonImmutable::now()->toDateTimeString());
+        $gacha_info = $this->gacha_info;
+
+        if (empty($gacha_info[$group_no])) {
+            $gacha_info[$group_no] = $this->_gacha_info;
+        }
+        $gacha_info[$group_no]['exec_count'] += 1;
+        $gacha_info[$group_no]['exec_at'] = CarbonImmutable::now()->toDateTimeString();
+
+        ksort($gacha_info);
+        $this->gacha_info($gacha_info);
     }
 
     public function toArray(): array
     {
-        return [
-            '_exec_count' => $this->_exec_count,
-            '_exec_at' => $this->_exec_at,
-        ];
+        return $this->gacha_info;
     }
 }

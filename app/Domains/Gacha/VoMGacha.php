@@ -44,7 +44,7 @@ class VoMGacha extends BaseMstVo
         return true;
     }
 
-    public function notEnoughCost(int $u_entity_amount): bool
+    public function enoughCost(int $u_entity_amount): bool
     {
         return $this->total_cost_amount <= $u_entity_amount;
     }

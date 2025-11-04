@@ -9,7 +9,7 @@ abstract class BaseVp
     protected object|null $_proxy_object = null;
     protected array|null $_proxy_array = null;
     protected array $_props = [];
-    public function init(array|object $proxy_values): self
+    public function init(array|object &$proxy_values): self
     {
         if (is_array($proxy_values)) {
             $this->_proxy_array = &$proxy_values;

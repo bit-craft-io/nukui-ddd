@@ -48,9 +48,9 @@ class AppGacha extends BaseApp
         }
 
         // @note コストが足りるか確認
-        if ($vo_gacha->notEnoughCost($ent_item->amount)) {
+        if (!$vo_gacha->enoughCost($ent_item->amount)) {
             // TODO エラー出力
-            dd('!validateCost');
+            dd('notEnoughCost');
         }
         $ent_item->subAmount($vo_gacha->total_cost_amount);
         $rep_item->persist($ent_item);
