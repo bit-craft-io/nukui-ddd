@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace App\Domains\Gacha\Service;
 
+use App\Core\Exceptions\Enums\TypeExcept;
 use App\Core\Libraries\Traits\TraitApplication;
 use App\Core\Libraries\Traits\TraitDomain;
+use App\Core\Libraries\Traits\TraitException;
 use App\Core\Libraries\Traits\TraitInfrastructure;
 use App\DataSources\DsHub;
 use App\Domains\Gacha\EntGacha;
 use App\Domains\Gacha\VoMGacha;
 use App\Domains\Gacha\VoHub;
 use App\Domains\RepHub;
+use Exception;
+
 // TODO 削除
 //use App\Master\MstGacha;
 //use App\Master\MstGachaDrawEntity;
@@ -22,8 +26,12 @@ class SvcGacha
 {
     use TraitApplication;
     use TraitDomain;
+    use TraitException;
     use TraitInfrastructure;
 
+    /**
+     * @throws Exception
+     */
     public function draw(int $user_id, int $gacha_id): array
     {
         // TODO 削除
@@ -38,9 +46,7 @@ class SvcGacha
 
         $vo_gacha = $this->_Domain::vo(VoHub::VO_M_GACHA)->find($gacha_id);
         if (!$vo_gacha->validate()) {
-            // TODO エラー出力
-            dd('!validate');
-            return [];
+            throw $this->_Except::app(TypeExcept::AppGachaMasterIsNotValid);
         }
 
         $draw_lots = match (true) {
@@ -113,9 +119,9 @@ class SvcGacha
     {
         // @note 実行回数 $vo_gacha->exec_count でユーザのステップの状態を管理
         if ($vo_gacha->exec_count !== $ent_gacha->getExecCount($vo_gacha->group_no)) {
-            // TODO エラー出力
-            dd('not equal step = ' . $vo_gacha->exec_count . ' | ' . $ent_gacha->getExecCount($vo_gacha->group_no));
-            return [];
+            // TODO エラー出力にオプションを追加
+            //dd('not equal step = ' . $vo_gacha->exec_count . ' | ' . $ent_gacha->getExecCount($vo_gacha->group_no));
+            throw $this->_Except::app(TypeExcept::AppGachaStepNotEqual);
         }
 
         // TODO m_gachas.exec_limit_count, m_gachas.is_exec_loop を追加
