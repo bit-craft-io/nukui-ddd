@@ -6,7 +6,6 @@ namespace App\Domains\Item;
 
 use App\Core\Domains\Entity\BaseEnt;
 use App\Core\Domains\Repository\BaseRep;
-use App\Core\Domains\ValueObject\VoMItem;
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\DataSources\DsHub;
 use App\Domains\EntHub;
@@ -39,6 +38,12 @@ class RepItem extends BaseRep
         return $this->_Domain::ent(EntHub::ENT_ITEM)->init($model);
     }
 
+    /**
+     * @param int $user_id
+     * @param int $item_id
+     * @return EntItem|BaseEnt
+     * @throws Exception
+     */
     public function findOrFail(int $user_id, int $item_id): EntItem|BaseEnt
     {
         $conditions = ['user_id' => $user_id, 'item_id' => $item_id];

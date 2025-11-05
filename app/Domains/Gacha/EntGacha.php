@@ -21,11 +21,17 @@ class EntGacha extends BaseEnt
     //protected int $_exec_count = 0;
     //protected string $_exec_at = '';
 
+    /**
+     * @return void
+     */
     public function initOnce(): void
     {
         // TODO: Implement initAfter() method.
     }
 
+    /**
+     * @return void
+     */
     public function initAfter(): void
     {
         //$this->_vp_gacha_info = $this->_Domain::vp(VpHub::VP_GACHA_INFO)->init([
@@ -35,6 +41,10 @@ class EntGacha extends BaseEnt
         $this->_vp_gacha_info = $this->_Domain::vp(VpHub::VP_GACHA_INFO)->init($this);
     }
 
+    /**
+     * @param int $group_no
+     * @return void
+     */
     public function addExecCount(int $group_no): void
     {
         //$info = $this->gacha_info ?? [];

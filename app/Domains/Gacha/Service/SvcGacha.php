@@ -16,12 +16,7 @@ use App\Domains\Gacha\VoHub;
 use App\Domains\RepHub;
 use Exception;
 
-// TODO 削除
-//use App\Master\MstGacha;
-//use App\Master\MstGachaDrawEntity;
-//use App\Master\MstHub;
-//use Illuminate\Support\Arr;
-
+// TODO クラスの処理を精査
 class SvcGacha
 {
     use TraitApplication;
@@ -64,7 +59,9 @@ class SvcGacha
     private function _normal(VoMGacha $vo_gacha, EntGacha $ent_gacha): array
     {
         $conditions = ['group_no' => $vo_gacha->gacha_draw_entity_group_no];
+        // TODO VOを使用した処理に変更
         $m_gacha_draw_entities = $this->_Infra::ds(DsHub::DS_M_GACHA_DRAW_ENTITY)->getEnable($conditions);
+        //$m_gacha_draw_entities = $this->_Domain::mstVo(VoHub::VO_M_GACHA)->get($conditions);;
 
         $sorted_rates = $m_gacha_draw_entities->sortByDesc('rate')->values()->toArray();
         $cum_rates = $this->_cumulativeRate($sorted_rates);
@@ -81,6 +78,7 @@ class SvcGacha
     {
         // @note レアリティ抽選用のデータ取得
         $conditions = ['group_no' => $vo_gacha->gacha_draw_rarity_group_no];
+        // TODO VOを使用した処理に変更
         $m_gacha_draw_rarities = $this->_Infra::ds(DsHub::DS_M_GACHA_DRAW_RARITY)->getEnable($conditions);
 
         // @note レアリティ抽選用のデータ作成
@@ -90,6 +88,7 @@ class SvcGacha
 
         // @note エンティティ抽選用のデータ取得
         $conditions = ['group_no' => $vo_gacha->gacha_draw_entity_group_no];
+        // TODO VOを使用した処理に変更
         $m_gacha_draw_entities = $this->_Infra::ds(DsHub::DS_M_GACHA_DRAW_ENTITY)->getEnable($conditions);
 
         $entities = [];

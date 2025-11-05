@@ -9,6 +9,7 @@ use App\Models\MGacha;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
+// TODO getEnable と findEnable は BaseMstVo に吸収してる
 class DsMGacha extends BaseDs
 {
     /**
@@ -24,6 +25,10 @@ class DsMGacha extends BaseDs
             ->get();
     }
 
+    /**
+     * @param int $id
+     * @return Model|null
+     */
     public function findEnable(int $id): ?Model
     {
         return $this->_model

@@ -8,15 +8,15 @@ use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\Core\Libraries\Traits\TraitApplication;
 use App\Core\Libraries\Traits\TraitInfrastructure;
 use App\DataSources\DsHub;
-use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseMstVo extends BaseVo
 {
     use TraitInfrastructure;
     use TraitApplication;
 
-    private int $_ttl_sec = 600;
-
+    /**
+     * @return string
+     */
     private function _dsConstName(): string
     {
         // @note VoM[Model] から DS_M_[Model] を作成
@@ -24,6 +24,10 @@ abstract class BaseMstVo extends BaseVo
         return 'DS_M_' . strtoupper($model_name);
     }
 
+    /**
+     * @param int $id
+     * @return static
+     */
     public function find(int $id): self
     {
         $const_name = $this->_dsConstName();

@@ -13,6 +13,9 @@ use App\Http\Requests\Account\ReqAccountLogin;
 
 class AppAccount extends BaseApp
 {
+    /**
+     * @return void
+     */
     public function register(): void
     {
         $this->_Transaction::begin();
@@ -43,6 +46,10 @@ class AppAccount extends BaseApp
         $rep_user->persist($ent_user);
     }
 
+    /**
+     * @param ReqAccountLogin $req
+     * @return void
+     */
     public function login(ReqAccountLogin $req): void
     {
         [$email, $password] = explode(':', $this->_UtilCompress::unComp($req->primary_code));

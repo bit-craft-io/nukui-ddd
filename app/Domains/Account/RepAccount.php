@@ -11,12 +11,19 @@ use App\Domains\EntHub;
 
 class RepAccount extends BaseRep
 {
+    /**
+     * @return EntAccount|BaseEnt
+     */
     public function mekDraft(): EntAccount|BaseEnt
     {
         $model = $this->_Infra::ds(DsHub::DS_ACCOUNT)->getDraft();
         return $this->_Domain::ent(EntHub::ENT_ACCOUNT)->init($model);
     }
 
+    /**
+     * @param EntAccount|BaseEnt $ent
+     * @return void
+     */
     public function persist(EntAccount|BaseEnt $ent): void
     {
         $ent->commit();

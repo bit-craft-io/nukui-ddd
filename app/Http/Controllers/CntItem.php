@@ -11,6 +11,11 @@ use App\Http\Applications\AppItem;
 
 class CntItem extends BaseCnt
 {
+    /**
+     * @param AppItem $app
+     * @param ReqNone $req
+     * @return void
+     */
     public function get(AppItem $app, ReqNone $req): void
     {
         $this->_ResponseModify::set(ResSuccess::class);

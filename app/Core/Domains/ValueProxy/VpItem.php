@@ -11,19 +11,22 @@ namespace App\Core\Domains\ValueProxy;
  */
 class VpItem extends BaseVp
 {
+    /**
+     * @param int $amount
+     * @return bool
+     */
     public function has(int $amount): bool
     {
         return ($this->amount - $amount) >= 0;
     }
 
+    /**
+     * @param int $amount
+     * @return void
+     */
     public function sub(int $amount): void
     {
         $sub_amount = $this->amount - $amount;
         $this->amount(max($sub_amount, 0));
     }
-
-    //public function add(int $amount): void
-    //{
-    //    $this->amount($amount);
-    //}
 }

@@ -6,7 +6,6 @@ namespace App\Domains\Gacha;
 
 use App\Core\Domains\Entity\BaseEnt;
 use App\Core\Domains\Repository\BaseRep;
-use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\DataSources\DsHub;
 use App\Domains\EntHub;
 
@@ -22,12 +21,20 @@ class RepGacha extends BaseRep
         return $this->_Domain::ent(EntHub::ENT_GACHA)->init($model);
     }
 
+    /**
+     * @param $user_id
+     * @return BaseEnt|string
+     */
     public function draft($user_id)
     {
         $model = $this->_Infra::ds(DsHub::DS_U_GACHA)->getDraft($user_id);
         return $this->_Domain::ent(EntHub::ENT_GACHA)->init($model);
     }
 
+    /**
+     * @param EntGacha|BaseEnt $ent
+     * @return void
+     */
     public function persist(EntGacha|BaseEnt $ent): void
     {
         $ent->commit();

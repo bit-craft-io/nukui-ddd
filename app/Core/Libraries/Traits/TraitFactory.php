@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Traits;
 
-use App\Core\Libraries\Stateful\Static\StfStaFactory;
-
 // @note このクラスは Trait 禁止
 //       Stateful/Static、Stateless/Static
 //       で use Trait をしてしまう為

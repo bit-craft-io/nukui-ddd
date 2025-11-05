@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Core\Libraries\Stateless\Static\Enum;
 
 enum TypeSizeUnit: int

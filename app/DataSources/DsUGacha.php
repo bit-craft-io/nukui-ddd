@@ -11,11 +11,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class DsUGacha extends BaseDs
 {
+    /**
+     * @param int $user_id
+     * @return Model|null
+     */
     public function getDraft(int $user_id): ?Model
     {
         return $this->_model->newInstance(['user_id' => $user_id]);
     }
 
+    /**
+     * @param int $user_id
+     * @return Collection
+     */
     public function getByUserId(int $user_id): Collection
     {
         return $this->_model
@@ -24,6 +32,10 @@ class DsUGacha extends BaseDs
             ->get();
     }
 
+    /**
+     * @param int $user_id
+     * @return UGacha|null
+     */
     public function findByUserId(int $user_id): ?UGacha
     {
         return $this->_model

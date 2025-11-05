@@ -9,6 +9,11 @@ abstract class BaseVp
     protected object|null $_proxy_object = null;
     protected array|null $_proxy_array = null;
     protected array $_props = [];
+
+    /**
+     * @param array|object $proxy_values
+     * @return $this
+     */
     public function init(array|object &$proxy_values): self
     {
         if (is_array($proxy_values)) {
@@ -22,6 +27,10 @@ abstract class BaseVp
         return $this;
     }
 
+    /**
+     * @param string $name
+     * @return mixed|null
+     */
     public function __get(string $name)
     {
         if ($this->_proxy_array) {
@@ -30,6 +39,11 @@ abstract class BaseVp
         return $this?->_proxy_object?->$name;
     }
 
+    /**
+     * @param string $name
+     * @param array $arguments
+     * @return void
+     */
     public function __call(string $name, array $arguments = [])
     {
         if (!array_key_exists($name, $this->_props)) {

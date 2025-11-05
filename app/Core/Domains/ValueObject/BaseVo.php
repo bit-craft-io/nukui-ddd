@@ -13,12 +13,20 @@ abstract class BaseVo
 {
     protected Model|array|null $_props = null;
 
+    /**
+     * @param Model|array $props
+     * @return $this
+     */
     public function init(Model|array $props): self
     {
         $this->_props = $props;
         return $this;
     }
 
+    /**
+     * @param string $name
+     * @return mixed|null
+     */
     public function __get(string $name)
     {
         return $this?->_props[$name] ?? null;
@@ -27,6 +35,11 @@ abstract class BaseVo
     // @note ValueObject は mutable の為、setter は存在しない
     //public function __call(string $name, array $arguments = [])
 
+    /**
+     * @param Collection $collect
+     * @param string $key_name
+     * @return StfInsIterator
+     */
     public function iterator(Collection $collect, string $key_name = 'id'): StfInsIterator
     {
         $callable = function ($model) {

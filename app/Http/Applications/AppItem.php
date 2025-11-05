@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace App\Http\Applications;
 
-use App\Core\Exceptions\Enums\TypeExcept;
 use App\Core\Http\Applications\BaseApp;
 use App\Core\Http\Requests\ReqNone;
 use App\Domains\RepHub;
 
 class AppItem extends BaseApp
 {
+    /**
+     * @param ReqNone $req
+     * @return void
+     */
     public function get(ReqNone $req): void
     {
         $rep_item = $this->_Domain::rep(RepHub::REP_ITEM);

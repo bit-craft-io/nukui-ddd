@@ -15,10 +15,11 @@ use App\Core\Libraries\Traits\TraitUtil;
 abstract class BaseApp
 {
     use TraitApplication;
-    use TraitTransaction;
+    use TraitDomain;
     use TraitException;
     use TraitResponse;
-    use TraitDevelop;
-    use TraitDomain;
+    use TraitTransaction;
     use TraitUtil;
+
+    use TraitDevelop;
 }

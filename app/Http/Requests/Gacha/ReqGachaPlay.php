@@ -11,6 +11,9 @@ use App\Core\Http\Requests\BaseReq;
  */
 final class ReqGachaPlay extends BaseReq
 {
+    /**
+     * @return string[]
+     */
     public function rules(): array
     {
         return [

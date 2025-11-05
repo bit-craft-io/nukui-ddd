@@ -19,6 +19,10 @@ class VpGachaInfo extends BaseVp
         'expired_at' => '',
     ];
 
+    /**
+     * @param int $group_no
+     * @return void
+     */
     public function addExecCount(int $group_no): void
     {
         $gacha_info = $this->gacha_info;
@@ -34,11 +38,18 @@ class VpGachaInfo extends BaseVp
         $this->gacha_info($gacha_info);
     }
 
+    /**
+     * @param int $group_no
+     * @return int
+     */
     public function getExecCount(int $group_no): int
     {
         return $this->gacha_info[$group_no]['exec_count'] ?? 0;
     }
 
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
         return $this->gacha_info;

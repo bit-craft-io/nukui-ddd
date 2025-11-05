@@ -12,6 +12,9 @@ use App\Core\Http\Requests\BaseReq;
  */
 final class ReqDevelopItemSub extends BaseReq
 {
+    /**
+     * @return string[]
+     */
     public function rules(): array
     {
         return [

@@ -10,6 +10,10 @@ use App\Domains\RepHub;
 
 class AppUser extends BaseApp
 {
+    /**
+     * @param ReqNone $req
+     * @return void
+     */
     public function info(ReqNone $req): void
     {
         $rep_user = $this->_Domain::rep(RepHub::REP_USER);

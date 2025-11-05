@@ -17,9 +17,12 @@ use Illuminate\Http\Request;
  */
 final class ResGachaGet extends BaseRes
 {
-    // TODO use Traitの精査
     use TraitDomain;
 
+    /**
+     * @param Request|ReqNone $req
+     * @return JsonResponse
+     */
     public function toResponse(Request|ReqNone $req): JsonResponse
     {
         // @note Collection<Model> にビジネスロジックを入れたく無い為、Voのイテレータを取得

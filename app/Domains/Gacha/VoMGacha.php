@@ -28,6 +28,9 @@ use App\Models\Enum\TypeDraw;
  */
 class VoMGacha extends BaseMstVo
 {
+    /**
+     * @return bool
+     */
     public function validate(): bool
     {
         if ($this->gacha_draw_entity_group_no <= 0) {
@@ -44,11 +47,18 @@ class VoMGacha extends BaseMstVo
         return true;
     }
 
+    /**
+     * @param int $u_entity_amount
+     * @return bool
+     */
     public function enoughCost(int $u_entity_amount): bool
     {
         return $this->total_cost_amount <= $u_entity_amount;
     }
 
+    /**
+     * @return array
+     */
     public function toArray()
     {
         return [

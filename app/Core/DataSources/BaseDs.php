@@ -19,6 +19,9 @@ abstract class BaseDs
     protected ?CarbonImmutable $_now = null;
     protected ?Model $_model = null;
 
+    /**
+     * @return CarbonImmutable
+     */
     final public function _now(): CarbonImmutable
     {
         // @note 意図しない動作を抑止する為 Carbon ではなく CarbonImmutable を使用
@@ -118,6 +121,11 @@ abstract class BaseDs
         )->id ?? 0;
     }
 
+    /**
+     * @param string|null $column_begin
+     * @param string|null $column_end
+     * @return Closure
+     */
     final public function enable(?string $column_begin = null, ?string $column_end = null): Closure
     {
         $now = $this->_now();
