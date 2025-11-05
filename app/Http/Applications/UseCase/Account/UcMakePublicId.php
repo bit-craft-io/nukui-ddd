@@ -13,6 +13,9 @@ final class UcMakePublicId
     use TraitInfrastructure;
     use TraitUtil;
 
+    /**
+     * @return string
+     */
     public function execute(): string
     {
         $ds_u_user = $this->_Infra::ds(DsHub::DS_U_USER);

@@ -13,8 +13,11 @@ final class UcMakeEmail
     use TraitInfrastructure;
     use TraitUtil;
 
-    const string MAIL_DOMAIN = 'example.com';
+    const string MAIL_DOMAIN = 'bit-craft.com';
 
+    /**
+     * @return string
+     */
     public function execute(): string
     {
         $ds_u_user = $this->_Infra::ds(DsHub::DS_U_USER);

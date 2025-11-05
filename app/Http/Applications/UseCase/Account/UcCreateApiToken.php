@@ -12,6 +12,11 @@ final class UcCreateApiToken
 {
     use TraitInfrastructure;
 
+    /**
+     * @param string $email
+     * @param string $password
+     * @return string
+     */
     public function execute(string $email, string $password): string
     {
         $account = $this->_Infra::ds(DsHub::DS_ACCOUNT)->findByEmail($email);
