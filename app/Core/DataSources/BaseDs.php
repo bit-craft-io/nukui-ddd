@@ -121,6 +121,8 @@ abstract class BaseDs
         )->id ?? 0;
     }
 
+    // @note 責任分離の為
+    //       model に builder を記述せず where($this->enable の処理にする
     /**
      * @param string|null $column_begin
      * @param string|null $column_end

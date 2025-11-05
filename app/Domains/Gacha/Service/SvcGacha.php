@@ -29,10 +29,6 @@ class SvcGacha
      */
     public function draw(int $user_id, int $gacha_id): array
     {
-        // TODO 削除
-        //$this->_Domain::vo(VoHub::VO_M_GACHA)->find($id);
-        //$this->_Domain::vo(VoHub::VO_M_GACHA)->get();
-
         $rep_gacha = $this->_Domain::rep(RepHub::REP_GACHA);
         $ent_gacha = $rep_gacha->find($user_id);
         if ($ent_gacha->isEmpty()) {
@@ -41,7 +37,8 @@ class SvcGacha
 
         $vo_gacha = $this->_Domain::vo(VoHub::VO_M_GACHA)->find($gacha_id);
         if (!$vo_gacha->validate()) {
-            throw $this->_Except::app(TypeExcept::AppGachaMasterIsNotValid);
+            $except_params['#1'] = $gacha_id;
+            throw $this->_Except::app(TypeExcept::AppGachaMasterIsNotValid, $except_params);
         }
 
         $draw_lots = match (true) {
@@ -58,10 +55,9 @@ class SvcGacha
 
     private function _normal(VoMGacha $vo_gacha, EntGacha $ent_gacha): array
     {
+        // @note エンティティ抽選用のデータ取得
         $conditions = ['group_no' => $vo_gacha->gacha_draw_entity_group_no];
-        // TODO VOを使用した処理に変更
         $m_gacha_draw_entities = $this->_Infra::ds(DsHub::DS_M_GACHA_DRAW_ENTITY)->getEnable($conditions);
-        //$m_gacha_draw_entities = $this->_Domain::mstVo(VoHub::VO_M_GACHA)->get($conditions);;
 
         $sorted_rates = $m_gacha_draw_entities->sortByDesc('rate')->values()->toArray();
         $cum_rates = $this->_cumulativeRate($sorted_rates);
@@ -78,7 +74,6 @@ class SvcGacha
     {
         // @note レアリティ抽選用のデータ取得
         $conditions = ['group_no' => $vo_gacha->gacha_draw_rarity_group_no];
-        // TODO VOを使用した処理に変更
         $m_gacha_draw_rarities = $this->_Infra::ds(DsHub::DS_M_GACHA_DRAW_RARITY)->getEnable($conditions);
 
         // @note レアリティ抽選用のデータ作成
@@ -88,7 +83,6 @@ class SvcGacha
 
         // @note エンティティ抽選用のデータ取得
         $conditions = ['group_no' => $vo_gacha->gacha_draw_entity_group_no];
-        // TODO VOを使用した処理に変更
         $m_gacha_draw_entities = $this->_Infra::ds(DsHub::DS_M_GACHA_DRAW_ENTITY)->getEnable($conditions);
 
         $entities = [];
@@ -118,9 +112,9 @@ class SvcGacha
     {
         // @note 実行回数 $vo_gacha->exec_count でユーザのステップの状態を管理
         if ($vo_gacha->exec_count !== $ent_gacha->getExecCount($vo_gacha->group_no)) {
-            // TODO エラー出力にオプションを追加
-            //dd('not equal step = ' . $vo_gacha->exec_count . ' | ' . $ent_gacha->getExecCount($vo_gacha->group_no));
-            throw $this->_Except::app(TypeExcept::AppGachaStepNotEqual);
+            $except_params['#1'] = $vo_gacha->exec_count;
+            $except_params['#2'] = $ent_gacha->getExecCount($vo_gacha->group_no);
+            throw $this->_Except::app(TypeExcept::AppGachaStepNotEqual, $except_params);
         }
 
         // TODO m_gachas.exec_limit_count, m_gachas.is_exec_loop を追加

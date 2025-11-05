@@ -11,9 +11,10 @@ final class ExceptModel extends Exception
 {
     /**
      * @param TypeExcept $type_except
-     * @return self
+     * @param array $except_params
+     * @return $this
      */
-    public function init(TypeExcept $type_except): ExceptModel
+    public function init(TypeExcept $type_except, array $except_params = []): ExceptModel
     {
         // TODO ログ出力
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
@@ -27,7 +28,7 @@ final class ExceptModel extends Exception
         ];
 
         $this->code = $type_except->value;
-        $this->message = $type_except->message();
+        $this->message = $type_except->message($except_params);
         return $this;
     }
 }

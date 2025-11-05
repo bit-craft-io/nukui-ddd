@@ -56,6 +56,9 @@ class EntGacha extends BaseEnt
         //$info[$group_no] = $this->_vp_gacha_info->toArray();
         //$this->gacha_info($info);
 
+        // @note vp_gacha_info で安全にJsonを操作
+        //       gacha_infoのデータの使用は処理のみで完結
+        //       設定されてる値を直接変更する事や分析に用いる事はしない
         $this->_vp_gacha_info->addExecCount($group_no);
     }
 
