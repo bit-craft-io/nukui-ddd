@@ -11,6 +11,9 @@ use App\Core\Http\Requests\BaseReq;
  */
 final class ReqAccountLogin extends BaseReq
 {
+    /**
+     * @return string[]
+     */
     public function rules(): array
     {
         return [
@@ -18,6 +21,9 @@ final class ReqAccountLogin extends BaseReq
         ];
     }
 
+    /**
+     * @return void
+     */
     protected function prepareForValidation(): void
     {
         $this->merge([

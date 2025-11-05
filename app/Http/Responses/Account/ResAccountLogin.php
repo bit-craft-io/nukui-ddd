@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
  */
 final class ResAccountLogin extends BaseRes
 {
+    /**
+     * @param Request $req
+     * @return JsonResponse
+     */
     public function toResponse(Request $req): JsonResponse
     {
         $result = [

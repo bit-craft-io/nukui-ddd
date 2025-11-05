@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Domains\ValueObject;
 
-use App\Models\Enums\TypeItem;
+use App\Models\Enum\TypeItem;
 
 /**
  * @property-read integer $id
@@ -15,7 +15,14 @@ use App\Models\Enums\TypeItem;
  * @property-read string $begin_at
  * @property-read string $end_at
  */
-class VoMItem extends BaseVo
+class VoMItem extends BaseMstVo
 {
-
+    /**
+     * @param int $amount
+     * @return int
+     */
+    public function clampToMaxStock(int $amount): int
+    {
+        return min($this->max_stock, $amount);
+    }
 }

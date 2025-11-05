@@ -13,11 +13,15 @@ use Illuminate\Http\Request;
  */
 final class ResFailed extends BaseRes
 {
+    /**
+     * @param Request $req
+     * @return JsonResponse
+     */
     public function toResponse(Request $req): JsonResponse
     {
         $result = [
             'success' => 0,
-            'result' => (object)$this->_props,
+            'result' => (object)$this->_result,
             //'error_info' => [
             //    'code' =>  $this->code,
             //    'message' => $this->message

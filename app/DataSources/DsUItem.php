@@ -10,11 +10,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class DsUItem extends BaseDs
 {
+    /**
+     * @return Model|null
+     */
     public function getDraft(): ?Model
     {
         return $this->_model;
     }
 
+    /**
+     * @param int $user_id
+     * @return Collection
+     */
     public function getByUserId(int $user_id): Collection
     {
         return $this->_model
@@ -23,6 +30,10 @@ class DsUItem extends BaseDs
             ->get();
     }
 
+    /**
+     * @param array $values
+     * @return void
+     */
     public function upsert(array $values): void
     {
         $uniqueBy = ['user_id', 'item_id'];

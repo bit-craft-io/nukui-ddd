@@ -19,6 +19,9 @@ abstract class BaseDs
     protected ?CarbonImmutable $_now = null;
     protected ?Model $_model = null;
 
+    /**
+     * @return CarbonImmutable
+     */
     final public function _now(): CarbonImmutable
     {
         // @note 意図しない動作を抑止する為 Carbon ではなく CarbonImmutable を使用
@@ -40,9 +43,9 @@ abstract class BaseDs
 
     /**
      * @param array $conditions
-     * @return Model
+     * @return Model|null
      */
-    final public function find(array $conditions): Model
+    final public function find(array $conditions = []): ?Model
     {
         return $this->_model
             ->newQuery()
@@ -52,10 +55,10 @@ abstract class BaseDs
 
     /**
      * @param array $conditions
-     * @return Model
+     * @return Model|null
      * @throws Exception
      */
-    final public function findOrFail(array $conditions): Model
+    final public function findOrFail(array $conditions = []): ?Model
     {
         $model = $this->_model
             ->newQuery()
@@ -73,7 +76,7 @@ abstract class BaseDs
      * @param array $conditions
      * @return Collection<Model>
      */
-    final public function get(array $conditions): Collection
+    final public function get(array $conditions = []): Collection
     {
         return $this->_model
             ->newQuery()
@@ -118,6 +121,11 @@ abstract class BaseDs
         )->id ?? 0;
     }
 
+    /**
+     * @param string|null $column_begin
+     * @param string|null $column_end
+     * @return Closure
+     */
     final public function enable(?string $column_begin = null, ?string $column_end = null): Closure
     {
         $now = $this->_now();

@@ -2,7 +2,7 @@
 
 namespace App\Core\Libraries\Stateless\Static;
 
-use App\Core\Libraries\Stateless\Static\Enums\TypeSizeUnit;
+use App\Core\Libraries\Stateless\Static\Enum\TypeSizeUnit;
 use Closure;
 
 final class StlStaDevelopTool

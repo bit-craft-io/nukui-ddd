@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Models\Enums\TypeItem;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Enum\TypeItem;
 use Illuminate\Database\Eloquent\Model;
 
 class MItem extends Model
@@ -30,6 +29,10 @@ class MItem extends Model
      * @var list<string>
      */
     protected $hidden = [
+        'is_active',
+        'begin_at',
+        'end_at',
+        'ops_memo',
         'created_at',
         'updated_at',
         'deleted_at',

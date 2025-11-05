@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Traits;
 
-use App\Core\Libraries\Stateless\Static\StlStaCompress;
-use App\Core\Libraries\Stateless\Static\StlStaRandom;
+use App\Core\Libraries\Stateless\Static\StlStaUtilCompress;
+use App\Core\Libraries\Stateless\Static\StlStaUtilRandom;
 
 trait TraitUtil
 {
-    public string|StlStaCompress $_UtilCompress = StlStaCompress::class;
-    public string|StlStaRandom $_UtilRandom = StlStaRandom::class;
+    public string|StlStaUtilCompress $_UtilCompress = StlStaUtilCompress::class;
+    public string|StlStaUtilRandom $_UtilRandom = StlStaUtilRandom::class;
 }

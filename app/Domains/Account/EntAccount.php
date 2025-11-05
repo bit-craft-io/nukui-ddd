@@ -18,11 +18,17 @@ use App\Core\Domains\Entity\BaseEnt;
  */
 class EntAccount extends BaseEnt
 {
+    /**
+     * @return void
+     */
     public function initOnce(): void
     {
         // TODO: Implement setUp() method.
     }
 
+    /**
+     * @return void
+     */
     public function initAfter(): void
     {
         // TODO: Implement initAfter() method.

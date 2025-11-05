@@ -10,11 +10,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class DsAccount extends BaseDs
 {
+    /**
+     * @return Model|null
+     */
     public function getDraft(): ?Model
     {
         return $this->_model;
     }
 
+    /**
+     * @param string $email
+     * @return Account|null
+     */
     public function findByEmail(string $email): Account|null
     {
         return $this->_model
@@ -23,6 +30,10 @@ class DsAccount extends BaseDs
             ->first();
     }
 
+    /**
+     * @param array $values
+     * @return void
+     */
     public function upsert(array $values): void
     {
         $uniqueBy = ['email'];

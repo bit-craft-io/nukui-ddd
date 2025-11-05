@@ -12,12 +12,20 @@ namespace App\Core\Domains\ValueProxy;
  */
 class VpEnergy extends BaseVp
 {
+    /**
+     * @param int $value
+     * @return void
+     */
     public function recover(int $value): void
     {
         $recover = min($this->energy_max_stock, ($this->energy + $value));
         $this->energy($recover);
     }
 
+    /**
+     * @param int $value
+     * @return void
+     */
     public function consume(int $value): void
     {
         $sub = max(($this->energy - $value), 0);

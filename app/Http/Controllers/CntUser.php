@@ -11,6 +11,11 @@ use App\Http\Applications\AppUser;
 
 class CntUser extends BaseCnt
 {
+    /**
+     * @param AppUser $app
+     * @param ReqNone $req
+     * @return void
+     */
     public function info(AppUser $app, ReqNone $req): void
     {
         $this->_ResponseModify::set(ResSuccess::class);

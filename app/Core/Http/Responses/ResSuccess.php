@@ -9,11 +9,15 @@ use Illuminate\Http\Request;
 
 final class ResSuccess extends BaseRes
 {
+    /**
+     * @param Request $req
+     * @return JsonResponse
+     */
     public function toResponse(Request $req): JsonResponse
     {
         $result = [
             'success' => 1,
-            'result' => (object)$this->_props
+            'result' => (object)$this->_result
         ];
         return response()->json($result);
     }

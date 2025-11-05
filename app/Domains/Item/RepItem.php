@@ -21,7 +21,20 @@ class RepItem extends BaseRep
     public function makeDraft(int $user_id, int $item_id): EntItem|BaseEnt
     {
         $model = $this->_Infra::ds(DsHub::DS_U_ITEM)->getDraft();
-        $model->fill(['user_id' => $user_id, 'item_id' => $item_id]);
+        $model->fill(['user_id' => $user_id, 'item_id' => $item_id, 'amount' => 0]);
+        return $this->_Domain::ent(EntHub::ENT_ITEM)->init($model);
+    }
+
+    /**
+     * @param int $user_id
+     * @param int $item_id
+     * @return EntItem|BaseEnt
+     * @throws Exception
+     */
+    public function find(int $user_id, int $item_id): EntItem|BaseEnt
+    {
+        $conditions = ['user_id' => $user_id, 'item_id' => $item_id];
+        $model = $this->_Infra::ds(DsHub::DS_U_ITEM)->find($conditions);
         return $this->_Domain::ent(EntHub::ENT_ITEM)->init($model);
     }
 
@@ -45,7 +58,7 @@ class RepItem extends BaseRep
     public function getByUserId(int $user_id): StfInsIterator
     {
         $models = $this->_Infra::ds(DsHub::DS_U_ITEM)->getByUserId($user_id);
-        return $this->_Domain::ent(EntHub::ENT_ITEM)->iterator($models, 'item_id');
+        return $this->_Domain::entIterator(EntHub::ENT_ITEM, $models, 'item_id');
     }
 
     /**

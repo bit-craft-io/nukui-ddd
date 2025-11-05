@@ -13,11 +13,14 @@ use App\Http\Requests\Account\ReqAccountLogin;
 
 class AppAccount extends BaseApp
 {
+    /**
+     * @return void
+     */
     public function register(): void
     {
         $this->_Transaction::begin();
 
-        $email = $this->_Service::uc(UcHub::UC_ACCOUNT_MAKE_EMAIL)->execute();
+        $email = $this->_App::uc(UcHub::UC_ACCOUNT_MAKE_EMAIL)->execute();
         $password = $this->_UtilRandom::key32(4, 4);
 
         $rep_account = $this->_Domain::rep(RepHub::REP_ACCOUNT);
@@ -31,7 +34,7 @@ class AppAccount extends BaseApp
         $primary_code = $this->_UtilCompress::comp($primary_data);
         $this->_ResponseParam::set('primary_code', $primary_code);
 
-        $public_id = $this->_Service::uc(UcHub::UC_ACCOUNT_MAKE_PUBLIC_ID)->execute();
+        $public_id = $this->_App::uc(UcHub::UC_ACCOUNT_MAKE_PUBLIC_ID)->execute();
         $rep_user = $this->_Domain::rep(RepHub::REP_USER);
         $ent_user = $rep_user->makeDraft();
         $ent_user->id($ent_account->id);
@@ -43,10 +46,14 @@ class AppAccount extends BaseApp
         $rep_user->persist($ent_user);
     }
 
+    /**
+     * @param ReqAccountLogin $req
+     * @return void
+     */
     public function login(ReqAccountLogin $req): void
     {
         [$email, $password] = explode(':', $this->_UtilCompress::unComp($req->primary_code));
-        $bearer_token = $this->_Service::uc(UcHub::UC_ACCOUNT_CREATE_API_TOKEN)->execute($email, $password);
+        $bearer_token = $this->_App::uc(UcHub::UC_ACCOUNT_CREATE_API_TOKEN)->execute($email, $password);
         $this->_ResponseParam::set('bearer_token', $bearer_token);
     }
 }

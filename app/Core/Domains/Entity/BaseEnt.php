@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Core\Domains\Entity;
 
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
+use App\Core\Libraries\Stateful\Static\StfStaFactory;
 use App\Core\Libraries\Traits\TraitDomain;
-use App\Core\Libraries\Traits\TraitInfra;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,8 +16,6 @@ use Illuminate\Database\Eloquent\Model;
 abstract class BaseEnt
 {
     use TraitDomain;
-    // @note Entity の initOnce で使用
-    use TraitInfra;
 
     // @note クラス生成時に１回だけ実行される
     abstract public function initOnce(): void;
@@ -28,15 +26,15 @@ abstract class BaseEnt
     protected array $_draft_keys = [];
 
     /**
-     * 初期化
-     *
      * @param Model|null $model
      * @return $this
      */
     public function init(?Model $model): self
     {
         $this->_model = $model;
-        $this->initAfter();
+        if ($this->_model) {
+            $this->initAfter();
+        }
         return $this;
     }
 
@@ -101,11 +99,24 @@ abstract class BaseEnt
             }
             return $this;
         };
-        return $this->_Domain::iterator($callable, $collect, $key_name);
+        $class = StfStaFactory::prototype(StfInsIterator::class);
+        $class->init($callable, $collect, $key_name);
+        return $class;
     }
 
+    /**
+     * @return bool
+     */
     public function isNew(): bool
     {
         return empty($this->id ?? null);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return empty($this->_model ?? null);
     }
 }
