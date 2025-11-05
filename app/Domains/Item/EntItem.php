@@ -49,9 +49,9 @@ class EntItem extends BaseEnt
         // $sum_amount = $vo_m_items->minAmount($this->amount + $amount);
         // $this->_vp_item->add($sum_amount);
 
-        $m_item = $this->_m_item_map[$this->item_id];
-        $sum_amount = min($m_item['max_stock'], $this->amount + $amount);
-        $this->_vp_item->add($sum_amount);
+        //$m_item = $this->_m_item_map[$this->item_id];
+        //$sum_amount = min($m_item['max_stock'], $this->amount + $amount);
+        $this->_vp_item->amount($amount);
     }
 
     public function subAmount(int $amount): void
@@ -79,7 +79,7 @@ class EntItem extends BaseEnt
         return [
             'item_id' => $this->item_id,
             'amount' => $this->amount,
-            'end_at' => $this->end_at->toDateTimeString(),
+            'end_at' => $this->end_at?->toDateTimeString(),
         ];
     }
 }

@@ -16,12 +16,13 @@ return new class extends Migration
     {
         Schema::create('m_items', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement()->comment('識別子');
+            $table->boolean('is_active')->default(false)->comment('公開中');
+            $table->timestamp('begin_at')->nullable()->comment('有効期間（開始日時）');
+            $table->timestamp('end_at')->nullable()->comment('有効期間（終了日時）');
             $table->string('name', 64)->nullable()->comment('名前');
             $table->unsignedTinyInteger('type_item')->default(1)->comment('アイテムタイプ（1: 消耗アイテム | 2: 永続アイテム | 3:装備アイテム | 4:素材アイテム）');
             $table->unsignedInteger('max_display')->default(1)->comment('表示最大値');
             $table->unsignedInteger('max_stock')->default(1)->comment('所持最大値');
-            $table->timestamp('begin_at')->nullable()->comment('有効期間（開始日時）');
-            $table->timestamp('end_at')->nullable()->comment('有効期間（終了日時）');
             $table->string('ops_memo', 128)->nullable()->comment('運用メモ');
             $table->timestamps();
 

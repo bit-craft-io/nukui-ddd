@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('u_gachas', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement()->comment('識別子');
             $table->unsignedBigInteger('user_id')->comment('ユーザID');
-            $table->json('vp_u_gacha_info')->nullable()->comment('ユーザガチャ情報')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('gacha_info')->nullable()->comment('ユーザガチャ情報')->default(new Expression('(JSON_OBJECT())'));
             $table->timestamps();
         });
     }

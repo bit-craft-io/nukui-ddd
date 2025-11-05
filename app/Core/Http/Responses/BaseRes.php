@@ -8,20 +8,20 @@ use Illuminate\Http\JsonResponse;
 
 abstract class BaseRes extends JsonResponse
 {
-    protected array $_props = [];
+    protected array $_result = [];
 
-    public function init(array $props = []): void
+    public function init(array $params = []): void
     {
-        $this->_props = $props;
+        $this->_result = $params;
     }
 
     public function __get(string $name)
     {
-        return $this?->_props[$name] ?? null;
+        return $this?->_result[$name] ?? null;
     }
 
     public function setParams(array $params): void
     {
-        $this->_props += $params;
+        $this->_result += $params;
     }
 }

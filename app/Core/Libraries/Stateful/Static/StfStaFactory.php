@@ -13,21 +13,21 @@ final class StfStaFactory
     private static ?array $_singleton = null;
 
     /**
-     * @template T
-     * @param T $class
+     * @template T of object
+     * @param class-string<T> $class
      * @return T
      */
-    public static function new($class)
+    public static function new(string $class): object
     {
         return app($class);
     }
 
     /**
-     * @template T
-     * @param T $class
+     * @template T of object
+     * @param class-string<T> $class
      * @return T
      */
-    public static function prototype($class, bool $is_singleton = false)
+    public static function prototype(string $class, bool $is_singleton = false): object
     {
         if (!app()->has($class)) {
             app()->singleton($class);
@@ -44,11 +44,11 @@ final class StfStaFactory
     }
 
     /**
-     * @template T
-     * @param T $class
+     * @template T of object
+     * @param class-string<T> $class
      * @return T
      */
-    public static function singleton($class)
+    public static function singleton(string $class): object
     {
         return self::prototype($class, true);
     }

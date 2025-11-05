@@ -50,11 +50,23 @@ final class StfInsIterator implements Iterator
     {
         /** @var T|null $model */
         $model = $this->_models->get($key) ?? null;
-        //dd($this->_models->toArray());
         if ($model) {
             return call_user_func($this->_callable, $model);
         }
         return null;
+    }
+
+    /**
+     * @param $key
+     * @return T|null
+     */
+    public function findOrWarn($key): mixed
+    {
+        $class = $this->find($key);
+        if (empty($class)) {
+            dd(__LINE__);
+        }
+        return $class;
     }
 
     /**

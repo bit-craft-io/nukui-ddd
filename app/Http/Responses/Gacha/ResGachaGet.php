@@ -7,8 +7,7 @@ namespace App\Http\Responses\Gacha;
 use App\Core\Http\Requests\ReqNone;
 use App\Core\Http\Responses\BaseRes;
 use App\Core\Libraries\Traits\TraitDomain;
-use App\Core\Libraries\Traits\TraitInfra;
-use App\DataSources\DsHub;
+use App\Domains\Gacha\VoMGacha;
 use App\Domains\RepHub;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,22 +17,28 @@ use Illuminate\Http\Request;
  */
 final class ResGachaGet extends BaseRes
 {
-    // TODO ここで Infra を使用して良いかを再考
-    use TraitInfra;
+    // TODO use Traitの精査
     use TraitDomain;
 
     public function toResponse(Request|ReqNone $req): JsonResponse
     {
-        $voMGachas = $this->_Domain::rep(RepHub::REP_GACHA)->getVoMGacha();
-        foreach ($voMGachas as $voMGacha) {
-            $this->_props['gachas'][] = $voMGacha->toArray();
+        // @note Collection<Model> にビジネスロジックを入れたく無い為、Voのイテレータを取得
+        $vo_gachas = $this->_Domain::mstVo(VoMGacha::class)->get();
+        foreach ($vo_gachas as $vo_gacha) {
+            $vo_gacha->find($vo_gacha->id);
+            if (!$vo_gacha->validate()) {
+                continue;
+            }
+            $this->_result['gachas'][] = $vo_gacha->toArray();
         }
-        $ent_gacha = $this->_Domain::rep(RepHub::REP_GACHA)->find($req->user_id);
-        $this->_props['u_gacha_info'] = $ent_gacha->toArray();
+
+        $rep_gacha = $this->_Domain::rep(RepHub::REP_GACHA);
+        $ent_gacha = $rep_gacha->find($req->user_id);
+        $this->_result['u_gacha'] = $ent_gacha->toArray();
 
         $result = [
             'success' => 1,
-            'result' => $this->_props
+            'result' => $this->_result
         ];
         return response()->json($result);
     }
