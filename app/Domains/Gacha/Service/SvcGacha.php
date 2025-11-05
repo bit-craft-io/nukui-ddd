@@ -41,16 +41,14 @@ class SvcGacha
             throw $this->_Except::app(TypeExcept::AppGachaMasterIsNotValid, $except_params);
         }
 
-        $draw_lots = match (true) {
+        $ent_gacha->addExecCount($vo_gacha->group_no);
+        $rep_gacha->persist($ent_gacha);
+
+        return match (true) {
             $vo_gacha->type_draw->isNormal() => $this->_normal($vo_gacha, $ent_gacha),
             $vo_gacha->type_draw->isRarity() => $this->_rarity($vo_gacha, $ent_gacha),
             $vo_gacha->type_draw->isStep() => $this->_step($vo_gacha, $ent_gacha),
         };
-
-        $ent_gacha->addExecCount($vo_gacha->group_no);
-        $rep_gacha->persist($ent_gacha);
-
-        return $draw_lots;
     }
 
     private function _normal(VoMGacha $vo_gacha, EntGacha $ent_gacha): array
@@ -61,11 +59,11 @@ class SvcGacha
 
         $sorted_rates = $m_gacha_draw_entities->sortByDesc('rate')->values()->toArray();
         $cum_rates = $this->_cumulativeRate($sorted_rates);
-        $sum_rate = end($cum_rates);
 
         $draw_lots = [];
         for ($i = 0; $i < $vo_gacha->draw_count; $i++) {
-            $draw_lots[] = $this->_drawLot($sorted_rates, $sum_rate, $cum_rates, ['type_entity', 'entity_id', 'entity_amount']);
+            // @note エンティティ抽選
+            $draw_lots[] = $this->_drawLot($sorted_rates, $cum_rates, ['type_entity', 'entity_id', 'entity_amount']);
         }
         return $draw_lots;
     }
@@ -79,7 +77,6 @@ class SvcGacha
         // @note レアリティ抽選用のデータ作成
         $rarity_sorted_rates = $m_gacha_draw_rarities->sortByDesc('rate')->values()->toArray();
         $rarity_cum_rates = $this->_cumulativeRate($rarity_sorted_rates);
-        $rarity_sum_rate = end($rarity_cum_rates);
 
         // @note エンティティ抽選用のデータ取得
         $conditions = ['group_no' => $vo_gacha->gacha_draw_entity_group_no];
@@ -90,7 +87,7 @@ class SvcGacha
         for ($i = 0; $i < $vo_gacha->draw_count; $i++) {
 
             // @note レアリティ抽選
-            $lot_results = $this->_drawLot($rarity_sorted_rates, $rarity_sum_rate, $rarity_cum_rates, ['type_rarity']);
+            $lot_results = $this->_drawLot($rarity_sorted_rates, $rarity_cum_rates, ['type_rarity']);
             $type_rarity = $lot_results['type_rarity'];
 
             // @note エンティティ抽選用のデータ作成
@@ -100,10 +97,9 @@ class SvcGacha
 
             $sorted_rates = $entities[$type_rarity]->sortByDesc('rate')->values()->toArray();
             $cum_rates = $this->_cumulativeRate($sorted_rates);
-            $sum_rate = end($cum_rates);
 
             // @note エンティティ抽選
-            $draw_lots[] = $this->_drawLot($sorted_rates, $sum_rate, $cum_rates, ['type_entity', 'entity_id', 'entity_amount']);
+            $draw_lots[] = $this->_drawLot($sorted_rates, $cum_rates, ['type_entity', 'entity_id', 'entity_amount']);
         }
         return $draw_lots;
     }
@@ -132,8 +128,11 @@ class SvcGacha
         return $cum_rates;
     }
 
-    private function _drawLot(array $sorted_rates, int $sum_rate, array $cum_rates, array $lot_filter = []): array
+    private function _drawLot(array $sorted_rates, array $cum_rates, array $lot_filter = []): array
     {
+        $sum_rate = end($cum_rates);
+        reset($cum_rates);
+
         $lot_num = mt_rand(1, $sum_rate);
 
         $left = 0;
