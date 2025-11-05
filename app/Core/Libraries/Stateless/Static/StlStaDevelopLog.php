@@ -2,7 +2,7 @@
 
 namespace App\Core\Libraries\Stateless\Static;
 
-use App\Core\Libraries\Stateless\Static\Enums\TypeLogText;
+use App\Core\Libraries\Stateless\Static\Enum\TypeLogText;
 use Illuminate\Support\Facades\Log;
 
 final class StlStaDevelopLog

@@ -33,7 +33,12 @@ abstract class BaseMstVo extends BaseVo
             return $this->init($model);
         };
 
-        return $this->_Cache::array()->remember("{$const_name}_{$id}", $this->_ttl_sec, $callback);
+        $config = $this->_Config::core();
+        if (!$config->cache_enable) {
+            return $callback();
+        }
+
+        return $this->_Cache::array()->remember("{$const_name}_{$id}", $config->cache_default_ttl_sec, $callback);
     }
 
     /**
@@ -48,6 +53,11 @@ abstract class BaseMstVo extends BaseVo
             return $this->iterator($models);
         };
 
-        return $this->_Cache::array()->remember($const_name, $this->_ttl_sec, $callback);
+        $config = $this->_Config::core();
+        if (!$config->cache_enable) {
+            return $callback();
+        }
+
+        return $this->_Cache::array()->remember($const_name, $config->cache_default_ttl_sec, $callback);
     }
 }

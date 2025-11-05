@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Models\Enums\TypeEntity;
-use App\Models\Enums\TypeRarity;
+use App\Models\Enum\TypeEntity;
+use App\Models\Enum\TypeRarity;
 use Illuminate\Database\Eloquent\Model;
 
 class MGachaDrawRarity extends Model

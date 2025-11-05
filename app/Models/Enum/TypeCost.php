@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Models\Enums;
+namespace App\Models\Enum;
 
-enum TypeEntity: int
+enum TypeCost: int
 {
     case Item = 1;
-    case Playable = 2;
+    case Other = 2;
 
     public function label(): string
     {
         return match ($this) {
             self::Item => 'アイテム',
-            self::Playable => 'プレイアブル',
+            self::Other => 'その他',
         };
     }
 
@@ -22,8 +22,8 @@ enum TypeEntity: int
         return $this === self::Item;
     }
 
-    public function isPlayable(): bool
+    public function isOther(): bool
     {
-        return $this === self::Playable;
+        return $this === self::Other;
     }
 }

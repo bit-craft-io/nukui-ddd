@@ -59,7 +59,7 @@ class AppGacha extends BaseApp
         $result_svc_gacha_draw = $svc_gacha->draw($req->user_id, $req->gacha_id);
 
         // @note $svc_gacha の戻り値 $result_svc_gacha_draw より present_box の処理
-
+        //       処理は割愛します
 
         // @note 各ドメインを永続化
         $rep_item->persist($ent_item);

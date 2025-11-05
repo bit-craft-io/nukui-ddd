@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Models\Enums;
+namespace App\Models\Enum;
 
 enum TypeRarity: int
 {

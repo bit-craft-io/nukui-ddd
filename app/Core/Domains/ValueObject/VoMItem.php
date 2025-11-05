@@ -6,7 +6,7 @@ namespace App\Core\Domains\ValueObject;
 
 use App\Core\Libraries\Traits\TraitInfrastructure;
 use App\DataSources\DsHub;
-use App\Models\Enums\TypeItem;
+use App\Models\Enum\TypeItem;
 
 /**
  * @property-read integer $id

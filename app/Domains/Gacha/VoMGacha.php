@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Domains\Gacha;
 
 use App\Core\Domains\ValueObject\BaseMstVo;
-use App\Models\Enums\TypeCost;
-use App\Models\Enums\TypeDraw;
+use App\Models\Enum\TypeCost;
+use App\Models\Enum\TypeDraw;
 
 /**
  * @property-read integer $id

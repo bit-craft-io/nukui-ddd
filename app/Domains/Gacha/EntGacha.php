@@ -51,11 +51,7 @@ class EntGacha extends BaseEnt
 
     public function getExecCount(int $group_no): int
     {
-        $info = $this->gacha_info ?? [];
-        if ($info[$group_no] ?? false) {
-            return $info[$group_no]['exec_count'];
-        }
-        return 0;
+        return $this->_vp_gacha_info->getExecCount($group_no);
     }
 
     public function toArray(): array
