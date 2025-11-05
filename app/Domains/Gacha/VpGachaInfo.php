@@ -13,6 +13,7 @@ use Carbon\CarbonImmutable;
  */
 class VpGachaInfo extends BaseVp
 {
+    // @note gacha_info の構造
     protected array $_gacha_info = [
         'exec_count' => 0,
         'exec_at' => '',
@@ -32,6 +33,7 @@ class VpGachaInfo extends BaseVp
         }
         $gacha_info[$group_no]['exec_count'] += 1;
         $gacha_info[$group_no]['exec_at'] = CarbonImmutable::now()->toDateTimeString();
+        // TODO $vo_gacha->end_at
         //$gacha_info[$group_no]['expired_at'] = $vo_gacha->end_at;
 
         ksort($gacha_info);

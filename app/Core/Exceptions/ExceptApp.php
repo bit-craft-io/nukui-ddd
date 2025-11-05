@@ -11,12 +11,13 @@ final class ExceptApp extends Exception
 {
     /**
      * @param TypeExcept $type_except
-     * @return self
+     * @param array $except_params
+     * @return $this
      */
-    public function init(TypeExcept $type_except): self
+    public function init(TypeExcept $type_except, array $except_params = []): self
     {
         $this->code = $type_except->value;
-        $this->message = $type_except->message();
+        $this->message = $type_except->message($except_params);
         return $this;
     }
 }

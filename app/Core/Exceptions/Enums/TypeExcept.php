@@ -16,7 +16,7 @@ enum TypeExcept: int
     case AppGachaMasterIsNotValid = 3003;
     case AppGachaStepNotEqual = 3004;
 
-    public function message(): string
+    public function message(array $except_params = []): string
     {
         return match ($this) {
             self::ModelDataNotFound => 'Data not found',
@@ -25,8 +25,8 @@ enum TypeExcept: int
             self::AppItemNotEnoughUnits => 'Item not enough units',
             self::AppGachaItemIsEmpty => 'Item is empty',
             self::AppGachaCostIsNotEnough => 'Cost is not enough',
-            self::AppGachaMasterIsNotValid => 'Master is not valid',
-            self::AppGachaStepNotEqual => 'Step is not equal',
+            self::AppGachaMasterIsNotValid => 'Master is not valid [gacha.id #1]',
+            self::AppGachaStepNotEqual => strtr('Step is not equal [gacha.exec_count #1 != #2]', $except_params),
         };
     }
 }

@@ -64,6 +64,7 @@ final class StfInsIterator implements Iterator
     {
         $class = $this->find($key);
         if (empty($class)) {
+            // TODO 警告を出力
             dd(__LINE__);
         }
         return $class;

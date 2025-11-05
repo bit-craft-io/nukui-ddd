@@ -42,18 +42,19 @@ abstract class BaseMstVo extends BaseVo
             return $callback();
         }
 
-        return $this->_Cache::array()->remember("{$const_name}_{$id}", $config->cache_default_ttl_sec, $callback);
+        $key = "{$const_name}_{$id}";
+        return $this->_Cache::array()->remember($key, $config->cache_default_ttl_sec, $callback);
     }
 
     /**
      * @return array<static>|StfInsIterator<static>
      */
-    public function get(): array|StfInsIterator
+    public function get(array $conditions = []): array|StfInsIterator
     {
         $const_name = $this->_dsConstName();
 
-        $callback = function () use ($const_name) {
-            $models = $this->_Infra::ds(DsHub::{$const_name})->getEnable();
+        $callback = function () use ($const_name, $conditions) {
+            $models = $this->_Infra::ds(DsHub::{$const_name})->getEnable($conditions);
             return $this->iterator($models);
         };
 
@@ -62,6 +63,7 @@ abstract class BaseMstVo extends BaseVo
             return $callback();
         }
 
-        return $this->_Cache::array()->remember($const_name, $config->cache_default_ttl_sec, $callback);
+        $key = "{$const_name}_" . serialize($conditions);
+        return $this->_Cache::array()->remember($key, $config->cache_default_ttl_sec, $callback);
     }
 }

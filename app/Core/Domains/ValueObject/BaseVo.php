@@ -32,7 +32,7 @@ abstract class BaseVo
         return $this?->_props[$name] ?? null;
     }
 
-    // @note ValueObject は mutable の為、setter は存在しない
+    // @note ValueObject は immutable の為、setter は存在しない
     //public function __call(string $name, array $arguments = [])
 
     /**
