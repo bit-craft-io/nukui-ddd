@@ -17,6 +17,7 @@ use App\Models\Enum\TypeDraw;
  * @property-read TypeDraw $type_draw
  * @property-read integer $group_no
  * @property-read integer $exec_count
+ * @property-read integer $exec_count_limit
  * @property-read TypeCost $type_cost
  * @property-read integer $cost_id
  * @property-read integer $total_cost_amount
@@ -54,6 +55,15 @@ class VoMGacha extends BaseMstVo
     public function enoughCost(int $u_entity_amount): bool
     {
         return $this->total_cost_amount <= $u_entity_amount;
+    }
+
+    /**
+     * @param int $exec_count
+     * @return bool
+     */
+    public function isExecCountOver(int $exec_count): bool
+    {
+        return $exec_count >= $this->exec_count_limit;
     }
 
     /**

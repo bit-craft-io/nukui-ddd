@@ -45,12 +45,12 @@ QUERY;
         DB::table('m_gachas')->truncate();
         $queries[] = /** @lang text */
             <<<'QUERY'
-insert into m_gachas (is_active, begin_at, end_at, name, type_draw, group_no, exec_count, type_cost, cost_id, total_cost_amount, draw_count, gacha_draw_rarity_group_no, gacha_draw_entity_group_no, display_order, banner_image_name, ops_memo) values
-(1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 'Normal', 1, 1, 0, 1, 1, 100, 3, 0, 1, 1, null, null),
-(1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 'Step', 2, 2, 0, 1, 1, 100, 10, 0, 1, 1, null, null),
-(1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 'Step', 2, 2, 1, 1, 1, 100, 10, 0, 2, 1, null, null),
-(1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 'Fixed', 3, 3, 0, 1, 1, 1000, 10, 0, 1, 1, null, null),
-(1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 'Rarity', 4, 4, 0, 1, 1, 100, 3, 2, 2, 1, null, null);
+insert into m_gachas (is_active, begin_at, end_at, name, type_draw, group_no, exec_count, exec_count_limit, type_cost, cost_id, total_cost_amount, draw_count, gacha_draw_rarity_group_no, gacha_draw_entity_group_no, display_order, banner_image_name, ops_memo) values
+(1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 'Normal', 1, 1, 0, 0, 1, 1, 100, 3, 0, 1, 1, null, null),
+(1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 'Step', 2, 2, 0, 0, 1, 1, 100, 10, 0, 1, 1, null, null),
+(1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 'Step', 2, 2, 1, 0, 1, 1, 100, 10, 0, 2, 1, null, null),
+(1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 'Fixed', 3, 3, 0, 0, 1, 1, 1000, 10, 0, 1, 1, null, null),
+(1, '2025-01-01 00:00:00', '2038-01-01 00:00:00', 'Rarity', 4, 4, 0, 0, 1, 1, 100, 3, 2, 2, 1, null, null);
 QUERY;
 
         DB::table('m_gacha_draw_entities')->truncate();

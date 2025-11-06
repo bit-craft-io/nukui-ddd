@@ -21,6 +21,7 @@ return new class extends Migration
             // @note 「グループ番号」と「実行回数」より「ｎステップを表現」
             $table->unsignedInteger('group_no')->default(0)->comment('グループ番号');
             $table->unsignedInteger('exec_count')->default(0)->comment('実行回数');
+            $table->unsignedInteger('exec_count_limit')->default(0)->comment('実行回数限度');
             $table->unsignedBigInteger('type_cost')->default(1)->comment('コストタイプ（1: アイテム | 2: その他）');
             $table->unsignedBigInteger('cost_id')->default(0)->comment('コストID');
             $table->unsignedInteger('total_cost_amount')->default(0)->comment('合計コスト個数');

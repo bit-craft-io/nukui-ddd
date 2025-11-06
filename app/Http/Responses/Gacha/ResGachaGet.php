@@ -25,6 +25,10 @@ final class ResGachaGet extends BaseRes
      */
     public function toResponse(Request|ReqNone $req): JsonResponse
     {
+        $rep_gacha = $this->_Domain::rep(RepHub::REP_GACHA);
+        $ent_gacha = $rep_gacha->find($req->user_id);
+        $this->_result['u_gacha'] = $ent_gacha->toArray();
+
         // @note Collection<Model> にビジネスロジックを入れたく無い為、Voのイテレータを取得
         $vo_gachas = $this->_Domain::mstVo(VoMGacha::class)->get();
         foreach ($vo_gachas as $vo_gacha) {
@@ -32,12 +36,16 @@ final class ResGachaGet extends BaseRes
             if (!$vo_gacha->validate()) {
                 continue;
             }
+            if ($vo_gacha->type_draw->isStep()) {
+                if ($vo_gacha->exec_count !== $ent_gacha->getExecCount($vo_gacha->group_no)) {
+                    continue;
+                }
+            }
+
             $this->_result['gachas'][] = $vo_gacha->toArray();
         }
 
-        $rep_gacha = $this->_Domain::rep(RepHub::REP_GACHA);
-        $ent_gacha = $rep_gacha->find($req->user_id);
-        $this->_result['u_gacha'] = $ent_gacha->toArray();
+
 
         $result = [
             'success' => 1,

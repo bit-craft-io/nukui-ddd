@@ -14,7 +14,8 @@ enum TypeExcept: int
     case AppGachaItemIsEmpty = 3001;
     case AppGachaCostIsNotEnough = 3002;
     case AppGachaMasterIsNotValid = 3003;
-    case AppGachaStepNotEqual = 3004;
+    case AppGachaExecCountOver = 3004;
+    case AppGachaStepNotEqual = 3005;
 
     public function message(array $except_params = []): string
     {
@@ -25,8 +26,9 @@ enum TypeExcept: int
             self::AppItemNotEnoughUnits => 'Item not enough units',
             self::AppGachaItemIsEmpty => 'Item is empty',
             self::AppGachaCostIsNotEnough => 'Cost is not enough',
-            self::AppGachaMasterIsNotValid => 'Master is not valid [gacha.id #1]',
-            self::AppGachaStepNotEqual => strtr('Step is not equal [gacha.exec_count #1 != #2]', $except_params),
+            self::AppGachaMasterIsNotValid => strtr('Master is not valid [gacha.id #1]', $except_params),
+            self::AppGachaExecCountOver => strtr('Exec count over [gacha.group_no #1]', $except_params),
+            self::AppGachaStepNotEqual => strtr('Step is not equal [step m #1 != u #2]', $except_params),
         };
     }
 }

@@ -31,7 +31,7 @@ class AppGacha extends BaseApp
     public function play(ReqGachaPlay $req): void
     {
         // @note トランザクション処理をする場合
-        //$this->_Transaction::begin();
+        $this->_Transaction::begin();
 
         // @note このやり方はイマイチ
         //$m_gachas = $this->_App::mst(MstHub::MST_GACHA)->get();
@@ -58,7 +58,7 @@ class AppGacha extends BaseApp
         }
         $ent_item->subAmount($vo_gacha->total_cost_amount);
 
-        // TODO 内部で validate のエラーをしてるので、どうするか決める
+        // TODO 内部で validate のエラーをしてるので、内部でthrow するかを決める
         $svc_gacha = $this->_Domain::svc(SvcHub::SVC_GACHA);
         $result_svc_gacha_draw = $svc_gacha->draw($req->user_id, $req->gacha_id);
 
