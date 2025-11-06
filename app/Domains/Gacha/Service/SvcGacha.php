@@ -37,18 +37,26 @@ class SvcGacha
 
         $vo_gacha = $this->_Domain::vo(VoHub::VO_M_GACHA)->find($gacha_id);
         if (!$vo_gacha->validate()) {
-            $except_params['#1'] = $gacha_id;
+            $except_params['#1'] = $vo_gacha->id;
             throw $this->_Except::app(TypeExcept::AppGachaMasterIsNotValid, $except_params);
         }
 
-        $ent_gacha->addExecCount($vo_gacha->group_no);
-        $rep_gacha->persist($ent_gacha);
+        $exec_count = $ent_gacha->getExecCount($vo_gacha->group_no);
+        if ($vo_gacha->isExecCountOver($exec_count)) {
+            $except_params['#1'] = $vo_gacha->group_no;
+            throw $this->_Except::app(TypeExcept::AppGachaExecCountOver, $except_params);
+        }
 
-        return match (true) {
+        $draw_lots = match (true) {
             $vo_gacha->type_draw->isNormal() => $this->_normal($vo_gacha, $ent_gacha),
             $vo_gacha->type_draw->isRarity() => $this->_rarity($vo_gacha, $ent_gacha),
             $vo_gacha->type_draw->isStep() => $this->_step($vo_gacha, $ent_gacha),
         };
+
+        $ent_gacha->addExecCount($vo_gacha->group_no);
+        $rep_gacha->persist($ent_gacha);
+
+        return $draw_lots;
     }
 
     private function _normal(VoMGacha $vo_gacha, EntGacha $ent_gacha): array
@@ -106,14 +114,24 @@ class SvcGacha
 
     private function _step(VoMGacha $vo_gacha, EntGacha $ent_gacha): array
     {
+        // TODO DBアクセスが増える
+
         // @note 実行回数 $vo_gacha->exec_count でユーザのステップの状態を管理
-        if ($vo_gacha->exec_count !== $ent_gacha->getExecCount($vo_gacha->group_no)) {
-            $except_params['#1'] = $vo_gacha->exec_count;
-            $except_params['#2'] = $ent_gacha->getExecCount($vo_gacha->group_no);
+        $conditions = ['group_no' => $vo_gacha->group_no];
+        $m_gachas = $this->_Infra::ds(DsHub::DS_M_GACHA)->getEnable($conditions);
+        $exec_count_max = $m_gachas->max('exec_count');
+
+        $step_max = $exec_count_max + 1;
+        $u_step = ($ent_gacha->getExecCount($vo_gacha->group_no) % $step_max) + 1;
+        $m_step = $vo_gacha->exec_count + 1;
+
+        // @note ステップの確認
+        if ($m_step !== $u_step) {
+            $except_params['#1'] = $m_step;
+            $except_params['#2'] = $u_step;
             throw $this->_Except::app(TypeExcept::AppGachaStepNotEqual, $except_params);
         }
 
-        // TODO m_gachas.exec_limit_count, m_gachas.is_exec_loop を追加
         return $this->_normal($vo_gacha, $ent_gacha);
     }
 

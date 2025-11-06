@@ -16,7 +16,7 @@ use App\Core\Domains\Entity\BaseEnt;
  */
 class EntGacha extends BaseEnt
 {
-    protected VpGachaInfo $_vp_gacha_info;
+    protected ?VpGachaInfo $_vp_gacha_info = null;
 
     //protected int $_exec_count = 0;
     //protected string $_exec_at = '';
@@ -62,11 +62,18 @@ class EntGacha extends BaseEnt
         $this->_vp_gacha_info->addExecCount($group_no);
     }
 
+    /**
+     * @param int $group_no
+     * @return int
+     */
     public function getExecCount(int $group_no): int
     {
-        return $this->_vp_gacha_info->getExecCount($group_no);
+        return $this->_vp_gacha_info?->getExecCount($group_no) ?? 0;
     }
 
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
         return [
