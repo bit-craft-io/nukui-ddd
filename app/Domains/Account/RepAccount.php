@@ -14,7 +14,7 @@ class RepAccount extends BaseRep
     /**
      * @return EntAccount|BaseEnt
      */
-    public function mekDraft(): EntAccount|BaseEnt
+    public function makeDraft(): EntAccount|BaseEnt
     {
         $model = $this->_Infra::ds(DsHub::DS_ACCOUNT)->getDraft();
         return $this->_Domain::ent(EntHub::ENT_ACCOUNT)->init($model);
