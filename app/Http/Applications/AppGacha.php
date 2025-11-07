@@ -30,9 +30,6 @@ class AppGacha extends BaseApp
      */
     public function play(ReqGachaPlay $req): void
     {
-        // @note トランザクション処理をする場合
-        $this->_Transaction::begin();
-
         // @note このやり方はイマイチ
         //$m_gachas = $this->_App::mst(MstHub::MST_GACHA)->get();
         //$m_gacha = $m_gachas->find($req->gacha_id);
@@ -45,20 +42,27 @@ class AppGacha extends BaseApp
         //
         //$result_lots = $this->_Domain::svc(SvcHub::SVC_GACHA)->draw($m_gacha);
 
+        // @note トランザクション処理をする場合
+        $this->_Transaction::begin();
+
         $vo_gacha = $this->_Domain::mstVo(VoHub::VO_M_GACHA)->find($req->gacha_id);
+        if (!$vo_gacha->validate()) {
+            $except_params['#1'] = $vo_gacha->id;
+            throw $this->_Except::app(TypeExcept::AppGachaMasterIsNotValid, $except_params);
+        }
+
+        // @note コストが足りるか確認
         $rep_item = $this->_Domain::rep(RepHub::REP_ITEM);
         $ent_item = $rep_item->find($req->user_id, $vo_gacha->cost_id);
         if ($ent_item->isEmpty()) {
             throw $this->_Except::app(TypeExcept::AppGachaItemIsEmpty);
         }
-
-        // @note コストが足りるか確認
         if (!$vo_gacha->enoughCost($ent_item->amount)) {
             throw $this->_Except::app(TypeExcept::AppGachaCostIsNotEnough);
         }
         $ent_item->subAmount($vo_gacha->total_cost_amount);
 
-        // TODO 内部で validate のエラーをしてるので、内部でthrow するかを決める
+        // @note ガチャ実行サービス内で処理
         $svc_gacha = $this->_Domain::svc(SvcHub::SVC_GACHA);
         $result_svc_gacha_draw = $svc_gacha->draw($req->user_id, $req->gacha_id);
 
