@@ -112,4 +112,12 @@ final class StfInsIterator implements Iterator
     {
         $this->_position = 0;
     }
+
+    /**
+     * @return Collection<T>|null
+     */
+    public function collect(): ?Collection
+    {
+        return $this->_models ?? null;
+    }
 }

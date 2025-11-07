@@ -22,7 +22,7 @@ class AppAccount extends BaseApp
         $password = $this->_UtilRandom::key32(4, 4);
 
         $rep_account = $this->_Domain::rep(RepHub::REP_ACCOUNT);
-        $ent_account = $rep_account->mekDraft();
+        $ent_account = $rep_account->makeDraft();
         $ent_account->name('none');
         $ent_account->email($email);
         $ent_account->password($password);
