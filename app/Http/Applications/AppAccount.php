@@ -21,6 +21,9 @@ class AppAccount extends BaseApp
         $email = $this->_App::uc(UcHub::UC_ACCOUNT_MAKE_EMAIL)->execute();
         $password = $this->_UtilRandom::key32(4, 4);
 
+        // @note このやり方は補完が効かない $rep_account->makeDraft()
+        //$rep_account = $this->_Domain::rep($this->_Rep::REP_ACCOUNT);
+
         $rep_account = $this->_Domain::rep(RepHub::REP_ACCOUNT);
         $ent_account = $rep_account->makeDraft();
         $ent_account->name('none');
