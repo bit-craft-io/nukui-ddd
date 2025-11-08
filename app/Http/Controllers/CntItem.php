@@ -18,6 +18,9 @@ class CntItem extends BaseCnt
         $this->_ResponseModify::set(ResItemGet::class);
     }
 
+    /**
+     * @return void
+     */
     public function find(): void
     {
         $this->_ResponseModify::set(ResItemFind::class);

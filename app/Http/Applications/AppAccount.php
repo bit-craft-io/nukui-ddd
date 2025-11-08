@@ -31,8 +31,7 @@ class AppAccount extends BaseApp
         $ent_account->password($password);
         $rep_account->persist($ent_account);
 
-        $primary_data = "$email:$password";
-        $primary_code = $this->_UtilCompress::comp($primary_data);
+        $primary_code = $this->_UtilCompress::comp("$email:$password");
         $this->_ResponseParam::set('primary_code', $primary_code);
 
         $public_id = $this->_App::uc(UcHub::UC_ACCOUNT_MAKE_PUBLIC_ID)->execute();

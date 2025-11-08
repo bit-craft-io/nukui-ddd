@@ -29,6 +29,7 @@ return Application::configure(basePath: dirname(__DIR__))
         StfStaTransaction::enableRollback();
 
         $exceptions->render(function (Throwable $e, Request $request): JsonResponse {
+            // TODO エラーの動作を確認
             $error = [
                 'code' => $e->getCode(),
                 'message' => $e->getMessage(),
