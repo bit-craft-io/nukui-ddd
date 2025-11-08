@@ -19,13 +19,12 @@ final class ResAccountRegister extends BaseRes
      */
     public function toResponse(Request $req): JsonResponse
     {
-        $result = [
-            'success' => 1,
-            // @note Header に設定する為、空オブジェクトを返却
-            //'result' => (object)$this->_result,
-            'result' => (object)[],
-        ];
-        return response()->json($result)
+        return response()
+            ->json([
+                'success' => 1,
+                // @note Header に設定する為、空オブジェクトを返却
+                'result' => (object)[],
+            ])
             ->header('Content-Type', 'application/json')
             ->header('Primary-Code', $this->primary_code);
     }

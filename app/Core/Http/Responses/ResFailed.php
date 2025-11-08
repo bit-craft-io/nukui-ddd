@@ -19,17 +19,17 @@ final class ResFailed extends BaseRes
      */
     public function toResponse(Request $req): JsonResponse
     {
-        $result = [
-            'success' => 0,
-            'result' => (object)$this->_result,
-            // @note MdlResponse で設定
-            //'result' => [
-            //    'error_info' => [
-            //        'code' => $this->code,
-            //        'message' => $this->message
-            //    ],
-            //]
-        ];
-        return response()->json($result);
+        return response()
+            ->json([
+                'success' => 0,
+                'result' => (object)$this->_result,
+                // @note MdlResponse で設定
+                //'result' => [
+                //    'error_info' => [
+                //        'code' => $this->code,
+                //        'message' => $this->message
+                //    ],
+                //]
+            ]);
     }
 }

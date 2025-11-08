@@ -38,10 +38,10 @@ final class ResGachaGet extends BaseRes
             $this->_result['gachas'][] = $vo_gacha->toArray();
         }
 
-        $result = [
-            'success' => 1,
-            'result' => (object)$this->_result,
-        ];
-        return response()->json($result);
+        return response()
+            ->json([
+                'success' => 1,
+                'result' => (object)$this->_result,
+            ]);
     }
 }

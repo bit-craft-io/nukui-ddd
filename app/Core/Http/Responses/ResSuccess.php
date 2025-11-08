@@ -15,10 +15,10 @@ final class ResSuccess extends BaseRes
      */
     public function toResponse(Request $req): JsonResponse
     {
-        $result = [
-            'success' => 1,
-            'result' => (object)$this->_result
-        ];
-        return response()->json($result);
+        return response()
+            ->json([
+                'success' => 1,
+                'result' => (object)$this->_result
+            ]);
     }
 }

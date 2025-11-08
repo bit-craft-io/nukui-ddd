@@ -13,10 +13,10 @@ abstract class BaseReq extends FormRequest
 {
     protected object $_props;
 
-    // @note コンストラクタインジェクションで BaseReq が無い場合
+    // @note BaseReq を継承したクラスをコンストラクタインジェクションして無い場合
     //       BaseReq の prepareForValidation が実行されて無い為
     //       ミドルウェアで request->user_id は null になる
-    //       prepareForValidation の実行フラグで制御
+    //       prepareForValidation の実行済フラグで制御
     public static bool $_is_merged_user_id = false;
 
     /**
