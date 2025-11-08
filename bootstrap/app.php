@@ -4,6 +4,8 @@ use App\Core\Exceptions\ExceptApp;
 use App\Core\Exceptions\ExceptModel;
 use App\Core\Http\Middlewares\MdlResponse;
 use App\Core\Http\Middlewares\MdlTransaction;
+use App\Core\Http\Responses\ResFailed;
+use App\Core\Libraries\Stateful\Static\StfStaFactory;
 use App\Core\Libraries\Stateful\Static\StfStaTransaction;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -29,16 +31,22 @@ return Application::configure(basePath: dirname(__DIR__))
         StfStaTransaction::enableRollback();
 
         $exceptions->render(function (Throwable $e, Request $request): JsonResponse {
-            $error = [
-                'code' => $e->getCode(),
-                'message' => $e->getMessage(),
-            ];
+            $class = StfStaFactory::singleton(ResFailed::class);
+            $class->setParams([
+                'error_info' => [
+                    'code' => $e->getCode(),
+                    'message' => $e->getMessage()
+                ]
+            ]);
             if ($e instanceof ExceptApp) {
-                return response()->json($error, 422);
+                return $class->toResponse($request)
+                    ->setStatusCode(422);
             }
             if ($e instanceof ExceptModel) {
-                return response()->json($error, 500);
+                return $class->toResponse($request)
+                    ->setStatusCode(404);
             }
-            return response()->json($error, 401);
+            return $class->toResponse($request)
+                ->setStatusCode(401);
         });
     })->create();

@@ -57,6 +57,7 @@ class AppGacha extends BaseApp
         // @note ガチャ実行サービス内で処理
         $svc_gacha = $this->_Domain::svc(SvcHub::SVC_GACHA);
         $result_svc_gacha_draw = $svc_gacha->draw($req->user_id, $req->gacha_id);
+        $this->_ResponseParam::set('gacha_draws', $result_svc_gacha_draw);
 
         // @note $svc_gacha の戻り値 $result_svc_gacha_draw より present_box の処理
         //       処理は割愛します
@@ -64,5 +65,8 @@ class AppGacha extends BaseApp
         // @note 各ドメインを永続化
         $rep_item->persist($ent_item);
         //$rep_present_box->persist($ent_present_box);
+
+        // @note 計算結果を反映後の数値（$ent_item->commit()）を取得
+        $this->_ResponseParam::set('item_info', $ent_item->toArray());
     }
 }

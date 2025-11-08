@@ -6,21 +6,23 @@ namespace App\Core\Exceptions\Enums;
 
 enum TypeExcept: int
 {
-    case ModelDataNotFound = 100;
+    case ModelDataNotFound = 11001;
 
-    case AppUserNotFound = 1001;
-    case AppItemNotHave = 2001;
-    case AppItemNotEnoughUnits = 2002;
-    case AppGachaItemIsEmpty = 3001;
-    case AppGachaCostIsNotEnough = 3002;
-    case AppGachaMasterIsNotValid = 3003;
-    case AppGachaExecCountOver = 3004;
-    case AppGachaStepNotEqual = 3005;
+    case AppNotOkStatus = 21001;
+    case AppUserNotFound = 22001;
+    case AppItemNotHave = 23001;
+    case AppItemNotEnoughUnits = 23002;
+    case AppGachaItemIsEmpty = 24001;
+    case AppGachaCostIsNotEnough = 24002;
+    case AppGachaMasterIsNotValid = 24003;
+    case AppGachaExecCountOver = 24004;
+    case AppGachaStepNotEqual = 24005;
 
     public function message(array $except_params = []): string
     {
         return match ($this) {
             self::ModelDataNotFound => 'Data not found',
+            self::AppNotOkStatus => 'Not Ok Status',
             self::AppUserNotFound => 'User not found',
             self::AppItemNotHave => 'Item not have',
             self::AppItemNotEnoughUnits => 'Item not enough units',

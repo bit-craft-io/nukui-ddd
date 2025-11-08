@@ -22,12 +22,12 @@ class ResItemFind extends BaseRes
     {
         $rep_item = $this->_Domain::rep(RepHub::REP_ITEM);
         $ent_item = $rep_item->findOrFail($req->user_id, $req->item_id);
-
         $this->_result['items'][] = $ent_item->toArray();
-        $result = [
-            'success' => 1,
-            'result' => (object)$this->_result,
-        ];
-        return response()->json($result);
+
+        return response()
+            ->json([
+                'success' => 1,
+                'result' => (object)$this->_result,
+            ]);
     }
 }

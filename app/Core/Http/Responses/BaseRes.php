@@ -17,15 +17,6 @@ abstract class BaseRes extends JsonResponse
     abstract public function toResponse(Request $req): JsonResponse;
 
     /**
-     * @param array $params
-     * @return void
-     */
-    public function init(array $params = []): void
-    {
-        $this->_result = $params;
-    }
-
-    /**
      * @param string $name
      * @return mixed|null
      */

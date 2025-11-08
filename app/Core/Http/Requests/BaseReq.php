@@ -13,6 +13,12 @@ abstract class BaseReq extends FormRequest
 {
     protected object $_props;
 
+    // @note BaseReq を継承したクラスをコンストラクタインジェクションして無い場合
+    //       BaseReq の prepareForValidation が実行されて無い為
+    //       ミドルウェアで request->user_id は null になる
+    //       prepareForValidation の実行済フラグで制御
+    public static bool $_is_merged_user_id = false;
+
     /**
      * @return array
      */
@@ -26,6 +32,7 @@ abstract class BaseReq extends FormRequest
      */
     protected function prepareForValidation(): void
     {
+        self::$_is_merged_user_id = true;
         $this->merge(['user_id' => ($this->user()->id ?? null)]);
     }
 

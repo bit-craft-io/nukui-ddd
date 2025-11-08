@@ -23,10 +23,11 @@ class ResItemGet extends BaseRes
         foreach ($ent_items as $ent_item) {
             $this->_result['items'][] = $ent_item->toArray();
         }
-        $result = [
-            'success' => 1,
-            'result' => (object)$this->_result,
-        ];
-        return response()->json($result);
+
+        return response()
+            ->json([
+                'success' => 1,
+                'result' => (object)$this->_result,
+            ]);
     }
 }
