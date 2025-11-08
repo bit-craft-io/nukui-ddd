@@ -76,7 +76,7 @@ class EntItem extends BaseEnt
         return [
             'item_id' => $this->item_id,
             'amount' => $this->amount,
-            'end_at' => $this->end_at?->toDateTimeString(),
+            'end_at' => $this->end_at?->toDateTimeString() ?? '',
         ];
     }
 }

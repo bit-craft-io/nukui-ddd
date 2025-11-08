@@ -21,6 +21,9 @@ final class ResAccountRegister extends BaseRes
     {
         $result = [
             'success' => 1,
+            // @note Header に設定する為、空オブジェクトを返却
+            //'result' => (object)$this->_result,
+            'result' => (object)[],
         ];
         return response()->json($result)
             ->header('Content-Type', 'application/json')

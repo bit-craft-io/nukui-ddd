@@ -30,6 +30,7 @@ Route::domain(env('APP_URL'))
     ->controller(CntItem::class)
     ->group(function () {
         Route::any('get', 'get');
+        Route::any('find', 'find');
     });
 
 Route::domain(env('APP_URL'))

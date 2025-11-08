@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace App\Core\Http\Responses;
 
+use App\Core\Libraries\Traits\TraitDomain;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 abstract class BaseRes extends JsonResponse
 {
+    use TraitDomain;
+
     protected array $_result = [];
+
+    abstract public function toResponse(Request $req): JsonResponse;
 
     /**
      * @param array $params

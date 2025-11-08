@@ -16,14 +16,6 @@ use Exception;
 class AppGacha extends BaseApp
 {
     /**
-     * @param ReqNone $req
-     * @return void
-     */
-    public function get(ReqNone $req): void
-    {
-    }
-
-    /**
      * @param ReqGachaPlay $req
      * @return void
      * @throws Exception
