@@ -63,6 +63,9 @@ class VoMGacha extends BaseMstVo
      */
     public function isExecCountOver(int $exec_count): bool
     {
+        if ($this->exec_count_limit === 0) {
+            return false;
+        }
         return $exec_count >= $this->exec_count_limit;
     }
 

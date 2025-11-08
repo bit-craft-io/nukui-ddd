@@ -28,8 +28,10 @@ final class MdlResponse
             $contents = json_decode($response->getContent(), true);
             $class = StfStaFactory::singleton(ResFailed::class);
             $class->init([
-                'code' => $contents['code'] ?? 0,
-                'message' => $contents['message'] ?? ''
+                'error_info' => [
+                    'code' => $contents['code'] ?? 0,
+                    'message' => $contents['message'] ?? ''
+                ]
             ]);
             return $class->toResponse($request);
         }

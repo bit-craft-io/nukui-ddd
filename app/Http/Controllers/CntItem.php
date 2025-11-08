@@ -5,20 +5,21 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Core\Http\Controllers\BaseCnt;
-use App\Core\Http\Requests\ReqNone;
-use App\Core\Http\Responses\ResSuccess;
-use App\Http\Applications\AppItem;
+use App\Http\Responses\Item\ResItemFind;
+use App\Http\Responses\Item\ResItemGet;
 
 class CntItem extends BaseCnt
 {
     /**
-     * @param AppItem $app
-     * @param ReqNone $req
      * @return void
      */
-    public function get(AppItem $app, ReqNone $req): void
+    public function get(): void
     {
-        $this->_ResponseModify::set(ResSuccess::class);
-        $app->get($req);
+        $this->_ResponseModify::set(ResItemGet::class);
+    }
+
+    public function find(): void
+    {
+        $this->_ResponseModify::set(ResItemFind::class);
     }
 }
