@@ -37,8 +37,17 @@ final class StfInsIterator implements Iterator
     public function init(callable $callable, Collection $models, string $key_name = 'id'): void
     {
         $this->_callable = $callable;
-        $this->_models = $models->keyBy($key_name);
-        $this->_keys = $this->_models->keys()->all();
+
+        // @note 全体ループの回数を減らす
+        //$this->_models = $models->keyBy($key_name);
+        //$this->_keys = $this->_models->keys()->all();
+        $this->_models = Collection::make();
+        foreach ($models as $model) {
+            $key = $model->{$key_name};
+            $this->_models->put($key, $model);
+            $this->_keys[] = $key;
+        }
+
         $this->rewind();
     }
 
@@ -93,7 +102,6 @@ final class StfInsIterator implements Iterator
      */
     public function key(): int
     {
-        //return $this->_position;
         return $this->_key();
     }
 
