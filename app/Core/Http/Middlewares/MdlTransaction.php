@@ -20,7 +20,6 @@ final class MdlTransaction
      */
     public function handle($request, Closure $next)
     {
-        // TODO try - catch するか判断
         $response = $next($request);
 
         $this->_DevLog::emergency('begin');
