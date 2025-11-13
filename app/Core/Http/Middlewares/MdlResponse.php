@@ -8,6 +8,7 @@ use App\Core\Exceptions\Enums\TypeExcept;
 use App\Core\Http\Requests\BaseReq;
 use App\Core\Http\Responses\ResSuccess;
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
+use App\Core\Libraries\Traits\TraitDevelop;
 use App\Core\Libraries\Traits\TraitException;
 use App\Core\Libraries\Traits\TraitResponse;
 use Closure;
@@ -18,6 +19,7 @@ final class MdlResponse
 {
     use TraitResponse;
     use TraitException;
+    use TraitDevelop;
 
     /**
      * @param $request
@@ -43,11 +45,22 @@ final class MdlResponse
         $class = $this->_ResponseModify::find();
         if ($class) {
             $class->setParams($this->_ResponseParam::get());
-            return $class->toResponse($request);
+            return $this->_finalize($class->toResponse($request));
         }
 
         $class = StfStaFactory::singleton(ResSuccess::class);
         $class->setParams($this->_ResponseParam::get());
-        return $class->toResponse($request);
+        return $this->_finalize($class->toResponse($request));
+    }
+
+    /**
+     * @param JsonResponse $response
+     * @return JsonResponse
+     */
+    private function _finalize(JsonResponse $response): JsonResponse
+    {
+        $size = $this->_DevTool::getValueSize($response);
+        $this->_DevLog::info("Response Size = $size Kb");
+        return $response;
     }
 }

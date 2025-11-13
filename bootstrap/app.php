@@ -26,11 +26,11 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-
-        // @note transaction rollback enable
-        StfStaTransaction::enableRollback();
-
         $exceptions->render(function (Throwable $e, Request $request): JsonResponse {
+
+            // @note transaction rollback enable
+            StfStaTransaction::enableRollback();
+
             $class = StfStaFactory::singleton(ResFailed::class);
             $class->setParams([
                 'error_info' => [

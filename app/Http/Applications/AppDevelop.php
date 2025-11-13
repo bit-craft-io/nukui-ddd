@@ -33,6 +33,9 @@ class AppDevelop extends BaseApp
 
         $ent_item->amount($sum_amount);
         $rep_item->persist($ent_item);
+
+        // @note 更新の結果を Response する場合
+        //$this->_ResponseParam::set('item', $ent_item->toArray());
     }
 
     /**
@@ -54,5 +57,8 @@ class AppDevelop extends BaseApp
 
         $ent_item->subAmount($req->amount);
         $rep_item->persist($ent_item);
+
+        // @note 更新の結果を Response する場合
+        //$this->_ResponseParam::set('item', $ent_item->toArray());
     }
 }
