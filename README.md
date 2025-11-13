@@ -1,61 +1,59 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## 概要
+- 実務で得た経験を基に、設計思想を整理・発展させたリポジトリです。<br />
+  再利用性と責務分離をLaravelとドメイン駆動設計(DDD)で実現してます。
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## ディレクトリ構成
+```
+app/
+--------------------------------------------------------------------------------
+├── Core/                # システム基盤
+│ ├── DataSources/       # インフラ層の共通処理
+│ ├── Domains/           # ドメイン層の共通処理
+│ ├── Exceptions/        # 例外処理
+│ │ ├── Enum/            # 例外コード
+│ │ └── (Except)/        # 各例外クラス
+│ ├── Http/              # HTTPレイヤーの共通処理
+│ │ ├── Middlewares/     # ミドルウェア
+│ │ └── ...              # 共通処理（Applications, Controllers, Requests, Responses）
+│ └── Libraries/         # 共通ユーティリティ
+│ │ ├── Stateful/        # 静的クラス（ステートフル）
+│ │ ├── Stateless/       # 静的クラス（ステートレス）
+│ │ └── Traits/          # 静的クラスを扱うトレイト（use して静的メソッドを実行）
+--------------------------------------------------------------------------------
+├── DataSources/         # インフラ層
+├── Domains/             # ドメイン層
+│ └── (Rep, Ent Vo, Vp)/ # 各ドメインクラス
+├── Http                 # API
+│ ├── Applications/      # ユースケース
+│ ├── Controllers/       # プレゼンテーション層
+│ ├── Requests/          # バリデーション定義
+│ └── Responses/         # APIレスポンス
+├── Models               # インフラ層（モデル）
+│ ├── Enum/              # インフラ層（タイプ）
+│ └── (Model)/           # 各モデルクラス
+└── Providers            # サービスプロバイダ
+```
 
-## About Laravel
+## 設計思想
+- コードは「責務」で整理
+- ドメイン層はビジネスルールを自然言語化して構築（ユビキタス言語）
+- システム基盤は抽象構造で設計
+- 他人が見て「なるべく迷わない」命名を心がける
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 特徴・ポイント
+1. **ValueProxy は Mutable な ValueObject**
+    - 通常の ValueObject が不変なのに対し、内部状態を更新可能にしたクラス
+2. **ValueObject の集合を Iterator で表現**
+    - Collection クラスを使わず、Iterator による軽量な疑似 Collection として管理
+    - メモリ効率を意識した設計
+3. **ValueObject の集合を Iterator で表現**
+    - Collection クラスを使わず、Iterator による軽量な疑似 Collection として管理
+    - メモリ効率を意識した設計
+4. **DataSources を経由して ORM(Model) を操作**
+    - インフラ層の責務を DataSources に集約
+    - ドメイン層は DB や ORM の存在を意識せず、ビジネスロジックに専念できる
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 使用技術
+- Laravel(PHP 8.4)
+- Docker(MySQL, Redis)
+- AWS(EC2, RDS, Valkey)

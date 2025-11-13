@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Gacha\Service;
 
-use App\Core\Exceptions\Enums\TypeExcept;
+use App\Core\Exceptions\Enum\TypeExcept;
 use App\Core\Libraries\Traits\TraitApplication;
 use App\Core\Libraries\Traits\TraitDomain;
 use App\Core\Libraries\Traits\TraitException;

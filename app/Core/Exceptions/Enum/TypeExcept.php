@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Exceptions\Enums;
+namespace App\Core\Exceptions\Enum;
 
 enum TypeExcept: int
 {

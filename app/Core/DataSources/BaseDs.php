@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\DataSources;
 
-use App\Core\Exceptions\Enums\TypeExcept;
+use App\Core\Exceptions\Enum\TypeExcept;
 use App\Core\Libraries\Traits\TraitException;
 use Carbon\CarbonImmutable;
 use Closure;

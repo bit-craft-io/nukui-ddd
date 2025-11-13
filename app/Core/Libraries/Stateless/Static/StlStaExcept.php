@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Libraries\Stateless\Static;
 
-use App\Core\Exceptions\Enums\TypeExcept;
+use App\Core\Exceptions\Enum\TypeExcept;
 use App\Core\Exceptions\ExceptApp;
 use App\Core\Exceptions\ExceptModel;
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
