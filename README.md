@@ -6,32 +6,32 @@
 ```
 app/
 --------------------------------------------------------------------------------
-├── Core/                # システム基盤
-│ ├── DataSources/       # インフラ層の共通処理
-│ ├── Domains/           # ドメイン層の共通処理
-│ ├── Exceptions/        # 例外処理
-│ │ ├── Enum/            # 例外コード
-│ │ └── (Except)/        # 各例外クラス
-│ ├── Http/              # HTTPレイヤーの共通処理
-│ │ ├── Middlewares/     # ミドルウェア
-│ │ └── ...              # 共通処理（Applications, Controllers, Requests, Responses）
-│ └── Libraries/         # 共通ユーティリティ
-│ │ ├── Stateful/        # 静的クラス（ステートフル）
-│ │ ├── Stateless/       # 静的クラス（ステートレス）
-│ │ └── Traits/          # 静的クラスを扱うトレイト（use して静的メソッドを実行）
+├── Core/                      # システム基盤
+│ ├── DataSources/             # インフラ層の共通処理
+│ ├── Domains/                 # ドメイン層の共通処理
+│ ├── Exceptions/              # 例外処理
+│ │ ├── Enum/                  # 例外コード
+│ │ └── (Except)/              # 各例外クラス
+│ ├── Http/                    # HTTPレイヤーの共通処理
+│ │ ├── Middlewares/           # ミドルウェア
+│ │ └── ...                    # 共通処理（Applications, Controllers, Requests, Responses）
+│ └── Libraries/               # 共通ユーティリティ
+│ │ ├── Stateful/              # 静的クラス（ステートフル）
+│ │ ├── Stateless/             # 静的クラス（ステートレス）
+│ │ └── Traits/                # 静的クラスを扱うトレイト（use して静的メソッドを実行）
 --------------------------------------------------------------------------------
-├── DataSources/         # インフラ層
-├── Domains/             # ドメイン層
-│ └── (Rep, Ent Vo, Vp)/ # 各ドメインクラス
-├── Http                 # API
-│ ├── Applications/      # ユースケース
-│ ├── Controllers/       # プレゼンテーション層
-│ ├── Requests/          # バリデーション定義
-│ └── Responses/         # APIレスポンス
-├── Models               # インフラ層（モデル）
-│ ├── Enum/              # インフラ層（タイプ）
-│ └── (Model)/           # 各モデルクラス
-└── Providers            # サービスプロバイダ
+├── DataSources/               # インフラ層
+├── Domains/                   # ドメイン層
+│ └── (Rep, Ent, Vo, Vp, Svc)/ # 各ドメインクラス
+├── Http                       # API
+│ ├── Applications/            # ユースケース
+│ ├── Controllers/             # プレゼンテーション層
+│ ├── Requests/                # バリデーション定義
+│ └── Responses/               # APIレスポンス
+├── Models                     # インフラ層（モデル）
+│ ├── Enum/                    # インフラ層（タイプ）
+│ └── (Model)/                 # 各モデルクラス
+└── Providers                  # サービスプロバイダ
 ```
 
 ## 設計思想
