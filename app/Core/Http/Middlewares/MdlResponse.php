@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Http\Middlewares;
 
-use App\Core\Exceptions\Enums\TypeExcept;
+use App\Core\Exceptions\Enum\TypeExcept;
 use App\Core\Http\Requests\BaseReq;
 use App\Core\Http\Responses\ResSuccess;
 use App\Core\Libraries\Stateful\Static\StfStaFactory;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Applications;
 
-use App\Core\Exceptions\Enums\TypeExcept;
+use App\Core\Exceptions\Enum\TypeExcept;
 use App\Core\Http\Applications\BaseApp;
 use App\Core\Http\Requests\ReqNone;
 use App\Domains\Gacha\VoHub;
