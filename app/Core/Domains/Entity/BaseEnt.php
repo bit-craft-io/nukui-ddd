@@ -24,6 +24,8 @@ abstract class BaseEnt
     protected ?Model $_model = null;
     protected array $_draft = [];
     protected array $_draft_keys = [];
+    // @note 自動更新
+    protected bool $_auto_commit = false;
 
     /**
      * @param Model|null $model
@@ -46,7 +48,7 @@ abstract class BaseEnt
      */
     public function __get(string $name)
     {
-        return $this?->_model?->{$name};
+        return $this->_model?->{$name};
     }
 
     /**
@@ -60,6 +62,9 @@ abstract class BaseEnt
     {
         $this->_draft[$name] = $arguments[0];
         $this->_draft_keys[] = $name;
+        if ($this->_auto_commit) {
+            $this->_model->fill([$name => $arguments[0]]);
+        }
         return $this;
     }
 

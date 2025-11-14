@@ -44,7 +44,6 @@ abstract class BaseVo
     {
         $callable = function ($model) {
             if ($model && method_exists($this, 'init')) {
-                // @note Collection<Model>
                 $this->init($model);
             }
             return $this;

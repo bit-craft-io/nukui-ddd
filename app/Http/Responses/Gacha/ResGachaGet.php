@@ -23,7 +23,9 @@ final class ResGachaGet extends BaseRes
         $ent_gacha = $rep_gacha->find($req->user_id);
         $this->_result['u_gacha'] = $ent_gacha->toArray();
 
-        // @note Collection<Model> にビジネスロジックを入れたく無い為、Voのイテレータを取得
+        // @note Modelにビジネスロジックのメソッドを追加も可能であるが
+        //       インフラ層にビジネスロジックが入ると結合度が高くなる為
+        //       Voのビジネスロジックとイテレータで表現
         $vo_gachas = $this->_Domain::mstVo(VoHub::VO_M_GACHA)->get();
         foreach ($vo_gachas as $vo_gacha) {
             $vo_gacha->find($vo_gacha->id);

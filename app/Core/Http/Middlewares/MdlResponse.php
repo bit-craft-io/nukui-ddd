@@ -8,6 +8,7 @@ use App\Core\Exceptions\Enum\TypeExcept;
 use App\Core\Http\Requests\BaseReq;
 use App\Core\Http\Responses\ResSuccess;
 use App\Core\Libraries\Stateful\Static\StfStaFactory;
+use App\Core\Libraries\Traits\TraitApplication;
 use App\Core\Libraries\Traits\TraitDevelop;
 use App\Core\Libraries\Traits\TraitException;
 use App\Core\Libraries\Traits\TraitResponse;
@@ -17,9 +18,10 @@ use Illuminate\Http\JsonResponse;
 
 final class MdlResponse
 {
-    use TraitResponse;
+    use TraitApplication;
     use TraitException;
     use TraitDevelop;
+    use TraitResponse;
 
     /**
      * @param $request
@@ -59,8 +61,10 @@ final class MdlResponse
      */
     private function _finalize(JsonResponse $response): JsonResponse
     {
-        $size = $this->_DevTool::getValueSize($response);
-        $this->_DevLog::info("Response Size = $size Kb");
+        if ($this->_Config::app()->debug) {
+            $size = $this->_DevTool::getValueSize($response);
+            $this->_DevLog::info("Response Size = $size Kb");
+        }
         return $response;
     }
 }

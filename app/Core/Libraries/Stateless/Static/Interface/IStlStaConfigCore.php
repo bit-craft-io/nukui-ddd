@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Core\Libraries\Stateless\Static\Interface;
 
 /**
- * @property-read $cache_enable
- * @property-read $cache_default_ttl_sec
+ * @property-read bool $cache_enable
+ * @property-read integer $cache_default_ttl_sec
  */
 interface IStlStaConfigCore
 {
