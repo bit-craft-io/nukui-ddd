@@ -20,7 +20,7 @@ app/
 │ │ ├── Stateless/             # 静的クラス（ステートレス）
 │ │ └── Traits/                # 静的クラスを扱うトレイト（use して静的メソッドを実行）
 --------------------------------------------------------------------------------
-├── DataSources/               # インフラ層
+├── DataSources/               # インフラ層（データソース）
 ├── Domains/                   # ドメイン層
 │ └── (Rep, Ent, Vo, Vp, Svc)/ # 各ドメインクラス
 ├── Http                       # API
@@ -41,17 +41,23 @@ app/
 - 他人が見て「なるべく迷わない」命名を心がける
 
 ## 特徴・ポイント
-1. **ValueProxy は Mutable な ValueObject**
-    - 通常の ValueObject が不変なのに対し、内部状態を更新可能にしたクラス
-2. **ValueObject の集合を Iterator で表現**
+1. **DataSources を経由して ORM(Model) を操作**
+    - インフラ層の責務を DataSources に集約
+    - ドメイン層は DB や ORM の存在を意識せず、ビジネスロジックに専念できる
+2. **Entity の集合を Iterator で表現**
     - Collection クラスを使わず、Iterator による軽量な疑似 Collection として管理
     - メモリ効率を意識した設計
 3. **ValueObject の集合を Iterator で表現**
     - Collection クラスを使わず、Iterator による軽量な疑似 Collection として管理
     - メモリ効率を意識した設計
-4. **DataSources を経由して ORM(Model) を操作**
-    - インフラ層の責務を DataSources に集約
-    - ドメイン層は DB や ORM の存在を意識せず、ビジネスロジックに専念できる
+4. **ValueProxy は Mutable な ValueObject**
+    - ValueObject が Immutable に対し、内部状態を更新可能にしたクラス
+5. **Transaction の commit や rollback は Middleware で制御**
+   - 都度、try-catch を記述せず Middleware で処理
+6. **API の Response は Middleware で制御**
+   - 共通もしくは個別のレスポンスの型で返す<br />
+     ※トランザクションの処理後はスレーブ参照にする為<br />
+     　config.database.connections.{db}.sticky = true
 
 ## 使用技術
 - Laravel(PHP 8.4)

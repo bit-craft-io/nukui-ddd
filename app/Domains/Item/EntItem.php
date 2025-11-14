@@ -19,6 +19,7 @@ use App\Core\Domains\ValueProxy\VpItem;
  */
 class EntItem extends BaseEnt
 {
+    //protected bool $_auto_commit = true;
     protected VpItem $_vp_item;
 
     /**
