@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Responses\Account;
+
+use App\Core\Http\Responses\BaseRes;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+
+/**
+ * @property-read string $primary_code
+ */
+final class ResAccountRegister extends BaseRes
+{
+    /**
+     * @param Request $req
+     * @return JsonResponse
+     */
+    public function toResponse(Request $req): JsonResponse
+    {
+        return response()
+            ->json([
+                'success' => 1,
+                // @note Header に設定する為、空オブジェクトを返却
+                'result' => (object)[],
+            ])
+            ->header('Content-Type', 'application/json')
+            ->header('Primary-Code', $this->primary_code);
+    }
+}

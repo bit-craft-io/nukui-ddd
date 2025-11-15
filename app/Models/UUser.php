@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -34,10 +36,10 @@ class UUser extends Model
     ];
 
     protected $casts = [
-        'icon_no' => 'int',
-        'energy' => 'int',
-        'energy_max_regen' => 'int',
-        'energy_max_stock' => 'int',
+        'icon_no' => 'integer',
+        'energy' => 'integer',
+        'energy_max_regen' => 'integer',
+        'energy_max_stock' => 'integer',
         'meta_data' => 'json',
     ];
 }

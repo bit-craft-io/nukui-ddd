@@ -4,22 +4,33 @@ declare(strict_types=1);
 
 namespace App\Domains\Account;
 
-use App\Domains\Core\Entity\BaseEnt;
+use App\Core\Domains\Entity\BaseEnt;
 
 /**
- * @method _id(string $value)
- * @method _name(string $value)
- * @method _email(string $value)
- * @method _password(string $value)
- * @property-read int $id
+ * @method void id(integer $value)
+ * @method void name(string $value)
+ * @method void email(string $value)
+ * @method void password(string $value)
+ * @property-read integer $id
  * @property-read string $name
  * @property-read string $email
  * @property-read string $password
  */
 class EntAccount extends BaseEnt
 {
-    public function setDefaults(): void
+    /**
+     * @return void
+     */
+    public function initOnce(): void
     {
         // TODO: Implement setUp() method.
+    }
+
+    /**
+     * @return void
+     */
+    public function initAfter(): void
+    {
+        // TODO: Implement initAfter() method.
     }
 }

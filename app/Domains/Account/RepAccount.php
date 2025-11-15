@@ -4,24 +4,32 @@ declare(strict_types=1);
 
 namespace App\Domains\Account;
 
-use App\Domains\Core\Entity\BaseEnt;
-use App\Domains\Core\Repository\BaseRep;
+use App\Core\Domains\Entity\BaseEnt;
+use App\Core\Domains\Repository\BaseRep;
+use App\DataSources\DsHub;
+use App\Domains\EntHub;
 
 class RepAccount extends BaseRep
 {
-    public function draft(): EntAccount|BaseEnt
+    /**
+     * @return EntAccount|BaseEnt
+     */
+    public function makeDraft(): EntAccount|BaseEnt
     {
-        $model = $this->_ds(self::DS_ACCOUNT)->getDraft();
-        return $this->_ent($model);
+        $model = $this->_Infra::ds(DsHub::DS_ACCOUNT)->getDraft();
+        return $this->_Domain::ent(EntHub::ENT_ACCOUNT)->init($model);
     }
 
+    /**
+     * @param EntAccount|BaseEnt $ent
+     * @return void
+     */
     public function persist(EntAccount|BaseEnt $ent): void
     {
-        /** @var  */
         $ent->commit();
-        $id = $this->_ds(self::DS_ACCOUNT)->insertGetId($ent->getProperties());
+        $id = $this->_Infra::ds(DsHub::DS_ACCOUNT)->createGetId($ent->getProperties());
 
-        $ent->_id($id);
+        $ent->id($id);
         $ent->commit();
     }
 }

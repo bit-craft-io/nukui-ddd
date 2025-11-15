@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Core\Domains\ValueProxy;
+
+/**
+ * @method void energy(integer $value)
+ * @property-read integer $energy
+ * @property-read integer $energy_max_regen
+ * @property-read integer $energy_max_stock
+ */
+class VpEnergy extends BaseVp
+{
+    /**
+     * @param int $value
+     * @return void
+     */
+    public function recover(int $value): void
+    {
+        $recover = min($this->energy_max_stock, ($this->energy + $value));
+        $this->energy($recover);
+    }
+
+    /**
+     * @param int $value
+     * @return void
+     */
+    public function consume(int $value): void
+    {
+        $sub = max(($this->energy - $value), 0);
+        $this->energy($sub);
+    }
+}

@@ -4,26 +4,54 @@ declare(strict_types=1);
 
 namespace App\Domains\User;
 
-use App\Domains\Core\Entity\BaseEnt;
-use App\Domains\Core\Repository\BaseRep;
+use App\Core\Domains\Entity\BaseEnt;
+use App\Core\Domains\Repository\BaseRep;
+use App\DataSources\DsHub;
+use App\Domains\EntHub;
 
 class RepUser extends BaseRep
 {
+    /**
+     * @return EntUser|BaseEnt
+     */
+    public function makeDraft(): EntUser|BaseEnt
+    {
+        $model = $this->_Infra::ds(DsHub::DS_U_USER)->getDraft();
+        return $this->_Domain::ent(EntHub::ENT_USER)->init($model);
+    }
+
+    /**
+     * @param string $public_id
+     * @return EntUser|BaseEnt
+     */
     public function findByPublicId(string $public_id): EntUser|BaseEnt
     {
-        $model = $this->_ds(self::DS_U_USER)->findByPublicId($public_id);
-        return $this->_ent($model);
+        $model = $this->_Infra::ds(DsHub::DS_U_USER)->findByPublicId($public_id);
+        return $this->_Domain::ent(EntHub::ENT_USER)->init($model);
     }
 
-    public function draft(): EntUser|BaseEnt
+    /**
+     * @param int $user_id
+     * @return EntUser|BaseEnt
+     */
+    public function findByUserId(int $user_id): EntUser|BaseEnt
     {
-        $model = $this->_ds(self::DS_U_USER)->getDraft();
-        return $this->_ent($model);
+        $model = $this->_Infra::ds(DsHub::DS_U_USER)->findByUserId($user_id);
+        return $this->_Domain::ent(EntHub::ENT_USER)->init($model);
     }
 
+    /**
+     * @param EntUser|BaseEnt $ent
+     * @return void
+     */
     public function persist(EntUser|BaseEnt $ent): void
     {
         $ent->commit();
-        $this->_ds(self::DS_U_USER)->insert($ent->getProperties());
+        if ($ent->isNew()) {
+            $this->_Infra::ds(DsHub::DS_U_USER)->create($ent->getProperties());
+        } else {
+            $this->_Infra::ds(DsHub::DS_U_USER)->update($ent->getProperties(), ['id' => $ent->id]);
+        }
+
     }
 }
