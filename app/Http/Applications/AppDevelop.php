@@ -6,10 +6,12 @@ namespace App\Http\Applications;
 
 use App\Core\Exceptions\Enum\TypeExcept;
 use App\Core\Http\Applications\BaseApp;
+use App\Core\Http\Requests\ReqNone;
 use App\Domains\Item\VoHub;
 use App\Domains\RepHub;
 use App\Http\Requests\Develop\ReqDevelopItemAdd;
 use App\Http\Requests\Develop\ReqDevelopItemSub;
+use App\Http\Requests\Develop\ReqDevelopSetFakeNow;
 use Exception;
 
 class AppDevelop extends BaseApp
@@ -60,5 +62,24 @@ class AppDevelop extends BaseApp
 
         // @note 更新の結果を Response する場合
         //$this->_ResponseParam::set('item', $ent_item->toArray());
+    }
+
+    /**
+     * @param ReqDevelopSetFakeNow $req
+     * @return void
+     */
+    public function setFakeNow(ReqDevelopSetFakeNow $req): void
+    {
+        $this->_FakeNow::setFakeNow($req->user_id, $req->fake_now);
+    }
+
+    /**
+     * @param ReqNone $req
+     * @return void
+     */
+    public function getFakeNow(ReqNone $req): void
+    {
+        $fake_now = $this->_FakeNow::getFakeNow($req->user_id);
+        $this->_ResponseParam::set('fake_now', $fake_now->format('Y-m-d H:i:s'));
     }
 }

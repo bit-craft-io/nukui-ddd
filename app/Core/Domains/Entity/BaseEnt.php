@@ -26,7 +26,8 @@ abstract class BaseEnt
     protected array $_draft_keys = [];
     // @note 自動更新
     protected bool $_auto_commit = false;
-
+    protected bool $_is_new = false;
+    protected bool $_is_empty = true;
     /**
      * @param Model|null $model
      * @return $this
@@ -36,6 +37,8 @@ abstract class BaseEnt
         $this->_model = $model;
         if ($this->_model) {
             $this->initAfter();
+            $this->_is_empty = false;
+            $this->_is_new = empty($this->_model->id ?? null);
         }
         return $this;
     }
@@ -114,7 +117,7 @@ abstract class BaseEnt
      */
     public function isNew(): bool
     {
-        return empty($this->id ?? null);
+        return $this->_is_new;
     }
 
     /**
