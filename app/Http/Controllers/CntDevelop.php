@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Core\Http\Controllers\BaseCnt;
+use App\Core\Http\Requests\ReqNone;
 use App\Core\Http\Responses\ResSuccess;
 use App\Http\Applications\AppDevelop;
 use App\Http\Requests\Develop\ReqDevelopItemAdd;
 use App\Http\Requests\Develop\ReqDevelopItemSub;
+use App\Http\Requests\Develop\ReqDevelopSetFakeNow;
 use Exception;
 
 class CntDevelop extends BaseCnt
@@ -35,5 +37,27 @@ class CntDevelop extends BaseCnt
     {
         $this->_ResponseModify::set(ResSuccess::class);
         $app->itemSub($req);
+    }
+
+    /**
+     * @param AppDevelop $app
+     * @param ReqDevelopSetFakeNow $req
+     * @return void
+     */
+    public function setFakeNow(AppDevelop $app, ReqDevelopSetFakeNow $req)
+    {
+        $this->_ResponseModify::set(ResSuccess::class);
+        $app->setFakeNow($req);
+    }
+
+    /**
+     * @param AppDevelop $app
+     * @param ReqNone $req
+     * @return void
+     */
+    public function getFakeNow(AppDevelop $app, ReqNone $req)
+    {
+        $this->_ResponseModify::set(ResSuccess::class);
+        $app->getFakeNow($req);
     }
 }

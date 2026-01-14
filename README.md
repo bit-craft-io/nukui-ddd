@@ -63,3 +63,6 @@ app/
 - Laravel(PHP 8.4)
 - Docker(MySQL, Redis)
 - AWS(EC2, RDS, Valkey)
+
+## その他
+- コミットログの内容は割愛してます
