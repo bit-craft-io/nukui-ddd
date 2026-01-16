@@ -20,8 +20,8 @@ final class MdlResponse
 {
     use TraitApplication;
     use TraitException;
-    use TraitDevelop;
     use TraitResponse;
+    use TraitDevelop;
 
     /**
      * @param $request
@@ -63,7 +63,7 @@ final class MdlResponse
     {
         if ($this->_Config::app()->debug) {
             $size = $this->_DevTool::getValueSize($response);
-            $this->_DevLog::info("Response Size = $size Kb");
+            $this->_Log::info("Response Size = $size Kb");
         }
         return $response;
     }

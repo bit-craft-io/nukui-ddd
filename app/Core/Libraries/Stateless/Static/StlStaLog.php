@@ -5,7 +5,7 @@ namespace App\Core\Libraries\Stateless\Static;
 use App\Core\Libraries\Stateless\Static\Enum\TypeLogText;
 use Illuminate\Support\Facades\Log;
 
-final class StlStaDevelopLog
+final class StlStaLog
 {
     /**
      * @param string|int $message

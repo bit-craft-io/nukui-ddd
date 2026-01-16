@@ -6,6 +6,7 @@ namespace App\Domains\Gacha\Service;
 
 use App\Core\Exceptions\Enum\TypeExcept;
 use App\Core\Libraries\Traits\TraitApplication;
+use App\Core\Libraries\Traits\TraitDevelop;
 use App\Core\Libraries\Traits\TraitDomain;
 use App\Core\Libraries\Traits\TraitException;
 use App\Domains\Gacha\EntGacha;
@@ -175,7 +176,14 @@ class SvcGacha //extends BaseSvc
         $left = 0;
         $right = count($cum_rates) - 1;
         $lot_filter_key = array_flip($lot_filter);
-        while ($left <= $right) {
+
+        $limit = (int)ceil(log(count($cum_rates) ?: 1, 2)) + 1;
+
+        //while ($left <= $right) {
+        for ($i = 0; $i < $limit; $i++) {
+//            if ($left > $right) {
+//                break;
+//            }
             $mid = intdiv($left + $right, 2);
             if ($lot_num <= $cum_rates[$mid]) {
                 if ($mid === 0 || $lot_num > $cum_rates[$mid - 1]) {
@@ -187,6 +195,8 @@ class SvcGacha //extends BaseSvc
                 $left = $mid + 1;
             }
         }
-        return [];
+
+        $this->_Log::warning('_drawLot failed');
+        return array_intersect_key($sorted_rates[0], $lot_filter_key);
     }
 }

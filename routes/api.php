@@ -27,6 +27,7 @@ Route::domain(StlStaConfig::app()->url)->group(function () {
             Route::post('item-sub', 'itemSub');
             Route::post('set-fake-now', 'setFakeNow');
             Route::get('get-fake-now', 'getFakeNow');
+            Route::post('unset-fake-now', 'unsetFakeNow');
         });
     });
     // @note not auth
