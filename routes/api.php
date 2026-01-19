@@ -37,4 +37,12 @@ Route::domain(StlStaConfig::app()->url)->group(function () {
             Route::post('login', 'login');
         });
     });
+
+    Route::middleware(['mdl.forward_game_server'])->group(function () {
+        Route::prefix('develop')->controller(CntDevelop::class)->group(function () {
+            Route::prefix('game-server')->controller(CntDevelop::class)->group(function () {
+                Route::any('{action}');
+            });
+        });
+    });
 });
