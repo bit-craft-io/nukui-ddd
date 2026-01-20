@@ -38,10 +38,10 @@ Route::domain(StlStaConfig::app()->url)->group(function () {
         });
     });
 
-    Route::middleware(['mdl.forward_game_server'])->group(function () {
+    Route::middleware(['mdl.response', 'mdl.forward_game_server'])->group(function () {
         Route::prefix('develop')->controller(CntDevelop::class)->group(function () {
             Route::prefix('game-server')->controller(CntDevelop::class)->group(function () {
-                Route::any('{action}');
+                Route::any('{action}', fn() => null);
             });
         });
     });

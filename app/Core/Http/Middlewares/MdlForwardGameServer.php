@@ -2,23 +2,38 @@
 
 namespace App\Core\Http\Middlewares;
 
+use App\Core\Exceptions\Enum\TypeExcept;
+use App\Core\Exceptions\ExceptApp;
 use App\Core\Libraries\Traits\TraitApplication;
+use App\Core\Libraries\Traits\TraitException;
+use App\Core\Libraries\Traits\TraitResponse;
 use Closure;
-use Protobuf\Health\V1\ReqHealth;
+use Exception;
+use Google\Protobuf\Internal\Message;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Protobuf\Health\V1\ResHealth;
 
 final class MdlForwardGameServer
 {
     use TraitApplication;
+    use TraitResponse;
+    use TraitException;
 
     public function handle($request, Closure $next)
     {
-        return $this->_forward($request);
+        $response_gs = $this->_forward($request);
+        $this->_ResponseParam::set('response_gs', $response_gs);
+        return $next($request);
     }
 
-    private function _forward(Request $request)
+    /**
+     * @throws ExceptApp
+     * @throws ConnectionException
+     * @throws Exception
+     */
+    private function _forward(Request $request): array
     {
         // @note hallo
         //$payload = $request->all();
@@ -29,58 +44,39 @@ final class MdlForwardGameServer
         //return response($res->body(), $res->status(), $res->headers());
 
         // @note protoBuf
-        //$payload = $request->all();
-        //$reqPb = new ReqHealth();
-        //$reqPb->setMessage($payload['message']);
-        //$reqPb->setInProgress($payload['in_progress']);
-        //$reqPb->setTimestamp(intval(Carbon::now()->timestamp));
-        //$bin = $reqPb->serializeToString();
+        $proto_ver = "V{$request->header('PROTO_VER', 1)}";
+        $action = $request->route('action');
+        $api = Str::studly($action);
+        $proto_name = "\\Protobuf\\$api\\$proto_ver";
+        $req_class_name = "$proto_name\\Req$api";
 
         $payload = $request->all();
-        $reqPb = new ReqHealth($payload);
-        $bin = $reqPb->serializeToString();
+        if (!class_exists($req_class_name)) {
+            $except_params['#1'] = $req_class_name;
+            throw $this->_Except::app(TypeExcept::DevelopNoneProtoBuf, $except_params);
+        }
+        /** @var Message $req_protocol */
+        $req_protocol = new $req_class_name($payload);
+        $bin = $req_protocol->serializeToString();
 
-        $game_server_api = $this->_Config::gameServer()->endpoint . '/' . $request->route('action');
+        $game_server_api = $this->_Config::gameServer()->endpoint . '/' . $action;
+        $res_binary = Http::withBody($bin, 'application/x-protobuf')->post($game_server_api);
 
-        $resBin = Http::withBody($bin, 'application/x-protobuf')
-            ->post($game_server_api);
-
-        // 1. まずステータスと生の中身をチェック！
-        if ($resBin->failed()) {
-            dd(
-                "エラーコード: " . $resBin->status(),
-                "生のレスポンス: " . $resBin->body() // ここに「Unauthorized」とか入ってへんか？
-            );
+        if ($res_binary->failed()) {
+            $except_params['#1'] = $res_binary->status();
+            $except_params['#2'] = $res_binary->body();
+            throw $this->_Except::app(TypeExcept::DevelopNoneProtoBuf, $except_params);
         }
 
-        $resPb = new ResHealth();
-        $resPb->mergeFromString($resBin->body());
+        $res_class_name = "$proto_name\\Res$api";
+        if (!class_exists($res_class_name)) {
+            $except_params['#1'] = $res_class_name;
+            throw $this->_Except::app(TypeExcept::DevelopNoneProtoBuf, $except_params);
+        }
 
-        dd($resPb->getIsSuccess(), $resPb->getMessage());
-//        $res = Http::withHeaders([
-//            'Content-Type' => 'application/x-protobuf',
-//        ])->withBody(
-//            $binary,
-//            'application/x-protobuf'
-//        )->post('http://host.docker.internal:30180/health');
-
-//        $req->setMessage($payload['message']);
-//        $req->setInProgress($payload['in_progress']);
-//        $req->setTimestamp(Carbon::now()->timestamp);
-//        $bin = $req->serializeToJsonString();
-
-        // TODO temp
-
-//        $jsonPb = json_encode([]);
-//        $game_server_api = $this->_Config::gameServer()->endpoint . '/' . $request->route('action');
-//        $res = Http::withHeaders(['Content-Type' => 'application/json'])
-//            ->send($request->method(), $game_server_api, ['body' => $jsonPb]);
-
-        // 4. gs のレスポンスをそのまま返す
-        return response(
-            $res->body(),
-            $res->status(),
-            $res->headers()
-        );
+        /** @var Message $res_protocol */
+        $res_protocol = new $res_class_name();
+        $res_protocol->mergeFromString($res_binary->body());
+        return json_decode($res_protocol->serializeToJsonString(), true);
     }
 }
