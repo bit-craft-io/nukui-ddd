@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace App\Core\DataSources;
 
 use App\Core\Exceptions\Enum\TypeExcept;
-use App\Core\Libraries\Traits\TraitException;
+use App\Core\Libraries\Traits\TraitDomain;
+use App\Core\Libraries\Traits\TraitInfra;
+use App\Core\Libraries\Traits\TraitCore;
+use App\Core\Libraries\Traits\TraitUtil;
 use Carbon\CarbonImmutable;
 use Closure;
 use Exception;
@@ -14,7 +17,10 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseDs
 {
-    use TraitException;
+    use TraitCore;
+    use TraitUtil;
+    use TraitInfra;
+    use TraitDomain;
 
     protected ?CarbonImmutable $_now = null;
     protected ?Model $_model = null;

@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace App\Core\Http\Middlewares;
 
-use App\Core\Libraries\Traits\TraitApplication;
-use App\Core\Libraries\Traits\TraitTransaction;
+use App\Core\Libraries\Traits\TraitDomain;
+use App\Core\Libraries\Traits\TraitInfra;
+use App\Core\Libraries\Traits\TraitCore;
+use App\Core\Libraries\Traits\TraitUtil;
 use Closure;
 
 final class MdlTransaction
 {
-    use TraitApplication;
-    use TraitTransaction;
+    use TraitCore;
+    use TraitUtil;
+    use TraitInfra;
+    use TraitDomain;
 
     /**
      * @param $request

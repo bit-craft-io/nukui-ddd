@@ -16,7 +16,7 @@ class RepUser extends BaseRep
      */
     public function makeDraft(): EntUser|BaseEnt
     {
-        $model = $this->_Infra::ds(DsHub::DS_U_USER)->getDraft();
+        $model = $this->_DataSource::make(DsHub::DS_U_USER)->getDraft();
         return $this->_Domain::ent(EntHub::ENT_USER)->init($model);
     }
 
@@ -26,7 +26,7 @@ class RepUser extends BaseRep
      */
     public function findByPublicId(string $public_id): EntUser|BaseEnt
     {
-        $model = $this->_Infra::ds(DsHub::DS_U_USER)->findByPublicId($public_id);
+        $model = $this->_DataSource::make(DsHub::DS_U_USER)->findByPublicId($public_id);
         return $this->_Domain::ent(EntHub::ENT_USER)->init($model);
     }
 
@@ -36,7 +36,7 @@ class RepUser extends BaseRep
      */
     public function findByUserId(int $user_id): EntUser|BaseEnt
     {
-        $model = $this->_Infra::ds(DsHub::DS_U_USER)->findByUserId($user_id);
+        $model = $this->_DataSource::make(DsHub::DS_U_USER)->findByUserId($user_id);
         return $this->_Domain::ent(EntHub::ENT_USER)->init($model);
     }
 
@@ -48,9 +48,9 @@ class RepUser extends BaseRep
     {
         $ent->commit();
         if ($ent->isNew()) {
-            $this->_Infra::ds(DsHub::DS_U_USER)->create($ent->getProperties());
+            $this->_DataSource::make(DsHub::DS_U_USER)->create($ent->getProperties());
         } else {
-            $this->_Infra::ds(DsHub::DS_U_USER)->update($ent->getProperties(), ['id' => $ent->id]);
+            $this->_DataSource::make(DsHub::DS_U_USER)->update($ent->getProperties(), ['id' => $ent->id]);
         }
 
     }

@@ -5,14 +5,18 @@ declare(strict_types=1);
 namespace App\Core\Domains\ValueObject;
 
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
-use App\Core\Libraries\Traits\TraitApplication;
-use App\Core\Libraries\Traits\TraitInfrastructure;
+use App\Core\Libraries\Traits\TraitDomain;
+use App\Core\Libraries\Traits\TraitInfra;
+use App\Core\Libraries\Traits\TraitCore;
+use App\Core\Libraries\Traits\TraitUtil;
 use App\DataSources\DsHub;
 
 abstract class BaseMstVo extends BaseVo
 {
-    use TraitInfrastructure;
-    use TraitApplication;
+    use TraitCore;
+    use TraitUtil;
+    use TraitInfra;
+    use TraitDomain;
 
     /**
      * @return string
@@ -34,7 +38,7 @@ abstract class BaseMstVo extends BaseVo
         $const_name = $this->_dsConstName();
 
         $callback = function () use ($const_name, $id) {
-            $model = $this->_Infra::ds(DsHub::{$const_name})->findEnable($id);
+            $model = $this->_DataSource::make(DsHub::{$const_name})->findEnable($id);
             return $this->init($model);
         };
 
@@ -55,7 +59,7 @@ abstract class BaseMstVo extends BaseVo
         $const_name = $this->_dsConstName();
 
         $callback = function () use ($const_name, $conditions, $key_name) {
-            $models = $this->_Infra::ds(DsHub::{$const_name})->getEnable($conditions);
+            $models = $this->_DataSource::make(DsHub::{$const_name})->getEnable($conditions);
             return $this->iterator($models, $key_name);
         };
 

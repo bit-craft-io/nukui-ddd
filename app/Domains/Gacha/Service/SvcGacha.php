@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\Domains\Gacha\Service;
 
 use App\Core\Exceptions\Enum\TypeExcept;
-use App\Core\Libraries\Traits\TraitApplication;
-use App\Core\Libraries\Traits\TraitDevelop;
 use App\Core\Libraries\Traits\TraitDomain;
-use App\Core\Libraries\Traits\TraitException;
+use App\Core\Libraries\Traits\TraitInfra;
+use App\Core\Libraries\Traits\TraitCore;
+use App\Core\Libraries\Traits\TraitDevelop;
+use App\Core\Libraries\Traits\TraitUtil;
 use App\Domains\Gacha\EntGacha;
 use App\Domains\Gacha\VoMGacha;
 use App\Domains\Gacha\VoHub;
@@ -18,9 +19,10 @@ use Exception;
 // TODO extends BaseSvc
 class SvcGacha //extends BaseSvc
 {
-    use TraitApplication;
+    use TraitCore;
+    use TraitUtil;
+    use TraitInfra;
     use TraitDomain;
-    use TraitException;
 
     /**
      * @throws Exception
@@ -58,7 +60,7 @@ class SvcGacha //extends BaseSvc
 
         // @note エンティティ抽選用のデータ取得
         //$conditions = ['group_no' => $vo_gacha->gacha_draw_entity_group_no];
-        //$m_gacha_draw_entities = $this->_Infra::ds(DsHub::DS_M_GACHA_DRAW_ENTITY)->getEnable($conditions);
+        //$m_gacha_draw_entities = $this->_DataSource::make(DsHub::DS_M_GACHA_DRAW_ENTITY)->getEnable($conditions);
         //$sorted_rates = $m_gacha_draw_entities->sortByDesc('rate')->values()->toArray();
 
         // @note エンティティ抽選用のデータ取得
@@ -83,7 +85,7 @@ class SvcGacha //extends BaseSvc
 
         // @note レアリティ抽選用のデータ取得
         //$conditions = ['group_no' => $vo_gacha->gacha_draw_rarity_group_no];
-        //$m_gacha_draw_rarities = $this->_Infra::ds(DsHub::DS_M_GACHA_DRAW_RARITY)->getEnable($conditions);
+        //$m_gacha_draw_rarities = $this->_DataSource::make(DsHub::DS_M_GACHA_DRAW_RARITY)->getEnable($conditions);
 
         // @note レアリティ抽選用のデータ作成
         //$rarity_sorted_rates = $m_gacha_draw_rarities->sortByDesc('rate')->values()->toArray();
@@ -99,7 +101,7 @@ class SvcGacha //extends BaseSvc
 
         // @note エンティティ抽選用のデータ取得
         //$conditions = ['group_no' => $vo_gacha->gacha_draw_entity_group_no];
-        //$m_gacha_draw_entities = $this->_Infra::ds(DsHub::DS_M_GACHA_DRAW_ENTITY)->getEnable($conditions);
+        //$m_gacha_draw_entities = $this->_DataSource::make(DsHub::DS_M_GACHA_DRAW_ENTITY)->getEnable($conditions);
         // @note エンティティ抽選用のデータ取得
         $conditions = ['group_no' => $vo_gacha->gacha_draw_entity_group_no];
         $vo_gacha_draw_entities = $this->_Domain::mstVo(VoHub::VO_M_GACHA_DRAW_ENTITY)->get($conditions);
@@ -134,7 +136,7 @@ class SvcGacha //extends BaseSvc
 
         // @note 実行回数 $vo_gacha->exec_count でユーザのステップの状態を管理
         //$conditions = ['group_no' => $vo_gacha->group_no];
-        //$m_gachas = $this->_Infra::ds(DsHub::DS_M_GACHA)->getEnable($conditions);
+        //$m_gachas = $this->_DataSource::make(DsHub::DS_M_GACHA)->getEnable($conditions);
         //$exec_count_max = $m_gachas->max('exec_count');
 
         $conditions = ['group_no' => $vo_gacha->group_no];

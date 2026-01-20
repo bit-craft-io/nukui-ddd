@@ -4,9 +4,11 @@ namespace App\Core\Http\Middlewares;
 
 use App\Core\Exceptions\Enum\TypeExcept;
 use App\Core\Exceptions\ExceptApp;
-use App\Core\Libraries\Traits\TraitApplication;
-use App\Core\Libraries\Traits\TraitException;
+use App\Core\Libraries\Traits\TraitDomain;
+use App\Core\Libraries\Traits\TraitInfra;
+use App\Core\Libraries\Traits\TraitCore;
 use App\Core\Libraries\Traits\TraitResponse;
+use App\Core\Libraries\Traits\TraitUtil;
 use Closure;
 use Exception;
 use Google\Protobuf\Internal\Message;
@@ -17,9 +19,11 @@ use Illuminate\Support\Facades\Http;
 
 final class MdlForwardGameServer
 {
-    use TraitApplication;
+    use TraitCore;
+    use TraitUtil;
+    use TraitInfra;
+    use TraitDomain;
     use TraitResponse;
-    use TraitException;
 
     public function handle($request, Closure $next)
     {

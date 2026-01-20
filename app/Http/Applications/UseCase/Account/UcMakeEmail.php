@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace App\Http\Applications\UseCase\Account;
 
-use App\Core\Libraries\Traits\TraitInfrastructure;
+use App\Core\Libraries\Traits\TraitDomain;
+use App\Core\Libraries\Traits\TraitInfra;
+use App\Core\Libraries\Traits\TraitCore;
 use App\Core\Libraries\Traits\TraitUtil;
 use App\DataSources\DsHub;
 
 final class UcMakeEmail
 {
-    use TraitInfrastructure;
+    use TraitCore;
     use TraitUtil;
+    use TraitInfra;
+    use TraitDomain;
 
     const string MAIL_DOMAIN = 'bit-craft.com';
 
@@ -20,7 +24,7 @@ final class UcMakeEmail
      */
     public function execute(): string
     {
-        $ds_u_user = $this->_Infra::ds(DsHub::DS_U_USER);
+        $ds_u_user = $this->_DataSource::make(DsHub::DS_U_USER);
         do {
             $random_key = $this->_UtilRandom::key(10, 10);
             $model = $ds_u_user->findByPublicId($random_key);

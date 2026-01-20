@@ -17,7 +17,7 @@ class RepGacha extends BaseRep
      */
     public function find(int $user_id): EntGacha
     {
-        $model = $this->_Infra::ds(DsHub::DS_U_GACHA)->findByUserId($user_id);
+        $model = $this->_DataSource::make(DsHub::DS_U_GACHA)->findByUserId($user_id);
         return $this->_Domain::ent(EntHub::ENT_GACHA)->init($model);
     }
 
@@ -27,7 +27,7 @@ class RepGacha extends BaseRep
      */
     public function draft($user_id)
     {
-        $model = $this->_Infra::ds(DsHub::DS_U_GACHA)->getDraft($user_id);
+        $model = $this->_DataSource::make(DsHub::DS_U_GACHA)->getDraft($user_id);
         return $this->_Domain::ent(EntHub::ENT_GACHA)->init($model);
     }
 
@@ -39,10 +39,10 @@ class RepGacha extends BaseRep
     {
         $ent->commit();
         if ($ent->isNew()) {
-            $this->_Infra::ds(DsHub::DS_U_GACHA)->create($ent->getProperties());
+            $this->_DataSource::make(DsHub::DS_U_GACHA)->create($ent->getProperties());
 
         } else {
-            $this->_Infra::ds(DsHub::DS_U_GACHA)->update($ent->getProperties(), ['user_id' => $ent->user_id]);
+            $this->_DataSource::make(DsHub::DS_U_GACHA)->update($ent->getProperties(), ['user_id' => $ent->user_id]);
         }
     }
 }
