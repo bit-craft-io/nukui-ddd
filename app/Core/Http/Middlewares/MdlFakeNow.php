@@ -12,7 +12,7 @@ final class MdlFakeNow
     public function handle($request, Closure $next)
     {
         if ($this->_Config::app()->debug && auth()->check()) {
-            $this->_FakeNow::applyFakeNow(auth()->id());
+            $this->_Date::applyFakeNow(auth()->id());
         }
         return $next($request);
 

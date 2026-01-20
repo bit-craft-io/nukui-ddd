@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Core\Http\Middlewares;
 
-use App\Core\Libraries\Traits\TraitDevelop;
+use App\Core\Libraries\Traits\TraitApplication;
 use App\Core\Libraries\Traits\TraitTransaction;
 use Closure;
 
 final class MdlTransaction
 {
-    use TraitDevelop;
+    use TraitApplication;
     use TraitTransaction;
 
     /**
@@ -22,26 +22,26 @@ final class MdlTransaction
     {
         $response = $next($request);
 
-        $this->_DevLog::info('begin');
+        $this->_Log::info('begin');
 
         $tranLevel = $this->_Transaction::getLevel();
 
         // @note ロールバック
         if ($this->_Transaction::isRollback()) {
             for ($i = 0; $i < $tranLevel; $i++) {
-                $this->_DevLog::info('rollback');
+                $this->_Log::info('rollback');
                 $this->_Transaction::rollback();
             }
-            $this->_DevLog::info('end');
+            $this->_Log::info('end');
             return $response;
         }
 
         // @note コミット
         for ($i = 0; $i < $tranLevel; $i++) {
-            $this->_DevLog::info('commit');
+            $this->_Log::info('commit');
             $this->_Transaction::commit();
         }
-        $this->_DevLog::info('end');
+        $this->_Log::info('end');
         return $response;
     }
 }

@@ -27,6 +27,7 @@ Route::domain(StlStaConfig::app()->url)->group(function () {
             Route::post('item-sub', 'itemSub');
             Route::post('set-fake-now', 'setFakeNow');
             Route::get('get-fake-now', 'getFakeNow');
+            Route::post('unset-fake-now', 'unsetFakeNow');
         });
     });
     // @note not auth
@@ -34,6 +35,14 @@ Route::domain(StlStaConfig::app()->url)->group(function () {
         Route::prefix('account')->controller(CntAccount::class)->group(function () {
             Route::post('register', 'register');
             Route::post('login', 'login');
+        });
+    });
+
+    Route::middleware(['mdl.response', 'mdl.forward_game_server'])->group(function () {
+        Route::prefix('develop')->controller(CntDevelop::class)->group(function () {
+            Route::prefix('game-server')->controller(CntDevelop::class)->group(function () {
+                Route::any('{action}', fn() => null);
+            });
         });
     });
 });

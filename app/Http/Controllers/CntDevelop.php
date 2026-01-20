@@ -55,6 +55,17 @@ class CntDevelop extends BaseCnt
      * @param ReqNone $req
      * @return void
      */
+    public function unsetFakeNow(AppDevelop $app, ReqNone $req)
+    {
+        $this->_ResponseModify::set(ResSuccess::class);
+        $app->unsetFakeNow($req);
+    }
+
+    /**
+     * @param AppDevelop $app
+     * @param ReqNone $req
+     * @return void
+     */
     public function getFakeNow(AppDevelop $app, ReqNone $req)
     {
         $this->_ResponseModify::set(ResSuccess::class);

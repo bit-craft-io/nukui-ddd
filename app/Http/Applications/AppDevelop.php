@@ -70,7 +70,16 @@ class AppDevelop extends BaseApp
      */
     public function setFakeNow(ReqDevelopSetFakeNow $req): void
     {
-        $this->_FakeNow::setFakeNow($req->user_id, $req->fake_now);
+        $this->_Date::setFakeNow($req->user_id, $req->fake_now);
+    }
+
+    /**
+     * @param ReqNone $req
+     * @return void
+     */
+    public function unsetFakeNow(ReqNone $req): void
+    {
+        $this->_Date::unsetFakeNow($req->user_id);
     }
 
     /**
@@ -79,7 +88,7 @@ class AppDevelop extends BaseApp
      */
     public function getFakeNow(ReqNone $req): void
     {
-        $fake_now = $this->_FakeNow::getFakeNow($req->user_id);
+        $fake_now = $this->_Date::getFakeNow($req->user_id);
         $this->_ResponseParam::set('fake_now', $fake_now->format('Y-m-d H:i:s'));
     }
 }
