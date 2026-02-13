@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Core\Http\Responses;
 
 use App\Core\Libraries\Traits\TraitDomain;
+use App\Core\Libraries\Traits\TraitInfra;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 abstract class BaseRes extends JsonResponse
 {
+    use TraitInfra;
     use TraitDomain;
 
     protected array $_result = [];

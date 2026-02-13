@@ -16,7 +16,7 @@ class RepAccount extends BaseRep
      */
     public function makeDraft(): EntAccount|BaseEnt
     {
-        $model = $this->_Infra::ds(DsHub::DS_ACCOUNT)->getDraft();
+        $model = $this->_DataSource::make(DsHub::DS_ACCOUNT)->getDraft();
         return $this->_Domain::ent(EntHub::ENT_ACCOUNT)->init($model);
     }
 
@@ -27,7 +27,7 @@ class RepAccount extends BaseRep
     public function persist(EntAccount|BaseEnt $ent): void
     {
         $ent->commit();
-        $id = $this->_Infra::ds(DsHub::DS_ACCOUNT)->createGetId($ent->getProperties());
+        $id = $this->_DataSource::make(DsHub::DS_ACCOUNT)->createGetId($ent->getProperties());
 
         $ent->id($id);
         $ent->commit();

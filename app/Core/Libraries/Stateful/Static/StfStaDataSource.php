@@ -7,7 +7,7 @@ namespace App\Core\Libraries\Stateful\Static;
 use App\Core\DataSources\BaseDs;
 use Illuminate\Database\Eloquent\Model;
 
-final class StfStaInfra
+final class StfStaDataSource
 {
     private static ?array $_instances = null;
 
@@ -16,7 +16,7 @@ final class StfStaInfra
      * @param T $data_source_class
      * @return T
      */
-    public static function ds(string $data_source_class)
+    public static function make(string $data_source_class)
     {
         $instance = self::$_instances[$data_source_class] ?? null;
         if ($instance) {

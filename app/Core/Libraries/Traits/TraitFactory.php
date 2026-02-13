@@ -9,5 +9,5 @@ namespace App\Core\Libraries\Traits;
 //       で use Trait をしてしまう為
 trait TraitFactory
 {
-    //public string|StfStaFactory $_factory = StfStaFactory::class;
+    //public string|StfStaFactory $_Factory = StfStaFactory::class;
 }
