@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package hallo.v1;
 
-option go_package = "internal.local/bit-craft-io/sandbox/gs/gen/hallopb;hallopb";
+option go_package = "internal.local/bit-craft-io/sandbox/gs/gen/protobuf;protobuf";
 option php_namespace = "Protobuf\\Hallo\\V1";
 
 message ReqHallo {
