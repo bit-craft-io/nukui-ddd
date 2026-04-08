@@ -18,11 +18,17 @@ class AppAccount extends BaseApp
     {
         $this->_Transaction::begin();
 
-        $email = $this->_UseCase::make(UcHub::UC_ACCOUNT_MAKE_EMAIL)->execute();
-        $password = $this->_UtilRandom::key32(4, 4);
+        // TODO 20260408
+        //$public_id = $this->_UseCase::make(UcHub::UC_ACCOUNT_MAKE_PUBLIC_ID)->execute();
+        $public_id = $this->_UtilNanoId::base32();
 
-        // @note このやり方は補完が効かない $rep_account->makeDraft()
-        //$rep_account = $this->_Domain::rep($this->_Rep::REP_ACCOUNT);
+        // TODO 20260408
+        //$email = $this->_UseCase::make(UcHub::UC_ACCOUNT_MAKE_EMAIL)->execute($public_id);
+        $email = sprintf('%s@bit-craft.com', $public_id);
+        $password = $this->_UtilNanoId::base32(8);
+
+        $primary_code = $this->_UseCase::make(UcHub::UC_ACCOUNT_MAKE_PRIMARY_CODE)->execute($email, $password);
+        $this->_ResponseParam::set('primary_code', $primary_code);
 
         $rep_account = $this->_Domain::rep(RepHub::REP_ACCOUNT);
         $ent_account = $rep_account->makeDraft();
@@ -31,10 +37,6 @@ class AppAccount extends BaseApp
         $ent_account->password($password);
         $rep_account->persist($ent_account);
 
-        $primary_code = $this->_UtilCompress::comp("$email:$password");
-        $this->_ResponseParam::set('primary_code', $primary_code);
-
-        $public_id = $this->_UseCase::make(UcHub::UC_ACCOUNT_MAKE_PUBLIC_ID)->execute();
         $rep_user = $this->_Domain::rep(RepHub::REP_USER);
         $ent_user = $rep_user->makeDraft();
         $ent_user->id($ent_account->id);

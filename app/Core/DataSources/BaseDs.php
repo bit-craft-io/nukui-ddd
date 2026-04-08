@@ -22,6 +22,7 @@ abstract class BaseDs
     use TraitInfra;
     use TraitDomain;
 
+    // @note 副作用を防止する為 Carbon ではなく CarbonImmutable を使用
     protected ?CarbonImmutable $_now = null;
     protected ?Model $_model = null;
 
@@ -30,8 +31,7 @@ abstract class BaseDs
      */
     final public function _now(): CarbonImmutable
     {
-        // @note 意図しない動作を抑止する為 Carbon ではなく CarbonImmutable を使用
-        if ($this->_now == null) {
+        if ($this->_now === null) {
             $this->_now = CarbonImmutable::now();
         }
         return $this->_now;
@@ -61,10 +61,10 @@ abstract class BaseDs
 
     /**
      * @param array $conditions
-     * @return Model|null
+     * @return Model
      * @throws Exception
      */
-    final public function findOrFail(array $conditions = []): ?Model
+    final public function findOrFail(array $conditions = []): Model
     {
         $model = $this->_model
             ->newQuery()

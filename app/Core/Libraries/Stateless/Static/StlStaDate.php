@@ -7,13 +7,11 @@ namespace App\Core\Libraries\Stateless\Static;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
-use DateInterval;
-use DateTime;
 use Illuminate\Support\Facades\Cache;
 
 final class StlStaDate
 {
-    private static ?CarbonInterface $_baseAt = null;
+    private static ?CarbonInterface $_base_now = null;
     private static int $_fake_now_expire_sec = 60;
 
     /**
@@ -23,11 +21,16 @@ final class StlStaDate
      */
     public static function setFakeNow(int $user_id, string $fake_at): void
     {
-        if (!Carbon::canBeCreatedFromFormat($fake_at, 'Y-m-d H:i:s')) {
+        if (!CarbonImmutable::canBeCreatedFromFormat($fake_at, 'Y-m-d H:i:s')) {
             return;
         }
-        $fake_date_time = DateTime::createFromFormat('Y-m-d H:i:s', $fake_at);
-        $offset_sec = $fake_date_time->getTimestamp() - time();
+
+        // @note リセット
+        Carbon::setTestNow();
+        CarbonImmutable::setTestNow();
+
+        $fake_date_time = CarbonImmutable::parse($fake_at);
+        $offset_sec = $fake_date_time->timestamp - CarbonImmutable::now()->timestamp;
         Cache::set(self::_fakeNowKey($user_id), $offset_sec, self::$_fake_now_expire_sec);
     }
 
@@ -41,16 +44,11 @@ final class StlStaDate
     }
 
     /**
-     * @param int $user_id
-     * @return DateTime
+     * @return CarbonInterface
      */
-    public static function getFakeNow(int $user_id): DateTime
+    public static function getFakeNow(): CarbonInterface
     {
-        $offset = intval(Cache::get(self::_fakeNowKey($user_id)) ?? 0);
-        if ($offset !== 0) {
-            return new DateTime("+{$offset} seconds");
-        }
-        return new DateTime();
+        return CarbonImmutable::now();
     }
 
     /**
@@ -60,11 +58,18 @@ final class StlStaDate
     public static function applyFakeNow(int $user_id): void
     {
         $offset = intval(Cache::get(self::_fakeNowKey($user_id)) ?? 0);
-        if ($offset !== 0) {
-            $fakeNow = new DateTime("+{$offset} seconds");
-            Carbon::setTestNow($fakeNow);
-            CarbonImmutable::setTestNow($fakeNow);
+        if ($offset === 0) {
+            return;
         }
+
+        // @note リセット
+        Carbon::setTestNow();
+        CarbonImmutable::setTestNow();
+
+        // @note 設定
+        $fakeNow = CarbonImmutable::now()->addSeconds($offset);
+        Carbon::setTestNow($fakeNow);
+        CarbonImmutable::setTestNow($fakeNow);
     }
 
     /**
@@ -79,11 +84,12 @@ final class StlStaDate
     /**
      * @return CarbonInterface
      */
-    public static function baseAt(): CarbonInterface
+    public static function baseNow(): CarbonInterface
     {
-        if (empty(self::$_baseAt)) {
-            self::$_baseAt = CarbonImmutable::createFromTimestamp(LARAVEL_START);
+        if (empty(self::$_base_now)) {
+            self::$_base_now = CarbonImmutable::createFromTimestamp(LARAVEL_START)
+                ->timezone(date_default_timezone_get());
         }
-        return self::$_baseAt;
+        return self::$_base_now;
     }
 }

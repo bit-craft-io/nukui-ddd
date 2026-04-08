@@ -83,12 +83,11 @@ class AppDevelop extends BaseApp
     }
 
     /**
-     * @param ReqNone $req
      * @return void
      */
-    public function getFakeNow(ReqNone $req): void
+    public function getFakeNow(): void
     {
-        $fake_now = $this->_Date::getFakeNow($req->user_id);
+        $fake_now = $this->_Date::getFakeNow();
         $this->_ResponseParam::set('fake_now', $fake_now->format('Y-m-d H:i:s'));
     }
 }
