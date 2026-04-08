@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package health.v1;
 
-option go_package = "internal.local/bit-craft-io/sandbox/gs/gen/healthpb;healthpb";
+option go_package = "internal.local/bit-craft-io/sandbox/gs/gen/protobuf;protobuf";
 option php_namespace = "Protobuf\\Health\\V1";
 
 message ReqHealth {

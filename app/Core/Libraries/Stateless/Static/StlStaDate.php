@@ -6,12 +6,14 @@ namespace App\Core\Libraries\Stateless\Static;
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use DateInterval;
 use DateTime;
 use Illuminate\Support\Facades\Cache;
 
 final class StlStaDate
 {
+    private static ?CarbonInterface $_baseAt = null;
     private static int $_fake_now_expire_sec = 60;
 
     /**
@@ -72,5 +74,16 @@ final class StlStaDate
     private static function _fakeNowKey(int $user_id): string
     {
         return "user_fake_offset_sec::$user_id";
+    }
+
+    /**
+     * @return CarbonInterface
+     */
+    public static function baseAt(): CarbonInterface
+    {
+        if (empty(self::$_baseAt)) {
+            self::$_baseAt = CarbonImmutable::createFromTimestamp(LARAVEL_START);
+        }
+        return self::$_baseAt;
     }
 }
