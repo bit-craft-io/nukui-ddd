@@ -21,6 +21,5 @@ final class MdlFakeNow
             $this->_Date::applyFakeNow(auth()->id());
         }
         return $next($request);
-
     }
 }

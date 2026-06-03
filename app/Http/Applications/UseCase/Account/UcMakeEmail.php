@@ -8,7 +8,6 @@ use App\Core\Libraries\Traits\TraitDomain;
 use App\Core\Libraries\Traits\TraitInfra;
 use App\Core\Libraries\Traits\TraitCore;
 use App\Core\Libraries\Traits\TraitUtil;
-use App\DataSources\DsHub;
 
 final class UcMakeEmail
 {
@@ -20,15 +19,18 @@ final class UcMakeEmail
     const string MAIL_DOMAIN = 'bit-craft.com';
 
     /**
+     * @param string $public_id
      * @return string
      */
-    public function execute(): string
+    public function execute(string $public_id): string
     {
-        $ds_u_user = $this->_DataSource::make(DsHub::DS_U_USER);
-        do {
-            $random_key = $this->_UtilRandom::key(10, 10);
-            $model = $ds_u_user->findByPublicId($random_key);
-        } while ($model);
-        return $random_key . '@' . self::MAIL_DOMAIN;
+        // TODO 20260408
+        //$ds_u_user = $this->_DataSource::make(DsHub::DS_U_USER);
+        //do {
+        //    $random_key = $this->_UtilRandom::key(10, 10);
+        //    $model = $ds_u_user->findByPublicId($random_key);
+        //} while ($model);
+        //return $random_key . '@' . self::MAIL_DOMAIN;
+        return $public_id . '@' . self::MAIL_DOMAIN;
     }
 }

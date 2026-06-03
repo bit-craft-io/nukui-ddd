@@ -26,6 +26,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('energy_max_stock')->default(1)->comment('エナジー最大値');
             $table->json('meta_data')->nullable()->default(new Expression('(JSON_OBJECT())'))->comment('クライアント自由保存領域');
             $table->timestamps();
+
+            $table->unique(['public_id'], 'unique_public_id');
         });
     }
 
