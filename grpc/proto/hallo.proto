@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package hallo;
+
+option go_package = "internal.local/bit-craft-io/sandbox/gs/gen/proto;proto";
+option php_namespace = "Proto\\Hallo";
+
+message ReqHallo {
+}
+
+message ResHallo {
+  bool is_success = 1;
+  string message = 2;
+}

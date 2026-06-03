@@ -1,10 +1,12 @@
 ## 概要
 - 実務で得た経験を基に、設計思想を整理・発展させたリポジトリです。<br />
   再利用性と責務分離をLaravelとドメイン駆動設計(DDD)で実現してます。
+- This repository is a part of my professional portfolio, <br>
+  demonstrating my learning process and technical skills in software development.
 
 ## ディレクトリ構成
 ```
-app/
+app/                           # アプリケーション
 --------------------------------------------------------------------------------
 ├── Core/                      # システム基盤
 │ ├── DataSources/             # インフラ層の共通処理
