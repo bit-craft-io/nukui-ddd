@@ -3,7 +3,7 @@
 use App\Core\Exceptions\ExceptApp;
 use App\Core\Exceptions\ExceptModel;
 use App\Core\Http\Middlewares\MdlFakeNow;
-use App\Core\Http\Middlewares\MdlForwardGameServer;
+use App\Core\Http\Middlewares\MdlForwardPod;
 use App\Core\Http\Middlewares\MdlResponse;
 use App\Core\Http\Middlewares\MdlTransaction;
 use App\Core\Http\Responses\ResFailed;
@@ -26,7 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'mdl.transaction' => MdlTransaction::class,
             'mdl.response' => MdlResponse::class,
             'mdl.fake_now' => MdlFakeNow::class,
-            'mdl.forward_game_server' => MdlForwardGameServer::class,
+            'mdl.forward_pod' => MdlForwardPod::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

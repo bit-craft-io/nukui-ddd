@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package health.v1;
+package health;
 
-option go_package = "internal.local/bit-craft-io/sandbox/gs/gen/protobuf;protobuf";
-option php_namespace = "Protobuf\\Health\\V1";
+option go_package = "internal.local/bit-craft-io/sandbox/gs/gen/proto;proto";
+option php_namespace = "Proto\\Health";
 
 message ReqHealth {
   string message = 1;

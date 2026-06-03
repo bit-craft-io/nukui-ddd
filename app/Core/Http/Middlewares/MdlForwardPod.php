@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-final class MdlForwardGameServer
+final class MdlForwardPod
 {
     use TraitCore;
     use TraitUtil;
@@ -39,6 +39,18 @@ final class MdlForwardGameServer
      */
     private function _forward(Request $request): array
     {
+        if ($request->isMethod('get')) {
+            $action = $request->route('action');
+            $pod_api = $this->_Config::develop()->api_endpoint . '/' . $action;
+            $res = Http::get($pod_api, $request->all())->throw();
+            return ['status' => $res->status(), 'body' => $res->body()];
+        }
+        $action = $request->route('action');
+        $pod_api = $this->_Config::develop()->api_endpoint . '/' . $action;
+        dd($pod_api);
+        $res = Http::post($pod_api, $request->all())->throw();
+        dd($res);
+
         // @note hallo
         //$payload = $request->all();
         //$jsonPb = json_encode($payload);
@@ -48,10 +60,9 @@ final class MdlForwardGameServer
         //return response($res->body(), $res->status(), $res->headers());
 
         // @note protoBuf
-        $proto_ver = "V{$request->header('PROTO_VER', 1)}";
         $action = $request->route('action');
         $api = Str::studly($action);
-        $proto_name = "\\Protobuf\\$api\\$proto_ver";
+        $proto_name = "\\Protobuf\\$api";
         $req_class_name = "$proto_name\\Req$api";
 
         $payload = $request->all();

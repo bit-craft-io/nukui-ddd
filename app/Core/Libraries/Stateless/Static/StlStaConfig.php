@@ -6,6 +6,7 @@ namespace App\Core\Libraries\Stateless\Static;
 
 use App\Core\Libraries\Stateless\Static\Interface\IStlStaConfigApp;
 use App\Core\Libraries\Stateless\Static\Interface\IStlStaConfigCore;
+use App\Core\Libraries\Stateless\Static\Interface\IStlStaConfigDevelop;
 use App\Core\Libraries\Stateless\Static\Interface\IStlStaConfigGameServer;
 
 final class StlStaConfig
@@ -32,5 +33,13 @@ final class StlStaConfig
     public static function gameServer(): mixed
     {
         return (object)config('game_server');
+    }
+
+    /**
+     * @return IStlStaConfigdevelop|object
+     */
+    public static function develop(): mixed
+    {
+        return (object)config('develop');
     }
 }
