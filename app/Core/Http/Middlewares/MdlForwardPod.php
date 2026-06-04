@@ -25,11 +25,39 @@ final class MdlForwardPod
     use TraitDomain;
     use TraitResponse;
 
-    public function handle($request, Closure $next)
+    /**
+     * @param $request
+     * @param Closure $next
+     * @return mixed
+     * @throws ConnectionException
+     * @throws ExceptApp
+     */
+    public function handle($request, Closure $next): mixed
     {
-        $response_gs = $this->_forward($request);
-        $this->_ResponseParam::set('response_gs', $response_gs);
+        $response = $this->_forward($request);
+        if (isset($response['message']) && json_validate($response['message'])) {
+            $response['message'] = json_decode($response['message'], true);
+        }
+        $this->_ResponseParam::set('develop', $response);
         return $next($request);
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     * @throws ExceptApp
+     */
+    private function _mustEndpoint(Request $request): string
+    {
+        $server = Str::afterLast(dirname($request->path()), '/');
+        $ep = match($server) {
+            'api' => $this->_Config::develop()->api_endpoint,
+            default => false
+        };
+        if ($ep === false) {
+            throw $this->_Except::app(TypeExcept::DevelopGeneralError);
+        }
+        return $ep;
     }
 
     /**
@@ -39,17 +67,21 @@ final class MdlForwardPod
      */
     private function _forward(Request $request): array
     {
+        $endpoint = $this->_mustEndpoint($request);
+        $action = $request->route('action');
+        $pod_api = $endpoint . '/' . $action;
         if ($request->isMethod('get')) {
-            $action = $request->route('action');
-            $pod_api = $this->_Config::develop()->api_endpoint . '/' . $action;
             $res = Http::get($pod_api, $request->all())->throw();
             return ['status' => $res->status(), 'body' => $res->body()];
         }
-        $action = $request->route('action');
-        $pod_api = $this->_Config::develop()->api_endpoint . '/' . $action;
-        dd($pod_api);
-        $res = Http::post($pod_api, $request->all())->throw();
-        dd($res);
+
+        $is_pb = $request->get('pb') ?? true;
+        if (!$is_pb) {
+            $res = Http::post($pod_api, $request->all());
+            return json_decode($res, true);
+        }
+
+//        dd(__LINE__);
 
         // @note hallo
         //$payload = $request->all();
@@ -60,9 +92,9 @@ final class MdlForwardPod
         //return response($res->body(), $res->status(), $res->headers());
 
         // @note protoBuf
-        $action = $request->route('action');
+        // @note composer.json に "autoload.psr-4.Proto//" の設定があるか確認
         $api = Str::studly($action);
-        $proto_name = "\\Protobuf\\$api";
+        $proto_name = "\\Proto\\$api";
         $req_class_name = "$proto_name\\Req$api";
 
         $payload = $request->all();
@@ -70,12 +102,13 @@ final class MdlForwardPod
             $except_params['#1'] = $req_class_name;
             throw $this->_Except::app(TypeExcept::DevelopNoneProtoBuf, $except_params);
         }
+
         /** @var Message $req_protocol */
         $req_protocol = new $req_class_name($payload);
         $bin = $req_protocol->serializeToString();
 
-        $game_server_api = $this->_Config::gameServer()->endpoint . '/' . $action;
-        $res_binary = Http::withBody($bin, 'application/x-protobuf')->post($game_server_api);
+        $res_binary = Http::withBody($bin, 'application/x-protobuf')
+            ->post($pod_api);
 
         if ($res_binary->failed()) {
             $except_params['#1'] = $res_binary->status();
