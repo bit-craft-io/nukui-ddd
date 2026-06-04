@@ -18,8 +18,9 @@ enum TypeExcept: int
     case AppGachaExecCountOver = 24004;
     case AppGachaStepNotEqual = 24005;
 
-    case DevelopNoneProtoBuf = 99001;
-    case DevelopFailedForwardGameServer = 99002;
+    case DevelopGeneralError = 99001;
+    case DevelopNoneProtoBuf = 99011;
+    case DevelopFailedForwardGameServer = 99012;
 
     public function message(array $except_params = []): string
     {
@@ -34,6 +35,7 @@ enum TypeExcept: int
             self::AppGachaMasterIsNotValid => strtr('Master is not valid [gacha.id #1]', $except_params),
             self::AppGachaExecCountOver => strtr('Exec count over [gacha.group_no #1]', $except_params),
             self::AppGachaStepNotEqual => strtr('Step is not equal [step m #1 != u #2]', $except_params),
+            self::DevelopGeneralError => 'develop error',
             self::DevelopNoneProtoBuf => strtr('develop none proto buf [proto #1]', $except_params),
             self::DevelopFailedForwardGameServer => strtr('develop failed forward game server [status #1 body #2]', $except_params),
         };
