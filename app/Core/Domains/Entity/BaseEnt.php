@@ -24,6 +24,7 @@ abstract class BaseEnt
     // @note 初期化後に実行される
     abstract public function initAfter(): void;
     protected ?Model $_model = null;
+    protected array $_cache = [];
     protected array $_draft = [];
     protected array $_draft_keys = [];
     // @note 自動更新
@@ -53,7 +54,10 @@ abstract class BaseEnt
      */
     public function __get(string $name)
     {
-        return $this->_model?->{$name};
+        if (!isset($this->_cache[$name])) {
+            $this->_cache[$name] = $this->_model?->{$name};
+        }
+        return $this->_cache[$name];
     }
 
     /**
@@ -82,6 +86,7 @@ abstract class BaseEnt
     {
         $this->_model->fill($this->_draft);
         $this->_draft = [];
+        //$this->_cache = [];
     }
 
     /**

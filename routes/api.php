@@ -28,6 +28,7 @@ Route::domain(StlStaConfig::app()->url)->group(function () {
             Route::post('set-fake-now', 'setFakeNow');
             Route::get('get-fake-now', 'getFakeNow');
             Route::post('unset-fake-now', 'unsetFakeNow');
+            Route::post('set-que', 'setQue');
         });
     });
     // @note not auth
@@ -37,7 +38,7 @@ Route::domain(StlStaConfig::app()->url)->group(function () {
             Route::post('login', 'login');
         });
     });
-
+    // @note pod
     Route::middleware(['mdl.response', 'mdl.forward_pod'])->group(function () {
         Route::prefix('develop')->controller(CntDevelop::class)->group(function () {
             Route::prefix('api')->controller(CntDevelop::class)->group(function () {
