@@ -7,6 +7,8 @@ namespace App\Http\Applications;
 use App\Core\Exceptions\Enum\TypeExcept;
 use App\Core\Http\Applications\BaseApp;
 use App\Core\Http\Requests\ReqNone;
+use App\Core\Jobs\Contexts\AccessInfo;
+use App\Core\Jobs\JobAccessInfo;
 use App\Domains\Item\VoHub;
 use App\Domains\RepHub;
 use App\Http\Requests\Develop\ReqDevelopItemAdd;
@@ -89,5 +91,11 @@ class AppDevelop extends BaseApp
     {
         $fake_now = $this->_Date::getFakeNow();
         $this->_ResponseParam::set('fake_now', $fake_now->format('Y-m-d H:i:s'));
+    }
+
+    public function setQue(ReqNone $req): void
+    {
+        JobAccessInfo::dispatch(AccessInfo::make($req->user_id, ['debug' => __LINE__]));
+        sleep(1);
     }
 }
