@@ -12,9 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('h_access_infos', function (Blueprint $table) {
+        Schema::create('access_infos', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement()->comment('識別子');
-            $table->unsignedBigInteger('user_id')->comment('ユーザID');
+            $table->unsignedBigInteger('user_id')->default(0)->comment('内部用ユーザ識別子');
+            $table->string('public_id', 12)->default('')->comment('外部公開用ユーザ識別子');
             $table->unsignedSmallInteger('level')->default(1)->comment('ログレベル');
             $table->string('api', 256)->nullable()->comment('実行API');
             $table->json('param')->default(new Expression('(JSON_OBJECT())'))->comment('パラメータ');
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('h_access_infos');
+        Schema::dropIfExists('access_infos');
     }
 };

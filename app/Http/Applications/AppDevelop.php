@@ -7,7 +7,7 @@ namespace App\Http\Applications;
 use App\Core\Exceptions\Enum\TypeExcept;
 use App\Core\Http\Applications\BaseApp;
 use App\Core\Http\Requests\ReqNone;
-use App\Core\Jobs\Contexts\AccessInfo;
+use App\Core\Jobs\Contexts\CtxAccessInfo;
 use App\Core\Jobs\JobAccessInfo;
 use App\Domains\Item\VoHub;
 use App\Domains\RepHub;
@@ -95,7 +95,8 @@ class AppDevelop extends BaseApp
 
     public function setQue(ReqNone $req): void
     {
-        JobAccessInfo::dispatch(AccessInfo::make($req->user_id, ['debug' => __LINE__]));
+        //dd($req->public_id);
+        JobAccessInfo::dispatch(CtxAccessInfo::make($req->user_id, ['debug' => __LINE__]));
         sleep(1);
     }
 }

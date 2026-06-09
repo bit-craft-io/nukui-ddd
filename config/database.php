@@ -2,6 +2,46 @@
 
 use Illuminate\Support\Str;
 
+$con_mysql = [
+    'driver' => 'mysql',
+    'read' => [
+        'host' => env('DB_SLAVE_HOST', '127.0.0.1'),
+        'port' => env('DB_SLAVE_PORT', '3306'),
+    ],
+    'write' => [
+        'host' => env('DB_MASTER_HOST', '127.0.0.1'),
+        'port' => env('DB_MASTER_PORT', '3306'),
+    ],
+    'sticky' => true,
+
+    'database' => env('DB_DATABASE', 'laravel'),
+    'username' => env('DB_USERNAME', 'root'),
+    'password' => env('DB_PASSWORD', ''),
+    'unix_socket' => env('DB_SOCKET', ''),
+    'charset' => env('DB_CHARSET', 'utf8mb4'),
+    'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+    'prefix' => '',
+    'prefix_indexes' => true,
+    'strict' => true,
+    'engine' => null,
+    'options' => extension_loaded('pdo_mysql') ? array_filter([
+        PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+    ]) : [],
+];
+
+//dd(array_merge($con_mysql, [
+//    'read' => [
+//        'host' => env('LOG_DB_SLAVE_HOST', '127.0.0.1'),
+//        'port' => env('LOG_DB_SLAVE_PORT', '3306'),
+//    ],
+//    'write' => [
+//        'host' => env('LOG_DB_MASTER_HOST', '127.0.0.1'),
+//        'port' => env('LOG_DB_MASTER_PORT', '3306'),
+//    ],
+//    'database' => env('LOG_DB_DATABASE', 'laravel'),
+//    'username' => env('LOG_DB_USERNAME', 'root'),
+//    'password' => env('LOG_DB_PASSWORD', ''),
+//]));
 return [
 
     /*
@@ -43,32 +83,25 @@ return [
             'transaction_mode' => 'DEFERRED',
         ],
 
-        'mysql' => [
-            'driver' => 'mysql',
+        'mysql' => $con_mysql,
+
+        'app_db' => array_merge($con_mysql, []),
+
+        'test_db' => array_merge($con_mysql, []),
+
+        'log_db' => array_merge($con_mysql, [
             'read' => [
-                'host' => env('DB_SLAVE_HOST', '127.0.0.1'),
-                'port' => env('DB_SLAVE_PORT', '3306'),
+                'host' => env('LOG_DB_SLAVE_HOST', '127.0.0.1'),
+                'port' => env('LOG_DB_SLAVE_PORT', '3306'),
             ],
             'write' => [
-                'host' => env('DB_MASTER_HOST', '127.0.0.1'),
-                'port' => env('DB_MASTER_PORT', '3306'),
+                'host' => env('LOG_DB_MASTER_HOST', '127.0.0.1'),
+                'port' => env('LOG_DB_MASTER_PORT', '3306'),
             ],
-            'sticky' => true,
-
-            'database' => env('DB_DATABASE', 'laravel'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => env('DB_CHARSET', 'utf8mb4'),
-            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
+            'database' => env('LOG_DB_DATABASE', 'laravel'),
+            'username' => env('LOG_DB_USERNAME', 'root'),
+            'password' => env('LOG_DB_PASSWORD', ''),
+        ]),
 
         'mariadb' => [
             'driver' => 'mariadb',
