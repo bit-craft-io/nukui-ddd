@@ -4,6 +4,7 @@ namespace App\Core\Jobs\Contexts;
 
 /**
  * @property-read integer $_user_id
+ * @property-read string $_public_id
  * @property-read integer $_level
  * @property-read string $_api
  * @property-read array $_param
@@ -11,10 +12,11 @@ namespace App\Core\Jobs\Contexts;
  * @property-read integer $_line
  * @property-read array $_option
  */
-class AccessInfo
+class CtxAccessInfo
 {
     public function __construct(
         public int $_user_id = 0,
+        public string $_public_id = '',
         public int $_level = 0,
         public string $_api = '',
         public array $_param = [],
@@ -25,18 +27,6 @@ class AccessInfo
 
     public static function make(int $user_id, array $option): self
     {
-//        // @note 呼び出し元を取得
-//        $source = [];
-//        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
-//        $caller = $backtrace[0] ?? null;
-//        $relative_path = str_replace(base_path() . DIRECTORY_SEPARATOR, '', $caller['file']);
-//        if ($caller && isset($caller['file'])) {
-//            $source = [
-//                'file' => $relative_path,
-//                'line' => $caller['line'] ?? 0,
-//            ];
-//        }
-//        return new self($user_id, $source, $info);
         // @note 呼び出し元
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
         $caller = $backtrace[1] ?? [];
@@ -48,8 +38,12 @@ class AccessInfo
         $api = request()->path() ?? '';
         $param = request()->all();
 
+        // TODO 20260609 ここの設定は保留
+        $public_id = '';
+
         return new self(
             _user_id: $user_id,
+            _public_id: $public_id,
             _api: $api,
             _param: $param,
             _file: $file,

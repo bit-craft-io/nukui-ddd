@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
@@ -8,8 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    use SoftDeletes;
-
     /**
      * Run the migrations.
      */
@@ -18,9 +15,9 @@ return new class extends Migration
         Schema::create('u_users', function (Blueprint $table) {
             // @note PK（accounts.id） と FK（u_users.id） を紐づけ
             $table->foreignId('id')->primary()->constrained('accounts')->onDelete('cascade');
-            $table->string('public_id', 12)->unique()->comment('外部公開用識別子');
+            $table->string('public_id', 12)->unique()->comment('外部公開用ユーザ識別子');
             $table->string('nick_name', 64)->nullable()->comment('渾名');
-            $table->unsignedBigInteger('icon_id')->default(1)->comment('アイコンID');
+            $table->unsignedBigInteger('icon_id')->default(1)->comment('アイコン識別子');
             $table->unsignedSmallInteger('energy')->default(1)->comment('エナジー最大値');
             $table->unsignedSmallInteger('energy_max_regen')->default(1)->comment('エナジー最大値（自動回復）');
             $table->unsignedSmallInteger('energy_max_stock')->default(1)->comment('エナジー最大値');

@@ -6,8 +6,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class HAccessInfo extends Model
+class LogAccessInfo extends Model
 {
+    // TODO 20260609 ここをもう少し考える on('log_db')
+    //protected $connection = 'log_db';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -16,6 +19,7 @@ class HAccessInfo extends Model
     protected $fillable = [
         'id',
         'user_id',
+        'public_id',
         'level',
         'api',
         'param',
@@ -38,6 +42,7 @@ class HAccessInfo extends Model
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
+        'public_id' => 'string',
         'level' => 'integer',
         'api' => 'string',
         'param' => 'json',

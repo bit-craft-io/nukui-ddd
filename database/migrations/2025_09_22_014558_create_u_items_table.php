@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('u_items', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement()->comment('識別子');
-            $table->unsignedBigInteger('user_id')->default(1)->comment('ユーザID');
-            $table->unsignedBigInteger('item_id')->default(1)->comment('アイテムID');
+            $table->unsignedBigInteger('user_id')->default(1)->comment('内部用ユーザ識別子');
+            $table->unsignedBigInteger('item_id')->default(1)->comment('アイテム識別子');
             $table->unsignedInteger('amount')->default(1)->comment('所持数');
             // @note 検索時に使用
             $table->timestamp('end_at')->nullable()->comment('有効期間（終了日時）');
