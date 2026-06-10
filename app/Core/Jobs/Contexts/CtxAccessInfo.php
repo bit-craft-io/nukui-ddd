@@ -10,7 +10,7 @@ namespace App\Core\Jobs\Contexts;
  * @property-read array $_param
  * @property-read string $_file
  * @property-read integer $_line
- * @property-read array $_option
+ * @property-read array $_option_info
  */
 class CtxAccessInfo
 {
@@ -22,10 +22,10 @@ class CtxAccessInfo
         public array $_param = [],
         public string $_file = '',
         public int $_line = 0,
-        public array $_option = [],
+        public array $_option_info = [],
     ) {}
 
-    public static function make(int $user_id, array $option): self
+    public static function make(int $user_id, array $option_info): self
     {
         // @note 呼び出し元
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
@@ -48,7 +48,7 @@ class CtxAccessInfo
             _param: $param,
             _file: $file,
             _line: $line,
-            _option: $option
+            _option_info: $option_info
         );
     }
 }

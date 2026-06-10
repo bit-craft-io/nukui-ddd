@@ -19,11 +19,31 @@ class DevUser extends Seeder
         DB::table('accounts')->truncate();
         $queries[] = /** @lang text */
             <<<'QUERY'
+insert into accounts (id, name, email, email_verified_at, password, remember_token, created_at, updated_at) values
+(1, 'none', 'ksuyra4g49ti@bit-craft.com', null, '$2y$12$nfrDclo7NqeTlvE20lP7c.nVBZT56SjdGR2eXq0SOeQYh2Xvmpx7y', null, '2026-06-10 15:17:25', '2026-06-10 15:17:25');
 QUERY;
 
         DB::table('u_users')->truncate();
         $queries[] = /** @lang text */
             <<<'QUERY'
+insert into u_users (id, public_id, nick_name, icon_id, energy, energy_max_regen, energy_max_stock, meta_data) values
+(1, 'ksuyra4g49ti', 'none', 1, 100, 100, 100, '{}')
+;
+QUERY;
+
+        DB::table('u_items')->truncate();
+        $queries[] = /** @lang text */
+            <<<'QUERY'
+insert into u_items (user_id, item_id, amount, end_at) values
+(1, 1, 9900, null), (1, 2, 1000, null), (1, 3, 1000, null)
+;
+QUERY;
+
+        DB::table('u_gachas')->truncate();
+        $queries[] = /** @lang text */
+            <<<'QUERY'
+insert into u_gachas (user_id, gacha_info)
+values  (1, '{"1": {"exec_at": "2026-06-10 15:07:08", "exec_count": 1, "expired_at": ""}, "2": {"exec_at": "2026-06-10 15:07:14", "exec_count": 1, "expired_at": ""}, "3": {"exec_at": "2026-06-10 15:06:32", "exec_count": 1, "expired_at": ""}}');
 QUERY;
 
         foreach ($queries as $query) {

@@ -32,7 +32,7 @@ class JobAccessInfo implements ShouldQueue
             'param' => $this->_access_info->_param,
             'file' => $this->_access_info->_file,
             'line' => $this->_access_info->_line,
-            'option' => $this->_access_info->_option,
+            'option_info' => $this->_access_info->_option_info,
         ]);
     }
 }

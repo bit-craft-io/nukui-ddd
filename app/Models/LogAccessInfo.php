@@ -25,7 +25,7 @@ class LogAccessInfo extends Model
         'param',
         'file',
         'line',
-        'option',
+        'option_info',
     ];
 
     /**
@@ -48,6 +48,6 @@ class LogAccessInfo extends Model
         'param' => 'json',
         'file' => 'string',
         'line' => 'integer',
-        'option' => 'json',
+        'option_info' => 'json',
     ];
 }

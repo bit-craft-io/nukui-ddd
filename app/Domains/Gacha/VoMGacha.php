@@ -75,7 +75,7 @@ class VoMGacha extends BaseMstVo
     public function toArray()
     {
         return [
-            'if' => $this->id,
+            'id' => $this->id,
             'name' => $this->name,
             'type_draw' => $this->type_draw,
             'group_no' => $this->group_no,
