@@ -1,0 +1,869 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "デフォルトモジュール",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "01_account"
+    },
+    {
+      "name": "02_user"
+    },
+    {
+      "name": "11_item"
+    },
+    {
+      "name": "51_gacha"
+    },
+    {
+      "name": "81_ai"
+    },
+    {
+      "name": "98_develop"
+    },
+    {
+      "name": "99_sandbox"
+    },
+    {
+      "name": "proxy"
+    }
+  ],
+  "paths": {
+    "/api/account/register": {
+      "post": {
+        "summary": "register",
+        "deprecated": false,
+        "description": "",
+        "operationId": "0101",
+        "tags": [
+          "01_account"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/account/login": {
+      "post": {
+        "summary": "login",
+        "deprecated": false,
+        "description": "",
+        "operationId": "0102",
+        "tags": [
+          "01_account"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/user/info": {
+      "get": {
+        "summary": "info",
+        "deprecated": false,
+        "description": "",
+        "operationId": "0201",
+        "tags": [
+          "02_user"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "user_info": {
+                          "type": "object",
+                          "properties": {
+                            "public_id": {
+                              "type": "string"
+                            },
+                            "nick_name": {
+                              "type": "string"
+                            },
+                            "icon_no": {
+                              "type": "null"
+                            },
+                            "energy": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "public_id",
+                            "nick_name",
+                            "icon_no",
+                            "energy"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "user_info"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "result"
+                  ]
+                },
+                "example": {
+                  "success": 1,
+                  "result": {
+                    "user_info": {
+                      "public_id": "7gv8y5us6",
+                      "nick_name": "none",
+                      "icon_no": null,
+                      "energy": 100
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/item/get": {
+      "get": {
+        "summary": "get",
+        "deprecated": false,
+        "description": "",
+        "operationId": "1101",
+        "tags": [
+          "11_item"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/item/find": {
+      "get": {
+        "summary": "find",
+        "deprecated": false,
+        "description": "",
+        "operationId": "1102",
+        "tags": [
+          "11_item"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "item_id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "item_id"
+                ]
+              },
+              "example": {
+                "item_id": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/gacha/get": {
+      "get": {
+        "summary": "get",
+        "deprecated": false,
+        "description": "",
+        "operationId": "5101",
+        "tags": [
+          "51_gacha"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/gacha/play": {
+      "post": {
+        "summary": "play",
+        "deprecated": false,
+        "description": "",
+        "operationId": "5102",
+        "tags": [
+          "51_gacha"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "gacha_id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "gacha_id"
+                ]
+              },
+              "example": {
+                "gacha_id": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/develop/get-access-info": {
+      "post": {
+        "summary": "get-access-info",
+        "deprecated": false,
+        "description": "",
+        "operationId": "8101",
+        "tags": [
+          "81_ai"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "public_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "public_id"
+                ]
+              },
+              "example": {
+                "public_id": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "fake_now": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fake_now"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "result"
+                  ]
+                },
+                "example": {
+                  "success": 1,
+                  "result": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/develop/item-add": {
+      "post": {
+        "summary": "item-add",
+        "deprecated": false,
+        "description": "",
+        "operationId": "9901",
+        "tags": [
+          "98_develop"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "item_id": {
+                    "type": "integer"
+                  },
+                  "amount": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "item_id",
+                  "amount"
+                ]
+              },
+              "example": {
+                "item_id": 1,
+                "amount": 10000
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/develop/item-sub": {
+      "post": {
+        "summary": "item-sub",
+        "deprecated": false,
+        "description": "",
+        "operationId": "9902",
+        "tags": [
+          "98_develop"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "item_id": {
+                    "type": "integer"
+                  },
+                  "amount": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "item_id",
+                  "amount"
+                ]
+              },
+              "example": {
+                "item_id": 1,
+                "amount": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/develop/set-fake-now": {
+      "post": {
+        "summary": "set-fake-now",
+        "deprecated": false,
+        "description": "",
+        "operationId": "9902",
+        "tags": [
+          "98_develop"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fake_now": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "fake_now"
+                ]
+              },
+              "example": {
+                "fake_now": "2026-05-01 23:00:00"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "result"
+                  ]
+                },
+                "example": {
+                  "success": 1,
+                  "result": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/develop/get-fake-now": {
+      "get": {
+        "summary": "get-fake-now",
+        "deprecated": false,
+        "description": "",
+        "operationId": "9902",
+        "tags": [
+          "98_develop"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "fake_now": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fake_now"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "result"
+                  ]
+                },
+                "example": {
+                  "success": 1,
+                  "result": {
+                    "fake_now": "2026-01-14 16:10:12"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/develop/unset-fake-now": {
+      "post": {
+        "summary": "unset-fake-now",
+        "deprecated": false,
+        "description": "",
+        "operationId": "9902",
+        "tags": [
+          "98_develop"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "fake_now": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fake_now"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "result"
+                  ]
+                },
+                "example": {
+                  "success": 1,
+                  "result": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/sandbox/set-que": {
+      "post": {
+        "summary": "set-que",
+        "deprecated": false,
+        "description": "",
+        "operationId": "9901",
+        "tags": [
+          "99_sandbox"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "fake_now": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fake_now"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "result"
+                  ]
+                },
+                "example": {
+                  "success": 1,
+                  "result": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/proxy/api/healthz": {
+      "get": {
+        "summary": "healthz",
+        "deprecated": false,
+        "description": "",
+        "operationId": "p0101",
+        "tags": [
+          "proxy"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "result"
+                  ]
+                },
+                "example": {
+                  "success": 1,
+                  "result": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/proxy/api/access": {
+      "post": {
+        "summary": "access",
+        "deprecated": false,
+        "description": "",
+        "operationId": "p0102",
+        "tags": [
+          "proxy"
+        ],
+        "parameters": [
+          {
+            "name": "pb",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "false",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "result"
+                  ]
+                },
+                "example": {
+                  "success": 1,
+                  "result": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": [],
+  "security": []
+}

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core\Domains\ValueObject;
 
+use App\Core\Exceptions\Enum\TypeExcept;
+use App\Core\Exceptions\ExceptModel;
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
 use App\Core\Libraries\Traits\TraitDomain;
 use App\Core\Libraries\Traits\TraitInfra;
@@ -31,14 +33,18 @@ abstract class BaseMstVo extends BaseVo
 
     /**
      * @param int $id
-     * @return static
+     * @return self
+     * @throws ExceptModel
      */
-    public function find(int $id): self
+    public function findOrFail(int $id): self
     {
         $const_name = $this->_dsConstName();
 
         $callback = function () use ($const_name, $id) {
             $model = $this->_DataSource::make(DsHub::{$const_name})->findEnable($id);
+            if (empty($model)) {
+                throw $this->_Except::model(TypeExcept::ModelDataNotFound);
+            }
             return $this->init($model);
         };
 

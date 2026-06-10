@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('access_infos', function (Blueprint $table) {
+        Schema::create('log_access_infos', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement()->comment('識別子');
             $table->unsignedBigInteger('user_id')->default(0)->comment('内部用ユーザ識別子');
             $table->string('public_id', 12)->default('')->comment('外部公開用ユーザ識別子');
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('access_infos');
+        Schema::dropIfExists('log_access_infos');
     }
 };

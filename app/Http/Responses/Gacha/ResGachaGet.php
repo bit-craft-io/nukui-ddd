@@ -28,7 +28,7 @@ final class ResGachaGet extends BaseRes
         //       Voのビジネスロジックとイテレータで表現
         $vo_gachas = $this->_Domain::mstVo(VoHub::VO_M_GACHA)->get();
         foreach ($vo_gachas as $vo_gacha) {
-            $vo_gacha->find($vo_gacha->id);
+            $vo_gacha->findOrFail($vo_gacha->id);
             if (!$vo_gacha->validate()) {
                 continue;
             }
