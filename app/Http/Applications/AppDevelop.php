@@ -31,7 +31,7 @@ class AppDevelop extends BaseApp
             $ent_item = $rep_item->makeDraft($req->user_id, $req->item_id);
         }
 
-        $vo_item = $this->_Domain::mstVo(VoHub::VO_M_ITEM)->find($req->item_id);
+        $vo_item = $this->_Domain::mstVo(VoHub::VO_M_ITEM)->findOrFail($req->item_id);
         $ent_item->end_at($vo_item->end_at);
         $sum_amount = $vo_item->clampToMaxStock($ent_item->amount + $req->amount);
 
@@ -95,7 +95,7 @@ class AppDevelop extends BaseApp
 
     public function setQue(ReqNone $req): void
     {
-        //dd($req->public_id);
+        //dd(__LINE__);
         JobAccessInfo::dispatch(CtxAccessInfo::make($req->user_id, ['debug' => __LINE__]));
         sleep(1);
     }

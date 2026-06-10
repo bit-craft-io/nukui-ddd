@@ -35,7 +35,7 @@ class SvcGacha //extends BaseSvc
             $ent_gacha = $rep_gacha->draft($user_id);
         }
 
-        $vo_gacha = $this->_Domain::mstVo(VoHub::VO_M_GACHA)->find($gacha_id);
+        $vo_gacha = $this->_Domain::mstVo(VoHub::VO_M_GACHA)->findOrFail($gacha_id);
         $exec_count = $ent_gacha->getExecCount($vo_gacha->group_no);
         if ($vo_gacha->isExecCountOver($exec_count)) {
             $except_params['#1'] = $vo_gacha->group_no;

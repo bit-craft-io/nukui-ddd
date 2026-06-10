@@ -37,7 +37,7 @@ class AppGacha extends BaseApp
         // @note トランザクション処理をする場合
         $this->_Transaction::begin();
 
-        $vo_gacha = $this->_Domain::mstVo(VoHub::VO_M_GACHA)->find($req->gacha_id);
+        $vo_gacha = $this->_Domain::mstVo(VoHub::VO_M_GACHA)->findOrFail($req->gacha_id);
         if (!$vo_gacha->validate()) {
             $except_params['#1'] = $vo_gacha->id;
             throw $this->_Except::app(TypeExcept::AppGachaMasterIsNotValid, $except_params);
