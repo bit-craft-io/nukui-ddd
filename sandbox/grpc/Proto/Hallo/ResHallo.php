@@ -5,9 +5,7 @@
 
 namespace Proto\Hallo;
 
-use Google\Protobuf\Internal\GPBType;
 use Google\Protobuf\Internal\GPBUtil;
-use Google\Protobuf\RepeatedField;
 
 /**
  * Generated from protobuf message <code>hallo.ResHallo</code>
@@ -34,7 +32,7 @@ class ResHallo extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Hallo::initOnce();
+        \grpc\GPBMetadata\Hallo::initOnce();
         parent::__construct($data);
     }
 
