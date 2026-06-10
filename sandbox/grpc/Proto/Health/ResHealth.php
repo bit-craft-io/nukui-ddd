@@ -5,9 +5,7 @@
 
 namespace Proto\Health;
 
-use Google\Protobuf\Internal\GPBType;
 use Google\Protobuf\Internal\GPBUtil;
-use Google\Protobuf\RepeatedField;
 
 /**
  * Generated from protobuf message <code>health.ResHealth</code>
@@ -34,7 +32,7 @@ class ResHealth extends \Google\Protobuf\Internal\Message
      * }
      */
     public function __construct($data = NULL) {
-        \GPBMetadata\Health::initOnce();
+        \grpc\GPBMetadata\Health::initOnce();
         parent::__construct($data);
     }
 

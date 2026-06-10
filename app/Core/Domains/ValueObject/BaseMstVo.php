@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Domains\ValueObject;
 
+use App\Core\DataSources\BaseMstDs;
 use App\Core\Exceptions\Enum\TypeExcept;
 use App\Core\Exceptions\ExceptModel;
 use App\Core\Libraries\Stateful\Instance\StfInsIterator;
@@ -36,12 +37,15 @@ abstract class BaseMstVo extends BaseVo
      * @return self
      * @throws ExceptModel
      */
-    public function findOrFail(int $id): self
+    public function findOrFail(int $id): static
     {
         $const_name = $this->_dsConstName();
 
         $callback = function () use ($const_name, $id) {
-            $model = $this->_DataSource::make(DsHub::{$const_name})->findEnable($id);
+            // @note 動的に取得する為 @var で型を指定
+            /** @var BaseMstDs $data_source */
+            $data_source = $this->_DataSource::make(DsHub::{$const_name});
+            $model = $data_source->findEnable($id);
             if (empty($model)) {
                 throw $this->_Except::model(TypeExcept::ModelDataNotFound);
             }
@@ -65,7 +69,10 @@ abstract class BaseMstVo extends BaseVo
         $const_name = $this->_dsConstName();
 
         $callback = function () use ($const_name, $conditions, $key_name) {
-            $models = $this->_DataSource::make(DsHub::{$const_name})->getEnable($conditions);
+            // @note 動的に取得する為 @var で型を指定
+            /** @var BaseMstDs $data_source */
+            $data_source = $this->_DataSource::make(DsHub::{$const_name});
+            $models = $data_source->getEnable($conditions);
             return $this->iterator($models, $key_name);
         };
 

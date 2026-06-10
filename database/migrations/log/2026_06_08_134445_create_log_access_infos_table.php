@@ -21,7 +21,7 @@ return new class extends Migration
             $table->json('param')->default(new Expression('(JSON_OBJECT())'))->comment('パラメータ');
             $table->string('file', 256)->nullable()->comment('発生ファイル');
             $table->unsignedInteger('line')->default(0)->comment('発生行');
-            $table->json('option')->default(new Expression('(JSON_OBJECT())'))->comment('オプション項目');
+            $table->json('option_info')->default(new Expression('(JSON_OBJECT())'))->comment('オプション項目');
             $table->timestamps();
 
             $table->index('user_id');

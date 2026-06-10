@@ -14,6 +14,7 @@ use App\Domains\Gacha\EntGacha;
 use App\Domains\Gacha\VoMGacha;
 use App\Domains\Gacha\VoHub;
 use App\Domains\RepHub;
+use App\Models\Enum\TypeDraw;
 use Exception;
 
 // TODO extends BaseSvc
@@ -45,6 +46,7 @@ class SvcGacha //extends BaseSvc
         $draw_lots = match (true) {
             $vo_gacha->type_draw->isNormal() => $this->_normal($vo_gacha, $ent_gacha),
             $vo_gacha->type_draw->isRarity() => $this->_rarity($vo_gacha, $ent_gacha),
+            $vo_gacha->type_draw->isFixed() => $this->_fixed($vo_gacha, $ent_gacha),
             $vo_gacha->type_draw->isStep() => $this->_step($vo_gacha, $ent_gacha),
         };
 
@@ -77,6 +79,12 @@ class SvcGacha //extends BaseSvc
             $draw_lots[] = $this->_drawLot($sorted_rates, $cum_rates, ['type_entity', 'entity_id', 'entity_amount']);
         }
         return $draw_lots;
+    }
+
+    private function _fixed(VoMGacha $vo_gacha, EntGacha $ent_gacha): array
+    {
+        // TODO dummy
+        return $this->_normal($vo_gacha, $ent_gacha);
     }
 
     private function _rarity(VoMGacha $vo_gacha, EntGacha $ent_gacha): array
