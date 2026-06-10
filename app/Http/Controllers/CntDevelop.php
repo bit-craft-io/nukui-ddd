@@ -70,10 +70,4 @@ class CntDevelop extends BaseCnt
         $this->_ResponseModify::set(ResSuccess::class);
         $app->getFakeNow();
     }
-
-    public function setQue(AppDevelop $app, ReqNone $req)
-    {
-        $this->_ResponseModify::set(ResSuccess::class);
-        $app->setQue($req);
-    }
 }

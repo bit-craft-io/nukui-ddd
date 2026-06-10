@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers;
+
+use App\Core\Http\Controllers\BaseCnt;
+use App\Core\Http\Requests\ReqNone;
+use App\Core\Http\Responses\ResSuccess;
+use App\Http\Applications\AppDevelop;
+
+class CntSandbox extends BaseCnt
+{
+    /**
+     * @param AppDevelop $app
+     * @param ReqNone $req
+     * @return void
+     */
+    public function setQue(AppDevelop $app, ReqNone $req)
+    {
+        $this->_ResponseModify::set(ResSuccess::class);
+        $app->setQue($req);
+    }
+}
