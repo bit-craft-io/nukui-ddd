@@ -88,6 +88,14 @@ php-stan:
 	vendor/bin/phpstan analyse
 
 # ========================================
+# openapi
+# ----------------------------------------
+.PHONY: openapi-build
+openapi-build:
+	vendor/bin/phpstan analyse
+
+
+# ========================================
 # migrate
 # ----------------------------------------
 .PHONY: migrate-all
