@@ -92,8 +92,7 @@ php-stan:
 # ----------------------------------------
 .PHONY: openapi-build
 openapi-build:
-	vendor/bin/phpstan analyse
-
+	cd ./docs/apidog && sh build.sh
 
 # ========================================
 # migrate

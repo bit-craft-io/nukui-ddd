@@ -1,10 +1,13 @@
 #!/bin/bash
 set -e
+set -a
+source .env
+set +a
 
 INPUT_DIR=${INPUT_DIR:-import}
 INPUT_FILE_PATH="$INPUT_DIR/$(basename "$INPUT_FILE")"
 
-OUTPUT_FILE=${OUTPUT_FILE:-$INPUT_FILE.html}
+OUTPUT_FILE=${OUTPUT_FILE:-${INPUT_FILE%.json}.html}
 OUTPUT_DIR=${OUTPUT_DIR:-output}
 OUTPUT_FILE_PATH="$OUTPUT_DIR/$(basename "$OUTPUT_FILE")"
 

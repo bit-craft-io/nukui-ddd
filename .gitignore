@@ -31,3 +31,4 @@ Homestead.json
 .phpactor.json
 auth.json
 /.php-cs-fixer.cache
+docs/apidog/output
