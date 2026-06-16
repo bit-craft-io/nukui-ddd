@@ -1,0 +1,36 @@
+<!-- custom-template.hbs -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{title}}</title>
+    <meta name="description" content="{{{templateOptions.metaDescription}}}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body { padding: 0; margin: 0; font-family: Arial, sans-serif; }
+
+      .menu-content { width: 300px !important; }
+      .api-content { margin-left: 0; }
+
+      table { width: 100%; font-size: 12px; }
+      table th { background-color: whitesmoke; padding: 5px; }
+      table td { padding: 5px; }
+
+      .api-info table,
+      .api-info pre,
+      .api-info code { font-size: 12px; }
+
+      [role="search"] input { height: 60px !important; padding: 10px !important; font-size: 16px !important; }
+      [role="search"] .search-icon { display: none !important; }
+      [role="menuitem"] label span { font-size: 12px !important; }
+
+      a[href="https://redocly.com/redoc/"] { display: none !important; }
+
+      div[data-section-id^="tag/"] { padding: 0 !important; }
+      div[data-section-id^="tag/"] h2 { background-color: aliceblue !important; }
+    </style>
+    {{{redocHead}}}
+  </head>
+  <body>
+    {{{redocHTML}}}
+  </body>
+</html>

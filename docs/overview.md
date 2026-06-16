@@ -1,6 +1,12 @@
-# 概要
+## 概要
 
-**GitHub:** https://github.com/bit-craft-io/nukui-ddd
+- **GitHub:** https://github.com/bit-craft-io/nukui-ddd
+
+上記のGitHubは<br />
+実務で得た経験を基に、設計思想を整理・発展させたリポジトリです。<br />
+再利用性と責務分離をLaravelとドメイン駆動設計(DDD)で実現してます。<br />
+
+その実装内容と設計プロセスを資料化したものです。
 
 ---
 

@@ -28,14 +28,6 @@ final class StlStaConfig
     }
 
     /**
-     * @return IStlStaConfigGameServer|object
-     */
-    public static function gameServer(): mixed
-    {
-        return (object)config('game_server');
-    }
-
-    /**
      * @return IStlStaConfigdevelop|object
      */
     public static function develop(): mixed
