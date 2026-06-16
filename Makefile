@@ -71,11 +71,11 @@ artisan:
 # ========================================
 # php-cs-fixer
 # ----------------------------------------
-.PHONY: php-format-dry
+.PHONY: php-fix-dry
 php-fix-dry:
 	vendor/bin/php-cs-fixer fix --dry-run --diff
 
-.PHONY: php-format
+.PHONY: php-fix
 php-fix:
 	@read -p "commit? [y/N]: " ans && [ "$$ans" = "y" ]
 	vendor/bin/php-cs-fixer fix --diff
