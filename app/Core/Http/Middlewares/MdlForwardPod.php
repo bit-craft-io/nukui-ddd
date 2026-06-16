@@ -83,14 +83,6 @@ final class MdlForwardPod
 
 //        dd(__LINE__);
 
-        // @note hallo
-        //$payload = $request->all();
-        //$jsonPb = json_encode($payload);
-        //$game_server_api = $this->_Config::gameServer()->endpoint . '/' . $request->route('action');
-        //$res = Http::withHeaders(['Content-Type' => 'application/json'])
-        //    ->post($game_server_api, ['body' => $jsonPb]);
-        //return response($res->body(), $res->status(), $res->headers());
-
         // @note protoBuf
         // @note composer.json に "autoload.psr-4.Proto//" の設定があるか確認
         $api = Str::studly($action);
