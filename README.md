@@ -37,10 +37,16 @@ app/                           # アプリケーション
 ├── Providers                  # サービスプロバイダ
 --------------------------------------------------------------------------------
 docs/                          # ドキュメント
-├── apidog/                    # ApiDog
-│ ├── env.json                 # 環境変数
-│ └── openapi.json             # API設定
-├── sandbox/                   # （DDDとは関連なし）検証・使い捨てコード置き場
+├── ddd/                       # 本リポジトリのDDD概要
+├── apidog/                    # （DDDとは関連なし）ApiDog
+│ ├── import                   # （DDDとは関連なし）インポートデータ
+│ ├── .env                     # （DDDとは関連なし）仕様書を出力するプログラムの環境変数
+│ ├── build.sh                 # （DDDとは関連なし）仕様書を出力するプログラム 
+│ └── layout.hbs               # （DDDとは関連なし）出力時のレイアウト
+├── xdebug/                    # （DDDとは関連なし）Xdebug
+│ ├── src                      # （DDDとは関連なし）Xdebug設定の資料
+│ └── dist                     # （DDDとは関連なし）Xdebug設定の資料（PDF）
+sandbox/                       # （DDDとは関連なし）検証・使い捨てコード置き場
 ├── grpc/                      # （DDDとは関連なし）gRPC疎通確認用
 Makefile                       # （DDDとは関連なし）プロジェクト共通コマンド
 ```
