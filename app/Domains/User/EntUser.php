@@ -58,7 +58,7 @@ class EntUser extends BaseEnt
 
     public function isEmpty(): bool
     {
-        return ($this->id ?? 0) != 0;
+        return ($this->id ?? 0) == 0;
     }
 
     public function toArray(): array
