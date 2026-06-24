@@ -1,3 +1,5 @@
+# start_with_request=yes のため無効
+export XDEBUG_MODE=off
 MAKEFLAGS += --no-print-directory
 
 # ==============================================================================
