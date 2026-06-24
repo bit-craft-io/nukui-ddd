@@ -41,11 +41,26 @@
 <div align="center">
   <img src="xdebug_7.png" style="width: 100%; max-width: 600px; height: auto;">
 </div>
+
+6. プロファイルの設定
+<div align="center">
+  <img src="xdebug_8.png" style="width: 100%; max-width: 600px; height: auto;">
+</div>
+
 <div style="page-break-before: always;"></div>
 
 ### ApiDogから実行（ブレイクポイントで止まる事を確認）
+- ApiDog
 <div align="center">
   <img src="xdebug_10.png" style="width: 100%; max-width: 600px; height: auto;">
+</div>
+
+- PhpStorm
+<div align="center">
   <img src="xdebug_11.png" style="width: 100%; max-width: 600px; height: auto;">
 </div>
 
+### ブレークポイントで止まらない場合
+- PhpStormのデバッグの項目「PHPスクリプトの最初の行で中断する」をONにしてみる。
+- PHPデバッグ接続のリッスンを停止・開始してみる。
+- コンテナを再起動してみる。
