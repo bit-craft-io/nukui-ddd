@@ -2,6 +2,7 @@
 
 use App\Core\Libraries\Stateless\Static\StlStaConfig;
 use App\Http\Controllers\CntAccount;
+use App\Http\Controllers\CntIdle;
 use App\Http\Controllers\CntSandbox;
 use App\Http\Controllers\CntDevelop;
 use App\Http\Controllers\CntGacha;
@@ -30,6 +31,9 @@ Route::domain(StlStaConfig::app()->url)->group(function () {
         Route::prefix('gacha')->controller(CntGacha::class)->group(function () {
             Route::get('get', 'get');
             Route::post('play', 'play');
+        });
+        Route::prefix('idle')->controller(CntIdle::class)->group(function () {
+            Route::post('sync', 'sync');
         });
         Route::prefix('develop')->controller(CntDevelop::class)->group(function () {
             Route::post('item-add', 'itemAdd');

@@ -16,4 +16,5 @@ final class DsHub
     const string DS_U_USER = DsUUser::class;
     const string DS_U_ITEM = DsUItem::class;
     const string DS_U_GACHA = DsUGacha::class;
+    const string DS_U_IDLE = DsUIdle::class;
 }

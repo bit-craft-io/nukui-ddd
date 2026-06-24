@@ -40,7 +40,6 @@ class RepGacha extends BaseRep
         $ent->commit();
         if ($ent->isNew()) {
             $this->_DataSource::make(DsHub::DS_U_GACHA)->create($ent->getProperties());
-
         } else {
             $this->_DataSource::make(DsHub::DS_U_GACHA)->update($ent->getProperties(), ['user_id' => $ent->user_id]);
         }

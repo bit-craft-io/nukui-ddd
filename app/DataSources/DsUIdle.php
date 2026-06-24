@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace App\DataSources;
 
 use App\Core\DataSources\BaseDs;
-use App\Models\UGacha;
+use App\Models\UIdle;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class DsUGacha extends BaseDs
+class DsUIdle extends BaseDs
 {
     /**
-     * @param int $user_id
+     * @param array $values
      * @return Model|null
      */
-    public function getDraft(int $user_id): ?Model
+    public function getDraft(array $values): ?Model
     {
-        return $this->_model->newInstance(['user_id' => $user_id]);
+        return $this->_model->newInstance($values);
     }
 
     /**
@@ -34,13 +34,17 @@ class DsUGacha extends BaseDs
 
     /**
      * @param int $user_id
-     * @return Model|null
+     * @param int $type_idle
+     * @param int $index_no
+     * @return UIdle|null
      */
-    public function findByUserId(int $user_id): ?Model
+    public function findByUnique(int $user_id, int $type_idle, int $index_no): ?UIdle
     {
         return $this->_model
             ->newQuery()
             ->where('user_id', $user_id)
+            ->where('type_idle', $type_idle)
+            ->where('index_no', $index_no)
             ->first();
     }
 }
