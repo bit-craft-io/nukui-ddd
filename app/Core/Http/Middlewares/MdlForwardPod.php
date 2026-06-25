@@ -71,17 +71,15 @@ final class MdlForwardPod
         $action = $request->route('action');
         $pod_api = $endpoint . '/' . $action;
         if ($request->isMethod('get')) {
-            $res = Http::get($pod_api, $request->all())->throw();
+            $res = Http::get($pod_api, $request)->throw();
             return ['status' => $res->status(), 'body' => $res->body()];
         }
 
-        $is_pb = $request->get('pb') ?? true;
+        $is_pb = $request->boolean('pb', true);
         if (!$is_pb) {
-            $res = Http::post($pod_api, $request->all());
+            $res = Http::post($pod_api, $request);
             return json_decode($res, true);
         }
-
-//        dd(__LINE__);
 
         // @note protoBuf
         // @note composer.json に "autoload.psr-4.Proto//" の設定があるか確認
