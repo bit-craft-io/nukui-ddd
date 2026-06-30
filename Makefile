@@ -52,10 +52,6 @@ composer:
 	$(call print_headline,${@})
 	composer $(COMPOSER_ARGS)
 
-# 必須のおなじない
-%:
-	@:
-
 # ========================================
 # artisan
 # ----------------------------------------
@@ -65,10 +61,6 @@ ARTISAN_ARGS := $(filter-out artisan,$(MAKECMDGOALS))
 artisan:
 	$(call print_headline,${@})
 	php artisan $(ARTISAN_ARGS)
-
-# 必須のおなじない
-%:
-	@:
 
 # ========================================
 # php-cs-fixer
@@ -188,10 +180,6 @@ migrate-fresh:
 	$(call print_headline,${@})
 	DB_DATABASE=$(DB_NAME_ARGS) php artisan migrate:fresh
 
-# 必須のおなじない
-%:
-	@:
-
 # ========================================
 # migrate:reset
 # ----------------------------------------
@@ -210,3 +198,9 @@ job-restart:
 job-work:
 	$(call print_headline,${@})
 	php artisan queue:work
+
+# 必須のおまじない
+#%:
+#	@:
+.DEFAULT:
+	@echo "--- [WARN] target '$@' unknown ---"
